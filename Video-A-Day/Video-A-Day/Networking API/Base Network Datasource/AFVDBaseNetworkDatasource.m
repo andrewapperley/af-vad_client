@@ -10,6 +10,7 @@
 #import "AFVDBaseNetworkDatasource.h"
 
 const NSString *kAFVDBaseNetworkURL     = @"http://99.232.33.159:5000";
+const char *kAFVDBaseNetworkQueue       = "kAFVDBaseNetworkDispatchQueue";
 
 @implementation AFVDBaseNetworkDatasource
 
@@ -29,7 +30,7 @@ const NSString *kAFVDBaseNetworkURL     = @"http://99.232.33.159:5000";
     } andFailure:^(NSError *error) {
         completion(nil);
     }];
-
+    
     [[AFFNManager sharedManager] addNetworkOperation:request];
 }
 
@@ -58,7 +59,7 @@ const NSString *kAFVDBaseNetworkURL     = @"http://99.232.33.159:5000";
     NSDictionary *responseDictionary = [NSDictionary dictionaryWithDictionary:networkCallbackDictionary];
     
     if(responseDictionary && responseDictionary.allValues.count > 0 && responseDictionary.allKeys.count > 0) {
-        [networkModel setValue:responseDictionary forKey:@"responseDictionary"];
+        [networkModel setValue:responseDictionary forKey:@"responseData"];
     }
     
     return networkModel;

@@ -12,7 +12,7 @@
 
 @property (nonatomic, strong, readonly) NSString *userName;
 @property (nonatomic, strong, readonly) NSString *password;
-@property (nonatomic, strong, readonly) NSString *profileImageURL;
+@property (nonatomic, strong, readonly) UIImage *profileImage;
 @property (nonatomic, strong, readonly) NSString *email;
 @property (nonatomic, strong, readonly) NSArray *relationships;
 

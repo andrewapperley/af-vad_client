@@ -28,14 +28,21 @@
     NSString *username = @"andrewApperley";
     NSString *token = @"c60f789ea83ec7452149cce7571f5bb661e53d8a67d37b81bc98d593";
     
+    NSLog(@"Start");
+    
     [userModelFactory fetchUserModelWithUserName:username accessToken:token completion:^(AFVDUserModel *userModel, AFVDBaseNetworkModel *networkCallback) {
         
         if(networkCallback.success) {
             
-            NSLog(@"SUCCESS!");
-            userModel;
+            NSLog(@"Finish - Success");
+            
+            UIImageView *profileImage = [[UIImageView alloc] initWithImage:userModel.profileImage];
+            [self.view addSubview:profileImage];
+            
+            profileImage.center = self.view.center;
+            
         } else {
-            NSLog(@"FAILURE! %d - %@", networkCallback.responseCode, networkCallback.responseMessage);
+            NSLog(@"Finish - Failure %d - %@", networkCallback.responseCode, networkCallback.responseMessage);
         }
     }];
 }

@@ -6,7 +6,6 @@
 //  Copyright (c) 2013 AFApps. All rights reserved.
 //
 
-#import "AFVDUserModel.h"
 #import "AFVDUserModelDatasource.h"
 #import "AFVDUserModelFactory.h"
 
@@ -33,9 +32,13 @@
     
     NSDictionary *userDictionary = data[@"User"];
     
+    NSString *profileImageString = userDictionary[@"profile_image"];
+    NSData *profileImageData = [[NSData alloc]initWithBase64EncodedString:profileImageString options:NSDataBase64DecodingIgnoreUnknownCharacters];
+    UIImage *profileImage = [UIImage imageWithData:profileImageData];
+    
     [model setValue:userDictionary[@"username"] forKey:@"userName"];
     [model setValue:userDictionary[@"email"] forKey:@"email"];
-    [model setValue:userDictionary[@"profile_image"] forKey:@"profileImageURL"];
+    [model setValue:profileImage forKey:@"profileImage"];
     [model setValue:userDictionary[@"relationships"] forKey:@"relationships"];
     
     return model;

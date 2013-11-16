@@ -6,9 +6,8 @@
 //  Copyright (c) 2013 AFApps. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import "AFVDUserModel.h"
 
-@class AFVDUserModel;
 @class AFVDBaseNetworkModel;
 
 typedef void(^AFVDUserModelCompletion)(AFVDUserModel *userModel, AFVDBaseNetworkModel *networkCallback);
