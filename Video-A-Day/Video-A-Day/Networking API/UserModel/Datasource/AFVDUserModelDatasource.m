@@ -8,6 +8,21 @@
 
 #import "AFVDUserModelDatasource.h"
 
+NSString *kAFVDUserModelEndpointURL             = @"/user/info?username=&access_token=";
+NSString *kAFVDUserModelParameterKeyUserName    = @"username";
+NSString *kAFVDUserModelParameterKeyAcessToken  = @"access_token";
+
 @implementation AFVDUserModelDatasource
+
+- (void)fetchUserModelWithUserName:(NSString *)userName accessToken:(NSString *)accessToken completion:(AFVDUserModelDatasourceCompletion)completion {
+    
+    NSDictionary *parameters = @{userName : kAFVDUserModelParameterKeyUserName,
+                                 accessToken : kAFVDUserModelParameterKeyAcessToken};
+    
+    [self makeURLRequestWithType:kAFFNGet endpointURLString:kAFVDUserModelEndpointURL parameters:parameters completion:^(AFVDBaseNetworkModel *callback) {
+        
+        completion(callback);
+    }];
+}
 
 @end

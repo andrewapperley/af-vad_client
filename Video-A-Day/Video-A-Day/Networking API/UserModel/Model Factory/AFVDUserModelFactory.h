@@ -8,6 +8,13 @@
 
 #import <Foundation/Foundation.h>
 
+@class AFVDUserModel;
+@class AFVDBaseNetworkModel;
+
+typedef void(^AFVDUserModelCompletion)(AFVDUserModel *userModel, AFVDBaseNetworkModel *networkCallback);
+
 @interface AFVDUserModelFactory : NSObject
+
+- (void)fetchUserModelWithUserName:(NSString *)userName accessToken:(NSString *)accessToken completion:(AFVDUserModelCompletion)completion;
 
 @end

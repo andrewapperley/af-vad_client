@@ -6,8 +6,17 @@
 //  Copyright (c) 2013 AFApps. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import "AFVDBaseNetworkModel.h"
+#import "AFFNRequest.h"
+
+typedef void(^AFVDBaseNetworkCompletion)(AFVDBaseNetworkModel *callback);
 
 @interface AFVDBaseNetworkDatasource : NSObject
+
+- (void)makeURLRequestWithType:(AFFNPostType)type endpointURLString:(NSString *)urlString completion:(AFVDBaseNetworkCompletion)completion;
+- (void)makeURLRequestWithType:(AFFNPostType)type endpointURLString:(NSString *)urlString parameters:(NSDictionary *)parameters completion:(AFVDBaseNetworkCompletion)completion;
+
+#pragma mark - Singleton instance
++ (instancetype)sharedDataSource;
 
 @end

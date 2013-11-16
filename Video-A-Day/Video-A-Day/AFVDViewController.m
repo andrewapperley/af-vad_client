@@ -6,7 +6,11 @@
 //  Copyright (c) 2013 AFApps. All rights reserved.
 //
 
+#import "AFVDBaseNetworkModel.h"
 #import "AFVDViewController.h"
+
+#warning TEMP VC
+#import "AFVDUserModelFactory.h"
 
 @interface AFVDViewController ()
 
@@ -18,6 +22,22 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+    
+    AFVDUserModelFactory *userModelFactory = [[AFVDUserModelFactory alloc] init];
+    
+    NSString *username = @"andrewApperley";
+    NSString *token = @"c60f789ea83ec7452149cce7571f5bb661e53d8a67d37b81bc98d593";
+    
+    [userModelFactory fetchUserModelWithUserName:username accessToken:token completion:^(AFVDUserModel *userModel, AFVDBaseNetworkModel *networkCallback) {
+        
+        if(networkCallback.success) {
+            
+            NSLog(@"SUCCESS!");
+            userModel;
+        } else {
+            NSLog(@"FAILURE! %d - %@", networkCallback.responseCode, networkCallback.responseMessage);
+        }
+    }];
 }
 
 - (void)didReceiveMemoryWarning
@@ -25,5 +45,7 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+#warning END TEMP VC
 
 @end

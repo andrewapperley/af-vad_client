@@ -30,6 +30,8 @@
 		7677BA6E18373A6B00F3EDC9 /* AFVDUserModelDatasource.m in Sources */ = {isa = PBXBuildFile; fileRef = 7677BA6618373A6B00F3EDC9 /* AFVDUserModelDatasource.m */; };
 		7677BA6F18373A6B00F3EDC9 /* AFVDUserModelFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 7677BA6918373A6B00F3EDC9 /* AFVDUserModelFactory.m */; };
 		7677BA7018373A6B00F3EDC9 /* AFVDUserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7677BA6C18373A6B00F3EDC9 /* AFVDUserModel.m */; };
+		76C651931838003D003C7F7D /* NSDictionary+NSDictionary_NSDataConversion.m in Sources */ = {isa = PBXBuildFile; fileRef = 76C651921838003D003C7F7D /* NSDictionary+NSDictionary_NSDataConversion.m */; };
+		76C6519818380A14003C7F7D /* AFVDBaseNetworkModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 76C6519718380A14003C7F7D /* AFVDBaseNetworkModel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,6 +83,10 @@
 		7677BA6918373A6B00F3EDC9 /* AFVDUserModelFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFVDUserModelFactory.m; sourceTree = "<group>"; };
 		7677BA6B18373A6B00F3EDC9 /* AFVDUserModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFVDUserModel.h; sourceTree = "<group>"; };
 		7677BA6C18373A6B00F3EDC9 /* AFVDUserModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFVDUserModel.m; sourceTree = "<group>"; };
+		76C651911838003D003C7F7D /* NSDictionary+NSDictionary_NSDataConversion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDictionary+NSDictionary_NSDataConversion.h"; path = "AF/AFCategory/NSDictionary+NSDataConversion/NSDictionary+NSDictionary_NSDataConversion.h"; sourceTree = "<group>"; };
+		76C651921838003D003C7F7D /* NSDictionary+NSDictionary_NSDataConversion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSDictionary+NSDictionary_NSDataConversion.m"; path = "AF/AFCategory/NSDictionary+NSDataConversion/NSDictionary+NSDictionary_NSDataConversion.m"; sourceTree = "<group>"; };
+		76C6519618380A14003C7F7D /* AFVDBaseNetworkModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFVDBaseNetworkModel.h; path = "Base Network Model/AFVDBaseNetworkModel.h"; sourceTree = "<group>"; };
+		76C6519718380A14003C7F7D /* AFVDBaseNetworkModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AFVDBaseNetworkModel.m; path = "Base Network Model/AFVDBaseNetworkModel.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -199,6 +205,7 @@
 		0F2FC6F01837303800611873 /* Video-A-Day */ = {
 			isa = PBXGroup;
 			children = (
+				76C6518E1837FFCD003C7F7D /* AF */,
 				7677BA5F18373A6B00F3EDC9 /* Networking API */,
 				0F2FC6F91837303800611873 /* AFVDAppDelegate.h */,
 				0F2FC6FA1837303800611873 /* AFVDAppDelegate.m */,
@@ -242,8 +249,9 @@
 		7677BA5F18373A6B00F3EDC9 /* Networking API */ = {
 			isa = PBXGroup;
 			children = (
-				0F18F182183743EF0071BEF5 /* Network Engine */,
 				7677BA6018373A6B00F3EDC9 /* Base Network Datasource */,
+				76C65195183809E5003C7F7D /* Base Network Model */,
+				0F18F182183743EF0071BEF5 /* Network Engine */,
 				7677BA6318373A6B00F3EDC9 /* UserModel */,
 			);
 			path = "Networking API";
@@ -293,6 +301,40 @@
 				7677BA6C18373A6B00F3EDC9 /* AFVDUserModel.m */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		76C6518E1837FFCD003C7F7D /* AF */ = {
+			isa = PBXGroup;
+			children = (
+				76C6518F1837FFFD003C7F7D /* AFCategory */,
+			);
+			name = AF;
+			sourceTree = "<group>";
+		};
+		76C6518F1837FFFD003C7F7D /* AFCategory */ = {
+			isa = PBXGroup;
+			children = (
+				76C6519018380007003C7F7D /* NSDictionary+NSDataConversion */,
+			);
+			name = AFCategory;
+			sourceTree = "<group>";
+		};
+		76C6519018380007003C7F7D /* NSDictionary+NSDataConversion */ = {
+			isa = PBXGroup;
+			children = (
+				76C651911838003D003C7F7D /* NSDictionary+NSDictionary_NSDataConversion.h */,
+				76C651921838003D003C7F7D /* NSDictionary+NSDictionary_NSDataConversion.m */,
+			);
+			name = "NSDictionary+NSDataConversion";
+			sourceTree = "<group>";
+		};
+		76C65195183809E5003C7F7D /* Base Network Model */ = {
+			isa = PBXGroup;
+			children = (
+				76C6519618380A14003C7F7D /* AFVDBaseNetworkModel.h */,
+				76C6519718380A14003C7F7D /* AFVDBaseNetworkModel.m */,
+			);
+			name = "Base Network Model";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -400,8 +442,10 @@
 				0F2FC6F71837303800611873 /* main.m in Sources */,
 				0F18F196183743EF0071BEF5 /* UIImageView+AFFNImage.m in Sources */,
 				0F2FC6FB1837303800611873 /* AFVDAppDelegate.m in Sources */,
+				76C6519818380A14003C7F7D /* AFVDBaseNetworkModel.m in Sources */,
 				0F18F194183743EF0071BEF5 /* AFFNCallbackObject.m in Sources */,
 				7677BA6D18373A6B00F3EDC9 /* AFVDBaseNetworkDatasource.m in Sources */,
+				76C651931838003D003C7F7D /* NSDictionary+NSDictionary_NSDataConversion.m in Sources */,
 				0F18F195183743EF0071BEF5 /* AFFNImageManager.m in Sources */,
 				0F18F199183743EF0071BEF5 /* AFFNStreamingRequest.m in Sources */,
 				0F18F197183743EF0071BEF5 /* AFFNManager.m in Sources */,
