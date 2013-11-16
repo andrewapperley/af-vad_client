@@ -26,9 +26,15 @@ const char *kAFVDBaseNetworkQueue       = "kAFVDBaseNetworkDispatchQueue";
     AFFNRequest *request = [AFFNRequest requestWithConnectionType:type andURL:requestString andParams:parameters withCompletion:^(AFFNCallbackObject *result) {
         
         AFVDBaseNetworkModel *networkModel = [self networkModelFromResponse:result];
-        completion(networkModel);
+        dispatch_async(dispatch_get_main_queue(), ^(){
+            completion(networkModel);
+        });
+        
     } andFailure:^(NSError *error) {
-        completion(nil);
+        dispatch_async(dispatch_get_main_queue(), ^(){
+            completion(nil);
+        });
+        
     }];
     
     [[AFFNManager sharedManager] addNetworkOperation:request];

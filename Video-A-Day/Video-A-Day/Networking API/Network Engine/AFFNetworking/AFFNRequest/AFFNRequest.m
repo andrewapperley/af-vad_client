@@ -369,7 +369,7 @@ static NSString *__AFFNKeyFinished = @"isFinished";
 //Successful request function. Returns the total request time and data to the completion block in a AFFNCallbackObject
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection
 {
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         [_connection release];
         _connection = nil;
         
