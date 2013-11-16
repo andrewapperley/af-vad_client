@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>C6DCF31E-6539-490A-8809-70B3B31B1184</string>
+	<key>IDESourceControlProjectName</key>
+	<string>Video-A-Day</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>5549B809-891A-469B-9C6C-C152994FECCC</key>
+		<string>https://bitbucket.org/andrewapperley1/af-vad_client.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>Video-A-Day/Video-A-Day.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>5549B809-891A-469B-9C6C-C152994FECCC</key>
+		<string>../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://bitbucket.org/andrewapperley1/af-vad_client.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>5549B809-891A-469B-9C6C-C152994FECCC</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>5549B809-891A-469B-9C6C-C152994FECCC</string>
+			<key>IDESourceControlWCCName</key>
+			<string>af-vad_client</string>
+		</dict>
+	</array>
+</dict>
+</plist>

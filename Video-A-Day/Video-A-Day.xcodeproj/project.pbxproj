@@ -20,6 +20,10 @@
 		0F2FC70F1837303900611873 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F2FC6EE1837303800611873 /* UIKit.framework */; };
 		0F2FC7171837303900611873 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0F2FC7151837303900611873 /* InfoPlist.strings */; };
 		0F2FC7191837303900611873 /* Video_A_DayTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F2FC7181837303900611873 /* Video_A_DayTests.m */; };
+		7677BA6D18373A6B00F3EDC9 /* AFVDBaseNetworkDatasource.m in Sources */ = {isa = PBXBuildFile; fileRef = 7677BA6218373A6B00F3EDC9 /* AFVDBaseNetworkDatasource.m */; };
+		7677BA6E18373A6B00F3EDC9 /* AFVDUserModelDatasource.m in Sources */ = {isa = PBXBuildFile; fileRef = 7677BA6618373A6B00F3EDC9 /* AFVDUserModelDatasource.m */; };
+		7677BA6F18373A6B00F3EDC9 /* AFVDUserModelFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 7677BA6918373A6B00F3EDC9 /* AFVDUserModelFactory.m */; };
+		7677BA7018373A6B00F3EDC9 /* AFVDUserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7677BA6C18373A6B00F3EDC9 /* AFVDUserModel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +55,14 @@
 		0F2FC7141837303900611873 /* Video-A-DayTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Video-A-DayTests-Info.plist"; sourceTree = "<group>"; };
 		0F2FC7161837303900611873 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		0F2FC7181837303900611873 /* Video_A_DayTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Video_A_DayTests.m; sourceTree = "<group>"; };
+		7677BA6118373A6B00F3EDC9 /* AFVDBaseNetworkDatasource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFVDBaseNetworkDatasource.h; sourceTree = "<group>"; };
+		7677BA6218373A6B00F3EDC9 /* AFVDBaseNetworkDatasource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFVDBaseNetworkDatasource.m; sourceTree = "<group>"; };
+		7677BA6518373A6B00F3EDC9 /* AFVDUserModelDatasource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFVDUserModelDatasource.h; sourceTree = "<group>"; };
+		7677BA6618373A6B00F3EDC9 /* AFVDUserModelDatasource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFVDUserModelDatasource.m; sourceTree = "<group>"; };
+		7677BA6818373A6B00F3EDC9 /* AFVDUserModelFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFVDUserModelFactory.h; sourceTree = "<group>"; };
+		7677BA6918373A6B00F3EDC9 /* AFVDUserModelFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFVDUserModelFactory.m; sourceTree = "<group>"; };
+		7677BA6B18373A6B00F3EDC9 /* AFVDUserModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFVDUserModel.h; sourceTree = "<group>"; };
+		7677BA6C18373A6B00F3EDC9 /* AFVDUserModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFVDUserModel.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,6 +122,7 @@
 		0F2FC6F01837303800611873 /* Video-A-Day */ = {
 			isa = PBXGroup;
 			children = (
+				7677BA5F18373A6B00F3EDC9 /* Networking API */,
 				0F2FC6F91837303800611873 /* AFVDAppDelegate.h */,
 				0F2FC6FA1837303800611873 /* AFVDAppDelegate.m */,
 				0F2FC7021837303900611873 /* AFVDViewController.h */,
@@ -147,6 +160,61 @@
 				0F2FC7151837303900611873 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		7677BA5F18373A6B00F3EDC9 /* Networking API */ = {
+			isa = PBXGroup;
+			children = (
+				7677BA6018373A6B00F3EDC9 /* Base Network Datasource */,
+				7677BA6318373A6B00F3EDC9 /* UserModel */,
+			);
+			path = "Networking API";
+			sourceTree = "<group>";
+		};
+		7677BA6018373A6B00F3EDC9 /* Base Network Datasource */ = {
+			isa = PBXGroup;
+			children = (
+				7677BA6118373A6B00F3EDC9 /* AFVDBaseNetworkDatasource.h */,
+				7677BA6218373A6B00F3EDC9 /* AFVDBaseNetworkDatasource.m */,
+			);
+			path = "Base Network Datasource";
+			sourceTree = "<group>";
+		};
+		7677BA6318373A6B00F3EDC9 /* UserModel */ = {
+			isa = PBXGroup;
+			children = (
+				7677BA6418373A6B00F3EDC9 /* Datasource */,
+				7677BA6718373A6B00F3EDC9 /* Model Factory */,
+				7677BA6A18373A6B00F3EDC9 /* Models */,
+			);
+			path = UserModel;
+			sourceTree = "<group>";
+		};
+		7677BA6418373A6B00F3EDC9 /* Datasource */ = {
+			isa = PBXGroup;
+			children = (
+				7677BA6518373A6B00F3EDC9 /* AFVDUserModelDatasource.h */,
+				7677BA6618373A6B00F3EDC9 /* AFVDUserModelDatasource.m */,
+			);
+			path = Datasource;
+			sourceTree = "<group>";
+		};
+		7677BA6718373A6B00F3EDC9 /* Model Factory */ = {
+			isa = PBXGroup;
+			children = (
+				7677BA6818373A6B00F3EDC9 /* AFVDUserModelFactory.h */,
+				7677BA6918373A6B00F3EDC9 /* AFVDUserModelFactory.m */,
+			);
+			path = "Model Factory";
+			sourceTree = "<group>";
+		};
+		7677BA6A18373A6B00F3EDC9 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				7677BA6B18373A6B00F3EDC9 /* AFVDUserModel.h */,
+				7677BA6C18373A6B00F3EDC9 /* AFVDUserModel.m */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -247,8 +315,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				0F2FC7041837303900611873 /* AFVDViewController.m in Sources */,
+				7677BA7018373A6B00F3EDC9 /* AFVDUserModel.m in Sources */,
+				7677BA6E18373A6B00F3EDC9 /* AFVDUserModelDatasource.m in Sources */,
+				7677BA6F18373A6B00F3EDC9 /* AFVDUserModelFactory.m in Sources */,
 				0F2FC6F71837303800611873 /* main.m in Sources */,
 				0F2FC6FB1837303800611873 /* AFVDAppDelegate.m in Sources */,
+				7677BA6D18373A6B00F3EDC9 /* AFVDBaseNetworkDatasource.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -451,6 +523,7 @@
 				0F2FC71E1837303900611873 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		0F2FC71F1837303900611873 /* Build configuration list for PBXNativeTarget "Video-A-DayTests" */ = {
 			isa = XCConfigurationList;
@@ -459,6 +532,7 @@
 				0F2FC7211837303900611873 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
