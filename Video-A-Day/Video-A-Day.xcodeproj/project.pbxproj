@@ -1,0 +1,466 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0F2FC6EB1837303800611873 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F2FC6EA1837303800611873 /* Foundation.framework */; };
+		0F2FC6ED1837303800611873 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F2FC6EC1837303800611873 /* CoreGraphics.framework */; };
+		0F2FC6EF1837303800611873 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F2FC6EE1837303800611873 /* UIKit.framework */; };
+		0F2FC6F51837303800611873 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0F2FC6F31837303800611873 /* InfoPlist.strings */; };
+		0F2FC6F71837303800611873 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F2FC6F61837303800611873 /* main.m */; };
+		0F2FC6FB1837303800611873 /* AFVDAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F2FC6FA1837303800611873 /* AFVDAppDelegate.m */; };
+		0F2FC7041837303900611873 /* AFVDViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F2FC7031837303900611873 /* AFVDViewController.m */; };
+		0F2FC7061837303900611873 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0F2FC7051837303900611873 /* Images.xcassets */; };
+		0F2FC70D1837303900611873 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F2FC70C1837303900611873 /* XCTest.framework */; };
+		0F2FC70E1837303900611873 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F2FC6EA1837303800611873 /* Foundation.framework */; };
+		0F2FC70F1837303900611873 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F2FC6EE1837303800611873 /* UIKit.framework */; };
+		0F2FC7171837303900611873 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0F2FC7151837303900611873 /* InfoPlist.strings */; };
+		0F2FC7191837303900611873 /* Video_A_DayTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F2FC7181837303900611873 /* Video_A_DayTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		0F2FC7101837303900611873 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0F2FC6DF1837303800611873 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0F2FC6E61837303800611873;
+			remoteInfo = "Video-A-Day";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		0F2FC6E71837303800611873 /* Video-A-Day.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Video-A-Day.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		0F2FC6EA1837303800611873 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		0F2FC6EC1837303800611873 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		0F2FC6EE1837303800611873 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		0F2FC6F21837303800611873 /* Video-A-Day-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Video-A-Day-Info.plist"; sourceTree = "<group>"; };
+		0F2FC6F41837303800611873 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		0F2FC6F61837303800611873 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		0F2FC6F81837303800611873 /* Video-A-Day-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Video-A-Day-Prefix.pch"; sourceTree = "<group>"; };
+		0F2FC6F91837303800611873 /* AFVDAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AFVDAppDelegate.h; sourceTree = "<group>"; };
+		0F2FC6FA1837303800611873 /* AFVDAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AFVDAppDelegate.m; sourceTree = "<group>"; };
+		0F2FC7021837303900611873 /* AFVDViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AFVDViewController.h; sourceTree = "<group>"; };
+		0F2FC7031837303900611873 /* AFVDViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AFVDViewController.m; sourceTree = "<group>"; };
+		0F2FC7051837303900611873 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		0F2FC70B1837303900611873 /* Video-A-DayTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Video-A-DayTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		0F2FC70C1837303900611873 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		0F2FC7141837303900611873 /* Video-A-DayTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Video-A-DayTests-Info.plist"; sourceTree = "<group>"; };
+		0F2FC7161837303900611873 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		0F2FC7181837303900611873 /* Video_A_DayTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Video_A_DayTests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		0F2FC6E41837303800611873 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0F2FC6ED1837303800611873 /* CoreGraphics.framework in Frameworks */,
+				0F2FC6EF1837303800611873 /* UIKit.framework in Frameworks */,
+				0F2FC6EB1837303800611873 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0F2FC7081837303900611873 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0F2FC70D1837303900611873 /* XCTest.framework in Frameworks */,
+				0F2FC70F1837303900611873 /* UIKit.framework in Frameworks */,
+				0F2FC70E1837303900611873 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		0F2FC6DE1837303800611873 = {
+			isa = PBXGroup;
+			children = (
+				0F2FC6F01837303800611873 /* Video-A-Day */,
+				0F2FC7121837303900611873 /* Video-A-DayTests */,
+				0F2FC6E91837303800611873 /* Frameworks */,
+				0F2FC6E81837303800611873 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		0F2FC6E81837303800611873 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				0F2FC6E71837303800611873 /* Video-A-Day.app */,
+				0F2FC70B1837303900611873 /* Video-A-DayTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		0F2FC6E91837303800611873 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				0F2FC6EA1837303800611873 /* Foundation.framework */,
+				0F2FC6EC1837303800611873 /* CoreGraphics.framework */,
+				0F2FC6EE1837303800611873 /* UIKit.framework */,
+				0F2FC70C1837303900611873 /* XCTest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		0F2FC6F01837303800611873 /* Video-A-Day */ = {
+			isa = PBXGroup;
+			children = (
+				0F2FC6F91837303800611873 /* AFVDAppDelegate.h */,
+				0F2FC6FA1837303800611873 /* AFVDAppDelegate.m */,
+				0F2FC7021837303900611873 /* AFVDViewController.h */,
+				0F2FC7031837303900611873 /* AFVDViewController.m */,
+				0F2FC7051837303900611873 /* Images.xcassets */,
+				0F2FC6F11837303800611873 /* Supporting Files */,
+			);
+			path = "Video-A-Day";
+			sourceTree = "<group>";
+		};
+		0F2FC6F11837303800611873 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				0F2FC6F21837303800611873 /* Video-A-Day-Info.plist */,
+				0F2FC6F31837303800611873 /* InfoPlist.strings */,
+				0F2FC6F61837303800611873 /* main.m */,
+				0F2FC6F81837303800611873 /* Video-A-Day-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		0F2FC7121837303900611873 /* Video-A-DayTests */ = {
+			isa = PBXGroup;
+			children = (
+				0F2FC7181837303900611873 /* Video_A_DayTests.m */,
+				0F2FC7131837303900611873 /* Supporting Files */,
+			);
+			path = "Video-A-DayTests";
+			sourceTree = "<group>";
+		};
+		0F2FC7131837303900611873 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				0F2FC7141837303900611873 /* Video-A-DayTests-Info.plist */,
+				0F2FC7151837303900611873 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		0F2FC6E61837303800611873 /* Video-A-Day */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0F2FC71C1837303900611873 /* Build configuration list for PBXNativeTarget "Video-A-Day" */;
+			buildPhases = (
+				0F2FC6E31837303800611873 /* Sources */,
+				0F2FC6E41837303800611873 /* Frameworks */,
+				0F2FC6E51837303800611873 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Video-A-Day";
+			productName = "Video-A-Day";
+			productReference = 0F2FC6E71837303800611873 /* Video-A-Day.app */;
+			productType = "com.apple.product-type.application";
+		};
+		0F2FC70A1837303900611873 /* Video-A-DayTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0F2FC71F1837303900611873 /* Build configuration list for PBXNativeTarget "Video-A-DayTests" */;
+			buildPhases = (
+				0F2FC7071837303900611873 /* Sources */,
+				0F2FC7081837303900611873 /* Frameworks */,
+				0F2FC7091837303900611873 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				0F2FC7111837303900611873 /* PBXTargetDependency */,
+			);
+			name = "Video-A-DayTests";
+			productName = "Video-A-DayTests";
+			productReference = 0F2FC70B1837303900611873 /* Video-A-DayTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		0F2FC6DF1837303800611873 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = AFVD;
+				LastUpgradeCheck = 0500;
+				ORGANIZATIONNAME = AFApps;
+				TargetAttributes = {
+					0F2FC70A1837303900611873 = {
+						TestTargetID = 0F2FC6E61837303800611873;
+					};
+				};
+			};
+			buildConfigurationList = 0F2FC6E21837303800611873 /* Build configuration list for PBXProject "Video-A-Day" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 0F2FC6DE1837303800611873;
+			productRefGroup = 0F2FC6E81837303800611873 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				0F2FC6E61837303800611873 /* Video-A-Day */,
+				0F2FC70A1837303900611873 /* Video-A-DayTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		0F2FC6E51837303800611873 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0F2FC7061837303900611873 /* Images.xcassets in Resources */,
+				0F2FC6F51837303800611873 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0F2FC7091837303900611873 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0F2FC7171837303900611873 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		0F2FC6E31837303800611873 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0F2FC7041837303900611873 /* AFVDViewController.m in Sources */,
+				0F2FC6F71837303800611873 /* main.m in Sources */,
+				0F2FC6FB1837303800611873 /* AFVDAppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0F2FC7071837303900611873 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0F2FC7191837303900611873 /* Video_A_DayTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		0F2FC7111837303900611873 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 0F2FC6E61837303800611873 /* Video-A-Day */;
+			targetProxy = 0F2FC7101837303900611873 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		0F2FC6F31837303800611873 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0F2FC6F41837303800611873 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		0F2FC7151837303900611873 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0F2FC7161837303900611873 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		0F2FC71A1837303900611873 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		0F2FC71B1837303900611873 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		0F2FC71D1837303900611873 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Video-A-Day/Video-A-Day-Prefix.pch";
+				INFOPLIST_FILE = "Video-A-Day/Video-A-Day-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		0F2FC71E1837303900611873 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Video-A-Day/Video-A-Day-Prefix.pch";
+				INFOPLIST_FILE = "Video-A-Day/Video-A-Day-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		0F2FC7201837303900611873 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Video-A-Day.app/Video-A-Day";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Video-A-Day/Video-A-Day-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "Video-A-DayTests/Video-A-DayTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		0F2FC7211837303900611873 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Video-A-Day.app/Video-A-Day";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Video-A-Day/Video-A-Day-Prefix.pch";
+				INFOPLIST_FILE = "Video-A-DayTests/Video-A-DayTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		0F2FC6E21837303800611873 /* Build configuration list for PBXProject "Video-A-Day" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0F2FC71A1837303900611873 /* Debug */,
+				0F2FC71B1837303900611873 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0F2FC71C1837303900611873 /* Build configuration list for PBXNativeTarget "Video-A-Day" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0F2FC71D1837303900611873 /* Debug */,
+				0F2FC71E1837303900611873 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		0F2FC71F1837303900611873 /* Build configuration list for PBXNativeTarget "Video-A-DayTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0F2FC7201837303900611873 /* Debug */,
+				0F2FC7211837303900611873 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 0F2FC6DF1837303800611873 /* Project object */;
+}
