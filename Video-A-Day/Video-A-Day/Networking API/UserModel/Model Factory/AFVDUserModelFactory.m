@@ -23,7 +23,7 @@
         
         completion(model, networkCallback);
     }];
-}
+}      
 
 #pragma mark - User Model
 - (AFVDUserModel *)userModelForData:(NSDictionary *)data {

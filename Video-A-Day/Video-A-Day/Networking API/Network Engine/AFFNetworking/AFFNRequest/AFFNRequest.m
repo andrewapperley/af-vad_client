@@ -145,44 +145,47 @@ static NSString *__AFFNKeyFinished = @"isFinished";
  * The main function of where the request creates the POST/GET request and the connection object, then starts the process.
  */
 - (void)start
-{    
-    [self willChangeValueForKey:__AFFNKeyExecuting];
-    _isExecuting = TRUE;
-    [self didChangeValueForKey:__AFFNKeyExecuting];
-    
-    if(self.isCancelled) {
-        [self willChangeValueForKey:__AFFNKeyExecuting];
-        _isExecuting = FALSE;
-        [self didChangeValueForKey:__AFFNKeyExecuting];
-        
-        [self willChangeValueForKey:__AFFNKeyFinished];
-        _isFinished = TRUE;
-        [self didChangeValueForKey:__AFFNKeyFinished];
-        
-        //TODO : temp custom error code/string
-        _failureBlock([NSError errorWithDomain:@"operation.cancelled" code:600 userInfo:nil]);
-        return;
-    }
-    
-    [self performSelector:(_type == kAFFNPost || _type == kAFFNMulti) ? @selector(generatePOSTRequest) : @selector(generateGETRequest)];
-    
-    _connection = [[NSURLConnection alloc] initWithRequest:request delegate:self startImmediately:FALSE];
-    
-    if(_connection) {
-        receivedData = [NSMutableData new];
-        
-        [_connection scheduleInRunLoop:[NSRunLoop mainRunLoop]
-                               forMode:NSDefaultRunLoopMode];
-        [_connection start];
-        
-        requestTime = [NSDate new];
-        
-        [finalURL release];
-        finalURL = nil;
-        
-        [request release];
-        request = nil;
-    }
+{
+   dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+       [self willChangeValueForKey:__AFFNKeyExecuting];
+       _isExecuting = TRUE;
+       [self didChangeValueForKey:__AFFNKeyExecuting];
+       
+       if(self.isCancelled) {
+           [self willChangeValueForKey:__AFFNKeyExecuting];
+           _isExecuting = FALSE;
+           [self didChangeValueForKey:__AFFNKeyExecuting];
+           
+           [self willChangeValueForKey:__AFFNKeyFinished];
+           _isFinished = TRUE;
+           [self didChangeValueForKey:__AFFNKeyFinished];
+           
+           //TODO : temp custom error code/string
+           _failureBlock([NSError errorWithDomain:@"operation.cancelled" code:600 userInfo:nil]);
+           return;
+       }
+       
+       [self performSelector:(_type == kAFFNPost || _type == kAFFNMulti) ? @selector(generatePOSTRequest) : @selector(generateGETRequest)];
+       
+       _connection = [[NSURLConnection alloc] initWithRequest:request delegate:self startImmediately:FALSE];
+       
+       if(_connection) {
+           receivedData = [NSMutableData new];
+           
+           [_connection scheduleInRunLoop:[NSRunLoop mainRunLoop]
+                                  forMode:NSDefaultRunLoopMode];
+           [_connection start];
+           
+           requestTime = [NSDate new];
+           
+           [finalURL release];
+           finalURL = nil;
+           
+           [request release];
+           request = nil;
+       }
+
+   });
 }
 
 //Generates a POST type request
@@ -299,83 +302,92 @@ static NSString *__AFFNKeyFinished = @"isFinished";
 //Calculates the progress of the request
 - (void)connection:(NSURLConnection *)connection didSendBodyData:(NSInteger)bytesWritten totalBytesWritten:(NSInteger)totalBytesWritten totalBytesExpectedToWrite:(NSInteger)totalBytesExpectedToWrite
 {
-    if(_upDone || !_upProgressBlock)
-        return;
+   dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+       if(_upDone || !_upProgressBlock)
+           return;
     
-    if( ((CGFloat)totalBytesWritten / (CGFloat)totalBytesExpectedToWrite) >= 1)
-        _upDone = TRUE;
+       if( ((CGFloat)totalBytesWritten / (CGFloat)totalBytesExpectedToWrite) >= 1)
+           _upDone = TRUE;
     
-    _upProgressBlock(((CGFloat)totalBytesWritten / (CGFloat)totalBytesExpectedToWrite));
+       _upProgressBlock(((CGFloat)totalBytesWritten / (CGFloat)totalBytesExpectedToWrite));
+   });
 }
 
 //Failure of the connection, returns the error through the failure block
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
 {
-    [_connection release];
-    _connection = nil;
-    
-    if(_failureBlock)
-        _failureBlock(error);
-    
-    [self willChangeValueForKey:__AFFNKeyExecuting];
-    _isExecuting = FALSE;
-    [self didChangeValueForKey:__AFFNKeyExecuting];
-
-    [self willChangeValueForKey:__AFFNKeyFinished];
-    _isFinished = TRUE;
-    [self didChangeValueForKey:__AFFNKeyFinished];
-
-    if(error)
-        assert(error);
+   dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+       [_connection release];
+       _connection = nil;
+       
+       if(_failureBlock)
+           _failureBlock(error);
+       
+       [self willChangeValueForKey:__AFFNKeyExecuting];
+       _isExecuting = FALSE;
+       [self didChangeValueForKey:__AFFNKeyExecuting];
+       
+       [self willChangeValueForKey:__AFFNKeyFinished];
+       _isFinished = TRUE;
+       [self didChangeValueForKey:__AFFNKeyFinished];
+       
+       if(error)
+           assert(error);
+   });
 }
 
 //Sets the progress and data to 0 as a request/attempt has started
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
 {
-    if(receivedData)
-        [receivedData setLength:0];
-    downloadDataLength = 0;
-    expectedDataLength = response.expectedContentLength;
-    _downDone = FALSE;
+   dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+       if(receivedData)
+           [receivedData setLength:0];
+       downloadDataLength = 0;
+       expectedDataLength = response.expectedContentLength;
+       _downDone = FALSE;
+   });
 }
 
 //Appends data to the data object
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
 {
-    downloadDataLength += data.length;
-    if(receivedData)
-        [receivedData appendData:data];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        downloadDataLength += data.length;
+        if(receivedData)
+            [receivedData appendData:data];
     
-    if(_downDone || !_downProgressBlock)
-        return;
+        if(_downDone || !_downProgressBlock)
+            return;
     
-    if((downloadDataLength / expectedDataLength) >= 1)
-        _downDone = TRUE;
+        if((downloadDataLength / expectedDataLength) >= 1)
+            _downDone = TRUE;
     
-    _downProgressBlock((downloadDataLength / expectedDataLength));
-    
+        _downProgressBlock((downloadDataLength / expectedDataLength));
+    });
 }
 
 //Successful request function. Returns the total request time and data to the completion block in a AFFNCallbackObject
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection
 {
-    [_connection release];
-    _connection = nil;
-    
-    NSTimeInterval totalRequestTime = [[NSDate date] timeIntervalSinceDate:requestTime];
-    
-    AFFNCallbackObject *callBack = [AFFNCallbackObject callbackWithData:receivedData andReqestTime:totalRequestTime];
-    
-    if(_completionBlock)
-        _completionBlock(callBack);
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [_connection release];
+        _connection = nil;
         
-    [self willChangeValueForKey:__AFFNKeyExecuting];
-    _isExecuting = FALSE;
-    [self didChangeValueForKey:__AFFNKeyExecuting];
-    
-    [self willChangeValueForKey:__AFFNKeyFinished];
-    _isFinished = TRUE;
-    [self didChangeValueForKey:__AFFNKeyFinished];
+        NSTimeInterval totalRequestTime = [[NSDate date] timeIntervalSinceDate:requestTime];
+        
+        AFFNCallbackObject *callBack = [AFFNCallbackObject callbackWithData:receivedData andReqestTime:totalRequestTime];
+        
+        if(_completionBlock)
+            _completionBlock(callBack);
+        
+        [self willChangeValueForKey:__AFFNKeyExecuting];
+        _isExecuting = FALSE;
+        [self didChangeValueForKey:__AFFNKeyExecuting];
+        
+        [self willChangeValueForKey:__AFFNKeyFinished];
+        _isFinished = TRUE;
+        [self didChangeValueForKey:__AFFNKeyFinished];
+    });
 }
 
 #pragma mark - Dealloc
