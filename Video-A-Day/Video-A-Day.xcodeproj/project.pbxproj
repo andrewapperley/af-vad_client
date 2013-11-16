@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0F18F194183743EF0071BEF5 /* AFFNCallbackObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F18F186183743EF0071BEF5 /* AFFNCallbackObject.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		0F18F195183743EF0071BEF5 /* AFFNImageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F18F189183743EF0071BEF5 /* AFFNImageManager.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		0F18F196183743EF0071BEF5 /* UIImageView+AFFNImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F18F18B183743EF0071BEF5 /* UIImageView+AFFNImage.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		0F18F197183743EF0071BEF5 /* AFFNManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F18F18E183743EF0071BEF5 /* AFFNManager.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		0F18F198183743EF0071BEF5 /* AFFNRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F18F191183743EF0071BEF5 /* AFFNRequest.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		0F18F199183743EF0071BEF5 /* AFFNStreamingRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F18F193183743EF0071BEF5 /* AFFNStreamingRequest.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		0F2FC6EB1837303800611873 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F2FC6EA1837303800611873 /* Foundation.framework */; };
 		0F2FC6ED1837303800611873 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F2FC6EC1837303800611873 /* CoreGraphics.framework */; };
 		0F2FC6EF1837303800611873 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F2FC6EE1837303800611873 /* UIKit.framework */; };
@@ -37,6 +43,18 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0F18F185183743EF0071BEF5 /* AFFNCallbackObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFFNCallbackObject.h; sourceTree = "<group>"; };
+		0F18F186183743EF0071BEF5 /* AFFNCallbackObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFFNCallbackObject.m; sourceTree = "<group>"; };
+		0F18F188183743EF0071BEF5 /* AFFNImageManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFFNImageManager.h; sourceTree = "<group>"; };
+		0F18F189183743EF0071BEF5 /* AFFNImageManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFFNImageManager.m; sourceTree = "<group>"; };
+		0F18F18A183743EF0071BEF5 /* UIImageView+AFFNImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+AFFNImage.h"; sourceTree = "<group>"; };
+		0F18F18B183743EF0071BEF5 /* UIImageView+AFFNImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+AFFNImage.m"; sourceTree = "<group>"; };
+		0F18F18D183743EF0071BEF5 /* AFFNManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFFNManager.h; sourceTree = "<group>"; };
+		0F18F18E183743EF0071BEF5 /* AFFNManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFFNManager.m; sourceTree = "<group>"; };
+		0F18F190183743EF0071BEF5 /* AFFNRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFFNRequest.h; sourceTree = "<group>"; };
+		0F18F191183743EF0071BEF5 /* AFFNRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFFNRequest.m; sourceTree = "<group>"; };
+		0F18F192183743EF0071BEF5 /* AFFNStreamingRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFFNStreamingRequest.h; sourceTree = "<group>"; };
+		0F18F193183743EF0071BEF5 /* AFFNStreamingRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFFNStreamingRequest.m; sourceTree = "<group>"; };
 		0F2FC6E71837303800611873 /* Video-A-Day.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Video-A-Day.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0F2FC6EA1837303800611873 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		0F2FC6EC1837303800611873 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -89,6 +107,65 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0F18F182183743EF0071BEF5 /* Network Engine */ = {
+			isa = PBXGroup;
+			children = (
+				0F18F183183743EF0071BEF5 /* AFFNetworking */,
+			);
+			path = "Network Engine";
+			sourceTree = "<group>";
+		};
+		0F18F183183743EF0071BEF5 /* AFFNetworking */ = {
+			isa = PBXGroup;
+			children = (
+				0F18F184183743EF0071BEF5 /* AFFNCallbackObject */,
+				0F18F187183743EF0071BEF5 /* AFFNImage */,
+				0F18F18C183743EF0071BEF5 /* AFFNManager */,
+				0F18F18F183743EF0071BEF5 /* AFFNRequest */,
+			);
+			path = AFFNetworking;
+			sourceTree = "<group>";
+		};
+		0F18F184183743EF0071BEF5 /* AFFNCallbackObject */ = {
+			isa = PBXGroup;
+			children = (
+				0F18F185183743EF0071BEF5 /* AFFNCallbackObject.h */,
+				0F18F186183743EF0071BEF5 /* AFFNCallbackObject.m */,
+			);
+			path = AFFNCallbackObject;
+			sourceTree = "<group>";
+		};
+		0F18F187183743EF0071BEF5 /* AFFNImage */ = {
+			isa = PBXGroup;
+			children = (
+				0F18F188183743EF0071BEF5 /* AFFNImageManager.h */,
+				0F18F189183743EF0071BEF5 /* AFFNImageManager.m */,
+				0F18F18A183743EF0071BEF5 /* UIImageView+AFFNImage.h */,
+				0F18F18B183743EF0071BEF5 /* UIImageView+AFFNImage.m */,
+			);
+			path = AFFNImage;
+			sourceTree = "<group>";
+		};
+		0F18F18C183743EF0071BEF5 /* AFFNManager */ = {
+			isa = PBXGroup;
+			children = (
+				0F18F18D183743EF0071BEF5 /* AFFNManager.h */,
+				0F18F18E183743EF0071BEF5 /* AFFNManager.m */,
+			);
+			path = AFFNManager;
+			sourceTree = "<group>";
+		};
+		0F18F18F183743EF0071BEF5 /* AFFNRequest */ = {
+			isa = PBXGroup;
+			children = (
+				0F18F190183743EF0071BEF5 /* AFFNRequest.h */,
+				0F18F191183743EF0071BEF5 /* AFFNRequest.m */,
+				0F18F192183743EF0071BEF5 /* AFFNStreamingRequest.h */,
+				0F18F193183743EF0071BEF5 /* AFFNStreamingRequest.m */,
+			);
+			path = AFFNRequest;
+			sourceTree = "<group>";
+		};
 		0F2FC6DE1837303800611873 = {
 			isa = PBXGroup;
 			children = (
@@ -165,6 +242,7 @@
 		7677BA5F18373A6B00F3EDC9 /* Networking API */ = {
 			isa = PBXGroup;
 			children = (
+				0F18F182183743EF0071BEF5 /* Network Engine */,
 				7677BA6018373A6B00F3EDC9 /* Base Network Datasource */,
 				7677BA6318373A6B00F3EDC9 /* UserModel */,
 			);
@@ -314,13 +392,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0F18F198183743EF0071BEF5 /* AFFNRequest.m in Sources */,
 				0F2FC7041837303900611873 /* AFVDViewController.m in Sources */,
 				7677BA7018373A6B00F3EDC9 /* AFVDUserModel.m in Sources */,
 				7677BA6E18373A6B00F3EDC9 /* AFVDUserModelDatasource.m in Sources */,
 				7677BA6F18373A6B00F3EDC9 /* AFVDUserModelFactory.m in Sources */,
 				0F2FC6F71837303800611873 /* main.m in Sources */,
+				0F18F196183743EF0071BEF5 /* UIImageView+AFFNImage.m in Sources */,
 				0F2FC6FB1837303800611873 /* AFVDAppDelegate.m in Sources */,
+				0F18F194183743EF0071BEF5 /* AFFNCallbackObject.m in Sources */,
 				7677BA6D18373A6B00F3EDC9 /* AFVDBaseNetworkDatasource.m in Sources */,
+				0F18F195183743EF0071BEF5 /* AFFNImageManager.m in Sources */,
+				0F18F199183743EF0071BEF5 /* AFFNStreamingRequest.m in Sources */,
+				0F18F197183743EF0071BEF5 /* AFFNManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
