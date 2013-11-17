@@ -13,4 +13,7 @@
 #pragma mark - User model
 - (void)fetchUserModelWithUserName:(NSString *)userName accessToken:(NSString *)accessToken completion:(AFVDBaseNetworkCompletion)completion;
 
+#pragma mark - User login
+- (void)loginUserWithUsername:(NSString *)userName andPassword:(NSString *)password completion:(AFVDBaseNetworkCompletion)completion;
+
 @end

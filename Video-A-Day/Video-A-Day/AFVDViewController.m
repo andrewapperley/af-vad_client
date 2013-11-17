@@ -15,6 +15,7 @@
 
 NSString *userName = @"andrewApperley";
 NSString *token = @"c60f789ea83ec7452149cce7571f5bb661e53d8a67d37b81bc98d593";
+NSString *password = @"Abcde321";
 
 @interface AFVDViewController ()
 
@@ -30,6 +31,19 @@ NSString *token = @"c60f789ea83ec7452149cce7571f5bb661e53d8a67d37b81bc98d593";
     [self fetchUserModel];
     [self fetchRelationshipModel];
     [self fetchVideoModel];
+    [self loginUser];
+}
+
+- (void)loginUser {
+    AFVDUserModelFactory *modelFactory = [[AFVDUserModelFactory alloc] init];
+      NSLog(@"Start AFVDLogin");
+    
+    [modelFactory fetchUserModelAndAccessTokenWithUserName:userName andPassword:password completion:^(AFVDUserModel *userModel, NSString *access_token, AFVDBaseNetworkModel *networkCallback){
+        if (networkCallback.success) {
+            NSLog(@"Finish AFVDLogin - Success");
+            NSLog(@"Access Token - %@", access_token);
+        }
+    }];
 }
 
 - (void)fetchUserModel {

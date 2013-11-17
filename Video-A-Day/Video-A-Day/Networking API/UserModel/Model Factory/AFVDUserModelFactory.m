@@ -24,7 +24,24 @@
         
         completion(model, networkCallback);
     }];
-}      
+}
+
+#pragma mark - Fetch user model and access_token
+- (void)fetchUserModelAndAccessTokenWithUserName:(NSString *)userName andPassword:(NSString *)password completion:(AFVDUserLoginCompletion)completion {
+    
+    [[AFVDUserModelDatasource sharedDataSource] loginUserWithUsername:userName andPassword:password completion:^(AFVDBaseNetworkModel *networkCallback) {
+        
+        AFVDUserModel *model = nil;
+        
+        if(networkCallback.success) {
+            model = [self userModelForData:networkCallback.responseData];
+            setAccessToken(networkCallback.responseData[@"access_token"]);
+        }
+        
+        completion(model, getAccessToken, networkCallback);
+    }];
+}
+
 
 #pragma mark - User model
 - (AFVDUserModel *)userModelForData:(NSDictionary *)data {
