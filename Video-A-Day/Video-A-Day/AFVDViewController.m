@@ -44,6 +44,7 @@ NSString *password = @"Abcde321";
             NSLog(@"Access Token - %@", access_token);
         }
     }];
+    [self createVideo];
 }
 
 - (void)fetchUserModel {
@@ -110,12 +111,35 @@ NSString *password = @"Abcde321";
     }];
 }
 
+- (void)createVideo {
+    
+    AFVDVideoModelFactory *modelFactory = [[AFVDVideoModelFactory alloc] init];
+
+    NSLog(@"Start VideoCreation");
+
+    NSString *relationshipId = @"123456789";
+    NSString *videoContent = @"";
+    NSString *date = @"2013-11-17";
+    NSString *thumbnail = @"";
+    
+    [modelFactory postVideoModelWithUserName:userName relationshipId:relationshipId videoContent:videoContent date:date accessToken:token videoThumbnail:thumbnail completion:^(AFVDBaseNetworkModel *networkCallback) {
+        
+        if(networkCallback.success) {
+            
+            NSLog(@"Finish VideoCreation - Success");
+            
+        } else {
+            NSLog(@"Finish VideoCreation - Failure %d - %@", networkCallback.responseCode, networkCallback.responseMessage);
+        }
+    }];
+}
+
+#warning END TEMP VC
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-#warning END TEMP VC
 
 @end

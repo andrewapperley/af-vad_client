@@ -9,8 +9,8 @@
 #import "AFFNManager.h"
 #import "AFVDBaseNetworkDatasource.h"
 
-const NSString *kAFVDBaseNetworkURL     = @"http://99.232.33.159:5000";
-const char *kAFVDBaseNetworkQueue       = "kAFVDBaseNetworkDispatchQueue";
+const NSString *kAFVDBaseNetworkURL             = @"http://99.232.33.159:5000";
+const NSString *kAFVDBaseNetworkKeyPostParam    = @"params";
 
 @implementation AFVDBaseNetworkDatasource
 
@@ -20,6 +20,19 @@ const char *kAFVDBaseNetworkQueue       = "kAFVDBaseNetworkDispatchQueue";
 }
 
 - (void)makeURLRequestWithType:(AFFNPostType)type endpointURLString:(NSString *)urlString parameters:(NSDictionary *)parameters completion:(AFVDBaseNetworkCompletion)completion {
+    
+    //If the type is "POST" then we must wrap any parameters in a 'params' dictionary.
+    NSDictionary *paramDictionary;
+    if(type == kAFFNPost) {
+       
+        NSMutableDictionary *newParamDictionary = [NSMutableDictionary dictionary];
+        [newParamDictionary setObject:parameters forKey:kAFVDBaseNetworkKeyPostParam];
+        paramDictionary = newParamDictionary;
+        
+    } else {
+        paramDictionary = parameters;
+    }
+    
     
     NSString *requestString = [NSString stringWithFormat:@"%@%@", kAFVDBaseNetworkURL, urlString];
     

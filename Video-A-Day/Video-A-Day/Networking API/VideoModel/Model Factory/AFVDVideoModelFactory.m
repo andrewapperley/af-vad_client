@@ -41,6 +41,15 @@
     }];
 }
 
+#pragma mark - Post video creation
+- (void)postVideoModelWithUserName:(NSString *)userName relationshipId:(NSString *)relationshipId videoContent:(NSString *)videoContent date:(NSString *)date accessToken:(NSString *)accessToken videoThumbnail:(NSString *)videoThumbnail completion:(AFVDVideoCreationModelCompletion)completion {
+
+    [[AFVDVideoModelDatasource sharedDataSource] postVideoModelWithUserName:userName relationshipId:relationshipId videoContent:videoContent date:date accessToken:accessToken videoThumbnail:videoThumbnail completion:^(AFVDBaseNetworkModel *networkCallback) {
+        
+        completion(networkCallback);
+    }];
+}
+
 #pragma mark - Video relationship model
 - (AFVDVideoRelationshipModel *)videoRelationshipModelForData:(NSDictionary *)data {
     
