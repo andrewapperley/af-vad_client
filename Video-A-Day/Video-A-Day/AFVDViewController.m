@@ -11,6 +11,10 @@
 
 #warning TEMP VC
 #import "AFVDUserModelFactory.h"
+#import "AFVDVideoModelFactory.h"
+
+NSString *userName = @"andrewApperley";
+NSString *token = @"c60f789ea83ec7452149cce7571f5bb661e53d8a67d37b81bc98d593";
 
 @interface AFVDViewController ()
 
@@ -23,18 +27,22 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     
-    AFVDUserModelFactory *userModelFactory = [[AFVDUserModelFactory alloc] init];
+    [self fetchUserModel];
+    [self fetchRelationshipModel];
+    [self fetchVideoModel];
+}
+
+- (void)fetchUserModel {
     
-    NSString *username = @"andrewApperley";
-    NSString *token = @"c60f789ea83ec7452149cce7571f5bb661e53d8a67d37b81bc98d593";
+    AFVDUserModelFactory *modelFactory = [[AFVDUserModelFactory alloc] init];
     
-    NSLog(@"Start");
+    NSLog(@"Start AFVDUserModel");
     
-    [userModelFactory fetchUserModelWithUserName:username accessToken:token completion:^(AFVDUserModel *userModel, AFVDBaseNetworkModel *networkCallback) {
+    [modelFactory fetchUserModelWithUserName:userName accessToken:token completion:^(AFVDUserModel *userModel, AFVDBaseNetworkModel *networkCallback) {
         
         if(networkCallback.success) {
             
-            NSLog(@"Finish - Success");
+            NSLog(@"Finish AFVDUserModel - Success");
             
             UIImageView *profileImage = [[UIImageView alloc] initWithImage:userModel.profileImage];
             [self.view addSubview:profileImage];
@@ -42,7 +50,48 @@
             profileImage.center = self.view.center;
             
         } else {
-            NSLog(@"Finish - Failure %d - %@", networkCallback.responseCode, networkCallback.responseMessage);
+            NSLog(@"Finish AFVDUserModel - Failure %d - %@", networkCallback.responseCode, networkCallback.responseMessage);
+        }
+    }];
+}
+
+- (void)fetchRelationshipModel {
+    
+    AFVDVideoModelFactory *modelFactory = [[AFVDVideoModelFactory alloc] init];
+    
+    NSString *relationshipId = @"";
+    
+    NSLog(@"Start AFVDVideoRelationshipModel");
+    
+    [modelFactory fetchVideoRelationshipModelWithUserName:userName relationshipId:relationshipId accessToken:token completion:^(AFVDVideoRelationshipModel *videoRelationshipModel, AFVDBaseNetworkModel *networkCallback) {
+        
+        if(networkCallback.success) {
+            
+            NSLog(@"Finish AFVDVideoRelationshipModel - Success");
+            
+        } else {
+            NSLog(@"Finish AFVDVideoRelationshipModel - Failure %d - %@", networkCallback.responseCode, networkCallback.responseMessage);
+        }
+    }];
+}
+
+- (void)fetchVideoModel {
+    
+    AFVDVideoModelFactory *modelFactory = [[AFVDVideoModelFactory alloc] init];
+    
+    NSString *playlistId = @"";
+    NSUInteger pageIndex = 0;
+    
+    NSLog(@"Start AFVDVideoPlaylistModel");
+    
+    [modelFactory fetchVideoPlaylistModelWithUserName:userName playlistId:playlistId accessToken:token pageIndex:pageIndex completion:^(AFVDVideoPlaylistModel *videoPlaylistModel, AFVDBaseNetworkModel *networkCallback) {
+        
+        if(networkCallback.success) {
+            
+            NSLog(@"Finish AFVDVideoPlaylistModel - Success");
+            
+        } else {
+            NSLog(@"Finish AFVDVideoPlaylistModel - Failure %d - %@", networkCallback.responseCode, networkCallback.responseMessage);
         }
     }];
 }

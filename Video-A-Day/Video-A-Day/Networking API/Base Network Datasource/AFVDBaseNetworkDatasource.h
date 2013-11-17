@@ -9,7 +9,7 @@
 #import "AFVDBaseNetworkModel.h"
 #import "AFFNRequest.h"
 
-typedef void(^AFVDBaseNetworkCompletion)(AFVDBaseNetworkModel *callback);
+typedef void(^AFVDBaseNetworkCompletion)(AFVDBaseNetworkModel *networkCallback);
 
 @interface AFVDBaseNetworkDatasource : NSObject
 

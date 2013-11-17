@@ -8,10 +8,9 @@
 
 #import "AFVDBaseNetworkDatasource.h"
 
-typedef void(^AFVDUserModelDatasourceCompletion)(AFVDBaseNetworkModel *networkCallback);
-
 @interface AFVDUserModelDatasource : AFVDBaseNetworkDatasource
 
-- (void)fetchUserModelWithUserName:(NSString *)userName accessToken:(NSString *)accessToken completion:(AFVDUserModelDatasourceCompletion)completion;
+#pragma mark - User model
+- (void)fetchUserModelWithUserName:(NSString *)userName accessToken:(NSString *)accessToken completion:(AFVDBaseNetworkCompletion)completion;
 
 @end

@@ -14,7 +14,8 @@ NSString *kAFVDUserModelParameterKeyAcessToken  = @"access_token";
 
 @implementation AFVDUserModelDatasource
 
-- (void)fetchUserModelWithUserName:(NSString *)userName accessToken:(NSString *)accessToken completion:(AFVDUserModelDatasourceCompletion)completion {
+#pragma mark - User model
+- (void)fetchUserModelWithUserName:(NSString *)userName accessToken:(NSString *)accessToken completion:(AFVDBaseNetworkCompletion)completion {
     
     NSDictionary *parameters = @{kAFVDUserModelParameterKeyUserName : userName,
                                  kAFVDUserModelParameterKeyAcessToken : accessToken};
