@@ -8,21 +8,17 @@
 
 #import "AFVDVideoModelDatasource.h"
 
-NSString *kAFVDVideoModelParameterKeyUserName    = @"username";
-NSString *kAFVDVideoModelParameterKeyAcessToken  = @"access_token";
+NSString *kAFVDVideoModelParameterKeyUserName            = @"username";
+NSString *kAFVDVideoModelParameterKeyAcessToken          = @"access_token";
 
 //Video playlist
-NSString *kAFVDVideoPlaylistModelEndpointURL             = @"/video/";
+NSString *kAFVDVideoPlaylistModelEndpointURL             = @"/video/getVideos/";
 NSString *kAFVDVideoPlaylistModelParameterKeyPlaylistId  = @"playlist_id";
 NSString *kAFVDVideoPlaylistModelParameterKeyPage        = @"page";
 
 //Video relationship playlist
 NSString *kAFVDVideoRelationshipModelEndpointURL         = @"/video/playlists/";
 NSString *kAFVDVideoRelationshipModelId                  = @"relationship_id";
-
-//CONTENT_BASE_URL+/user_content/videos/relationship_id/username/video_date/thumbnail
-//and videos at
-//CONTENT_BASE_URL+/user_content/videos/relationship_id/username/video_date/video_id.mov
 
 @implementation AFVDVideoModelDatasource
 
@@ -52,6 +48,5 @@ NSString *kAFVDVideoRelationshipModelId                  = @"relationship_id";
         completion(callback);
     }];
 }
-
 
 @end

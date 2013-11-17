@@ -59,7 +59,7 @@ NSString *token = @"c60f789ea83ec7452149cce7571f5bb661e53d8a67d37b81bc98d593";
     
     AFVDVideoModelFactory *modelFactory = [[AFVDVideoModelFactory alloc] init];
     
-    NSString *relationshipId = @"";
+    NSString *relationshipId = @"123456789";
     
     NSLog(@"Start AFVDVideoRelationshipModel");
     
@@ -79,7 +79,7 @@ NSString *token = @"c60f789ea83ec7452149cce7571f5bb661e53d8a67d37b81bc98d593";
     
     AFVDVideoModelFactory *modelFactory = [[AFVDVideoModelFactory alloc] init];
     
-    NSString *playlistId = @"";
+    NSString *playlistId = @"123456789";
     NSUInteger pageIndex = 0;
     
     NSLog(@"Start AFVDVideoPlaylistModel");
