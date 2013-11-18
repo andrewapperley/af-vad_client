@@ -17,6 +17,6 @@
 - (void)loginUserWithUsername:(NSString *)userName password:(NSString *)password completion:(AFVDBaseNetworkCompletion)completion;
 
 #pragma mark - Fetch user image
-- (void)fetchUserProfileImage:(NSString *)userName profileImageId:(NSString *)profileImageId completion:(AFVDBaseNetworkCompletion)completion;
+- (void)fetchUserProfileImage:(NSString *)userName accessToken:(NSString *)accessToken profileImageId:(NSString *)profileImageId completion:(AFVDBaseNetworkCompletion)completion;
     
 @end

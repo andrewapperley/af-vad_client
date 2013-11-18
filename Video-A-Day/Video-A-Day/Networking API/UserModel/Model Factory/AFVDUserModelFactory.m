@@ -43,9 +43,9 @@
 }
 
 #pragma mark - Fetch user image
-- (void)fetchUserProfileImage:(NSString *)userName profileImageId:(NSString *)profileImageId completion:(AFVDUserProfileImageCompletion)completion {
+- (void)fetchUserProfileImage:(NSString *)userName accessToken:(NSString *)accessToken profileImageId:(NSString *)profileImageId completion:(AFVDUserProfileImageCompletion)completion {
     
-    [[AFVDUserModelDatasource sharedDataSource] fetchUserProfileImage:userName profileImageId:profileImageId completion:^(AFVDBaseNetworkModel *networkCallback) {
+    [[AFVDUserModelDatasource sharedDataSource] fetchUserProfileImage:userName accessToken:accessToken profileImageId:profileImageId completion:^(AFVDBaseNetworkModel *networkCallback) {
         
         UIImage *userProfileImage = nil;
         

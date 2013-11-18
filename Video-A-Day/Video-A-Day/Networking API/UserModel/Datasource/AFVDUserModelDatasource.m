@@ -49,9 +49,10 @@ NSString *kAFVDUserProfileImageKeyId                    = @"profile_image_id";
 }
 
 #pragma mark - Fetch user image
-- (void)fetchUserProfileImage:(NSString *)userName profileImageId:(NSString *)profileImageId completion:(AFVDBaseNetworkCompletion)completion {
+- (void)fetchUserProfileImage:(NSString *)userName accessToken:(NSString *)accessToken profileImageId:(NSString *)profileImageId completion:(AFVDBaseNetworkCompletion)completion {
     
     NSDictionary *parameters = @{kAFVDUserModelParameterKeyUserName : userName,
+                                 kAFVDUserModelParameterKeyAcessToken : accessToken,
                                  kAFVDUserProfileImageKeyId : profileImageId};
     
     [self makeURLRequestWithType:kAFFNGet endpointURLString:kAFVDUserProfileImageURLEndpoint parameters:parameters completion:^(AFVDBaseNetworkModel *callback) {

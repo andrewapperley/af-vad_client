@@ -61,7 +61,7 @@ NSString *password = @"Abcde321";
     
     NSString *profileImageId = @"972334_10152842579735105_224416000";
     
-    [modelFactory fetchUserProfileImage:userName profileImageId:profileImageId completion:^(UIImage *profileImage, AFVDBaseNetworkModel *networkCallback) {
+    [modelFactory fetchUserProfileImage:userName accessToken:token profileImageId:profileImageId completion:^(UIImage *profileImage, AFVDBaseNetworkModel *networkCallback) {
        
         if(networkCallback.success) {
             
