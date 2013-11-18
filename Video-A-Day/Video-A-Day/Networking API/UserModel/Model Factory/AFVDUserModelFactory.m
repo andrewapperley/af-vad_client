@@ -29,7 +29,7 @@
 #pragma mark - Fetch user model and access token
 - (void)fetchUserModelAndAccessTokenWithUserName:(NSString *)userName andPassword:(NSString *)password completion:(AFVDUserLoginCompletion)completion {
     
-    [[AFVDUserModelDatasource sharedDataSource] loginUserWithUsername:userName andPassword:password completion:^(AFVDBaseNetworkModel *networkCallback) {
+    [[AFVDUserModelDatasource sharedDataSource] loginUserWithUsername:userName password:password completion:^(AFVDBaseNetworkModel *networkCallback) {
         
         AFVDUserModel *model = nil;
         
@@ -43,9 +43,18 @@
 }
 
 #pragma mark - Fetch user image
-- (void)fetchUserProfileImage:(NSString *)userName imageView:(UIImageView *)imageView {
+- (void)fetchUserProfileImage:(NSString *)userName profileImageId:(NSString *)profileImageId completion:(AFVDUserProfileImageCompletion)completion {
     
-    [[AFVDUserModelDatasource sharedDataSource] fetchUserProfileImage:userName imageView:imageView];
+    [[AFVDUserModelDatasource sharedDataSource] fetchUserProfileImage:userName profileImageId:profileImageId completion:^(AFVDBaseNetworkModel *networkCallback) {
+        
+        UIImage *userProfileImage = nil;
+        
+        if(networkCallback.success) {
+            userProfileImage = [self userProfileImageForData:networkCallback.responseData];
+        }
+        
+        completion(userProfileImage, networkCallback);
+    }];
 }
 
 #pragma mark - User model
@@ -61,6 +70,14 @@
     [model setValue:userDictionary[@"relationships"] forKey:@"relationships"];
     
     return model;
+}
+
+#pragma mark - User profile image
+- (UIImage *)userProfileImageForData:(NSDictionary *)data {
+    
+    UIImage *userProfileImage = nil;
+    
+    return userProfileImage;
 }
 
 @end

@@ -29,22 +29,10 @@ NSString *password = @"Abcde321";
 	// Do any additional setup after loading the view, typically from a nib.
     
     [self fetchUserModel];
+    [self fetchUserProfileImage];
     [self fetchRelationshipModel];
     [self fetchVideoModel];
     [self loginUser];
-}
-
-- (void)loginUser {
-    AFVDUserModelFactory *modelFactory = [[AFVDUserModelFactory alloc] init];
-      NSLog(@"Start AFVDLogin");
-    
-    [modelFactory fetchUserModelAndAccessTokenWithUserName:userName andPassword:password completion:^(AFVDUserModel *userModel, NSString *access_token, AFVDBaseNetworkModel *networkCallback){
-        if (networkCallback.success) {
-            NSLog(@"Finish AFVDLogin - Success");
-            NSLog(@"Access Token - %@", access_token);
-        }
-    }];
-    [self createVideo];
 }
 
 - (void)fetchUserModel {
@@ -59,16 +47,28 @@ NSString *password = @"Abcde321";
             
             NSLog(@"Finish AFVDUserModel - Success");
             
-            UIImageView *profileImage = [[UIImageView alloc] init];
-            [self.view addSubview:profileImage];
-            
-            //Set profile image
-            [modelFactory fetchUserProfileImage:userName imageView:profileImage];
-            
-            profileImage.center = self.view.center;
-            
         } else {
             NSLog(@"Finish AFVDUserModel - Failure %d - %@", networkCallback.responseCode, networkCallback.responseMessage);
+        }
+    }];
+}
+
+- (void)fetchUserProfileImage {
+    
+    AFVDUserModelFactory *modelFactory = [[AFVDUserModelFactory alloc] init];
+    
+    NSLog(@"Start User profile image");
+    
+    NSString *profileImageId = @"972334_10152842579735105_224416000";
+    
+    [modelFactory fetchUserProfileImage:userName profileImageId:profileImageId completion:^(UIImage *profileImage, AFVDBaseNetworkModel *networkCallback) {
+       
+        if(networkCallback.success) {
+            
+            NSLog(@"Finish User profile image - Success");
+            
+        } else {
+            NSLog(@"Finish User profile image - Failure %d - %@", networkCallback.responseCode, networkCallback.responseMessage);
         }
     }];
 }
@@ -112,6 +112,19 @@ NSString *password = @"Abcde321";
             NSLog(@"Finish AFVDVideoPlaylistModel - Failure %d - %@", networkCallback.responseCode, networkCallback.responseMessage);
         }
     }];
+}
+
+- (void)loginUser {
+    AFVDUserModelFactory *modelFactory = [[AFVDUserModelFactory alloc] init];
+    NSLog(@"Start AFVDLogin");
+    
+    [modelFactory fetchUserModelAndAccessTokenWithUserName:userName andPassword:password completion:^(AFVDUserModel *userModel, NSString *access_token, AFVDBaseNetworkModel *networkCallback){
+        if (networkCallback.success) {
+            NSLog(@"Finish AFVDLogin - Success");
+            NSLog(@"Access Token - %@", access_token);
+        }
+    }];
+    [self createVideo];
 }
 
 - (void)createVideo {

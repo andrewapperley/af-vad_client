@@ -12,7 +12,7 @@
 
 typedef void(^AFVDUserModelCompletion)(AFVDUserModel *userModel, AFVDBaseNetworkModel *networkCallback);
 typedef void(^AFVDUserLoginCompletion)(AFVDUserModel *userModel, NSString *accessToken, AFVDBaseNetworkModel *networkCallback);
-typedef void(^AFVDUserProfileImageCompletion)(AFVDBaseNetworkModel *networkCallback);
+typedef void(^AFVDUserProfileImageCompletion)(UIImage *profileImage, AFVDBaseNetworkModel *networkCallback);
 
 @interface AFVDUserModelFactory : NSObject
 
@@ -23,6 +23,6 @@ typedef void(^AFVDUserProfileImageCompletion)(AFVDBaseNetworkModel *networkCallb
 - (void)fetchUserModelAndAccessTokenWithUserName:(NSString *)userName andPassword:(NSString *)password completion:(AFVDUserLoginCompletion)completion;
 
 #pragma mark - Fetch user image
-- (void)fetchUserProfileImage:(NSString *)userName imageView:(UIImageView *)imageView;
+- (void)fetchUserProfileImage:(NSString *)userName profileImageId:(NSString *)profileImageId completion:(AFVDUserProfileImageCompletion)completion;
 
 @end

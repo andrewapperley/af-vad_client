@@ -19,9 +19,8 @@ NSString *kAFVDUserModelParameterKeyPassword            = @"password";
 NSString *kAFVDUserModelParameterKeyAcessToken          = @"access_token";
 
 //User profile image
-NSString *kAFVDUserProfileImageURLEndpoint              = @"/profileImage?id=";
-NSString *kAFVDUserProfileImageType                     = @".jpg";
-NSTimeInterval kAFVDUserProfileImageExpiryTimeOffset    = 60 * 60; //One hour
+NSString *kAFVDUserProfileImageURLEndpoint              = @"/profile_image";
+NSString *kAFVDUserProfileImageKeyId                    = @"profile_image_id";
 
 @implementation AFVDUserModelDatasource
 
@@ -38,7 +37,7 @@ NSTimeInterval kAFVDUserProfileImageExpiryTimeOffset    = 60 * 60; //One hour
 }
 
 #pragma mark - User login
-- (void)loginUserWithUsername:(NSString *)userName andPassword:(NSString *)password completion:(AFVDBaseNetworkCompletion)completion {
+- (void)loginUserWithUsername:(NSString *)userName password:(NSString *)password completion:(AFVDBaseNetworkCompletion)completion {
     
     NSDictionary *parameters = @{kAFVDUserModelParameterKeyUserName : userName,
                                  kAFVDUserModelParameterKeyPassword : password};
@@ -50,15 +49,15 @@ NSTimeInterval kAFVDUserProfileImageExpiryTimeOffset    = 60 * 60; //One hour
 }
 
 #pragma mark - Fetch user image
-- (void)fetchUserProfileImage:(NSString *)userName imageView:(UIImageView *)imageView {
+- (void)fetchUserProfileImage:(NSString *)userName profileImageId:(NSString *)profileImageId completion:(AFVDBaseNetworkCompletion)completion {
     
-    //Image url
-    NSString *profileImageURL = [NSString stringWithFormat:@"%@%@%@", kAFVDUserProfileImageURLEndpoint, userName, kAFVDUserProfileImageType];
+    NSDictionary *parameters = @{kAFVDUserModelParameterKeyUserName : userName,
+                                 kAFVDUserProfileImageKeyId : profileImageId};
     
-    //Expiry date
-    NSDate *expiryDate = [[NSDate date] dateByAddingTimeInterval:kAFVDUserProfileImageExpiryTimeOffset];
-    
-    [imageView setImageWithURL:profileImageURL placeholderImage:nil expiryDate:expiryDate willCache:TRUE];
+    [self makeURLRequestWithType:kAFFNGet endpointURLString:kAFVDUserProfileImageURLEndpoint parameters:parameters completion:^(AFVDBaseNetworkModel *callback) {
+        
+        completion(callback);
+    }];
 }
 
 @end

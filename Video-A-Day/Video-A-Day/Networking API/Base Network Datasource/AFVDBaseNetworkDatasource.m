@@ -9,7 +9,7 @@
 #import "AFFNManager.h"
 #import "AFVDBaseNetworkDatasource.h"
 
-const NSString *kAFVDBaseNetworkURL             = @"http://99.232.33.159:5000";
+const NSString *kAFVDBaseNetworkURL             = @"http://192.168.0.12:5000";
 const NSString *kAFVDBaseNetworkKeyPostParam    = @"params";
 
 @implementation AFVDBaseNetworkDatasource
