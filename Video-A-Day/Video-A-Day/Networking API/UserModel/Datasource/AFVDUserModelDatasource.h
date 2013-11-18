@@ -16,4 +16,7 @@
 #pragma mark - User login
 - (void)loginUserWithUsername:(NSString *)userName andPassword:(NSString *)password completion:(AFVDBaseNetworkCompletion)completion;
 
+#pragma mark - Fetch user image
+- (void)fetchUserProfileImage:(NSString *)userName imageView:(UIImageView *)imageView;
+    
 @end

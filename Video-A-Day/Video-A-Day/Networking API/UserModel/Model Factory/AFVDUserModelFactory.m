@@ -26,7 +26,7 @@
     }];
 }
 
-#pragma mark - Fetch user model and access_token
+#pragma mark - Fetch user model and access token
 - (void)fetchUserModelAndAccessTokenWithUserName:(NSString *)userName andPassword:(NSString *)password completion:(AFVDUserLoginCompletion)completion {
     
     [[AFVDUserModelDatasource sharedDataSource] loginUserWithUsername:userName andPassword:password completion:^(AFVDBaseNetworkModel *networkCallback) {
@@ -42,6 +42,11 @@
     }];
 }
 
+#pragma mark - Fetch user image
+- (void)fetchUserProfileImage:(NSString *)userName imageView:(UIImageView *)imageView {
+    
+    [[AFVDUserModelDatasource sharedDataSource] fetchUserProfileImage:userName imageView:imageView];
+}
 
 #pragma mark - User model
 - (AFVDUserModel *)userModelForData:(NSDictionary *)data {
@@ -50,15 +55,9 @@
     
     NSDictionary *userDictionary = data[@"User"];
     
-    //Profile image
-    NSString *profileImageString = userDictionary[@"profile_image"];
-    NSData *profileImageData = [[NSData alloc]initWithBase64EncodedString:profileImageString options:NSDataBase64DecodingIgnoreUnknownCharacters];
-    UIImage *profileImage = [UIImage imageWithData:profileImageData];
-    
-    //User infor
+    //User info
     [model setValue:userDictionary[@"username"] forKey:@"userName"];
     [model setValue:userDictionary[@"email"] forKey:@"email"];
-    [model setValue:profileImage forKey:@"profileImage"];
     [model setValue:userDictionary[@"relationships"] forKey:@"relationships"];
     
     return model;

@@ -30,6 +30,7 @@
 
 #import "UIImageView+AFFNImage.h"
 #import "AFFNImageManager.h"
+#import "AFFNManager.h"
 #import <objc/runtime.h>
 
 @implementation UIImageView (AFFNImage)
@@ -73,6 +74,15 @@ static char imageUrlKey;
     objc_setAssociatedObject(self, &imageUrlKey, limageURL, OBJC_ASSOCIATION_COPY);
 }
 
+- (void)setImageWithURL:(NSString *)imageURL placeholderImage:(UIImage *)phImage expiryDate:(NSDate *)expiry willCache:(BOOL)cache {
+    
+    [self setLimageURL:imageURL];
+    self.image = [AFFNImageManager doesImageExist:imageURL] ? [AFFNImageManager returnCachedImage:imageURL] : phImage;
+    
+    if(!self.image || !phImage || [self.image isEqual:phImage])
+        [self callURLForImage:imageURL withExpiry:expiry andCache:cache];
+}
+
 //The Placeholder image is already present and when this method is called the activity spinner starts animating and it makes a GET call
 //to hit the URL provided and then converts the byte data to a UIImage - removing the spinner from memory and switching the PH image with
 //the new image. If Caching was enabled for this image it willsend the UIImage with the imageURL and expiry date over to the manager so
@@ -101,6 +111,7 @@ static char imageUrlKey;
                 [spinner release];
                 spinner = nil;
                 self.image = [UIImage imageWithData:result.data];
+                [self sizeToFit];
                 if(cache)
                     [AFFNImageManager cacheImage:self.image withName:self.limageURL withExpiry:_expiry];
                 [_expiry release];
@@ -117,7 +128,6 @@ static char imageUrlKey;
     }];
     
     [[AFFNManager sharedManager] addNetworkOperation:request];
-    
 }
 
 @end

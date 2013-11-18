@@ -59,8 +59,11 @@ NSString *password = @"Abcde321";
             
             NSLog(@"Finish AFVDUserModel - Success");
             
-            UIImageView *profileImage = [[UIImageView alloc] initWithImage:userModel.profileImage];
+            UIImageView *profileImage = [[UIImageView alloc] init];
             [self.view addSubview:profileImage];
+            
+            //Set profile image
+            [modelFactory fetchUserProfileImage:userName imageView:profileImage];
             
             profileImage.center = self.view.center;
             
@@ -117,12 +120,20 @@ NSString *password = @"Abcde321";
 
     NSLog(@"Start VideoCreation");
 
+    //Video content
+    NSString *testVideoString = @"5646w5e4r62438we9r849df";
+    NSData *videoData = [testVideoString dataUsingEncoding:NSUTF8StringEncoding];
+    NSString *videoContent = [videoData base64EncodedStringWithOptions:0];
+
+    //Video thumbnail
+    NSString *testThumbnailString = @"5646w5e4r62438we9r849df";
+    NSData *thumbnailData = [testThumbnailString dataUsingEncoding:NSUTF8StringEncoding];
+    NSString *thumbnailContent = [thumbnailData base64EncodedStringWithOptions:0];
+
     NSString *relationshipId = @"123456789";
-    NSString *videoContent = @"";
     NSString *date = @"2013-11-17";
-    NSString *thumbnail = @"";
     
-    [modelFactory postVideoModelWithUserName:userName relationshipId:relationshipId videoContent:videoContent date:date accessToken:token videoThumbnail:thumbnail completion:^(AFVDBaseNetworkModel *networkCallback) {
+    [modelFactory postVideoModelWithUserName:userName relationshipId:relationshipId videoContent:videoContent date:date accessToken:token videoThumbnail:thumbnailContent completion:^(AFVDBaseNetworkModel *networkCallback) {
         
         if(networkCallback.success) {
             

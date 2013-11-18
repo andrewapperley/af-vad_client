@@ -29,7 +29,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "AFFNManager.h"
+
+@class AFFNManager;
+
 @interface UIImageView (AFFNImage)
 
 /*
@@ -45,4 +47,7 @@
 
 - (UIImageView *)initWithFrame:(CGRect)frame andPlaceholderImage:(UIImage *)phImage andImageURL:(NSString *)imageURL andExpiry:(NSDate *)expiry andToCache:(BOOL)cache;
 - (NSString *)limageURL;
+
+- (void)setImageWithURL:(NSString *)imageURL placeholderImage:(UIImage *)phImage expiryDate:(NSDate *)expiry willCache:(BOOL)cache;
+
 @end

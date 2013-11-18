@@ -18,13 +18,13 @@ typedef void(^AFVDVideoCreationModelCompletion)(AFVDBaseNetworkModel *networkCal
 
 @interface AFVDVideoModelFactory : NSObject
 
-#pragma mark - Video playlist
+#pragma mark - Fetch video playlist
 - (void)fetchVideoPlaylistModelWithUserName:(NSString *)userName playlistId:(NSString *)playlistId accessToken:(NSString *)accessToken pageIndex:(NSUInteger)pageIndex completion:(AFVDVideoPlaylistModelCompletion)completion;
 
-#pragma mark - Video relationship playlist
+#pragma mark - Fetch video relationship playlist
 - (void)fetchVideoRelationshipModelWithUserName:(NSString *)userName relationshipId:(NSString *)relationshipId accessToken:(NSString *)accessToken completion:(AFVDVideoRelationshipModelCompletion)completion;
 
-#pragma mark - Video creation
+#pragma mark - Post video creation
 - (void)postVideoModelWithUserName:(NSString *)userName relationshipId:(NSString *)relationshipId videoContent:(NSString *)videoContent date:(NSString *)date accessToken:(NSString *)accessToken videoThumbnail:(NSString *)videoThumbnail completion:(AFVDVideoCreationModelCompletion)completion;
 
 

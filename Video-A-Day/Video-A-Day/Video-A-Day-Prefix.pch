@@ -15,4 +15,5 @@
     #import <Foundation/Foundation.h>
     #import "NSDictionary+NSDictionary_NSDataConversion.h"
     #import "AFVDConstants.h"
+    #import "UIImageView+AFFNImage.h"
 #endif

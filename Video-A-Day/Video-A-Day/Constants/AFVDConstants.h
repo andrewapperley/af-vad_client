@@ -8,12 +8,15 @@
 
 #import <Foundation/Foundation.h>
 
-#pragma - User Section
+#pragma - User section
 
-// Access Token
+//Access Token handling
 static NSString * const kAFVDAccessToken = @"userAccessToken";
+
 #define setAccessToken(x) \
                         [[NSUserDefaults standardUserDefaults] setObject:x forKey:kAFVDAccessToken]; \
-                                                     [[NSUserDefaults standardUserDefaults] synchronize];
+                                                     [[NSUserDefaults standardUserDefaults] synchronize]
 
-#define getAccessToken ( [[NSUserDefaults standardUserDefaults] objectForKey:kAFVDAccessToken])
+#define getAccessToken [[NSUserDefaults standardUserDefaults] objectForKey:kAFVDAccessToken]
+
+
