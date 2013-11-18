@@ -19,7 +19,7 @@ NSString *kAFVDUserModelParameterKeyPassword            = @"password";
 NSString *kAFVDUserModelParameterKeyAcessToken          = @"access_token";
 
 //User profile image
-NSString *kAFVDUserProfileImageURLEndpoint              = @"/profile_image";
+NSString *kAFVDUserProfileImageURLEndpoint              = @"/user/profile_image";
 NSString *kAFVDUserProfileImageKeyId                    = @"profile_image_id";
 
 @implementation AFVDUserModelDatasource
