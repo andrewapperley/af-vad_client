@@ -42,20 +42,6 @@
     }];
 }
 
-#pragma mark - Fetch user image
-- (void)fetchUserProfileImage:(NSString *)userName accessToken:(NSString *)accessToken profileImageId:(NSString *)profileImageId completion:(AFVDUserProfileImageCompletion)completion {
-    
-    [[AFVDUserModelDatasource sharedDataSource] fetchUserProfileImage:userName accessToken:accessToken profileImageId:profileImageId completion:^(AFVDBaseNetworkModel *networkCallback) {
-        
-        UIImage *userProfileImage = nil;
-        
-        if(networkCallback.success) {
-            userProfileImage = [self userProfileImageForData:networkCallback.responseData];
-        }
-        
-        completion(userProfileImage, networkCallback);
-    }];
-}
 
 #pragma mark - User model
 - (AFVDUserModel *)userModelForData:(NSDictionary *)data {
@@ -67,17 +53,10 @@
     //User info
     [model setValue:userDictionary[@"username"] forKey:@"userName"];
     [model setValue:userDictionary[@"email"] forKey:@"email"];
+    [model setValue:userDictionary[@"profile_image"] forKey:@"userImageUrl"];
     [model setValue:userDictionary[@"relationships"] forKey:@"relationships"];
     
     return model;
-}
-
-#pragma mark - User profile image
-- (UIImage *)userProfileImageForData:(NSDictionary *)data {
-    
-    UIImage *userProfileImage = nil;
-    
-    return userProfileImage;
 }
 
 @end

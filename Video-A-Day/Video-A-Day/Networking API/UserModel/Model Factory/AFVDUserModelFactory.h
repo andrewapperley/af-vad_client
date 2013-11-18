@@ -22,7 +22,4 @@ typedef void(^AFVDUserProfileImageCompletion)(UIImage *profileImage, AFVDBaseNet
 #pragma mark - Fetch user model and access token
 - (void)fetchUserModelAndAccessTokenWithUserName:(NSString *)userName andPassword:(NSString *)password completion:(AFVDUserLoginCompletion)completion;
 
-#pragma mark - Fetch user image
-- (void)fetchUserProfileImage:(NSString *)userName accessToken:(NSString *)accessToken profileImageId:(NSString *)profileImageId completion:(AFVDUserProfileImageCompletion)completion;
-
 @end

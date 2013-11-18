@@ -28,11 +28,10 @@ NSString *password = @"Abcde321";
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     
-//    [self fetchUserModel];
-    [self fetchUserProfileImage];
-//    [self fetchRelationshipModel];
-//    [self fetchVideoModel];
-//    [self loginUser];
+    [self fetchUserModel];
+    [self fetchRelationshipModel];
+    [self fetchVideoModel];
+    [self loginUser];
 }
 
 - (void)fetchUserModel {
@@ -47,31 +46,22 @@ NSString *password = @"Abcde321";
             
             NSLog(@"Finish AFVDUserModel - Success");
             
+            NSString *profileImageURL = userModel.userImageUrl;
+            NSTimeInterval timeInterval = 60 * 30; // 30 minutes
+            NSDate *date = [[NSDate date] dateByAddingTimeInterval:timeInterval];
+            
+            UIImageView *profileImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 150, 200)];
+            [profileImage setImageWithURL:profileImageURL placeholderImage:nil expiryDate:date willCache:TRUE];
+            [self.view addSubview:profileImage];
+            
+            profileImage.center = self.view.center;
+            
         } else {
             NSLog(@"Finish AFVDUserModel - Failure %d - %@", networkCallback.responseCode, networkCallback.responseMessage);
         }
     }];
 }
 
-- (void)fetchUserProfileImage {
-    
-    AFVDUserModelFactory *modelFactory = [[AFVDUserModelFactory alloc] init];
-    
-    NSLog(@"Start User profile image");
-    
-    NSString *profileImageId = @"972334_10152842579735105_224416000";
-    
-    [modelFactory fetchUserProfileImage:userName accessToken:token profileImageId:profileImageId completion:^(UIImage *profileImage, AFVDBaseNetworkModel *networkCallback) {
-       
-        if(networkCallback.success) {
-            
-            NSLog(@"Finish User profile image - Success");
-            
-        } else {
-            NSLog(@"Finish User profile image - Failure %d - %@", networkCallback.responseCode, networkCallback.responseMessage);
-        }
-    }];
-}
 
 - (void)fetchRelationshipModel {
     

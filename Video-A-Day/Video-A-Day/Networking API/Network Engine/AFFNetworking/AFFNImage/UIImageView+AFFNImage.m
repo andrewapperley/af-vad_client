@@ -90,39 +90,20 @@ static char imageUrlKey;
 
 - (void)callURLForImage:(NSString *)imageURL withExpiry:(NSDate *)expiry andCache:(BOOL)lcache
 {
-    __block UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-    
     __block NSDate *_expiry = [expiry copy];
     
     __block BOOL cache = lcache;
     
-    spinner.frame = CGRectMake((self.frame.size.width - spinner.frame.size.width) / 2, (self.frame.size.height - spinner.frame.size.height) / 2, spinner.frame.size.width, spinner.frame.size.height);
-    
-    [self addSubview:spinner];
-    [spinner startAnimating];
-    
     AFFNRequest *request = [AFFNRequest requestWithConnectionType:kAFFNGet andURL:imageURL andParams:nil withCompletion:^(AFFNCallbackObject *result){
         dispatch_async(dispatch_get_main_queue(), ^(){
-            [UIView animateWithDuration:0.5f animations:^(){
-                [spinner stopAnimating];
-                spinner.alpha = 0;
-            } completion:^(BOOL done){
-                [spinner removeFromSuperview];
-                [spinner release];
-                spinner = nil;
-                self.image = [UIImage imageWithData:result.data];
-                [self sizeToFit];
-                if(cache)
-                    [AFFNImageManager cacheImage:self.image withName:self.limageURL withExpiry:_expiry];
-                [_expiry release];
-                _expiry = nil;
-            }];
+
+            self.image = [UIImage imageWithData:result.data];
+            if(cache)
+                [AFFNImageManager cacheImage:self.image withName:self.limageURL withExpiry:_expiry];
+            [_expiry release];
+            _expiry = nil;
         });
     } andFailure:^(NSError *error){
-        [spinner stopAnimating];
-        [spinner removeFromSuperview];
-        [spinner release];
-        spinner = nil;
         [_expiry release];
         _expiry = nil;
     }];
