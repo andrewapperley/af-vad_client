@@ -26,6 +26,9 @@
 		0F2FC70F1837303900611873 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F2FC6EE1837303800611873 /* UIKit.framework */; };
 		0F2FC7171837303900611873 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0F2FC7151837303900611873 /* InfoPlist.strings */; };
 		0F2FC7191837303900611873 /* Video_A_DayTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F2FC7181837303900611873 /* Video_A_DayTests.m */; };
+		7610BC5B183B1108003CE193 /* AFVDRelationshipModelDatasource.m in Sources */ = {isa = PBXBuildFile; fileRef = 7610BC5A183B1108003CE193 /* AFVDRelationshipModelDatasource.m */; };
+		7610BC5E183B1137003CE193 /* AFVDRelationshipModelFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 7610BC5D183B1137003CE193 /* AFVDRelationshipModelFactory.m */; };
+		7610BC61183B119C003CE193 /* AFVDRelationshipModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7610BC60183B119C003CE193 /* AFVDRelationshipModel.m */; };
 		7677BA6D18373A6B00F3EDC9 /* AFVDBaseNetworkDatasource.m in Sources */ = {isa = PBXBuildFile; fileRef = 7677BA6218373A6B00F3EDC9 /* AFVDBaseNetworkDatasource.m */; };
 		7677BA6E18373A6B00F3EDC9 /* AFVDUserModelDatasource.m in Sources */ = {isa = PBXBuildFile; fileRef = 7677BA6618373A6B00F3EDC9 /* AFVDUserModelDatasource.m */; };
 		7677BA6F18373A6B00F3EDC9 /* AFVDUserModelFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 7677BA6918373A6B00F3EDC9 /* AFVDUserModelFactory.m */; };
@@ -81,6 +84,12 @@
 		0F2FC7161837303900611873 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		0F2FC7181837303900611873 /* Video_A_DayTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Video_A_DayTests.m; sourceTree = "<group>"; };
 		0F79613718394FF100920C59 /* AFVDConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFVDConstants.h; sourceTree = "<group>"; };
+		7610BC59183B1108003CE193 /* AFVDRelationshipModelDatasource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFVDRelationshipModelDatasource.h; path = RelationshipModel/Datasource/AFVDRelationshipModelDatasource.h; sourceTree = "<group>"; };
+		7610BC5A183B1108003CE193 /* AFVDRelationshipModelDatasource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AFVDRelationshipModelDatasource.m; path = RelationshipModel/Datasource/AFVDRelationshipModelDatasource.m; sourceTree = "<group>"; };
+		7610BC5C183B1137003CE193 /* AFVDRelationshipModelFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFVDRelationshipModelFactory.h; path = "RelationshipModel/Model Factory/AFVDRelationshipModelFactory.h"; sourceTree = "<group>"; };
+		7610BC5D183B1137003CE193 /* AFVDRelationshipModelFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AFVDRelationshipModelFactory.m; path = "RelationshipModel/Model Factory/AFVDRelationshipModelFactory.m"; sourceTree = "<group>"; };
+		7610BC5F183B119C003CE193 /* AFVDRelationshipModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFVDRelationshipModel.h; path = RelationshipModel/Models/AFVDRelationshipModel.h; sourceTree = "<group>"; };
+		7610BC60183B119C003CE193 /* AFVDRelationshipModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AFVDRelationshipModel.m; path = RelationshipModel/Models/AFVDRelationshipModel.m; sourceTree = "<group>"; };
 		7677BA6118373A6B00F3EDC9 /* AFVDBaseNetworkDatasource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFVDBaseNetworkDatasource.h; sourceTree = "<group>"; };
 		7677BA6218373A6B00F3EDC9 /* AFVDBaseNetworkDatasource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFVDBaseNetworkDatasource.m; sourceTree = "<group>"; };
 		7677BA6518373A6B00F3EDC9 /* AFVDUserModelDatasource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFVDUserModelDatasource.h; sourceTree = "<group>"; };
@@ -271,12 +280,50 @@
 			path = Constants;
 			sourceTree = "<group>";
 		};
+		7610BC55183B107B003CE193 /* RelationshipModel */ = {
+			isa = PBXGroup;
+			children = (
+				7610BC56183B10B2003CE193 /* Datasource */,
+				7610BC57183B10BA003CE193 /* Model Factory */,
+				7610BC58183B10C1003CE193 /* Models */,
+			);
+			name = RelationshipModel;
+			sourceTree = "<group>";
+		};
+		7610BC56183B10B2003CE193 /* Datasource */ = {
+			isa = PBXGroup;
+			children = (
+				7610BC59183B1108003CE193 /* AFVDRelationshipModelDatasource.h */,
+				7610BC5A183B1108003CE193 /* AFVDRelationshipModelDatasource.m */,
+			);
+			name = Datasource;
+			sourceTree = "<group>";
+		};
+		7610BC57183B10BA003CE193 /* Model Factory */ = {
+			isa = PBXGroup;
+			children = (
+				7610BC5C183B1137003CE193 /* AFVDRelationshipModelFactory.h */,
+				7610BC5D183B1137003CE193 /* AFVDRelationshipModelFactory.m */,
+			);
+			name = "Model Factory";
+			sourceTree = "<group>";
+		};
+		7610BC58183B10C1003CE193 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				7610BC5F183B119C003CE193 /* AFVDRelationshipModel.h */,
+				7610BC60183B119C003CE193 /* AFVDRelationshipModel.m */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
 		7677BA5F18373A6B00F3EDC9 /* Networking API */ = {
 			isa = PBXGroup;
 			children = (
 				7677BA6018373A6B00F3EDC9 /* Base Network Datasource */,
 				76C65195183809E5003C7F7D /* Base Network Model */,
 				0F18F182183743EF0071BEF5 /* Network Engine */,
+				7610BC55183B107B003CE193 /* RelationshipModel */,
 				7677BA6318373A6B00F3EDC9 /* UserModel */,
 				76C6519D183840E4003C7F7D /* VideoModel */,
 			);
@@ -506,6 +553,7 @@
 				7677BA7018373A6B00F3EDC9 /* AFVDUserModel.m in Sources */,
 				7677BA6E18373A6B00F3EDC9 /* AFVDUserModelDatasource.m in Sources */,
 				7677BA6F18373A6B00F3EDC9 /* AFVDUserModelFactory.m in Sources */,
+				7610BC61183B119C003CE193 /* AFVDRelationshipModel.m in Sources */,
 				0F2FC6F71837303800611873 /* main.m in Sources */,
 				76C651AF18385CB1003C7F7D /* AFVDVideoRelationshipModel.m in Sources */,
 				0F18F196183743EF0071BEF5 /* UIImageView+AFFNImage.m in Sources */,
@@ -516,11 +564,13 @@
 				76C651A8183840E4003C7F7D /* AFVDVideoModelFactory.m in Sources */,
 				7677BA6D18373A6B00F3EDC9 /* AFVDBaseNetworkDatasource.m in Sources */,
 				76C651931838003D003C7F7D /* NSDictionary+NSDictionary_NSDataConversion.m in Sources */,
+				7610BC5B183B1108003CE193 /* AFVDRelationshipModelDatasource.m in Sources */,
 				76C651AC18384647003C7F7D /* AFVDVideoPlaylistModel.m in Sources */,
 				0F18F195183743EF0071BEF5 /* AFFNImageManager.m in Sources */,
 				0F18F199183743EF0071BEF5 /* AFFNStreamingRequest.m in Sources */,
 				76C651A9183840E4003C7F7D /* AFVDVideoModel.m in Sources */,
 				0F18F197183743EF0071BEF5 /* AFFNManager.m in Sources */,
+				7610BC5E183B1137003CE193 /* AFVDRelationshipModelFactory.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

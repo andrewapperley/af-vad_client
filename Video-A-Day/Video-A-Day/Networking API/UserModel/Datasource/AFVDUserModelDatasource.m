@@ -10,17 +10,12 @@
 
 //User model endpoint
 NSString *kAFVDUserModelEndpointURL                     = @"/user/info";
+NSString *kAFVDUserModelParameterKeyUserName            = @"username";
+NSString *kAFVDUserModelParameterKeyAcessToken          = @"access_token";
 
 //User login endpoint
 NSString *kAFVDUserLoginEndpointURL                     = @"/user/login/";
-
-NSString *kAFVDUserModelParameterKeyUserName            = @"username";
 NSString *kAFVDUserModelParameterKeyPassword            = @"password";
-NSString *kAFVDUserModelParameterKeyAcessToken          = @"access_token";
-
-//User profile image
-NSString *kAFVDUserProfileImageURLEndpoint              = @"/user/profile_image";
-NSString *kAFVDUserProfileImageKeyId                    = @"profile_image_id";
 
 @implementation AFVDUserModelDatasource
 
@@ -37,25 +32,12 @@ NSString *kAFVDUserProfileImageKeyId                    = @"profile_image_id";
 }
 
 #pragma mark - User login
-- (void)loginUserWithUsername:(NSString *)userName password:(NSString *)password completion:(AFVDBaseNetworkCompletion)completion {
+- (void)postLoginUserWithUsername:(NSString *)userName password:(NSString *)password completion:(AFVDBaseNetworkCompletion)completion {
     
     NSDictionary *parameters = @{kAFVDUserModelParameterKeyUserName : userName,
                                  kAFVDUserModelParameterKeyPassword : password};
     
     [self makeURLRequestWithType:kAFFNPost endpointURLString:kAFVDUserLoginEndpointURL parameters:parameters completion:^(AFVDBaseNetworkModel *callback) {
-        
-        completion(callback);
-    }];
-}
-
-#pragma mark - Fetch user image
-- (void)fetchUserProfileImage:(NSString *)userName accessToken:(NSString *)accessToken profileImageId:(NSString *)profileImageId completion:(AFVDBaseNetworkCompletion)completion {
-    
-    NSDictionary *parameters = @{kAFVDUserModelParameterKeyUserName : userName,
-                                 kAFVDUserModelParameterKeyAcessToken : accessToken,
-                                 kAFVDUserProfileImageKeyId : profileImageId};
-    
-    [self makeURLRequestWithType:kAFFNGet endpointURLString:kAFVDUserProfileImageURLEndpoint parameters:parameters completion:^(AFVDBaseNetworkModel *callback) {
         
         completion(callback);
     }];

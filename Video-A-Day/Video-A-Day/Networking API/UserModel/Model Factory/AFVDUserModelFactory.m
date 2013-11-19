@@ -29,7 +29,7 @@
 #pragma mark - Fetch user model and access token
 - (void)fetchUserModelAndAccessTokenWithUserName:(NSString *)userName andPassword:(NSString *)password completion:(AFVDUserLoginCompletion)completion {
     
-    [[AFVDUserModelDatasource sharedDataSource] loginUserWithUsername:userName password:password completion:^(AFVDBaseNetworkModel *networkCallback) {
+    [[AFVDUserModelDatasource sharedDataSource] postLoginUserWithUsername:userName password:password completion:^(AFVDBaseNetworkModel *networkCallback) {
         
         AFVDUserModel *model = nil;
         
