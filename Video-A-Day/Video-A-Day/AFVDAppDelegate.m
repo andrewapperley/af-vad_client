@@ -13,6 +13,8 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
    
+    AFFNImageManager *imageManager =nil;
+     imageManager = [AFFNImageManager sharedManager];
     _rootViewController = [[AFVDViewController alloc] initWithNibName:nil bundle:nil];
     _rootViewController.view.backgroundColor = [UIColor redColor];
     _window = [[UIWindow alloc] initWithFrame:_rootViewController.view.frame];
@@ -34,6 +36,7 @@
 {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+    [[AFFNImageManager sharedManager] saveCacheListToFile];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
@@ -49,6 +52,7 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    [[AFFNImageManager sharedManager] saveCacheListToFile];
 }
 
 @end
