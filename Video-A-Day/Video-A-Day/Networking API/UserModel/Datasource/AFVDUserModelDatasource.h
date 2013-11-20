@@ -16,4 +16,7 @@
 #pragma mark - User login
 - (void)postLoginUserWithUsername:(NSString *)userName password:(NSString *)password completion:(AFVDBaseNetworkCompletion)completion;
 
+#pragma mark - Create User
+- (void)postUsername:(NSString *)userName andPassword:(NSString *)password andEmail:(NSString *)email andProfileImage:(NSData *)profileImage completion:(AFVDBaseNetworkCompletion)completion;
+
 @end

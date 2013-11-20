@@ -216,7 +216,7 @@ static NSString *__AFFNKeyFinished = @"isFinished";
     if(error)
         assert(error);
     
-    NSString *jsonString = [[NSString stringWithFormat:@"{ \"params\": %@ }",[[[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding] autorelease]] retain];
+    NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
     
     if(_type == kAFFNMulti)
         [data appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"params\"\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];

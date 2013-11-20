@@ -35,7 +35,7 @@ NSString *kAFVDVideoCreationModelParameterKeyThumbnail      = @"video_thumbnail"
     NSDictionary *parameters = @{kAFVDVideoModelParameterKeyUserName : userName,
                                  kAFVDVideoPlaylistModelParameterKeyPlaylistId : playlistId,
                                  kAFVDVideoModelParameterKeyAcessToken : accessToken,
-                                 kAFVDVideoPlaylistModelParameterKeyPage : @(pageIndex)};
+                                 kAFVDVideoPlaylistModelParameterKeyPage : [NSString stringWithFormat:@"%d",pageIndex]};
     
     [self makeURLRequestWithType:kAFFNGet endpointURLString:kAFVDVideoPlaylistModelEndpointURL parameters:parameters completion:^(AFVDBaseNetworkModel *callback) {
         

@@ -42,6 +42,14 @@
     }];
 }
 
+#pragma mark - Create user 
+- (void)createUserWithUsername:(NSString *)userName andPassword:(NSString *)password andEmail:(NSString *)email andProfileImage:(NSData *)profileImage completion:(AFVDBaseNetworkCompletion)completion {
+    
+    [[AFVDUserModelDatasource sharedDataSource] postUsername:userName andPassword:password andEmail:email andProfileImage:profileImage completion:^(AFVDBaseNetworkModel *networkCallback) {
+        
+        completion(networkCallback);
+    }];
+}
 
 #pragma mark - User model
 - (AFVDUserModel *)userModelForData:(NSDictionary *)data {

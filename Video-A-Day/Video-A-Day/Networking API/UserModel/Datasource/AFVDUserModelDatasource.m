@@ -10,8 +10,11 @@
 
 //User model endpoint
 NSString *kAFVDUserModelEndpointURL                     = @"/user/info";
+NSString *kAFVDCreateUserModelEndpointURL                     = @"/user/";
 NSString *kAFVDUserModelParameterKeyUserName            = @"username";
 NSString *kAFVDUserModelParameterKeyAcessToken          = @"access_token";
+NSString *kAFVDUserModelParameterKeyEmail         = @"email";
+NSString *kAFVDUserModelParameterKeyProfileImage         = @"profile_image";
 
 //User login endpoint
 NSString *kAFVDUserLoginEndpointURL                     = @"/user/login/";
@@ -26,6 +29,24 @@ NSString *kAFVDUserModelParameterKeyPassword            = @"password";
                                  kAFVDUserModelParameterKeyAcessToken : accessToken};
     
     [self makeURLRequestWithType:kAFFNGet endpointURLString:kAFVDUserModelEndpointURL parameters:parameters completion:^(AFVDBaseNetworkModel *callback) {
+        
+        completion(callback);
+    }];
+}
+
+#pragma mark - Create User
+- (void)postUsername:(NSString *)userName andPassword:(NSString *)password andEmail:(NSString *)email andProfileImage:(NSData *)profileImage completion:(AFVDBaseNetworkCompletion)completion {
+    
+    NSString *profileImageString = [profileImage base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+    
+    NSDictionary *parameters = @{
+                                 kAFVDUserModelParameterKeyUserName : userName,
+                                 kAFVDUserModelParameterKeyPassword : password,
+                                 kAFVDUserModelParameterKeyEmail : email,
+                                 kAFVDUserModelParameterKeyProfileImage : profileImageString
+                                 };
+    
+    [self makeURLRequestWithType:kAFFNPost endpointURLString:kAFVDCreateUserModelEndpointURL parameters:parameters completion:^(AFVDBaseNetworkModel *callback) {
         
         completion(callback);
     }];

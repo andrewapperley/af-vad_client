@@ -16,9 +16,11 @@
 
 NSString *userName = @"andrewApperleys";
 NSString *otherUserName = @"jeremyFuellert";
-NSString *token = @"c60f789ea83ec7452149cce7571f5bb661e53d8a67d37b81bc98d593";
+NSString *token = @"b1488a23d1047d4a1c236195276c8b239b7be05c3e683cd9b43eda02";
+NSString *playlistId = @"d65cab706962faf9396aa94e4193ddb9";
 NSString *password = @"Abcde321";
-NSString *relationshipId = @"";
+NSString *relationshipId = @"a06b085bea0843446b52c525ab1a84ed";
+NSString *email = @"email@email.com";
 
 @interface AFVDViewController ()
 
@@ -34,16 +36,39 @@ NSString *relationshipId = @"";
     //User
     [self loginUser];
     [self fetchUserModel];
-    
-    //Videos
+//    //Already created both users and will fail saying user already exists so there is no point in calling this
+//    //as it works :)
+////    [self createUser];
+//    
+//    //Videos
     [self fetchRelationshipModel];
     [self fetchVideoModel];
-    [self createVideo];
+//    [self createVideo];
 
     //Relationship
-    [self createRelationship];
+//    [self createRelationship];
     [self fetchRelationshipModelIds];
     [self fetchRelationshipModelFromId];
+
+}
+
+- (void)createUser {
+    AFVDUserModelFactory *modelFactory = [[AFVDUserModelFactory alloc] init];
+    
+    NSLog(@"Start AFVDCreateUser");
+    
+    NSString *testProfileImage = @"5646w5e4r62438we9r849df";
+    NSData *testProfileImageData = [testProfileImage dataUsingEncoding:NSUTF8StringEncoding];
+    
+    [modelFactory createUserWithUsername:userName andPassword:password andEmail:email andProfileImage:testProfileImageData completion:^(AFVDBaseNetworkModel *networkCallback){
+        
+        if (networkCallback.success) {
+            
+            NSLog(@"Finish AFVDCreateUser - Success %d - %@", networkCallback.responseCode, networkCallback.responseMessage);
+        } else {
+            NSLog(@"Finish AFVDCreateUser - Failure %d - %@", networkCallback.responseCode, networkCallback.responseMessage);
+        }
+    }];
 
 }
 
@@ -119,8 +144,7 @@ NSString *relationshipId = @"";
     
     AFVDVideoModelFactory *modelFactory = [[AFVDVideoModelFactory alloc] init];
     
-    NSString *playlistId = @"123456789888888";
-    NSUInteger pageIndex = 0;
+    NSUInteger pageIndex = 1;
     
     NSLog(@"Start AFVDVideoPlaylistModel");
     
@@ -129,6 +153,9 @@ NSString *relationshipId = @"";
         if(networkCallback.success) {
             
             NSLog(@"Finish AFVDVideoPlaylistModel - Success");
+            NSLog(@"AFVDVideoPlaylistModel User - %@", ((AFVDVideoModel *)videoPlaylistModel.videos[0]).userName);
+            NSLog(@"AFVDVideoPlaylistModel Video ID - %@", ((AFVDVideoModel *)videoPlaylistModel.videos[0]).videoId);
+            NSLog(@"AFVDVideoPlaylistModel Date - %@", ((AFVDVideoModel *)videoPlaylistModel.videos[0]).date);
             
         } else {
             NSLog(@"Finish AFVDVideoPlaylistModel - Failure %d - %@", networkCallback.responseCode, networkCallback.responseMessage);

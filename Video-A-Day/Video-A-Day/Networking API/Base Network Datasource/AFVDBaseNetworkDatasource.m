@@ -9,7 +9,7 @@
 #import "AFFNManager.h"
 #import "AFVDBaseNetworkDatasource.h"
 
-const NSString *kAFVDBaseNetworkURL             = @"http://192.168.0.12:5000";//@"http://99.232.33.159:5000";
+const NSString *kAFVDBaseNetworkURL             = @"http://192.168.0.10:5000";//@"http://99.232.33.159:5000";
 const NSString *kAFVDBaseNetworkKeyPostParam    = @"params";
 
 @implementation AFVDBaseNetworkDatasource
@@ -36,7 +36,7 @@ const NSString *kAFVDBaseNetworkKeyPostParam    = @"params";
     
     NSString *requestString = [NSString stringWithFormat:@"%@%@", kAFVDBaseNetworkURL, urlString];
     
-    AFFNRequest *request = [AFFNRequest requestWithConnectionType:type andURL:requestString andParams:parameters withCompletion:^(AFFNCallbackObject *result) {
+    AFFNRequest *request = [AFFNRequest requestWithConnectionType:type andURL:requestString andParams:paramDictionary withCompletion:^(AFFNCallbackObject *result) {
         
         AFVDBaseNetworkModel *networkModel = [self networkModelFromResponse:result];
         dispatch_async(dispatch_get_main_queue(), ^(){

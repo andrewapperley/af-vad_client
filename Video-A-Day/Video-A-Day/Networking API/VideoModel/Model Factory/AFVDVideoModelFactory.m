@@ -103,8 +103,11 @@
     //User info
     [model setValue:data[@"user"] forKey:@"userName"];
     [model setValue:data[@"relationship_id"] forKey:@"relationshipId"];
-    [model setValue:data forKey:@"profileImage"];
-    [model setValue:data[@"relationships"] forKey:@"relationships"];
+#warning WTF
+//    [model setValue:data forKey:@"profileImage"]; // WTF?
+//    [model setValue:data[@"relationships"] forKey:@"relationships"]; // Again WTF
+
+#warning end WTF
     [model setValue:data[@"video_id"] forKey:@"videoId"];
     [model setValue:data[@"date"] forKey:@"date"];
     
