@@ -10,9 +10,8 @@
 
 @class AFVDBaseNetworkModel;
 
-typedef void(^AFVDUserModelCompletion)(AFVDUserModel *userModel, AFVDBaseNetworkModel *networkCallback);
 typedef void(^AFVDUserLoginCompletion)(AFVDUserModel *userModel, NSString *accessToken, AFVDBaseNetworkModel *networkCallback);
-typedef void(^AFVDUserProfileImageCompletion)(UIImage *profileImage, AFVDBaseNetworkModel *networkCallback);
+typedef void(^AFVDUserModelCompletion)(AFVDUserModel *userModel, AFVDBaseNetworkModel *networkCallback);
 
 @interface AFVDUserModelFactory : NSObject
 

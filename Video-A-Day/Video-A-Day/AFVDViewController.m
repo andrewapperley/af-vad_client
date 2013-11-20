@@ -14,10 +14,11 @@
 #import "AFVDVideoModelFactory.h"
 #import "AFVDRelationshipModelFactory.h"
 
-NSString *userName = @"andrewApperley";
+NSString *userName = @"andrewApperleys";
+NSString *otherUserName = @"jeremyFuellert";
 NSString *token = @"c60f789ea83ec7452149cce7571f5bb661e53d8a67d37b81bc98d593";
 NSString *password = @"Abcde321";
-NSString *relationshipId = @"1235465198";
+NSString *relationshipId = @"";
 
 @interface AFVDViewController ()
 
@@ -44,6 +45,24 @@ NSString *relationshipId = @"1235465198";
     [self fetchRelationshipModelIds];
     [self fetchRelationshipModelFromId];
 
+}
+
+- (void)loginUser {
+    
+    AFVDUserModelFactory *modelFactory = [[AFVDUserModelFactory alloc] init];
+    
+    NSLog(@"Start AFVDLogin");
+    
+    [modelFactory fetchUserModelAndAccessTokenWithUserName:userName andPassword:password completion:^(AFVDUserModel *userModel, NSString *access_token, AFVDBaseNetworkModel *networkCallback){
+        
+        if (networkCallback.success) {
+            
+            NSLog(@"Finish AFVDLogin - Success");
+            NSLog(@"Access Token - %@", access_token);
+        } else {
+            NSLog(@"Finish AFVDLogin - Failure %d - %@", networkCallback.responseCode, networkCallback.responseMessage);
+        }
+    }];
 }
 
 - (void)fetchUserModel {
@@ -117,24 +136,6 @@ NSString *relationshipId = @"1235465198";
     }];
 }
 
-- (void)loginUser {
-    
-    AFVDUserModelFactory *modelFactory = [[AFVDUserModelFactory alloc] init];
-    
-    NSLog(@"Start AFVDLogin");
-    
-    [modelFactory fetchUserModelAndAccessTokenWithUserName:userName andPassword:password completion:^(AFVDUserModel *userModel, NSString *access_token, AFVDBaseNetworkModel *networkCallback){
-        
-        if (networkCallback.success) {
-            
-            NSLog(@"Finish AFVDLogin - Success");
-            NSLog(@"Access Token - %@", access_token);
-        } else {
-            NSLog(@"Finish AFVDLogin - Failure %d - %@", networkCallback.responseCode, networkCallback.responseMessage);
-        }
-    }];
-}
-
 - (void)createVideo {
     
     AFVDVideoModelFactory *modelFactory = [[AFVDVideoModelFactory alloc] init];
@@ -173,7 +174,7 @@ NSString *relationshipId = @"1235465198";
 
     NSString *startDate = @"2013-11-19";
     NSString *endDate = @"2014-11-19";
-    NSArray *users = @[@"1235465198", @"12354651984444444"];
+    NSArray *users = @[userName, otherUserName];
     
     [modelFactory postRelationshipModelWithUserName:userName accessToken:token startDate:startDate endDate:endDate users:users completion:^(AFVDBaseNetworkModel *networkCallback) {
         
