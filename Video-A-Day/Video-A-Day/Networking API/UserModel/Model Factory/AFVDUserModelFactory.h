@@ -12,7 +12,8 @@
 
 typedef void(^AFVDUserLoginCompletion)(AFVDUserModel *userModel, NSString *accessToken, AFVDBaseNetworkModel *networkCallback);
 typedef void(^AFVDUserModelCompletion)(AFVDUserModel *userModel, AFVDBaseNetworkModel *networkCallback);
-typedef void(^AFVDBaseNetworkCompletion)(AFVDBaseNetworkModel *networkCallback);
+typedef void(^AFVDUserCreationCompletion)(AFVDBaseNetworkModel *networkCallback);
+typedef void(^AFVDUsernameAvailabilityCompletion)(AFVDBaseNetworkModel *networkCallback, BOOL isUsernameAvailable);
 
 @interface AFVDUserModelFactory : NSObject
 
@@ -23,5 +24,9 @@ typedef void(^AFVDBaseNetworkCompletion)(AFVDBaseNetworkModel *networkCallback);
 - (void)fetchUserModelAndAccessTokenWithUserName:(NSString *)userName andPassword:(NSString *)password completion:(AFVDUserLoginCompletion)completion;
 
 #pragma mark - Create user
-- (void)createUserWithUsername:(NSString *)userName andPassword:(NSString *)password andEmail:(NSString *)email andProfileImage:(NSData *)profileImage completion: (AFVDBaseNetworkCompletion)completion ;
+- (void)createUserWithUsername:(NSString *)userName andPassword:(NSString *)password andEmail:(NSString *)email andProfileImage:(NSData *)profileImage completion:(AFVDUserCreationCompletion)completion;
+
+#pragma mark - Check if username is available
+- (void)checkIfUsernameIsAvailable:(NSString *)userName completion:(AFVDUsernameAvailabilityCompletion)completion;
+
 @end

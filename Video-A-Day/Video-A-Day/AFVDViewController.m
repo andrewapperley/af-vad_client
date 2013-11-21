@@ -14,7 +14,7 @@
 #import "AFVDVideoModelFactory.h"
 #import "AFVDRelationshipModelFactory.h"
 
-NSString *userName = @"testUser100f";
+NSString *userName = @"jeremyFuellert";
 NSString *otherUserName = @"someOtherUsername";
 NSString *playlistId = @"d65cab706962faf9396aa94e4193ddb9";
 NSString *password = @"Abcde321";
@@ -35,7 +35,8 @@ NSString *email = @"email@email.com";
     //User
 //    //Already created both users and will fail saying user already exists so there is no point in calling this
 //    //as it works :)
-    [self createUser];
+//    [self createUser];
+    [self checkIfUsernameIsAvailable];
 //
 //    //Videos
 //    [self fetchRelationshipModel];
@@ -50,6 +51,7 @@ NSString *email = @"email@email.com";
 }
 
 - (void)createUser {
+    
     AFVDUserModelFactory *modelFactory = [[AFVDUserModelFactory alloc] init];
     
     NSLog(@"Start AFVDCreateUser");
@@ -58,9 +60,8 @@ NSString *email = @"email@email.com";
     
     [modelFactory createUserWithUsername:userName andPassword:password andEmail:email andProfileImage:testProfileImageData completion:^(AFVDBaseNetworkModel *networkCallback){
         
-        if (networkCallback.success) {
+        if(networkCallback.success) {
             
-
             NSLog(@"Finish AFVDCreateUser - Success %d - %@", networkCallback.responseCode, networkCallback.responseMessage);
             NSLog(@"Proceed to user login...");
             [self loginUser];
@@ -69,7 +70,23 @@ NSString *email = @"email@email.com";
             NSLog(@"Finish AFVDCreateUser - Failure %d - %@", networkCallback.responseCode, networkCallback.responseMessage);
         }
     }];
+}
 
+- (void)checkIfUsernameIsAvailable {
+    
+    AFVDUserModelFactory *modelFactory = [[AFVDUserModelFactory alloc] init];
+
+    NSLog(@"Start AFVDCheckIfUsernameIsAvailable");
+    
+    [modelFactory checkIfUsernameIsAvailable:userName completion:^(AFVDBaseNetworkModel *networkCallback, BOOL isUsernameAvailable) {
+        
+        if(networkCallback.success) {
+            
+            NSLog(@"Finish AFVDCheckIfUsernameIsAvailable - Success %d - %@", networkCallback.responseCode, networkCallback.responseMessage);
+        } else {
+            NSLog(@"Finish AFVDCheckIfUsernameIsAvailable - Failure %d - %@", networkCallback.responseCode, networkCallback.responseMessage);
+        }
+    }];
 }
 
 - (void)loginUser {

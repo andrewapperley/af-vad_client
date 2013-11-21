@@ -19,4 +19,7 @@
 #pragma mark - Create User
 - (void)postUsername:(NSString *)userName andPassword:(NSString *)password andEmail:(NSString *)email andProfileImage:(NSData *)profileImage completion:(AFVDBaseNetworkCompletion)completion;
 
+#pragma mark - Check if username is available
+- (void)checkIfUsernameIsAvailable:(NSString *)userName completion:(AFVDBaseNetworkCompletion)completion;
+
 @end

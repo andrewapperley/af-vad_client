@@ -43,11 +43,22 @@
 }
 
 #pragma mark - Create user 
-- (void)createUserWithUsername:(NSString *)userName andPassword:(NSString *)password andEmail:(NSString *)email andProfileImage:(NSData *)profileImage completion:(AFVDBaseNetworkCompletion)completion {
+- (void)createUserWithUsername:(NSString *)userName andPassword:(NSString *)password andEmail:(NSString *)email andProfileImage:(NSData *)profileImage completion:(AFVDUserCreationCompletion)completion {
     
     [[AFVDUserModelDatasource sharedDataSource] postUsername:userName andPassword:password andEmail:email andProfileImage:profileImage completion:^(AFVDBaseNetworkModel *networkCallback) {
         
         completion(networkCallback);
+    }];
+}
+
+#pragma mark - Check if username is available
+- (void)checkIfUsernameIsAvailable:(NSString *)userName completion:(AFVDUsernameAvailabilityCompletion)completion {
+    
+    [[AFVDUserModelDatasource sharedDataSource] checkIfUsernameIsAvailable:userName completion:^(AFVDBaseNetworkModel *networkCallback) {
+       
+        BOOL isUsernameAvailable = networkCallback.success;
+        
+        completion(networkCallback, isUsernameAvailable);
     }];
 }
 
