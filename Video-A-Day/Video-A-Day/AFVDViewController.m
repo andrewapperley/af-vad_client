@@ -14,9 +14,8 @@
 #import "AFVDVideoModelFactory.h"
 #import "AFVDRelationshipModelFactory.h"
 
-NSString *userName = @"andrewApperleys";
-NSString *otherUserName = @"jeremyFuellert";
-NSString *token = @"b1488a23d1047d4a1c236195276c8b239b7be05c3e683cd9b43eda02";
+NSString *userName = @"testUser1000";
+NSString *otherUserName = @"someOtherUsername";
 NSString *playlistId = @"d65cab706962faf9396aa94e4193ddb9";
 NSString *password = @"Abcde321";
 NSString *relationshipId = @"a06b085bea0843446b52c525ab1a84ed";
@@ -34,12 +33,10 @@ NSString *email = @"email@email.com";
 	// Do any additional setup after loading the view, typically from a nib.
     
     //User
-//    [self loginUser];
-//    [self fetchUserModel];
 //    //Already created both users and will fail saying user already exists so there is no point in calling this
 //    //as it works :)
-////    [self createUser];
-//    
+    [self createUser];
+//
 //    //Videos
 //    [self fetchRelationshipModel];
 //    [self fetchVideoModel];
@@ -48,7 +45,7 @@ NSString *email = @"email@email.com";
     //Relationship
 //    [self createRelationship];
 //    [self fetchRelationshipModelIds];
-    [self fetchRelationshipModelFromId];
+//    [self fetchRelationshipModelFromId];
 
 }
 
@@ -64,7 +61,11 @@ NSString *email = @"email@email.com";
         
         if (networkCallback.success) {
             
+
             NSLog(@"Finish AFVDCreateUser - Success %d - %@", networkCallback.responseCode, networkCallback.responseMessage);
+            NSLog(@"Proceed to user login...");
+            [self loginUser];
+
         } else {
             NSLog(@"Finish AFVDCreateUser - Failure %d - %@", networkCallback.responseCode, networkCallback.responseMessage);
         }
@@ -84,6 +85,8 @@ NSString *email = @"email@email.com";
             
             NSLog(@"Finish AFVDLogin - Success");
             NSLog(@"Access Token - %@", access_token);
+            NSLog(@"Proceed to fetch user data...");
+            [self fetchUserModel];
         } else {
             NSLog(@"Finish AFVDLogin - Failure %d - %@", networkCallback.responseCode, networkCallback.responseMessage);
         }
@@ -96,7 +99,7 @@ NSString *email = @"email@email.com";
     
     NSLog(@"Start AFVDUserModel");
     
-    [modelFactory fetchUserModelWithUserName:userName accessToken:token completion:^(AFVDUserModel *userModel, AFVDBaseNetworkModel *networkCallback) {
+    [modelFactory fetchUserModelWithUserName:userName accessToken:getAccessToken completion:^(AFVDUserModel *userModel, AFVDBaseNetworkModel *networkCallback) {
         
         if(networkCallback.success) {
             
@@ -128,7 +131,7 @@ NSString *email = @"email@email.com";
     
     NSLog(@"Start AFVDVideoRelationshipModel");
     
-    [modelFactory fetchVideoRelationshipModelWithUserName:userName relationshipId:relationshipId accessToken:token completion:^(AFVDVideoRelationshipModel *videoRelationshipModel, AFVDBaseNetworkModel *networkCallback) {
+    [modelFactory fetchVideoRelationshipModelWithUserName:userName relationshipId:relationshipId accessToken:getAccessToken completion:^(AFVDVideoRelationshipModel *videoRelationshipModel, AFVDBaseNetworkModel *networkCallback) {
         
         if(networkCallback.success) {
             
@@ -148,7 +151,7 @@ NSString *email = @"email@email.com";
     
     NSLog(@"Start AFVDVideoPlaylistModel");
     
-    [modelFactory fetchVideoPlaylistModelWithUserName:userName playlistId:playlistId accessToken:token pageIndex:pageIndex completion:^(AFVDVideoPlaylistModel *videoPlaylistModel, AFVDBaseNetworkModel *networkCallback) {
+    [modelFactory fetchVideoPlaylistModelWithUserName:userName playlistId:playlistId accessToken:getAccessToken pageIndex:pageIndex completion:^(AFVDVideoPlaylistModel *videoPlaylistModel, AFVDBaseNetworkModel *networkCallback) {
         
         if(networkCallback.success) {
             
@@ -181,7 +184,7 @@ NSString *email = @"email@email.com";
 
     NSString *date = @"2013-11-17";
     
-    [modelFactory postVideoModelWithUserName:userName relationshipId:relationshipId videoContent:videoContent date:date accessToken:token videoThumbnail:thumbnailContent completion:^(AFVDBaseNetworkModel *networkCallback) {
+    [modelFactory postVideoModelWithUserName:userName relationshipId:relationshipId videoContent:videoContent date:date accessToken:getAccessToken videoThumbnail:thumbnailContent completion:^(AFVDBaseNetworkModel *networkCallback) {
         
         if(networkCallback.success) {
             
@@ -203,7 +206,7 @@ NSString *email = @"email@email.com";
     NSString *endDate = @"2014-11-19";
     NSArray *users = @[userName, otherUserName];
     
-    [modelFactory postRelationshipModelWithUserName:userName accessToken:token startDate:startDate endDate:endDate users:users completion:^(AFVDBaseNetworkModel *networkCallback) {
+    [modelFactory postRelationshipModelWithUserName:userName accessToken:getAccessToken startDate:startDate endDate:endDate users:users completion:^(AFVDBaseNetworkModel *networkCallback) {
         
         if(networkCallback.success) {
             
@@ -221,7 +224,7 @@ NSString *email = @"email@email.com";
     
     NSLog(@"Start RelationshipModelIds");
     
-    [modelFactory fetchRelationshipModelIdsWithUserName:userName accessToken:token completion:^(NSArray *relationshipIds, AFVDBaseNetworkModel *networkCallback) {
+    [modelFactory fetchRelationshipModelIdsWithUserName:userName accessToken:getAccessToken completion:^(NSArray *relationshipIds, AFVDBaseNetworkModel *networkCallback) {
         
         if(networkCallback.success) {
             
@@ -240,7 +243,7 @@ NSString *email = @"email@email.com";
     
     NSLog(@"Start RelationshipModelFromId");
     
-    [modelFactory fetchRelationshipModelWithUserName:userName accessToken:token relationshipId:relationshipId completion:^(AFVDRelationshipModel *relationshipModel, AFVDBaseNetworkModel *networkCallback) {
+    [modelFactory fetchRelationshipModelWithUserName:userName accessToken:getAccessToken relationshipId:relationshipId completion:^(AFVDRelationshipModel *relationshipModel, AFVDBaseNetworkModel *networkCallback) {
         
         if(networkCallback.success) {
             
