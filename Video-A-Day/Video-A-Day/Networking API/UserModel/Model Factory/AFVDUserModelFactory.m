@@ -43,9 +43,18 @@
 }
 
 #pragma mark - Create user 
-- (void)createUserWithUsername:(NSString *)userName andPassword:(NSString *)password andEmail:(NSString *)email andProfileImage:(NSData *)profileImage completion:(AFVDUserCreationCompletion)completion {
+- (void)createUserWithUsername:(NSString *)userName password:(NSString *)password displayName:(NSString *)displayName email:(NSString *)email profileImage:(NSData *)profileImage completion:(AFVDUserCreationCompletion)completion {
     
-    [[AFVDUserModelDatasource sharedDataSource] postUsername:userName andPassword:password andEmail:email andProfileImage:profileImage completion:^(AFVDBaseNetworkModel *networkCallback) {
+    [[AFVDUserModelDatasource sharedDataSource] postCreateUsername:userName password:password displayName:displayName email:email profileImage:profileImage completion:^(AFVDBaseNetworkModel *networkCallback) {
+        
+        completion(networkCallback);
+    }];
+}
+
+#pragma mark - Updated user
+- (void)updateUserWithUsername:(NSString *)userName accessToken:(NSString *)accessToken displayName:(NSString *)displayName email:(NSString *)email profileImage:(NSData *)profileImage relationships:(NSSet *)relationships completion:(AFVDUserCreationCompletion)completion {
+    
+    [[AFVDUserModelDatasource sharedDataSource] postUpdateUserWithUsername:userName accessToken:accessToken displayName:displayName email:email profileImage:profileImage relationships:relationships completion:^(AFVDBaseNetworkModel *networkCallback) {
         
         completion(networkCallback);
     }];
@@ -73,7 +82,10 @@
     [model setValue:userDictionary[@"username"] forKey:@"userName"];
     [model setValue:userDictionary[@"email"] forKey:@"email"];
     [model setValue:userDictionary[@"profile_image"] forKey:@"userImageUrl"];
-    [model setValue:userDictionary[@"relationships"] forKey:@"relationships"];
+    
+    NSArray *relationshipsArray = userDictionary[@"relationships"];
+    NSSet *relationshipsSet = [NSSet setWithArray:relationshipsArray];
+    [model setValue:relationshipsSet forKey:@"relationships"];
     
     return model;
 }

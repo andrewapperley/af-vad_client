@@ -24,7 +24,10 @@ typedef void(^AFVDUsernameAvailabilityCompletion)(AFVDBaseNetworkModel *networkC
 - (void)fetchUserModelAndAccessTokenWithUserName:(NSString *)userName andPassword:(NSString *)password completion:(AFVDUserLoginCompletion)completion;
 
 #pragma mark - Create user
-- (void)createUserWithUsername:(NSString *)userName andPassword:(NSString *)password andEmail:(NSString *)email andProfileImage:(NSData *)profileImage completion:(AFVDUserCreationCompletion)completion;
+- (void)createUserWithUsername:(NSString *)userName password:(NSString *)password displayName:(NSString *)displayName email:(NSString *)email profileImage:(NSData *)profileImage completion:(AFVDUserCreationCompletion)completion;
+
+#pragma mark - Updated user
+- (void)updateUserWithUsername:(NSString *)userName accessToken:(NSString *)accessToken displayName:(NSString *)displayName email:(NSString *)email profileImage:(NSData *)profileImage relationships:(NSSet *)relationships completion:(AFVDUserCreationCompletion)completion;
 
 #pragma mark - Check if username is available
 - (void)checkIfUsernameIsAvailable:(NSString *)userName completion:(AFVDUsernameAvailabilityCompletion)completion;

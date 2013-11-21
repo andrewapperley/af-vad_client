@@ -13,6 +13,6 @@
 @property (nonatomic, strong, readonly) NSString *userName;
 @property (nonatomic, strong, readonly) NSString *email;
 @property (nonatomic, strong, readonly) NSString *userImageUrl;
-@property (nonatomic, strong, readonly) NSArray *relationships;
+@property (nonatomic, strong, readonly) NSSet *relationships;
 
 @end

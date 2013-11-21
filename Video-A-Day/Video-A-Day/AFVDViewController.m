@@ -15,6 +15,7 @@
 #import "AFVDRelationshipModelFactory.h"
 
 NSString *userName = @"jeremyFuellert";
+NSString *displayName = @"Nice Display Name";
 NSString *otherUserName = @"someOtherUsername";
 NSString *playlistId = @"d65cab706962faf9396aa94e4193ddb9";
 NSString *password = @"Abcde321";
@@ -36,7 +37,8 @@ NSString *email = @"email@email.com";
 //    //Already created both users and will fail saying user already exists so there is no point in calling this
 //    //as it works :)
 //    [self createUser];
-    [self checkIfUsernameIsAvailable];
+//    [self checkIfUsernameIsAvailable];
+    [self updateUser];
 //
 //    //Videos
 //    [self fetchRelationshipModel];
@@ -58,7 +60,7 @@ NSString *email = @"email@email.com";
     
     NSData *testProfileImageData = UIImageJPEGRepresentation([UIImage imageNamed:@"face.jpg"], 1) ;
     
-    [modelFactory createUserWithUsername:userName andPassword:password andEmail:email andProfileImage:testProfileImageData completion:^(AFVDBaseNetworkModel *networkCallback){
+    [modelFactory createUserWithUsername:userName password:password displayName:displayName email:email profileImage:testProfileImageData completion:^(AFVDBaseNetworkModel *networkCallback) {
         
         if(networkCallback.success) {
             
@@ -80,11 +82,34 @@ NSString *email = @"email@email.com";
     
     [modelFactory checkIfUsernameIsAvailable:userName completion:^(AFVDBaseNetworkModel *networkCallback, BOOL isUsernameAvailable) {
         
-        if(networkCallback.success) {
+        if(isUsernameAvailable) {
             
             NSLog(@"Finish AFVDCheckIfUsernameIsAvailable - Success %d - %@", networkCallback.responseCode, networkCallback.responseMessage);
         } else {
             NSLog(@"Finish AFVDCheckIfUsernameIsAvailable - Failure %d - %@", networkCallback.responseCode, networkCallback.responseMessage);
+        }
+    }];
+}
+
+- (void)updateUser {
+    
+    AFVDUserModelFactory *modelFactory = [[AFVDUserModelFactory alloc] init];
+    
+    NSLog(@"Start AFVDUpdateUser");
+    
+    NSData *testProfileImageData = UIImageJPEGRepresentation([UIImage imageNamed:@"face.jpg"], 1) ;
+    NSSet *relationshipSet = [NSSet setWithObjects:@"9823y4923r28793y987", @"wiuwe9r83r2oiu3r2362", nil];
+    
+    [modelFactory updateUserWithUsername:userName accessToken:getAccessToken displayName:@"New Display Name" email:email profileImage:testProfileImageData relationships:relationshipSet completion:^(AFVDBaseNetworkModel *networkCallback) {
+        
+        if(networkCallback.success) {
+            
+            NSLog(@"Finish AFVDUpdateUser - Success %d - %@", networkCallback.responseCode, networkCallback.responseMessage);
+            NSLog(@"Proceed to fetch user data...");
+            [self fetchUserModel];
+            
+        } else {
+            NSLog(@"Finish AFVDUpdateUser - Failure %d - %@", networkCallback.responseCode, networkCallback.responseMessage);
         }
     }];
 }
