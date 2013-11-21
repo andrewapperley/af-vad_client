@@ -14,7 +14,7 @@
 #import "AFVDVideoModelFactory.h"
 #import "AFVDRelationshipModelFactory.h"
 
-NSString *userName = @"testUser1000";
+NSString *userName = @"testUser100f";
 NSString *otherUserName = @"someOtherUsername";
 NSString *playlistId = @"d65cab706962faf9396aa94e4193ddb9";
 NSString *password = @"Abcde321";
@@ -54,8 +54,7 @@ NSString *email = @"email@email.com";
     
     NSLog(@"Start AFVDCreateUser");
     
-    NSString *testProfileImage = @"5646w5e4r62438we9r849df";
-    NSData *testProfileImageData = [testProfileImage dataUsingEncoding:NSUTF8StringEncoding];
+    NSData *testProfileImageData = UIImageJPEGRepresentation([UIImage imageNamed:@"face.jpg"], 1) ;
     
     [modelFactory createUserWithUsername:userName andPassword:password andEmail:email andProfileImage:testProfileImageData completion:^(AFVDBaseNetworkModel *networkCallback){
         

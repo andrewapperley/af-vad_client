@@ -37,7 +37,7 @@ NSString *kAFVDUserModelParameterKeyPassword            = @"password";
 #pragma mark - Create User
 - (void)postUsername:(NSString *)userName andPassword:(NSString *)password andEmail:(NSString *)email andProfileImage:(NSData *)profileImage completion:(AFVDBaseNetworkCompletion)completion {
     
-    NSString *profileImageString = [profileImage base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+    NSString *profileImageString = [profileImage base64EncodedStringWithOptions:NSDataBase64EncodingEndLineWithCarriageReturn];
     
     NSDictionary *parameters = @{
                                  kAFVDUserModelParameterKeyUserName : userName,

@@ -26,6 +26,7 @@
 		0F2FC70F1837303900611873 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F2FC6EE1837303800611873 /* UIKit.framework */; };
 		0F2FC7171837303900611873 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0F2FC7151837303900611873 /* InfoPlist.strings */; };
 		0F2FC7191837303900611873 /* Video_A_DayTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F2FC7181837303900611873 /* Video_A_DayTests.m */; };
+		0F79613A183DC81900920C59 /* face.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0F796139183DC81900920C59 /* face.jpg */; };
 		7610BC5B183B1108003CE193 /* AFVDRelationshipModelDatasource.m in Sources */ = {isa = PBXBuildFile; fileRef = 7610BC5A183B1108003CE193 /* AFVDRelationshipModelDatasource.m */; };
 		7610BC5E183B1137003CE193 /* AFVDRelationshipModelFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 7610BC5D183B1137003CE193 /* AFVDRelationshipModelFactory.m */; };
 		7610BC61183B119C003CE193 /* AFVDRelationshipModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7610BC60183B119C003CE193 /* AFVDRelationshipModel.m */; };
@@ -84,6 +85,7 @@
 		0F2FC7161837303900611873 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		0F2FC7181837303900611873 /* Video_A_DayTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Video_A_DayTests.m; sourceTree = "<group>"; };
 		0F79613718394FF100920C59 /* AFVDConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFVDConstants.h; sourceTree = "<group>"; };
+		0F796139183DC81900920C59 /* face.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = face.jpg; sourceTree = "<group>"; };
 		7610BC59183B1108003CE193 /* AFVDRelationshipModelDatasource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFVDRelationshipModelDatasource.h; path = RelationshipModel/Datasource/AFVDRelationshipModelDatasource.h; sourceTree = "<group>"; };
 		7610BC5A183B1108003CE193 /* AFVDRelationshipModelDatasource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AFVDRelationshipModelDatasource.m; path = RelationshipModel/Datasource/AFVDRelationshipModelDatasource.m; sourceTree = "<group>"; };
 		7610BC5C183B1137003CE193 /* AFVDRelationshipModelFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFVDRelationshipModelFactory.h; path = "RelationshipModel/Model Factory/AFVDRelationshipModelFactory.h"; sourceTree = "<group>"; };
@@ -230,6 +232,7 @@
 		0F2FC6F01837303800611873 /* Video-A-Day */ = {
 			isa = PBXGroup;
 			children = (
+				0F796138183DC81900920C59 /* Assets-TEMP */,
 				76C6518E1837FFCD003C7F7D /* AF */,
 				0F2FC6F91837303800611873 /* AFVDAppDelegate.h */,
 				0F2FC6FA1837303800611873 /* AFVDAppDelegate.m */,
@@ -278,6 +281,14 @@
 				0F79613718394FF100920C59 /* AFVDConstants.h */,
 			);
 			path = Constants;
+			sourceTree = "<group>";
+		};
+		0F796138183DC81900920C59 /* Assets-TEMP */ = {
+			isa = PBXGroup;
+			children = (
+				0F796139183DC81900920C59 /* face.jpg */,
+			);
+			path = "Assets-TEMP";
 			sourceTree = "<group>";
 		};
 		7610BC55183B107B003CE193 /* RelationshipModel */ = {
@@ -529,6 +540,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0F2FC7061837303900611873 /* Images.xcassets in Resources */,
+				0F79613A183DC81900920C59 /* face.jpg in Resources */,
 				0F2FC6F51837303800611873 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -637,7 +649,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
-					"IS_LOCAL_MACHINE=0",
+					"IS_LOCAL_MACHINE=1",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;

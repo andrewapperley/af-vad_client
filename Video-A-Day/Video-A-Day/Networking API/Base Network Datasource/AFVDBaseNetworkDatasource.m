@@ -10,7 +10,7 @@
 #import "AFVDBaseNetworkDatasource.h"
 
 #if IS_LOCAL_MACHINE
-const NSString *kAFVDBaseNetworkURL             = @"http://192.168.0.10:5000";
+const NSString *kAFVDBaseNetworkURL             = @"http://192.168.0.14:5000";
 #else 
 const NSString *kAFVDBaseNetworkURL             = @"http://99.232.33.159:5000";
 #endif
