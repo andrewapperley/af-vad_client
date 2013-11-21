@@ -34,20 +34,20 @@ NSString *email = @"email@email.com";
 	// Do any additional setup after loading the view, typically from a nib.
     
     //User
-    [self loginUser];
-    [self fetchUserModel];
+//    [self loginUser];
+//    [self fetchUserModel];
 //    //Already created both users and will fail saying user already exists so there is no point in calling this
 //    //as it works :)
 ////    [self createUser];
 //    
 //    //Videos
-    [self fetchRelationshipModel];
-    [self fetchVideoModel];
+//    [self fetchRelationshipModel];
+//    [self fetchVideoModel];
 //    [self createVideo];
 
     //Relationship
 //    [self createRelationship];
-    [self fetchRelationshipModelIds];
+//    [self fetchRelationshipModelIds];
     [self fetchRelationshipModelFromId];
 
 }

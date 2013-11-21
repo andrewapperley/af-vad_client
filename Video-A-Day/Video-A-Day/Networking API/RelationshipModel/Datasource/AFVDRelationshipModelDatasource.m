@@ -9,7 +9,7 @@
 #import "AFVDRelationshipModelDatasource.h"
 
 //Relationship from Id endpoint
-NSString *kAFVDRelationshipFromIdModelEndpointURL               = @"/user/relationships/";
+NSString *kAFVDRelationshipFromIdModelEndpointURL               = @"/user/relationship_model";
 NSString *kAFVDRelationshipFromIdModelParameterKeyUserName      = @"username";
 NSString *kAFVDRelationshipFromIdModelParameterKeyAcessToken    = @"access_token";
 NSString *kAFVDRelationshipFromIdModelParameterKeyId            = @"relationship_id";

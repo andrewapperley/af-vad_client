@@ -10,6 +10,6 @@
 
 @interface AFVDVideoRelationshipModel : NSObject
 
-@property (nonatomic, strong, readonly) NSArray *playlistIds;        //Contains playlist id NSStrings
+@property (nonatomic, strong, readonly) NSArray *playlistIds;        //Contains playlist id / username key value pairs.
 
 @end
