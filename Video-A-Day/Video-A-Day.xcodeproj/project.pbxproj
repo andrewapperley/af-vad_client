@@ -27,6 +27,7 @@
 		0F2FC7171837303900611873 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0F2FC7151837303900611873 /* InfoPlist.strings */; };
 		0F2FC7191837303900611873 /* Video_A_DayTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F2FC7181837303900611873 /* Video_A_DayTests.m */; };
 		0F79613A183DC81900920C59 /* face.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0F796139183DC81900920C59 /* face.jpg */; };
+		0F79613E183EE64E00920C59 /* AFVDUrlHasher.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F79613D183EE64E00920C59 /* AFVDUrlHasher.m */; };
 		7610BC5B183B1108003CE193 /* AFVDRelationshipModelDatasource.m in Sources */ = {isa = PBXBuildFile; fileRef = 7610BC5A183B1108003CE193 /* AFVDRelationshipModelDatasource.m */; };
 		7610BC5E183B1137003CE193 /* AFVDRelationshipModelFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 7610BC5D183B1137003CE193 /* AFVDRelationshipModelFactory.m */; };
 		7610BC61183B119C003CE193 /* AFVDRelationshipModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7610BC60183B119C003CE193 /* AFVDRelationshipModel.m */; };
@@ -86,6 +87,8 @@
 		0F2FC7181837303900611873 /* Video_A_DayTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Video_A_DayTests.m; sourceTree = "<group>"; };
 		0F79613718394FF100920C59 /* AFVDConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFVDConstants.h; sourceTree = "<group>"; };
 		0F796139183DC81900920C59 /* face.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = face.jpg; sourceTree = "<group>"; };
+		0F79613C183EE64E00920C59 /* AFVDUrlHasher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFVDUrlHasher.h; sourceTree = "<group>"; };
+		0F79613D183EE64E00920C59 /* AFVDUrlHasher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFVDUrlHasher.m; sourceTree = "<group>"; };
 		7610BC59183B1108003CE193 /* AFVDRelationshipModelDatasource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFVDRelationshipModelDatasource.h; path = RelationshipModel/Datasource/AFVDRelationshipModelDatasource.h; sourceTree = "<group>"; };
 		7610BC5A183B1108003CE193 /* AFVDRelationshipModelDatasource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AFVDRelationshipModelDatasource.m; path = RelationshipModel/Datasource/AFVDRelationshipModelDatasource.m; sourceTree = "<group>"; };
 		7610BC5C183B1137003CE193 /* AFVDRelationshipModelFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFVDRelationshipModelFactory.h; path = "RelationshipModel/Model Factory/AFVDRelationshipModelFactory.h"; sourceTree = "<group>"; };
@@ -291,6 +294,15 @@
 			path = "Assets-TEMP";
 			sourceTree = "<group>";
 		};
+		0F79613B183EE62000920C59 /* UrlHashing */ = {
+			isa = PBXGroup;
+			children = (
+				0F79613C183EE64E00920C59 /* AFVDUrlHasher.h */,
+				0F79613D183EE64E00920C59 /* AFVDUrlHasher.m */,
+			);
+			path = UrlHashing;
+			sourceTree = "<group>";
+		};
 		7610BC55183B107B003CE193 /* RelationshipModel */ = {
 			isa = PBXGroup;
 			children = (
@@ -331,6 +343,7 @@
 		7677BA5F18373A6B00F3EDC9 /* Networking API */ = {
 			isa = PBXGroup;
 			children = (
+				0F79613B183EE62000920C59 /* UrlHashing */,
 				7677BA6018373A6B00F3EDC9 /* Base Network Datasource */,
 				76C65195183809E5003C7F7D /* Base Network Model */,
 				0F18F182183743EF0071BEF5 /* Network Engine */,
@@ -569,6 +582,7 @@
 				0F2FC6F71837303800611873 /* main.m in Sources */,
 				76C651AF18385CB1003C7F7D /* AFVDVideoRelationshipModel.m in Sources */,
 				0F18F196183743EF0071BEF5 /* UIImageView+AFFNImage.m in Sources */,
+				0F79613E183EE64E00920C59 /* AFVDUrlHasher.m in Sources */,
 				0F2FC6FB1837303800611873 /* AFVDAppDelegate.m in Sources */,
 				76C6519818380A14003C7F7D /* AFVDBaseNetworkModel.m in Sources */,
 				76C651A7183840E4003C7F7D /* AFVDVideoModelDatasource.m in Sources */,
@@ -649,7 +663,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
-					"IS_LOCAL_MACHINE=0",
+					"IS_LOCAL_MACHINE=1",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;

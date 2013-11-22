@@ -19,4 +19,3 @@ static NSString * const kAFVDAccessToken = @"userAccessToken";
 
 #define getAccessToken [[NSUserDefaults standardUserDefaults] objectForKey:kAFVDAccessToken]
 
-

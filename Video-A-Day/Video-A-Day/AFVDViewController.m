@@ -8,13 +8,14 @@
 
 #import "AFVDBaseNetworkModel.h"
 #import "AFVDViewController.h"
+#import "AFVDUrlHasher.h"
 
 #warning TEMP VC
 #import "AFVDUserModelFactory.h"
 #import "AFVDVideoModelFactory.h"
 #import "AFVDRelationshipModelFactory.h"
 
-NSString *userName = @"jeremyFuellert";
+NSString *userName = @"jeremyFuelldsfsdert1000";
 NSString *displayName = @"Nice Display Name";
 NSString *otherUserName = @"someOtherUsername";
 NSString *playlistId = @"d65cab706962faf9396aa94e4193ddb9";
@@ -31,14 +32,15 @@ NSString *email = @"email@email.com";
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
     
     //User
 //    //Already created both users and will fail saying user already exists so there is no point in calling this
 //    //as it works :)
 //    [self createUser];
+    [self loginUser];
 //    [self checkIfUsernameIsAvailable];
-    [self updateUser];
+//    [self updateUser];
+    [self fetchUserModel];
 //
 //    //Videos
 //    [self fetchRelationshipModel];
@@ -100,7 +102,7 @@ NSString *email = @"email@email.com";
     NSData *testProfileImageData = UIImageJPEGRepresentation([UIImage imageNamed:@"face.jpg"], 1) ;
     NSSet *relationshipSet = [NSSet setWithObjects:@"9823y4923r28793y987", @"wiuwe9r83r2oiu3r2362", nil];
     
-    [modelFactory updateUserWithUsername:userName accessToken:getAccessToken displayName:@"New Display Name" email:email profileImage:testProfileImageData relationships:relationshipSet completion:^(AFVDBaseNetworkModel *networkCallback) {
+    [modelFactory updateUserWithUsername:userName accessToken:@"f1c94fd3d933aaf6f78fd1ab6058e10ae973831b9f911d04fcd40a33" displayName:@"New Display Name" email:email profileImage:testProfileImageData relationships:relationshipSet completion:^(AFVDBaseNetworkModel *networkCallback) {
         
         if(networkCallback.success) {
             
@@ -145,7 +147,7 @@ NSString *email = @"email@email.com";
         if(networkCallback.success) {
             
             NSLog(@"Finish AFVDUserModel - Success");
-            
+            NSLog(@"%@",userModel.userImageUrl);
             NSString *profileImageURL = userModel.userImageUrl;
             NSTimeInterval timeInterval = 60 * 30; // 30 minutes
             NSDate *date = [[NSDate date] dateByAddingTimeInterval:timeInterval];
