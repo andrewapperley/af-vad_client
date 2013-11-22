@@ -13,7 +13,7 @@
 #pragma - URL config
 
 static NSString *const kAFVDSecretKey = @"2ezTY3isQLK0Ne5fwHyA";
-static NSString *const kAFVDUserContentBaseURL = @"http://99.232.33.159";
+static NSString *const kAFVDUserContentBaseURL = @"http://99.232.33.159/user_content";
 
 
 
@@ -22,11 +22,13 @@ static NSString *const kAFVDUserContentBaseURL = @"http://99.232.33.159";
 
 + (NSString *)createSecureURLForResource:(NSString *)resource andResourcePath:(NSString *)path {
     
-    NSString *hexTime = [AFVDUrlHasher stringToHex:[NSString stringWithFormat:@"%f",[[NSDate date]timeIntervalSince1970]]];
+    NSLog(@"[[NSDate date]timeIntervalSince1970]+120 %d",(int)[[NSDate date]timeIntervalSince1970]+120);
     
-    NSString *token = [AFVDUrlHasher createMD5Hash:[NSString stringWithFormat:@"%@%@.%@",kAFVDSecretKey,resource,hexTime]];
+    NSString *hexTime = [AFVDUrlHasher stringToHex:[NSString stringWithFormat:@"%d",(int)[[NSDate date]timeIntervalSince1970]+120]];
     
-    NSString *url = [NSString stringWithFormat:@"%@%@%@/%@%@",kAFVDUserContentBaseURL, path,token,hexTime,resource];
+    NSString *token = [AFVDUrlHasher createMD5Hash:[NSString stringWithFormat:@"%@%@%@%@",kAFVDSecretKey, path, resource,hexTime]];
+    
+    NSString *url = [NSString stringWithFormat:@"%@/%@/%@/%@%@",kAFVDUserContentBaseURL,token,hexTime, path, resource];
     
     return url;
 }

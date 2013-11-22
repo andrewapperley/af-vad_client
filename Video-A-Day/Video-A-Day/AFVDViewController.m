@@ -37,10 +37,11 @@ NSString *email = @"email@email.com";
 //    //Already created both users and will fail saying user already exists so there is no point in calling this
 //    //as it works :)
 //    [self createUser];
-    [self loginUser];
-//    [self checkIfUsernameIsAvailable];
-//    [self updateUser];
-    [self fetchUserModel];
+//    [self loginUser];
+////    [self checkIfUsernameIsAvailable];
+////    [self updateUser];
+//    [self fetchUserModel];
+    NSLog(@"%@",[AFVDUrlHasher createSecureURLForResource:@"face.jpg" andResourcePath:@"users/"]);
 //
 //    //Videos
 //    [self fetchRelationshipModel];
