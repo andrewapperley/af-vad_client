@@ -12,23 +12,25 @@
 #pragma - mark
 #pragma - URL config
 
-static NSString *const kAFVDSecretKey = @"2ezTY3isQLK0Ne5fwHyA";
-static NSString *const kAFVDUserContentBaseURL = @"http://99.232.33.159/user_content";
+const NSString *kAFVDSecretKey = @"2ezTY3isQLK0Ne5fwHyA";
+#if IS_LOCAL_MACHINE
+const NSString * kAFVDUserContentBaseURL = @"http://192.168.0.14/user_content/";
+#else
+const NSString * kAFVDUserContentBaseURL = @"http://99.232.33.159/user_content/";
+#endif
 
 
 
 @implementation AFVDUrlHasher
 
 
-+ (NSString *)createSecureURLForResource:(NSString *)resource andResourcePath:(NSString *)path {
++ (NSString *)createSecureURLForResource:(NSString *)resource {
     
-    NSLog(@"[[NSDate date]timeIntervalSince1970]+120 %d",(int)[[NSDate date]timeIntervalSince1970]+120);
+    NSString *hexTime =  [NSString stringWithFormat:@"%x",(int)[[NSDate date]timeIntervalSince1970]];
+        
+    NSString *token = [AFVDUrlHasher createMD5Hash:[NSString stringWithFormat:@"%@%@%@",kAFVDSecretKey, resource,hexTime]];
     
-    NSString *hexTime = [AFVDUrlHasher stringToHex:[NSString stringWithFormat:@"%d",(int)[[NSDate date]timeIntervalSince1970]+120]];
-    
-    NSString *token = [AFVDUrlHasher createMD5Hash:[NSString stringWithFormat:@"%@%@%@%@",kAFVDSecretKey, path, resource,hexTime]];
-    
-    NSString *url = [NSString stringWithFormat:@"%@/%@/%@/%@%@",kAFVDUserContentBaseURL,token,hexTime, path, resource];
+    NSString *url = [NSString stringWithFormat:@"%@%@/%@%@",kAFVDUserContentBaseURL,token,hexTime, resource];
     
     return url;
 }
@@ -46,23 +48,6 @@ static NSString *const kAFVDUserContentBaseURL = @"http://99.232.33.159/user_con
     }
     
     return output;
-}
-
-+ (NSString *)stringToHex:(NSString *)str
-{
-    NSUInteger len = [str length];
-    unichar *chars = malloc(len * sizeof(unichar));
-    [str getCharacters:chars];
-    
-    NSMutableString *hexString = [[NSMutableString alloc] init];
-    
-    for(NSUInteger i = 0; i < len; i++ )
-    {
-        [hexString appendString:[NSString stringWithFormat:@"%x", chars[i]]];
-    }
-    free(chars);
-    
-    return hexString;
 }
 
 @end

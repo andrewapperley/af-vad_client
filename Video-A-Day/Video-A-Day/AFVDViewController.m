@@ -15,7 +15,7 @@
 #import "AFVDVideoModelFactory.h"
 #import "AFVDRelationshipModelFactory.h"
 
-NSString *userName = @"jeremyFuelldsfsdert1000";
+NSString *userName = @"andrewApperley1";
 NSString *displayName = @"Nice Display Name";
 NSString *otherUserName = @"someOtherUsername";
 NSString *playlistId = @"d65cab706962faf9396aa94e4193ddb9";
@@ -37,11 +37,10 @@ NSString *email = @"email@email.com";
 //    //Already created both users and will fail saying user already exists so there is no point in calling this
 //    //as it works :)
 //    [self createUser];
-//    [self loginUser];
+    [self loginUser];
 ////    [self checkIfUsernameIsAvailable];
 ////    [self updateUser];
 //    [self fetchUserModel];
-    NSLog(@"%@",[AFVDUrlHasher createSecureURLForResource:@"face.jpg" andResourcePath:@"users/"]);
 //
 //    //Videos
 //    [self fetchRelationshipModel];
@@ -149,7 +148,7 @@ NSString *email = @"email@email.com";
             
             NSLog(@"Finish AFVDUserModel - Success");
             NSLog(@"%@",userModel.userImageUrl);
-            NSString *profileImageURL = userModel.userImageUrl;
+            NSString *profileImageURL = [AFVDUrlHasher createSecureURLForResource:userModel.userImageUrl];
             NSTimeInterval timeInterval = 60 * 30; // 30 minutes
             NSDate *date = [[NSDate date] dateByAddingTimeInterval:timeInterval];
             

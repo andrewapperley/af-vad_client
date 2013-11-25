@@ -100,7 +100,8 @@ NSString *kAFVDUserNameCheckEndpointURL                 = @"/user/check_username
 - (void)postLoginUserWithUsername:(NSString *)userName password:(NSString *)password completion:(AFVDBaseNetworkCompletion)completion {
     
     NSDictionary *parameters = @{kAFVDUserModelParameterKeyUserName : userName,
-                                 kAFVDUserModelParameterKeyPassword : password};
+                                 kAFVDUserModelParameterKeyPassword : password,
+                                 kAFVDUserModelParameterKeyAcessToken : getAccessToken};
     
     [self makeURLRequestWithType:kAFFNPost endpointURLString:kAFVDUserLoginEndpointURL parameters:parameters completion:^(AFVDBaseNetworkModel *callback) {
         

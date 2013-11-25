@@ -10,6 +10,6 @@
 
 @interface AFVDUrlHasher : NSObject
 
-+ (NSString *)createSecureURLForResource:(NSString *)resource andResourcePath:(NSString *)path;
++ (NSString *)createSecureURLForResource:(NSString *)resource;
 
 @end
