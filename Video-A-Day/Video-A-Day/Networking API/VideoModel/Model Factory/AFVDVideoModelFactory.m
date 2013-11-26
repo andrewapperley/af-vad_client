@@ -93,19 +93,14 @@
     
     AFVDVideoModel *model = [[AFVDVideoModel alloc] init];
     
-    //Thumbnail
-    NSString *thumbnailImageString = data[@"thumbnail"];
-    NSData *thumbnailImageData = [[NSData alloc]initWithBase64EncodedString:thumbnailImageString options:NSDataBase64DecodingIgnoreUnknownCharacters];
-    UIImage *thumbnailImage = [UIImage imageWithData:thumbnailImageData];
-    
-    [model setValue:thumbnailImage forKey:@"thumbnailImage"];
-    
     //User info
-    [model setValue:data[@"user"] forKey:@"userName"];
-    [model setValue:data[@"relationship_id"] forKey:@"relationshipId"];
-    [model setValue:data[@"video_id"] forKey:@"videoId"];
     [model setValue:data[@"date"] forKey:@"date"];
-    
+    [model setValue:data[@"thumbnail_path"] forKey:@"thumbnailURL"];
+    [model setValue:data[@"video_id"] forKey:@"videoId"];
+    [model setValue:data[@"video_path"] forKey:@"videoURL"];
+    [model setValue:data[@"relationship_id"] forKey:@"relationshipId"];
+    [model setValue:data[@"user"] forKey:@"userName"];
+        
     return model;
 }
 

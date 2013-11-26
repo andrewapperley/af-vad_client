@@ -19,8 +19,6 @@ const NSString * kAFVDUserContentBaseURL = @"http://192.168.0.14/user_content/";
 const NSString * kAFVDUserContentBaseURL = @"http://99.232.33.159/user_content/";
 #endif
 
-
-
 @implementation AFVDUrlHasher
 
 
@@ -35,8 +33,8 @@ const NSString * kAFVDUserContentBaseURL = @"http://99.232.33.159/user_content/"
     return url;
 }
 
-+ (NSString *)createMD5Hash:(NSString *)lurl
-{
++ (NSString *)createMD5Hash:(NSString *)lurl {
+    
     unsigned char digest[16];
     
     CC_MD5([lurl UTF8String], (CC_LONG)strlen([lurl UTF8String]), digest);
@@ -48,6 +46,23 @@ const NSString * kAFVDUserContentBaseURL = @"http://99.232.33.159/user_content/"
     }
     
     return output;
+}
+
++ (NSString *)stringToHex:(NSString *)str {
+    
+    NSUInteger len = [str length];
+    unichar *chars = malloc(len * sizeof(unichar));
+    [str getCharacters:chars];
+    
+    NSMutableString *hexString = [[NSMutableString alloc] init];
+    
+    for(NSUInteger i = 0; i < len; i++ )
+    {
+        [hexString appendString:[NSString stringWithFormat:@"%x", chars[i]]];
+    }
+    free(chars);
+    
+    return hexString;
 }
 
 @end

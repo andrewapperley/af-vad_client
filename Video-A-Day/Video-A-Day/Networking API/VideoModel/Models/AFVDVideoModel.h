@@ -11,10 +11,10 @@
 @interface AFVDVideoModel : NSObject
 
 @property (nonatomic, strong, readonly) NSString *date;
-@property (nonatomic, strong, readonly) NSString *userName;
-@property (nonatomic, strong, readonly) NSString *relationshipId;
-@property (nonatomic, strong, readonly) UIImage *thumbnailImage;
-@property (nonatomic, strong, readonly) NSString *email;
+@property (nonatomic, strong, readonly) NSString *thumbnailURL;
 @property (nonatomic, strong, readonly) NSString *videoId;
+@property (nonatomic, strong, readonly) NSString *videoURL;
+@property (nonatomic, strong, readonly) NSString *relationshipId;
+@property (nonatomic, strong, readonly) NSString *userName;
 
 @end

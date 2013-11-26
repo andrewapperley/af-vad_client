@@ -44,7 +44,7 @@ NSString *email = @"email@email.com";
 //
 //    //Videos
 //    [self fetchRelationshipModel];
-//    [self fetchVideoModel];
+    [self fetchVideoModel];
 //    [self createVideo];
 
     //Relationship

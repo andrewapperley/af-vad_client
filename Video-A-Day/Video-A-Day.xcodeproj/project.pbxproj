@@ -343,11 +343,11 @@
 		7677BA5F18373A6B00F3EDC9 /* Networking API */ = {
 			isa = PBXGroup;
 			children = (
-				0F79613B183EE62000920C59 /* UrlHashing */,
 				7677BA6018373A6B00F3EDC9 /* Base Network Datasource */,
 				76C65195183809E5003C7F7D /* Base Network Model */,
 				0F18F182183743EF0071BEF5 /* Network Engine */,
 				7610BC55183B107B003CE193 /* RelationshipModel */,
+				0F79613B183EE62000920C59 /* UrlHashing */,
 				7677BA6318373A6B00F3EDC9 /* UserModel */,
 				76C6519D183840E4003C7F7D /* VideoModel */,
 			);
@@ -663,7 +663,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
-					"IS_LOCAL_MACHINE=1",
+					"IS_LOCAL_MACHINE=0",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
