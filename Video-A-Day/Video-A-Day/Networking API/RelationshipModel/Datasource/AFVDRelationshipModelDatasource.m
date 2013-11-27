@@ -26,32 +26,38 @@ NSString *kAFVDRelationshipCreateParameterKeyEndDate            = @"end_date";
 @implementation AFVDRelationshipModelDatasource
 
 #pragma mark - Relationship
-- (void)fetchRelationshipModelWithUserName:(NSString *)userName accessToken:(NSString *)accessToken relationshipId:(NSString *)relationshipId completion:(AFVDBaseNetworkCompletion)completion {
+- (void)fetchRelationshipModelWithUserName:(NSString *)userName accessToken:(NSString *)accessToken relationshipId:(NSString *)relationshipId success:(AFVDBaseNetworkSuccess)success failure:(AFVDBaseNetworkFailure)failure {
     
     NSDictionary *parameters = @{kAFVDRelationshipFromIdModelParameterKeyUserName : userName,
                                  kAFVDRelationshipFromIdModelParameterKeyAcessToken : accessToken,
                                  kAFVDRelationshipFromIdModelParameterKeyId : relationshipId};
     
-    [self makeURLRequestWithType:kAFFNGet endpointURLString:kAFVDRelationshipFromIdModelEndpointURL parameters:parameters completion:^(AFVDBaseNetworkModel *callback) {
+    [self makeURLRequestWithType:kAFVDNetworkCallType_GET endpointURLString:kAFVDRelationshipFromIdModelEndpointURL parameters:parameters success:^(AFVDBaseNetworkModel *networkCallback) {
         
-        completion(callback);
+        success(networkCallback);
+    } failure:^(NSError *error) {
+        
+        failure(error);
     }];
 }
 
 #pragma mark - Relationship Ids
-- (void)fetchRelationshipModelWithUserName:(NSString *)userName accessToken:(NSString *)accessToken completion:(AFVDBaseNetworkCompletion)completion {
+- (void)fetchRelationshipModelWithUserName:(NSString *)userName accessToken:(NSString *)accessToken success:(AFVDBaseNetworkSuccess)success failure:(AFVDBaseNetworkFailure)failure {
     
     NSDictionary *parameters = @{kAFVDRelationshipFromIdModelParameterKeyUserName : userName,
                                  kAFVDRelationshipFromIdModelParameterKeyAcessToken : accessToken};
     
-    [self makeURLRequestWithType:kAFFNGet endpointURLString:kAFVDRelationshipIdsEndpointURL parameters:parameters completion:^(AFVDBaseNetworkModel *callback) {
+    [self makeURLRequestWithType:kAFVDNetworkCallType_GET endpointURLString:kAFVDRelationshipIdsEndpointURL parameters:parameters success:^(AFVDBaseNetworkModel *networkCallback) {
         
-        completion(callback);
+        success(networkCallback);
+    } failure:^(NSError *error) {
+        
+        failure(error);
     }];
 }
 
 #pragma mark - Create relationship
-- (void)postRelationshipModelWithUserName:(NSString *)userName accessToken:(NSString *)accessToken startDate:(NSString *)startDate endDate:(NSString *)endDate users:(NSArray *)users completion:(AFVDBaseNetworkCompletion)completion {
+- (void)postRelationshipModelWithUserName:(NSString *)userName accessToken:(NSString *)accessToken startDate:(NSString *)startDate endDate:(NSString *)endDate users:(NSArray *)users success:(AFVDBaseNetworkSuccess)success failure:(AFVDBaseNetworkFailure)failure {
     
     NSDictionary *parameters = @{kAFVDRelationshipFromIdModelParameterKeyUserName : userName,
                                  kAFVDRelationshipFromIdModelParameterKeyAcessToken : accessToken,
@@ -59,9 +65,12 @@ NSString *kAFVDRelationshipCreateParameterKeyEndDate            = @"end_date";
                                  kAFVDRelationshipCreateParameterKeyEndDate : endDate,
                                  kAFVDRelationshipCreateParameterKeyUsers : users};
     
-    [self makeURLRequestWithType:kAFFNPost endpointURLString:kAFVDRelationshipCreateEndpointURL parameters:parameters completion:^(AFVDBaseNetworkModel *callback) {
+    [self makeURLRequestWithType:kAFVDNetworkCallType_POST endpointURLString:kAFVDRelationshipCreateEndpointURL parameters:parameters success:^(AFVDBaseNetworkModel *networkCallback) {
         
-        completion(callback);
+        success(networkCallback);
+    } failure:^(NSError *error) {
+        
+        failure(error);
     }];
 }
 

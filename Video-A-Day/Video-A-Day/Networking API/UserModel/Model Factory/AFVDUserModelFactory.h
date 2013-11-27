@@ -6,30 +6,30 @@
 //  Copyright (c) 2013 AFApps. All rights reserved.
 //
 
+#import "AFVDBaseNetworkModel.h"
+#import "AFVDBaseNetworkStatics.h"
 #import "AFVDUserModel.h"
 
-@class AFVDBaseNetworkModel;
-
-typedef void(^AFVDUserLoginCompletion)(AFVDUserModel *userModel, NSString *accessToken, AFVDBaseNetworkModel *networkCallback);
-typedef void(^AFVDUserModelCompletion)(AFVDUserModel *userModel, AFVDBaseNetworkModel *networkCallback);
-typedef void(^AFVDUserCreationCompletion)(AFVDBaseNetworkModel *networkCallback);
-typedef void(^AFVDUsernameAvailabilityCompletion)(AFVDBaseNetworkModel *networkCallback, BOOL isUsernameAvailable);
+typedef void(^AFVDUserLoginSuccess)(AFVDUserModel *userModel, NSString *accessToken, AFVDBaseNetworkModel *networkCallback);
+typedef void(^AFVDUserModelSuccess)(AFVDUserModel *userModel, AFVDBaseNetworkModel *networkCallback);
+typedef void(^AFVDUserCreationSuccess)(AFVDBaseNetworkModel *networkCallback);
+typedef void(^AFVDUsernameAvailabilitySuccess)(AFVDBaseNetworkModel *networkCallback, BOOL isUsernameAvailable);
 
 @interface AFVDUserModelFactory : NSObject
 
 #pragma mark - Fetch user model
-- (void)fetchUserModelWithUserName:(NSString *)userName accessToken:(NSString *)accessToken completion:(AFVDUserModelCompletion)completion;
+- (void)fetchUserModelWithUserName:(NSString *)userName accessToken:(NSString *)accessToken success:(AFVDUserModelSuccess)success failure:(AFVDBaseNetworkFailure)failure;
 
 #pragma mark - Fetch user model and access token
-- (void)fetchUserModelAndAccessTokenWithUserName:(NSString *)userName andPassword:(NSString *)password completion:(AFVDUserLoginCompletion)completion;
+- (void)fetchUserModelAndAccessTokenWithUserName:(NSString *)userName andPassword:(NSString *)password success:(AFVDUserLoginSuccess)success failure:(AFVDBaseNetworkFailure)failure;
 
 #pragma mark - Create user
-- (void)createUserWithUsername:(NSString *)userName password:(NSString *)password displayName:(NSString *)displayName email:(NSString *)email profileImage:(NSData *)profileImage completion:(AFVDUserCreationCompletion)completion;
+- (void)createUserWithUsername:(NSString *)userName password:(NSString *)password displayName:(NSString *)displayName email:(NSString *)email profileImage:(NSData *)profileImage success:(AFVDUserCreationSuccess)success failure:(AFVDBaseNetworkFailure)failure;
 
 #pragma mark - Updated user
-- (void)updateUserWithUsername:(NSString *)userName accessToken:(NSString *)accessToken displayName:(NSString *)displayName email:(NSString *)email profileImage:(NSData *)profileImage relationships:(NSSet *)relationships completion:(AFVDUserCreationCompletion)completion;
+- (void)updateUserWithUsername:(NSString *)userName accessToken:(NSString *)accessToken displayName:(NSString *)displayName email:(NSString *)email profileImage:(NSData *)profileImage relationships:(NSSet *)relationships success:(AFVDUserCreationSuccess)success failure:(AFVDBaseNetworkFailure)failure;
 
 #pragma mark - Check if username is available
-- (void)checkIfUsernameIsAvailable:(NSString *)userName completion:(AFVDUsernameAvailabilityCompletion)completion;
+- (void)checkIfUsernameIsAvailable:(NSString *)userName success:(AFVDUsernameAvailabilitySuccess)success failure:(AFVDBaseNetworkFailure)failure;
 
 @end

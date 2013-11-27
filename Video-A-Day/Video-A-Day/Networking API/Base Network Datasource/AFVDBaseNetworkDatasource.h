@@ -7,14 +7,17 @@
 //
 
 #import "AFVDBaseNetworkModel.h"
-#import "AFFNRequest.h"
+#import "AFVDBaseNetworkStatics.h"
 
-typedef void(^AFVDBaseNetworkCompletion)(AFVDBaseNetworkModel *networkCallback);
+typedef NS_ENUM(NSUInteger, AFVDNetworkCallType) {
+    kAFVDNetworkCallType_POST,
+    kAFVDNetworkCallType_GET
+};
 
 @interface AFVDBaseNetworkDatasource : NSObject
 
-- (void)makeURLRequestWithType:(AFFNPostType)type endpointURLString:(NSString *)urlString completion:(AFVDBaseNetworkCompletion)completion;
-- (void)makeURLRequestWithType:(AFFNPostType)type endpointURLString:(NSString *)urlString parameters:(NSDictionary *)parameters completion:(AFVDBaseNetworkCompletion)completion;
+- (void)makeURLRequestWithType:(AFVDNetworkCallType)type endpointURLString:(NSString *)urlString success:(AFVDBaseNetworkSuccess)success failure:(AFVDBaseNetworkFailure)failure;
+- (void)makeURLRequestWithType:(AFVDNetworkCallType)type endpointURLString:(NSString *)urlString parameters:(NSDictionary *)parameters success:(AFVDBaseNetworkSuccess)success failure:(AFVDBaseNetworkFailure)failure;
 
 #pragma mark - Singleton instance
 + (instancetype)sharedDataSource;

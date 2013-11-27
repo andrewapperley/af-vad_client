@@ -12,41 +12,50 @@
 @implementation AFVDRelationshipModelFactory
 
 #pragma mark - Fetch relationship
-- (void)fetchRelationshipModelWithUserName:(NSString *)userName accessToken:(NSString *)accessToken relationshipId:(NSString *)relationshipId completion:(AFVDRelationshipModelCompletion)completion {
+- (void)fetchRelationshipModelWithUserName:(NSString *)userName accessToken:(NSString *)accessToken relationshipId:(NSString *)relationshipId success:(AFVDRelationshipModelSuccess)success failure:(AFVDBaseNetworkFailure)failure {
     
-    [[AFVDRelationshipModelDatasource sharedDataSource] fetchRelationshipModelWithUserName:userName accessToken:accessToken relationshipId:relationshipId completion:^(AFVDBaseNetworkModel *networkCallback) {
-       
+    [[AFVDRelationshipModelDatasource sharedDataSource] fetchRelationshipModelWithUserName:userName accessToken:accessToken relationshipId:relationshipId success:^(AFVDBaseNetworkModel *networkCallback) {
+        
         AFVDRelationshipModel *model = nil;
         
         if(networkCallback.success) {
             model = [self relationshipModelForData:networkCallback.responseData];
         }
         
-        completion(model, networkCallback);
+        success(model, networkCallback);
+    } failure:^(NSError *error) {
+        
+        failure(error);
     }];
 }
 
 #pragma mark - Fetch relationship Ids
-- (void)fetchRelationshipModelIdsWithUserName:(NSString *)userName accessToken:(NSString *)accessToken completion:(AFVDRelationshipIdsCompletion)completion {
+- (void)fetchRelationshipModelIdsWithUserName:(NSString *)userName accessToken:(NSString *)accessToken success:(AFVDRelationshipIdsSuccess)success failure:(AFVDBaseNetworkFailure)failure {
     
-    [[AFVDRelationshipModelDatasource sharedDataSource] fetchRelationshipModelWithUserName:userName accessToken:accessToken completion:^(AFVDBaseNetworkModel *networkCallback) {
-       
+    [[AFVDRelationshipModelDatasource sharedDataSource] fetchRelationshipModelWithUserName:userName accessToken:accessToken success:^(AFVDBaseNetworkModel *networkCallback) {
+        
         NSArray *relationshipIds = nil;
         
         if(networkCallback.success) {
             relationshipIds = [self relationshipIdsForData:networkCallback.responseData];
         }
         
-        completion(relationshipIds, networkCallback);
+        success(relationshipIds, networkCallback);
+    } failure:^(NSError *error) {
+        
+        failure(error);
     }];
 }
 
 #pragma mark - Post relationship creation
-- (void)postRelationshipModelWithUserName:(NSString *)userName accessToken:(NSString *)accessToken startDate:(NSString *)startDate endDate:(NSString *)endDate users:(NSArray *)users completion:(AFVDRelationshipCreationCompletion)completion {
+- (void)postRelationshipModelWithUserName:(NSString *)userName accessToken:(NSString *)accessToken startDate:(NSString *)startDate endDate:(NSString *)endDate users:(NSArray *)users success:(AFVDBaseNetworkSuccess)success failure:(AFVDBaseNetworkFailure)failure {
     
-    [[AFVDRelationshipModelDatasource sharedDataSource] postRelationshipModelWithUserName:userName accessToken:accessToken startDate:startDate endDate:endDate users:users completion:^(AFVDBaseNetworkModel *networkCallback) {
-       
-        completion(networkCallback);
+    [[AFVDRelationshipModelDatasource sharedDataSource] postRelationshipModelWithUserName:userName accessToken:accessToken startDate:startDate endDate:endDate users:users success:^(AFVDBaseNetworkModel *networkCallback) {
+        
+        success(networkCallback);
+    } failure:^(NSError *error) {
+        
+        failure(error);
     }];
 }
 

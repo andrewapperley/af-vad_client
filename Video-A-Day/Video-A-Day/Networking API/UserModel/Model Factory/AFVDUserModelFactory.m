@@ -12,24 +12,27 @@
 @implementation AFVDUserModelFactory
 
 #pragma mark - Fetch user model
-- (void)fetchUserModelWithUserName:(NSString *)userName accessToken:(NSString *)accessToken completion:(AFVDUserModelCompletion)completion {
+- (void)fetchUserModelWithUserName:(NSString *)userName accessToken:(NSString *)accessToken success:(AFVDUserModelSuccess)success failure:(AFVDBaseNetworkFailure)failure {
     
-    [[AFVDUserModelDatasource sharedDataSource] fetchUserModelWithUserName:userName accessToken:accessToken completion:^(AFVDBaseNetworkModel *networkCallback) {
-       
+    [[AFVDUserModelDatasource sharedDataSource] fetchUserModelWithUserName:userName accessToken:accessToken success:^(AFVDBaseNetworkModel *networkCallback) {
+        
         AFVDUserModel *model = nil;
         
         if(networkCallback.success) {
             model = [self userModelForData:networkCallback.responseData];
         }
         
-        completion(model, networkCallback);
+        success(model, networkCallback);
+    } failure:^(NSError *error) {
+       
+        failure(error);
     }];
 }
 
 #pragma mark - Fetch user model and access token
-- (void)fetchUserModelAndAccessTokenWithUserName:(NSString *)userName andPassword:(NSString *)password completion:(AFVDUserLoginCompletion)completion {
+- (void)fetchUserModelAndAccessTokenWithUserName:(NSString *)userName andPassword:(NSString *)password success:(AFVDUserLoginSuccess)success failure:(AFVDBaseNetworkFailure)failure {
     
-    [[AFVDUserModelDatasource sharedDataSource] postLoginUserWithUsername:userName password:password completion:^(AFVDBaseNetworkModel *networkCallback) {
+    [[AFVDUserModelDatasource sharedDataSource] postLoginUserWithUsername:userName password:password success:^(AFVDBaseNetworkModel *networkCallback) {
         
         AFVDUserModel *model = nil;
         
@@ -38,36 +41,48 @@
             setAccessToken(networkCallback.responseData[@"access_token"]);
         }
         
-        completion(model, getAccessToken, networkCallback);
+        success(model, getAccessToken, networkCallback);
+    } failure:^(NSError *error) {
+       
+        failure(error);
     }];
 }
 
 #pragma mark - Create user 
-- (void)createUserWithUsername:(NSString *)userName password:(NSString *)password displayName:(NSString *)displayName email:(NSString *)email profileImage:(NSData *)profileImage completion:(AFVDUserCreationCompletion)completion {
+- (void)createUserWithUsername:(NSString *)userName password:(NSString *)password displayName:(NSString *)displayName email:(NSString *)email profileImage:(NSData *)profileImage success:(AFVDUserCreationSuccess)success failure:(AFVDBaseNetworkFailure)failure {
     
-    [[AFVDUserModelDatasource sharedDataSource] postCreateUsername:userName password:password displayName:displayName email:email profileImage:profileImage completion:^(AFVDBaseNetworkModel *networkCallback) {
+    [[AFVDUserModelDatasource sharedDataSource] postCreateUsername:userName password:password displayName:displayName email:email profileImage:profileImage success:^(AFVDBaseNetworkModel *networkCallback) {
         
-        completion(networkCallback);
+        success(networkCallback);
+    } failure:^(NSError *error) {
+       
+        failure(error);
     }];
 }
 
 #pragma mark - Updated user
-- (void)updateUserWithUsername:(NSString *)userName accessToken:(NSString *)accessToken displayName:(NSString *)displayName email:(NSString *)email profileImage:(NSData *)profileImage relationships:(NSSet *)relationships completion:(AFVDUserCreationCompletion)completion {
+- (void)updateUserWithUsername:(NSString *)userName accessToken:(NSString *)accessToken displayName:(NSString *)displayName email:(NSString *)email profileImage:(NSData *)profileImage relationships:(NSSet *)relationships success:(AFVDUserCreationSuccess)success failure:(AFVDBaseNetworkFailure)failure {
     
-    [[AFVDUserModelDatasource sharedDataSource] postUpdateUserWithUsername:userName accessToken:accessToken displayName:displayName email:email profileImage:profileImage relationships:relationships completion:^(AFVDBaseNetworkModel *networkCallback) {
+    [[AFVDUserModelDatasource sharedDataSource] postUpdateUserWithUsername:userName accessToken:accessToken displayName:displayName email:email profileImage:profileImage relationships:relationships success:^(AFVDBaseNetworkModel *networkCallback) {
         
-        completion(networkCallback);
+        success(networkCallback);
+    } failure:^(NSError *error) {
+        
+        failure(error);
     }];
 }
 
 #pragma mark - Check if username is available
-- (void)checkIfUsernameIsAvailable:(NSString *)userName completion:(AFVDUsernameAvailabilityCompletion)completion {
+- (void)checkIfUsernameIsAvailable:(NSString *)userName success:(AFVDUsernameAvailabilitySuccess)success failure:(AFVDBaseNetworkFailure)failure {
     
-    [[AFVDUserModelDatasource sharedDataSource] checkIfUsernameIsAvailable:userName completion:^(AFVDBaseNetworkModel *networkCallback) {
-       
+    [[AFVDUserModelDatasource sharedDataSource] checkIfUsernameIsAvailable:userName success:^(AFVDBaseNetworkModel *networkCallback) {
+        
         BOOL isUsernameAvailable = networkCallback.success;
         
-        completion(networkCallback, isUsernameAvailable);
+        success(networkCallback, isUsernameAvailable);
+    } failure:^(NSError *error) {
+        
+        failure(error);
     }];
 }
 

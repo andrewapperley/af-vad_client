@@ -12,41 +12,50 @@
 @implementation AFVDVideoModelFactory
 
 #pragma mark - Fetch video playlist
-- (void)fetchVideoPlaylistModelWithUserName:(NSString *)userName playlistId:(NSString *)playlistId accessToken:(NSString *)accessToken pageIndex:(NSUInteger)pageIndex completion:(AFVDVideoPlaylistModelCompletion)completion {
+- (void)fetchVideoPlaylistModelWithUserName:(NSString *)userName playlistId:(NSString *)playlistId accessToken:(NSString *)accessToken pageIndex:(NSUInteger)pageIndex success:(AFVDVideoPlaylistModelSuccess)success failure:(AFVDBaseNetworkFailure)failure {
     
-    [[AFVDVideoModelDatasource sharedDataSource] fetchVideoPlaylistModelWithUserName:userName playlistId:playlistId accessToken:accessToken pageIndex:pageIndex completion:^(AFVDBaseNetworkModel *networkCallback) {
-       
+    [[AFVDVideoModelDatasource sharedDataSource] fetchVideoPlaylistModelWithUserName:userName playlistId:playlistId accessToken:accessToken pageIndex:pageIndex success:^(AFVDBaseNetworkModel *networkCallback) {
+        
         AFVDVideoPlaylistModel *model = nil;
         
         if(networkCallback.success) {
             model = [self videoPlaylistModelForData:networkCallback.responseData];
         }
         
-        completion(model, networkCallback);
+        success(model, networkCallback);
+    } failure:^(NSError *error) {
+        
+        failure(error);
     }];
 }
 
 #pragma mark - Fetch video relationship playlist
-- (void)fetchVideoRelationshipModelWithUserName:(NSString *)userName relationshipId:(NSString *)relationshipId accessToken:(NSString *)accessToken completion:(AFVDVideoRelationshipModelCompletion)completion {
+- (void)fetchVideoRelationshipModelWithUserName:(NSString *)userName relationshipId:(NSString *)relationshipId accessToken:(NSString *)accessToken success:(AFVDVideoRelationshipModelSuccess)success failure:(AFVDBaseNetworkFailure)failure {
     
-    [[AFVDVideoModelDatasource sharedDataSource] fetchVideoRelationshipModelWithUserName:userName relationshipId:relationshipId accessToken:accessToken completion:^(AFVDBaseNetworkModel *networkCallback) {
-       
+    [[AFVDVideoModelDatasource sharedDataSource] fetchVideoRelationshipModelWithUserName:userName relationshipId:relationshipId accessToken:accessToken success:^(AFVDBaseNetworkModel *networkCallback) {
+        
         AFVDVideoRelationshipModel *model = nil;
         
         if(networkCallback.success) {
             model = [self videoRelationshipModelForData:networkCallback.responseData];
         }
         
-        completion(model, networkCallback);
+        success(model, networkCallback);
+    } failure:^(NSError *error) {
+       
+        failure(error);
     }];
 }
 
 #pragma mark - Post video creation
-- (void)postVideoModelWithUserName:(NSString *)userName relationshipId:(NSString *)relationshipId videoContent:(NSString *)videoContent date:(NSString *)date accessToken:(NSString *)accessToken videoThumbnail:(NSString *)videoThumbnail completion:(AFVDVideoCreationModelCompletion)completion {
+- (void)postVideoModelWithUserName:(NSString *)userName relationshipId:(NSString *)relationshipId videoContent:(NSString *)videoContent date:(NSString *)date accessToken:(NSString *)accessToken videoThumbnail:(NSString *)videoThumbnail success:(AFVDBaseNetworkSuccess)success failure:(AFVDBaseNetworkFailure)failure {
 
-    [[AFVDVideoModelDatasource sharedDataSource] postVideoModelWithUserName:userName relationshipId:relationshipId videoContent:videoContent date:date accessToken:accessToken videoThumbnail:videoThumbnail completion:^(AFVDBaseNetworkModel *networkCallback) {
+    [[AFVDVideoModelDatasource sharedDataSource] postVideoModelWithUserName:userName relationshipId:relationshipId videoContent:videoContent date:date accessToken:accessToken videoThumbnail:videoThumbnail success:^(AFVDBaseNetworkModel *networkCallback) {
         
-        completion(networkCallback);
+        success(networkCallback);
+    } failure:^(NSError *error) {
+       
+        failure(error);
     }];
 }
 

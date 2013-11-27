@@ -44,7 +44,7 @@ NSString *email = @"email@email.com";
 //
 //    //Videos
 //    [self fetchRelationshipModel];
-    [self fetchVideoModel];
+//    [self fetchVideoModel];
 //    [self createVideo];
 
     //Relationship
@@ -62,17 +62,21 @@ NSString *email = @"email@email.com";
     
     NSData *testProfileImageData = UIImageJPEGRepresentation([UIImage imageNamed:@"face.jpg"], 1) ;
     
-    [modelFactory createUserWithUsername:userName password:password displayName:displayName email:email profileImage:testProfileImageData completion:^(AFVDBaseNetworkModel *networkCallback) {
+    [modelFactory createUserWithUsername:userName password:password displayName:displayName email:email profileImage:testProfileImageData success:^(AFVDBaseNetworkModel *networkCallback) {
         
         if(networkCallback.success) {
             
             NSLog(@"Finish AFVDCreateUser - Success %d - %@", networkCallback.responseCode, networkCallback.responseMessage);
             NSLog(@"Proceed to user login...");
             [self loginUser];
-
+            
         } else {
             NSLog(@"Finish AFVDCreateUser - Failure %d - %@", networkCallback.responseCode, networkCallback.responseMessage);
         }
+        
+    } failure:^(NSError *error) {
+        
+        NSLog(@"Finish AFVDCreateUser - Failure %d - %@", error.code, error.localizedDescription);
     }];
 }
 
@@ -82,7 +86,7 @@ NSString *email = @"email@email.com";
 
     NSLog(@"Start AFVDCheckIfUsernameIsAvailable");
     
-    [modelFactory checkIfUsernameIsAvailable:userName completion:^(AFVDBaseNetworkModel *networkCallback, BOOL isUsernameAvailable) {
+    [modelFactory checkIfUsernameIsAvailable:userName success:^(AFVDBaseNetworkModel *networkCallback, BOOL isUsernameAvailable) {
         
         if(isUsernameAvailable) {
             
@@ -90,6 +94,9 @@ NSString *email = @"email@email.com";
         } else {
             NSLog(@"Finish AFVDCheckIfUsernameIsAvailable - Failure %d - %@", networkCallback.responseCode, networkCallback.responseMessage);
         }
+    } failure:^(NSError *error) {
+        
+        NSLog(@"Finish AFVDCheckIfUsernameIsAvailable - Failure %d - %@", error.code, error.localizedDescription);
     }];
 }
 
@@ -102,7 +109,7 @@ NSString *email = @"email@email.com";
     NSData *testProfileImageData = UIImageJPEGRepresentation([UIImage imageNamed:@"face.jpg"], 1) ;
     NSSet *relationshipSet = [NSSet setWithObjects:@"9823y4923r28793y987", @"wiuwe9r83r2oiu3r2362", nil];
     
-    [modelFactory updateUserWithUsername:userName accessToken:@"f1c94fd3d933aaf6f78fd1ab6058e10ae973831b9f911d04fcd40a33" displayName:@"New Display Name" email:email profileImage:testProfileImageData relationships:relationshipSet completion:^(AFVDBaseNetworkModel *networkCallback) {
+    [modelFactory updateUserWithUsername:userName accessToken:@"f1c94fd3d933aaf6f78fd1ab6058e10ae973831b9f911d04fcd40a33" displayName:@"New Display Name" email:email profileImage:testProfileImageData relationships:relationshipSet success:^(AFVDBaseNetworkModel *networkCallback) {
         
         if(networkCallback.success) {
             
@@ -113,6 +120,9 @@ NSString *email = @"email@email.com";
         } else {
             NSLog(@"Finish AFVDUpdateUser - Failure %d - %@", networkCallback.responseCode, networkCallback.responseMessage);
         }
+    } failure:^(NSError *error) {
+        
+        NSLog(@"Finish AFVDUpdateUser - Failure %d - %@", error.code, error.localizedDescription);
     }];
 }
 
@@ -122,17 +132,20 @@ NSString *email = @"email@email.com";
     
     NSLog(@"Start AFVDLogin");
     
-    [modelFactory fetchUserModelAndAccessTokenWithUserName:userName andPassword:password completion:^(AFVDUserModel *userModel, NSString *access_token, AFVDBaseNetworkModel *networkCallback){
+    [modelFactory fetchUserModelAndAccessTokenWithUserName:userName andPassword:password success:^(AFVDUserModel *userModel, NSString *accessToken, AFVDBaseNetworkModel *networkCallback) {
         
         if (networkCallback.success) {
             
             NSLog(@"Finish AFVDLogin - Success");
-            NSLog(@"Access Token - %@", access_token);
+            NSLog(@"Access Token - %@", accessToken);
             NSLog(@"Proceed to fetch user data...");
             [self fetchUserModel];
         } else {
             NSLog(@"Finish AFVDLogin - Failure %d - %@", networkCallback.responseCode, networkCallback.responseMessage);
         }
+    } failure:^(NSError *error) {
+        
+        NSLog(@"Finish AFVDLogin - Failure %d - %@", error.code, error.localizedDescription);
     }];
 }
 
@@ -142,28 +155,38 @@ NSString *email = @"email@email.com";
     
     NSLog(@"Start AFVDUserModel");
     
-    [modelFactory fetchUserModelWithUserName:userName accessToken:getAccessToken completion:^(AFVDUserModel *userModel, AFVDBaseNetworkModel *networkCallback) {
+    [modelFactory fetchUserModelWithUserName:userName accessToken:getAccessToken success:^(AFVDUserModel *userModel, AFVDBaseNetworkModel *networkCallback) {
         
         if(networkCallback.success) {
             
             NSLog(@"Finish AFVDUserModel - Success");
             NSLog(@"%@",userModel.userImageUrl);
             NSString *profileImageURL = [AFVDUrlHasher createSecureURLForResource:userModel.userImageUrl];
-            NSTimeInterval timeInterval = 60 * 30; // 30 minutes
-            NSDate *date = [[NSDate date] dateByAddingTimeInterval:timeInterval];
             
             UIImageView *profileImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 150, 200)];
             [self.view addSubview:profileImage];
             profileImage.center = self.view.center;
+            profileImage.alpha = 0;
 
-            #warning TODO : Add block support to image handling
-
-            [profileImage setImageWithURL:profileImageURL placeholderImage:nil expiryDate:date willCache:TRUE];
-            
+            __block UIImageView *weakProfileImage = profileImage;
+            NSURLRequest *urlRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:profileImageURL]];
+            [profileImage setImageWithURLRequest:urlRequest placeholderImage:nil success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+                
+                [UIView animateWithDuration:0.5f animations:^{
+                   
+                    weakProfileImage.alpha = 1;
+                }];
+                
+            } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
+                NSLog(@"Failed to load image from URL : %@", request.URL.absoluteString);
+            }];
             
         } else {
             NSLog(@"Finish AFVDUserModel - Failure %d - %@", networkCallback.responseCode, networkCallback.responseMessage);
         }
+    } failure:^(NSError *error) {
+        
+        NSLog(@"Finish AFVDUserModel - Failure %d - %@", error.code, error.localizedDescription);
     }];
 }
 
@@ -174,7 +197,7 @@ NSString *email = @"email@email.com";
     
     NSLog(@"Start AFVDVideoRelationshipModel");
     
-    [modelFactory fetchVideoRelationshipModelWithUserName:userName relationshipId:relationshipId accessToken:getAccessToken completion:^(AFVDVideoRelationshipModel *videoRelationshipModel, AFVDBaseNetworkModel *networkCallback) {
+    [modelFactory fetchVideoRelationshipModelWithUserName:userName relationshipId:relationshipId accessToken:getAccessToken success:^(AFVDVideoRelationshipModel *videoRelationshipModel, AFVDBaseNetworkModel *networkCallback) {
         
         if(networkCallback.success) {
             
@@ -183,6 +206,9 @@ NSString *email = @"email@email.com";
         } else {
             NSLog(@"Finish AFVDVideoRelationshipModel - Failure %d - %@", networkCallback.responseCode, networkCallback.responseMessage);
         }
+    } failure:^(NSError *error) {
+        
+        NSLog(@"Finish AFVDVideoRelationshipModel - Failure %d - %@", error.code, error.localizedDescription);
     }];
 }
 
@@ -194,7 +220,7 @@ NSString *email = @"email@email.com";
     
     NSLog(@"Start AFVDVideoPlaylistModel");
     
-    [modelFactory fetchVideoPlaylistModelWithUserName:userName playlistId:playlistId accessToken:getAccessToken pageIndex:pageIndex completion:^(AFVDVideoPlaylistModel *videoPlaylistModel, AFVDBaseNetworkModel *networkCallback) {
+    [modelFactory fetchVideoPlaylistModelWithUserName:userName playlistId:playlistId accessToken:getAccessToken pageIndex:pageIndex success:^(AFVDVideoPlaylistModel *videoPlaylistModel, AFVDBaseNetworkModel *networkCallback) {
         
         if(networkCallback.success) {
             
@@ -206,6 +232,9 @@ NSString *email = @"email@email.com";
         } else {
             NSLog(@"Finish AFVDVideoPlaylistModel - Failure %d - %@", networkCallback.responseCode, networkCallback.responseMessage);
         }
+    } failure:^(NSError *error) {
+        
+        NSLog(@"Finish AFVDVideoPlaylistModel - Failure %d - %@", error.code, error.localizedDescription);
     }];
 }
 
@@ -227,7 +256,7 @@ NSString *email = @"email@email.com";
 
     NSString *date = @"2013-11-17";
     
-    [modelFactory postVideoModelWithUserName:userName relationshipId:relationshipId videoContent:videoContent date:date accessToken:getAccessToken videoThumbnail:thumbnailContent completion:^(AFVDBaseNetworkModel *networkCallback) {
+    [modelFactory postVideoModelWithUserName:userName relationshipId:relationshipId videoContent:videoContent date:date accessToken:getAccessToken videoThumbnail:thumbnailContent success:^(AFVDBaseNetworkModel *networkCallback) {
         
         if(networkCallback.success) {
             
@@ -236,6 +265,9 @@ NSString *email = @"email@email.com";
         } else {
             NSLog(@"Finish VideoCreation - Failure %d - %@", networkCallback.responseCode, networkCallback.responseMessage);
         }
+    } failure:^(NSError *error) {
+        
+        NSLog(@"Finish VideoCreation - Failure %d - %@", error.code, error.localizedDescription);
     }];
 }
 
@@ -249,7 +281,7 @@ NSString *email = @"email@email.com";
     NSString *endDate = @"2014-11-19";
     NSArray *users = @[userName, otherUserName];
     
-    [modelFactory postRelationshipModelWithUserName:userName accessToken:getAccessToken startDate:startDate endDate:endDate users:users completion:^(AFVDBaseNetworkModel *networkCallback) {
+    [modelFactory postRelationshipModelWithUserName:userName accessToken:getAccessToken startDate:startDate endDate:endDate users:users success:^(AFVDBaseNetworkModel *networkCallback) {
         
         if(networkCallback.success) {
             
@@ -258,6 +290,9 @@ NSString *email = @"email@email.com";
         } else {
             NSLog(@"Finish RelationshipCreation - Failure %d - %@", networkCallback.responseCode, networkCallback.responseMessage);
         }
+    } failure:^(NSError *error) {
+        
+        NSLog(@"Finish RelationshipCreation - Failure %d - %@", error.code, error.localizedDescription);
     }];
 }
 
@@ -267,8 +302,8 @@ NSString *email = @"email@email.com";
     
     NSLog(@"Start RelationshipModelIds");
     
-    [modelFactory fetchRelationshipModelIdsWithUserName:userName accessToken:getAccessToken completion:^(NSArray *relationshipIds, AFVDBaseNetworkModel *networkCallback) {
-        
+    [modelFactory fetchRelationshipModelIdsWithUserName:userName accessToken:getAccessToken success:^(NSArray *relationshipIds, AFVDBaseNetworkModel *networkCallback) {
+
         if(networkCallback.success) {
             
             NSLog(@"Finish RelationshipModelIds - Success");
@@ -277,6 +312,9 @@ NSString *email = @"email@email.com";
         } else {
             NSLog(@"Finish RelationshipModelIds - Failure %d - %@", networkCallback.responseCode, networkCallback.responseMessage);
         }
+    } failure:^(NSError *error) {
+        
+        NSLog(@"Finish RelationshipModelIds - Failure %d - %@", error.code, error.localizedDescription);
     }];
 }
 
@@ -286,7 +324,7 @@ NSString *email = @"email@email.com";
     
     NSLog(@"Start RelationshipModelFromId");
     
-    [modelFactory fetchRelationshipModelWithUserName:userName accessToken:getAccessToken relationshipId:relationshipId completion:^(AFVDRelationshipModel *relationshipModel, AFVDBaseNetworkModel *networkCallback) {
+    [modelFactory fetchRelationshipModelWithUserName:userName accessToken:getAccessToken relationshipId:relationshipId success:^(AFVDRelationshipModel *relationshipModel, AFVDBaseNetworkModel *networkCallback) {
         
         if(networkCallback.success) {
             
@@ -296,6 +334,9 @@ NSString *email = @"email@email.com";
         } else {
             NSLog(@"Finish RelationshipModel - Failure %d - %@", networkCallback.responseCode, networkCallback.responseMessage);
         }
+    } failure:^(NSError *error) {
+        
+        NSLog(@"Finish RelationshipModel - Failure %d - %@", error.code, error.localizedDescription);
     }];
 }
 

@@ -6,62 +6,67 @@
 //  Copyright (c) 2013 AFApps. All rights reserved.
 //
 
-#import "AFFNManager.h"
+#import <AFNetworking.h>
 #import "AFVDBaseNetworkDatasource.h"
-
-#if IS_LOCAL_MACHINE
-const NSString *kAFVDBaseNetworkURL             = @"http://192.168.0.14:5000";
-#else 
-const NSString *kAFVDBaseNetworkURL             = @"http://99.232.33.159:5000";
-#endif
 
 const NSString *kAFVDBaseNetworkKeyPostParam    = @"params";
 
 @implementation AFVDBaseNetworkDatasource
 
-- (void)makeURLRequestWithType:(AFFNPostType)type endpointURLString:(NSString *)urlString completion:(AFVDBaseNetworkCompletion)completion {
+- (void)makeURLRequestWithType:(AFVDNetworkCallType)type endpointURLString:(NSString *)urlString success:(AFVDBaseNetworkSuccess)success failure:(AFVDBaseNetworkFailure)failure {
     
-    [self makeURLRequestWithType:type endpointURLString:urlString parameters:nil completion:completion];
+    [self makeURLRequestWithType:type endpointURLString:urlString parameters:nil success:success failure:failure];
 }
 
-- (void)makeURLRequestWithType:(AFFNPostType)type endpointURLString:(NSString *)urlString parameters:(NSDictionary *)parameters completion:(AFVDBaseNetworkCompletion)completion {
+- (void)makeURLRequestWithType:(AFVDNetworkCallType)type endpointURLString:(NSString *)urlString parameters:(NSDictionary *)parameters success:(AFVDBaseNetworkSuccess)success failure:(AFVDBaseNetworkFailure)failure {
+    
+    //Base request URL
+    static NSURL *baseRequestURL;
+    
+    if(!baseRequestURL) {
+        baseRequestURL = [NSURL URLWithString:BASE_NETWORK_URL];
+    }
+    
+    //Create session manager
+    AFHTTPSessionManager *sessionManager = [[AFHTTPSessionManager alloc] initWithBaseURL:baseRequestURL];
     
     //If the type is "POST" then we must wrap any parameters in a 'params' dictionary.
     NSDictionary *paramDictionary;
-    if(type == kAFFNPost) {
+    if(type == kAFVDNetworkCallType_POST) {
        
         NSMutableDictionary *newParamDictionary = [NSMutableDictionary dictionary];
         [newParamDictionary setObject:parameters forKey:kAFVDBaseNetworkKeyPostParam];
         paramDictionary = newParamDictionary;
         
+        [sessionManager POST:urlString parameters:paramDictionary success:^(NSURLSessionDataTask *task, id responseObject) {
+            
+            AFVDBaseNetworkModel *networkModel = [self networkModelFromResponse:responseObject];
+            success(networkModel);
+            
+        } failure:^(NSURLSessionDataTask *task, NSError *error) {
+            
+            failure(error);
+        }];
+        
     } else {
         paramDictionary = parameters;
+        
+        [sessionManager GET:urlString parameters:paramDictionary success:^(NSURLSessionDataTask *task, id responseObject) {
+            
+            AFVDBaseNetworkModel *networkModel = [self networkModelFromResponse:responseObject];
+            success(networkModel);
+            
+        } failure:^(NSURLSessionDataTask *task, NSError *error) {
+            
+            failure(error);
+        }];
     }
-    
-    
-    NSString *requestString = [NSString stringWithFormat:@"%@%@", kAFVDBaseNetworkURL, urlString];
-    
-    AFFNRequest *request = [AFFNRequest requestWithConnectionType:type andURL:requestString andParams:paramDictionary withCompletion:^(AFFNCallbackObject *result) {
-        
-        AFVDBaseNetworkModel *networkModel = [self networkModelFromResponse:result];
-        dispatch_async(dispatch_get_main_queue(), ^(){
-            completion(networkModel);
-        });
-        
-    } andFailure:^(NSError *error) {
-        dispatch_async(dispatch_get_main_queue(), ^(){
-            completion(nil);
-        });
-        
-    }];
-    
-    [[AFFNManager sharedManager] addNetworkOperation:request];
 }
 
 #pragma mark - Status handling
-- (AFVDBaseNetworkModel *)networkModelFromResponse:(AFFNCallbackObject *)callbackObject {
+- (AFVDBaseNetworkModel *)networkModelFromResponse:(id)callbackObject {
     
-    NSMutableDictionary *networkCallbackDictionary = [NSMutableDictionary dictionaryWithDictionary:[NSMutableDictionary dictionaryWithData:callbackObject.data]];
+    NSMutableDictionary *networkCallbackDictionary = [NSMutableDictionary dictionaryWithDictionary:[NSMutableDictionary dictionaryWithData:callbackObject]];
     
     AFVDBaseNetworkModel *networkModel = [[AFVDBaseNetworkModel alloc] init];
     

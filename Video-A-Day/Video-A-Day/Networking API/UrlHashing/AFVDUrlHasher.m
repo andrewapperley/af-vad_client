@@ -26,14 +26,14 @@ const NSString * kAFVDUserContentBaseURL = @"http://99.232.33.159/user_content/"
     
     NSString *hexTime =  [NSString stringWithFormat:@"%x",(int)[[NSDate date]timeIntervalSince1970]];
         
-    NSString *token = [AFVDUrlHasher createMD5Hash:[NSString stringWithFormat:@"%@%@%@",kAFVDSecretKey, resource,hexTime]];
+    NSString *token = createMD5Hash([NSString stringWithFormat:@"%@%@%@",kAFVDSecretKey, resource,hexTime]);
     
     NSString *url = [NSString stringWithFormat:@"%@%@/%@%@",kAFVDUserContentBaseURL,token,hexTime, resource];
     
     return url;
 }
 
-+ (NSString *)createMD5Hash:(NSString *)lurl {
+NSString *createMD5Hash(NSString *lurl) {
     
     unsigned char digest[16];
     
@@ -48,7 +48,7 @@ const NSString * kAFVDUserContentBaseURL = @"http://99.232.33.159/user_content/"
     return output;
 }
 
-+ (NSString *)stringToHex:(NSString *)str {
+NSString *stringToHex(NSString *str) {
     
     NSUInteger len = [str length];
     unichar *chars = malloc(len * sizeof(unichar));
