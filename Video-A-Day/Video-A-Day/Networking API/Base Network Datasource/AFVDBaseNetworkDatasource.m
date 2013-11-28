@@ -30,6 +30,8 @@ const NSString *kAFVDBaseNetworkKeyPostParam    = @"params";
     //Create session manager
     AFHTTPSessionManager *sessionManager = [[AFHTTPSessionManager alloc] initWithBaseURL:baseRequestURL];
     
+    [sessionManager setResponseSerializer:[AFJSONResponseSerializer serializerWithReadingOptions:NSJSONReadingMutableContainers]];
+    
     //If the type is "POST" then we must wrap any parameters in a 'params' dictionary.
     NSDictionary *paramDictionary;
     if(type == kAFVDNetworkCallType_POST) {
@@ -37,6 +39,8 @@ const NSString *kAFVDBaseNetworkKeyPostParam    = @"params";
         NSMutableDictionary *newParamDictionary = [NSMutableDictionary dictionary];
         [newParamDictionary setObject:parameters forKey:kAFVDBaseNetworkKeyPostParam];
         paramDictionary = newParamDictionary;
+        
+        [sessionManager setRequestSerializer:[AFJSONRequestSerializer serializerWithWritingOptions:NSJSONWritingPrettyPrinted]];
         
         [sessionManager POST:urlString parameters:paramDictionary success:^(NSURLSessionDataTask *task, id responseObject) {
             
@@ -66,7 +70,7 @@ const NSString *kAFVDBaseNetworkKeyPostParam    = @"params";
 #pragma mark - Status handling
 - (AFVDBaseNetworkModel *)networkModelFromResponse:(id)callbackObject {
     
-    NSMutableDictionary *networkCallbackDictionary = [NSMutableDictionary dictionaryWithDictionary:[NSMutableDictionary dictionaryWithData:callbackObject]];
+    NSMutableDictionary *networkCallbackDictionary = callbackObject;
     
     AFVDBaseNetworkModel *networkModel = [[AFVDBaseNetworkModel alloc] init];
     

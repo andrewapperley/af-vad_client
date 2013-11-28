@@ -15,7 +15,7 @@
 #import "AFVDVideoModelFactory.h"
 #import "AFVDRelationshipModelFactory.h"
 
-NSString *userName = @"andrewApperley1";
+NSString *userName = @"andrewApperley4";
 NSString *displayName = @"Nice Display Name";
 NSString *otherUserName = @"someOtherUsername";
 NSString *playlistId = @"d65cab706962faf9396aa94e4193ddb9";
@@ -36,8 +36,8 @@ NSString *email = @"email@email.com";
     //User
 //    //Already created both users and will fail saying user already exists so there is no point in calling this
 //    //as it works :)
-//    [self createUser];
-    [self loginUser];
+    [self createUser];
+//    [self loginUser];
 ////    [self checkIfUsernameIsAvailable];
 ////    [self updateUser];
 //    [self fetchUserModel];
