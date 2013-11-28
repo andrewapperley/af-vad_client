@@ -20,13 +20,19 @@ typedef void(^AFVDUsernameAvailabilitySuccess)(AFVDBaseNetworkModel *networkCall
 #pragma mark - Fetch user model
 - (void)fetchUserModelWithUserName:(NSString *)userName accessToken:(NSString *)accessToken success:(AFVDUserModelSuccess)success failure:(AFVDBaseNetworkFailure)failure;
 
-#pragma mark - Fetch user model and access token
+#pragma mark - User login / fetch user model and access token
 - (void)fetchUserModelAndAccessTokenWithUserName:(NSString *)userName andPassword:(NSString *)password success:(AFVDUserLoginSuccess)success failure:(AFVDBaseNetworkFailure)failure;
+
+#pragma mark - User logout
+- (void)fetchLogoutUserWithUsername:(NSString *)userName accessToken:(NSString *)accessToken success:(AFVDBaseNetworkSuccess)success failure:(AFVDBaseNetworkFailure)failure;
+
+#pragma mark - Deactivate user
+- (void)fetchDeactivateUser:(NSString *)userName password:(NSString *)password accessToken:(NSString *)accessToken success:(AFVDBaseNetworkSuccess)success failure:(AFVDBaseNetworkFailure)failure;
 
 #pragma mark - Create user
 - (void)createUserWithUsername:(NSString *)userName password:(NSString *)password displayName:(NSString *)displayName email:(NSString *)email profileImage:(NSData *)profileImage success:(AFVDUserCreationSuccess)success failure:(AFVDBaseNetworkFailure)failure;
 
-#pragma mark - Updated user
+#pragma mark - Update user
 - (void)updateUserWithUsername:(NSString *)userName accessToken:(NSString *)accessToken displayName:(NSString *)displayName email:(NSString *)email profileImage:(NSData *)profileImage relationships:(NSSet *)relationships success:(AFVDUserCreationSuccess)success failure:(AFVDBaseNetworkFailure)failure;
 
 #pragma mark - Check if username is available

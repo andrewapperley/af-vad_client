@@ -15,7 +15,7 @@
 #import "AFVDVideoModelFactory.h"
 #import "AFVDRelationshipModelFactory.h"
 
-NSString *userName = @"andrewApperley4";
+NSString *userName = @"andrewApperleykjl4";
 NSString *displayName = @"Nice Display Name";
 NSString *otherUserName = @"someOtherUsername";
 NSString *playlistId = @"d65cab706962faf9396aa94e4193ddb9";
@@ -36,11 +36,13 @@ NSString *email = @"email@email.com";
     //User
 //    //Already created both users and will fail saying user already exists so there is no point in calling this
 //    //as it works :)
-    [self createUser];
+//    [self createUser];
 //    [self loginUser];
-////    [self checkIfUsernameIsAvailable];
-////    [self updateUser];
+//    [self checkIfUsernameIsAvailable];
+//    [self updateUser];
 //    [self fetchUserModel];
+    [self logoutUser];
+    [self  deactivateUser];
 //
 //    //Videos
 //    [self fetchRelationshipModel];
@@ -190,6 +192,45 @@ NSString *email = @"email@email.com";
     }];
 }
 
+- (void)logoutUser {
+    
+    AFVDUserModelFactory *modelFactory = [[AFVDUserModelFactory alloc] init];
+    
+    NSLog(@"Start Logout user");
+    
+    [modelFactory fetchLogoutUserWithUsername:userName accessToken:getAccessToken success:^(AFVDBaseNetworkModel *networkCallback) {
+        
+        if(networkCallback.success) {
+            
+            NSLog(@"Finish Logout user - Success");
+        } else {
+            NSLog(@"Finish Logout user - Failure %d - %@", networkCallback.responseCode, networkCallback.responseMessage);
+        }
+    } failure:^(NSError *error) {
+        
+        NSLog(@"Finish Logout user - Failure %d - %@", error.code, error.localizedDescription);
+    }];
+}
+
+- (void)deactivateUser {
+    
+    AFVDUserModelFactory *modelFactory = [[AFVDUserModelFactory alloc] init];
+    
+    NSLog(@"Start Deactivate user");
+    
+    [modelFactory fetchDeactivateUser:userName password:password accessToken:getAccessToken success:^(AFVDBaseNetworkModel *networkCallback) {
+        
+        if(networkCallback.success) {
+            
+            NSLog(@"Finish Deactivate user - Success");
+        } else {
+            NSLog(@"Finish Deactivate user - Failure %d - %@", networkCallback.responseCode, networkCallback.responseMessage);
+        }
+    } failure:^(NSError *error) {
+        
+        NSLog(@"Finish Deactivate user - Failure %d - %@", error.code, error.localizedDescription);
+    }];
+}
 
 - (void)fetchRelationshipModel {
     
