@@ -15,7 +15,7 @@
 #import "AFVDVideoModelFactory.h"
 #import "AFVDRelationshipModelFactory.h"
 
-NSString *userName = @"andrewApperley4";
+NSString *userName = @"andrewApperley9";
 NSString *displayName = @"Nice Display Name";
 NSString *otherUserName = @"someOtherUsername";
 NSString *playlistId = @"d65cab706962faf9396aa94e4193ddb9";
@@ -36,11 +36,11 @@ NSString *email = @"email@email.com";
     //User
 //    //Already created both users and will fail saying user already exists so there is no point in calling this
 //    //as it works :)
-    [self createUser];
+//    [self createUser];
 //    [self loginUser];
 ////    [self checkIfUsernameIsAvailable];
 ////    [self updateUser];
-//    [self fetchUserModel];
+    [self fetchUserModel];
 //
 //    //Videos
 //    [self fetchRelationshipModel];
@@ -166,20 +166,21 @@ NSString *email = @"email@email.com";
             UIImageView *profileImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 150, 200)];
             [self.view addSubview:profileImage];
             profileImage.center = self.view.center;
-            profileImage.alpha = 0;
+            profileImage.alpha = 1;
 
-            __block UIImageView *weakProfileImage = profileImage;
-            NSURLRequest *urlRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:profileImageURL]];
-            [profileImage setImageWithURLRequest:urlRequest placeholderImage:nil success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
-                
-                [UIView animateWithDuration:0.5f animations:^{
-                   
-                    weakProfileImage.alpha = 1;
-                }];
-                
-            } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
-                NSLog(@"Failed to load image from URL : %@", request.URL.absoluteString);
-            }];
+//            __block UIImageView *weakProfileImage = profileImage;
+//            NSURLRequest *urlRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:profileImageURL]];
+            [profileImage setImageWithURL:[NSURL URLWithString:profileImageURL]];
+//            [profileImage setImageWithURLRequest:urlRequest placeholderImage:nil success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+//                
+//                [UIView animateWithDuration:0.5f animations:^{
+//                   
+//                    weakProfileImage.alpha = 1;
+//                }];
+//                
+//            } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
+//                NSLog(@"Failed to load image from URL : %@", request.URL.absoluteString);
+//            }];
             
         } else {
             NSLog(@"Finish AFVDUserModel - Failure %d - %@", networkCallback.responseCode, networkCallback.responseMessage);
