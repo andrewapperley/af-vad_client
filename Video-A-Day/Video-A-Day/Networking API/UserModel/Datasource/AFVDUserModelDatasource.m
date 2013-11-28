@@ -28,8 +28,14 @@ NSString *kAFVDUpdateUserModelParameterKeyRelationships = @"relationships";
 NSString *kAFVDUserLoginEndpointURL                     = @"/user/login/";
 NSString *kAFVDUserModelParameterKeyPassword            = @"password";
 
+//User logout endpoint
+NSString *kAFVDUserLogoutEndpointURL                    = @"/user/logout/";
+
 //Username check endpoint
 NSString *kAFVDUserNameCheckEndpointURL                 = @"/user/check_username";
+
+//Deactivate user endpoint
+NSString *kAFVDDeactivateUserEndpointURL                = @"/user/removeUser/";
 
 @implementation AFVDUserModelDatasource
 
@@ -40,6 +46,37 @@ NSString *kAFVDUserNameCheckEndpointURL                 = @"/user/check_username
                                  kAFVDUserModelParameterKeyAcessToken : accessToken};
     
     [self makeURLRequestWithType:kAFVDNetworkCallType_GET endpointURLString:kAFVDUserModelEndpointURL parameters:parameters success:^(AFVDBaseNetworkModel *networkCallback) {
+        
+        success(networkCallback);
+    } failure:^(NSError *error) {
+        
+        failure(error);
+    }];
+}
+
+#pragma mark - User login
+- (void)postLoginUserWithUsername:(NSString *)userName password:(NSString *)password success:(AFVDBaseNetworkSuccess)success failure:(AFVDBaseNetworkFailure)failure {
+    
+    NSDictionary *parameters = @{kAFVDUserModelParameterKeyUserName : userName,
+                                 kAFVDUserModelParameterKeyPassword : password,
+                                 kAFVDUserModelParameterKeyAcessToken : (!getAccessToken || [getAccessToken isEqualToString: @""]) ? @"" : getAccessToken};
+    
+    [self makeURLRequestWithType:kAFVDNetworkCallType_POST endpointURLString:kAFVDUserLoginEndpointURL parameters:parameters success:^(AFVDBaseNetworkModel *networkCallback) {
+        
+        success(networkCallback);
+    } failure:^(NSError *error) {
+        
+        failure(error);
+    }];
+}
+
+#pragma mark - User logout
+- (void)postLogoutUserWithUsername:(NSString *)userName accessToken:(NSString *)accessToken success:(AFVDBaseNetworkSuccess)success failure:(AFVDBaseNetworkFailure)failure {
+    
+    NSDictionary *parameters = @{kAFVDUserModelParameterKeyUserName : userName,
+                                 kAFVDUserModelParameterKeyAcessToken : accessToken};
+    
+    [self makeURLRequestWithType:kAFVDNetworkCallType_POST endpointURLString:kAFVDUserModelEndpointURL parameters:parameters success:^(AFVDBaseNetworkModel *networkCallback) {
         
         success(networkCallback);
     } failure:^(NSError *error) {
@@ -105,14 +142,12 @@ NSString *kAFVDUserNameCheckEndpointURL                 = @"/user/check_username
     }];
 }
 
-#pragma mark - User login
-- (void)postLoginUserWithUsername:(NSString *)userName password:(NSString *)password success:(AFVDBaseNetworkSuccess)success failure:(AFVDBaseNetworkFailure)failure {
+#pragma mark - Check if username is available
+- (void)checkIfUsernameIsAvailable:(NSString *)userName success:(AFVDBaseNetworkSuccess)success failure:(AFVDBaseNetworkFailure)failure {
     
-    NSDictionary *parameters = @{kAFVDUserModelParameterKeyUserName : userName,
-                                 kAFVDUserModelParameterKeyPassword : password,
-                                 kAFVDUserModelParameterKeyAcessToken : (!getAccessToken || [getAccessToken isEqualToString: @""]) ? @"" : getAccessToken};
+    NSDictionary *parameters = @{kAFVDUserModelParameterKeyUserName : userName};
     
-    [self makeURLRequestWithType:kAFVDNetworkCallType_POST endpointURLString:kAFVDUserLoginEndpointURL parameters:parameters success:^(AFVDBaseNetworkModel *networkCallback) {
+    [self makeURLRequestWithType:kAFVDNetworkCallType_GET endpointURLString:kAFVDUserNameCheckEndpointURL parameters:parameters success:^(AFVDBaseNetworkModel *networkCallback) {
         
         success(networkCallback);
     } failure:^(NSError *error) {
@@ -121,11 +156,14 @@ NSString *kAFVDUserNameCheckEndpointURL                 = @"/user/check_username
     }];
 }
 
-- (void)checkIfUsernameIsAvailable:(NSString *)userName success:(AFVDBaseNetworkSuccess)success failure:(AFVDBaseNetworkFailure)failure {
+#pragma mark - Deactivate user
+- (void)postDeactivateUser:(NSString *)userName password:(NSString *)password accessToken:(NSString *)accessToken success:(AFVDBaseNetworkSuccess)success failure:(AFVDBaseNetworkFailure)failure {
     
-    NSDictionary *parameters = @{kAFVDUserModelParameterKeyUserName : userName};
+    NSDictionary *parameters = @{kAFVDUserModelParameterKeyUserName : userName,
+                                 kAFVDUserModelParameterKeyPassword : password,
+                                 kAFVDUserModelParameterKeyAcessToken : (!getAccessToken || [getAccessToken isEqualToString: @""]) ? @"" : getAccessToken};
     
-    [self makeURLRequestWithType:kAFVDNetworkCallType_GET endpointURLString:kAFVDUserNameCheckEndpointURL parameters:parameters success:^(AFVDBaseNetworkModel *networkCallback) {
+    [self makeURLRequestWithType:kAFVDNetworkCallType_POST endpointURLString:kAFVDDeactivateUserEndpointURL parameters:parameters success:^(AFVDBaseNetworkModel *networkCallback) {
         
         success(networkCallback);
     } failure:^(NSError *error) {

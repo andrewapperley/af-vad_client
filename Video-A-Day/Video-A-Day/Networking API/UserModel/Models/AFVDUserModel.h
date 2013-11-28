@@ -14,5 +14,6 @@
 @property (nonatomic, strong, readonly) NSString *email;
 @property (nonatomic, strong, readonly) NSString *userImageUrl;
 @property (nonatomic, strong, readonly) NSSet *relationships;
+@property (nonatomic) BOOL isDeactivated;
 
 @end

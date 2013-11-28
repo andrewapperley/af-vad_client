@@ -41,6 +41,10 @@ NSString *email = @"email@email.com";
 ////    [self checkIfUsernameIsAvailable];
 ////    [self updateUser];
     [self fetchUserModel];
+
+//    [self checkIfUsernameIsAvailable];
+//    [self updateUser];
+//    [self fetchUserModel];
 //
 //    //Videos
 //    [self fetchRelationshipModel];
@@ -191,6 +195,45 @@ NSString *email = @"email@email.com";
     }];
 }
 
+- (void)logoutUser {
+    
+    AFVDUserModelFactory *modelFactory = [[AFVDUserModelFactory alloc] init];
+    
+    NSLog(@"Start Logout user");
+    
+    [modelFactory fetchLogoutUserWithUsername:userName accessToken:getAccessToken success:^(AFVDBaseNetworkModel *networkCallback) {
+        
+        if(networkCallback.success) {
+            
+            NSLog(@"Finish Logout user - Success");
+        } else {
+            NSLog(@"Finish Logout user - Failure %d - %@", networkCallback.responseCode, networkCallback.responseMessage);
+        }
+    } failure:^(NSError *error) {
+        
+        NSLog(@"Finish Logout user - Failure %d - %@", error.code, error.localizedDescription);
+    }];
+}
+
+- (void)deactivateUser {
+    
+    AFVDUserModelFactory *modelFactory = [[AFVDUserModelFactory alloc] init];
+    
+    NSLog(@"Start Deactivate user");
+    
+    [modelFactory fetchDeactivateUser:userName password:password accessToken:getAccessToken success:^(AFVDBaseNetworkModel *networkCallback) {
+        
+        if(networkCallback.success) {
+            
+            NSLog(@"Finish Deactivate user - Success");
+        } else {
+            NSLog(@"Finish Deactivate user - Failure %d - %@", networkCallback.responseCode, networkCallback.responseMessage);
+        }
+    } failure:^(NSError *error) {
+        
+        NSLog(@"Finish Deactivate user - Failure %d - %@", error.code, error.localizedDescription);
+    }];
+}
 
 - (void)fetchRelationshipModel {
     

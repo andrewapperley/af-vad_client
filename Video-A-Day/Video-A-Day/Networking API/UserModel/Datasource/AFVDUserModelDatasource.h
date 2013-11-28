@@ -16,6 +16,9 @@
 #pragma mark - User login
 - (void)postLoginUserWithUsername:(NSString *)userName password:(NSString *)password success:(AFVDBaseNetworkSuccess)success failure:(AFVDBaseNetworkFailure)failure;
 
+#pragma mark - User logout
+- (void)postLogoutUserWithUsername:(NSString *)userName accessToken:(NSString *)accessToken success:(AFVDBaseNetworkSuccess)success failure:(AFVDBaseNetworkFailure)failure;
+
 #pragma mark - Create user
 - (void)postCreateUsername:(NSString *)userName password:(NSString *)password displayName:(NSString *)displayName email:(NSString *)email profileImage:(NSData *)profileImage success:(AFVDBaseNetworkSuccess)success failure:(AFVDBaseNetworkFailure)failure;
 
@@ -24,5 +27,8 @@
 
 #pragma mark - Check if username is available
 - (void)checkIfUsernameIsAvailable:(NSString *)userName success:(AFVDBaseNetworkSuccess)success failure:(AFVDBaseNetworkFailure)failure;
+
+#pragma mark - Deactivate user
+- (void)postDeactivateUser:(NSString *)userName password:(NSString *)password accessToken:(NSString *)accessToken success:(AFVDBaseNetworkSuccess)success failure:(AFVDBaseNetworkFailure)failure;
 
 @end

@@ -29,7 +29,7 @@
     }];
 }
 
-#pragma mark - Fetch user model and access token
+#pragma mark - User login / fetch user model and access token
 - (void)fetchUserModelAndAccessTokenWithUserName:(NSString *)userName andPassword:(NSString *)password success:(AFVDUserLoginSuccess)success failure:(AFVDBaseNetworkFailure)failure {
     
     [[AFVDUserModelDatasource sharedDataSource] postLoginUserWithUsername:userName password:password success:^(AFVDBaseNetworkModel *networkCallback) {
@@ -48,7 +48,31 @@
     }];
 }
 
-#pragma mark - Create user 
+#pragma mark - User logout
+- (void)fetchLogoutUserWithUsername:(NSString *)userName accessToken:(NSString *)accessToken success:(AFVDBaseNetworkSuccess)success failure:(AFVDBaseNetworkFailure)failure {
+    
+    [[AFVDUserModelDatasource sharedDataSource] postLogoutUserWithUsername:userName accessToken:accessToken success:^(AFVDBaseNetworkModel *networkCallback) {
+        
+        success(networkCallback);
+    } failure:^(NSError *error) {
+ 
+        failure(error);
+    }];
+}
+
+#pragma mark - Deactivate user
+- (void)fetchDeactivateUser:(NSString *)userName password:(NSString *)password accessToken:(NSString *)accessToken success:(AFVDBaseNetworkSuccess)success failure:(AFVDBaseNetworkFailure)failure {
+    
+    [[AFVDUserModelDatasource sharedDataSource] postDeactivateUser:userName password:password accessToken:accessToken success:^(AFVDBaseNetworkModel *networkCallback) {
+        
+        success(networkCallback);
+    } failure:^(NSError *error) {
+        
+        failure(error);
+    }];
+}
+
+#pragma mark - Create user
 - (void)createUserWithUsername:(NSString *)userName password:(NSString *)password displayName:(NSString *)displayName email:(NSString *)email profileImage:(NSData *)profileImage success:(AFVDUserCreationSuccess)success failure:(AFVDBaseNetworkFailure)failure {
     
     [[AFVDUserModelDatasource sharedDataSource] postCreateUsername:userName password:password displayName:displayName email:email profileImage:profileImage success:^(AFVDBaseNetworkModel *networkCallback) {
@@ -60,7 +84,7 @@
     }];
 }
 
-#pragma mark - Updated user
+#pragma mark - Update user
 - (void)updateUserWithUsername:(NSString *)userName accessToken:(NSString *)accessToken displayName:(NSString *)displayName email:(NSString *)email profileImage:(NSData *)profileImage relationships:(NSSet *)relationships success:(AFVDUserCreationSuccess)success failure:(AFVDBaseNetworkFailure)failure {
     
     [[AFVDUserModelDatasource sharedDataSource] postUpdateUserWithUsername:userName accessToken:accessToken displayName:displayName email:email profileImage:profileImage relationships:relationships success:^(AFVDBaseNetworkModel *networkCallback) {
@@ -101,6 +125,9 @@
     NSArray *relationshipsArray = userDictionary[@"relationships"];
     NSSet *relationshipsSet = [NSSet setWithArray:relationshipsArray];
     [model setValue:relationshipsSet forKey:@"relationships"];
+
+    BOOL isDeactivated = [userDictionary[@"deactivated"] boolValue];
+    model.isDeactivated = isDeactivated;
     
     return model;
 }
