@@ -8,14 +8,15 @@
 
 #import "AFVDBaseNetworkModel.h"
 #import "AFVDViewController.h"
-#import "AFVDUrlHasher.h"
 
 #warning TEMP VC
+#import "AFVDUrlHasher.h"
+#import "AFVDKeychain.h"
 #import "AFVDUserModelFactory.h"
 #import "AFVDVideoModelFactory.h"
 #import "AFVDRelationshipModelFactory.h"
 
-NSString *userName = @"andrewApperley9";
+NSString *userName = @"jfuellert001";
 NSString *displayName = @"Nice Display Name";
 NSString *otherUserName = @"someOtherUsername";
 NSString *playlistId = @"d65cab706962faf9396aa94e4193ddb9";
@@ -32,24 +33,25 @@ NSString *email = @"email@email.com";
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+
     //User
 //    //Already created both users and will fail saying user already exists so there is no point in calling this
 //    //as it works :)
 //    [self createUser];
-//    [self loginUser];
-////    [self checkIfUsernameIsAvailable];
-////    [self updateUser];
-    [self fetchUserModel];
-
+    [self loginUser];
 //    [self checkIfUsernameIsAvailable];
-//    [self updateUser];
 //    [self fetchUserModel];
+#warning TODO : Check when server is updated
+//    [self updateUser];
+#warning ENDTODO : Check when server is updated
+//    [self logoutUser];
 //
 //    //Videos
+#warning TODO : Check when server is updated
 //    [self fetchRelationshipModel];
 //    [self fetchVideoModel];
 //    [self createVideo];
+#warning ENDTODO : Check when server is updated
 
     //Relationship
 //    [self createRelationship];
@@ -113,7 +115,7 @@ NSString *email = @"email@email.com";
     NSData *testProfileImageData = UIImageJPEGRepresentation([UIImage imageNamed:@"face.jpg"], 1) ;
     NSSet *relationshipSet = [NSSet setWithObjects:@"9823y4923r28793y987", @"wiuwe9r83r2oiu3r2362", nil];
     
-    [modelFactory updateUserWithUsername:userName accessToken:@"f1c94fd3d933aaf6f78fd1ab6058e10ae973831b9f911d04fcd40a33" displayName:@"New Display Name" email:email profileImage:testProfileImageData relationships:relationshipSet success:^(AFVDBaseNetworkModel *networkCallback) {
+    [modelFactory updateUserWithUsername:userName accessToken:[self accessToken] displayName:@"New Display Name" email:email profileImage:testProfileImageData relationships:relationshipSet success:^(AFVDBaseNetworkModel *networkCallback) {
         
         if(networkCallback.success) {
             
@@ -136,9 +138,9 @@ NSString *email = @"email@email.com";
     
     NSLog(@"Start AFVDLogin");
     
-    [modelFactory fetchUserModelAndAccessTokenWithUserName:userName andPassword:password success:^(AFVDUserModel *userModel, NSString *accessToken, AFVDBaseNetworkModel *networkCallback) {
-        
-        if (networkCallback.success) {
+    [modelFactory fetchUserModelAndAccessTokenWithUserName:userName andPassword:password accessToken:[self accessToken] success:^(AFVDUserModel *userModel, NSString *accessToken, AFVDBaseNetworkModel *networkCallback) {
+
+        if(networkCallback.success) {
             
             NSLog(@"Finish AFVDLogin - Success");
             NSLog(@"Access Token - %@", accessToken);
@@ -159,7 +161,7 @@ NSString *email = @"email@email.com";
     
     NSLog(@"Start AFVDUserModel");
     
-    [modelFactory fetchUserModelWithUserName:userName accessToken:getAccessToken success:^(AFVDUserModel *userModel, AFVDBaseNetworkModel *networkCallback) {
+    [modelFactory fetchUserModelWithUserName:userName accessToken:[self accessToken] success:^(AFVDUserModel *userModel, AFVDBaseNetworkModel *networkCallback) {
         
         if(networkCallback.success) {
             
@@ -201,7 +203,7 @@ NSString *email = @"email@email.com";
     
     NSLog(@"Start Logout user");
     
-    [modelFactory fetchLogoutUserWithUsername:userName accessToken:getAccessToken success:^(AFVDBaseNetworkModel *networkCallback) {
+    [modelFactory fetchLogoutUserWithUsername:userName accessToken:[self accessToken] success:^(AFVDBaseNetworkModel *networkCallback) {
         
         if(networkCallback.success) {
             
@@ -221,7 +223,7 @@ NSString *email = @"email@email.com";
     
     NSLog(@"Start Deactivate user");
     
-    [modelFactory fetchDeactivateUser:userName password:password accessToken:getAccessToken success:^(AFVDBaseNetworkModel *networkCallback) {
+    [modelFactory fetchDeactivateUser:userName password:password accessToken:[self accessToken] success:^(AFVDBaseNetworkModel *networkCallback) {
         
         if(networkCallback.success) {
             
@@ -241,7 +243,7 @@ NSString *email = @"email@email.com";
     
     NSLog(@"Start AFVDVideoRelationshipModel");
     
-    [modelFactory fetchVideoRelationshipModelWithUserName:userName relationshipId:relationshipId accessToken:getAccessToken success:^(AFVDVideoRelationshipModel *videoRelationshipModel, AFVDBaseNetworkModel *networkCallback) {
+    [modelFactory fetchVideoRelationshipModelWithUserName:userName relationshipId:relationshipId accessToken:[self accessToken] success:^(AFVDVideoRelationshipModel *videoRelationshipModel, AFVDBaseNetworkModel *networkCallback) {
         
         if(networkCallback.success) {
             
@@ -264,7 +266,7 @@ NSString *email = @"email@email.com";
     
     NSLog(@"Start AFVDVideoPlaylistModel");
     
-    [modelFactory fetchVideoPlaylistModelWithUserName:userName playlistId:playlistId accessToken:getAccessToken pageIndex:pageIndex success:^(AFVDVideoPlaylistModel *videoPlaylistModel, AFVDBaseNetworkModel *networkCallback) {
+    [modelFactory fetchVideoPlaylistModelWithUserName:userName playlistId:playlistId accessToken:[self accessToken] pageIndex:pageIndex success:^(AFVDVideoPlaylistModel *videoPlaylistModel, AFVDBaseNetworkModel *networkCallback) {
         
         if(networkCallback.success) {
             
@@ -300,7 +302,7 @@ NSString *email = @"email@email.com";
 
     NSString *date = @"2013-11-17";
     
-    [modelFactory postVideoModelWithUserName:userName relationshipId:relationshipId videoContent:videoContent date:date accessToken:getAccessToken videoThumbnail:thumbnailContent success:^(AFVDBaseNetworkModel *networkCallback) {
+    [modelFactory postVideoModelWithUserName:userName relationshipId:relationshipId videoContent:videoContent date:date accessToken:[self accessToken] videoThumbnail:thumbnailContent success:^(AFVDBaseNetworkModel *networkCallback) {
         
         if(networkCallback.success) {
             
@@ -325,7 +327,7 @@ NSString *email = @"email@email.com";
     NSString *endDate = @"2014-11-19";
     NSArray *users = @[userName, otherUserName];
     
-    [modelFactory postRelationshipModelWithUserName:userName accessToken:getAccessToken startDate:startDate endDate:endDate users:users success:^(AFVDBaseNetworkModel *networkCallback) {
+    [modelFactory postRelationshipModelWithUserName:userName accessToken:[self accessToken] startDate:startDate endDate:endDate users:users success:^(AFVDBaseNetworkModel *networkCallback) {
         
         if(networkCallback.success) {
             
@@ -346,7 +348,7 @@ NSString *email = @"email@email.com";
     
     NSLog(@"Start RelationshipModelIds");
     
-    [modelFactory fetchRelationshipModelIdsWithUserName:userName accessToken:getAccessToken success:^(NSArray *relationshipIds, AFVDBaseNetworkModel *networkCallback) {
+    [modelFactory fetchRelationshipModelIdsWithUserName:userName accessToken:[self accessToken] success:^(NSArray *relationshipIds, AFVDBaseNetworkModel *networkCallback) {
 
         if(networkCallback.success) {
             
@@ -368,7 +370,7 @@ NSString *email = @"email@email.com";
     
     NSLog(@"Start RelationshipModelFromId");
     
-    [modelFactory fetchRelationshipModelWithUserName:userName accessToken:getAccessToken relationshipId:relationshipId success:^(AFVDRelationshipModel *relationshipModel, AFVDBaseNetworkModel *networkCallback) {
+    [modelFactory fetchRelationshipModelWithUserName:userName accessToken:[self accessToken] relationshipId:relationshipId success:^(AFVDRelationshipModel *relationshipModel, AFVDBaseNetworkModel *networkCallback) {
         
         if(networkCallback.success) {
             
@@ -384,7 +386,19 @@ NSString *email = @"email@email.com";
     }];
 }
 
+#pragma mark - Token handling
+- (void)setAccessToken:(NSString *)accessToken {
+    
+    [[AFVDKeychain keychain] setAccessToken:accessToken];
+}
+
+- (NSString *)accessToken {
+    
+    return [[AFVDKeychain keychain] accessToken];
+}
+
 #warning END TEMP VC
+
 
 - (void)didReceiveMemoryWarning
 {

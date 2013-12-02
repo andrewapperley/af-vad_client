@@ -6,6 +6,7 @@
 //  Copyright (c) 2013 AFApps. All rights reserved.
 //
 
+#import "AFVDKeychain.h"
 #import "AFVDUserModelDatasource.h"
 
 //User model endpoint
@@ -55,11 +56,15 @@ NSString *kAFVDDeactivateUserEndpointURL                = @"/user/removeUser/";
 }
 
 #pragma mark - User login
-- (void)postLoginUserWithUsername:(NSString *)userName password:(NSString *)password success:(AFVDBaseNetworkSuccess)success failure:(AFVDBaseNetworkFailure)failure {
+- (void)postLoginUserWithUsername:(NSString *)userName password:(NSString *)password accessToken:(NSString *)accessToken success:(AFVDBaseNetworkSuccess)success failure:(AFVDBaseNetworkFailure)failure {
     
-    NSDictionary *parameters = @{kAFVDUserModelParameterKeyUserName : userName,
-                                 kAFVDUserModelParameterKeyPassword : password,
-                                 kAFVDUserModelParameterKeyAcessToken : (!getAccessToken || [getAccessToken isEqualToString: @""]) ? @"" : getAccessToken};
+    NSMutableDictionary *parameters = [[NSMutableDictionary alloc] initWithDictionary:
+                                       @{kAFVDUserModelParameterKeyUserName : userName,
+                                         kAFVDUserModelParameterKeyPassword : password}];
+    
+    if(accessToken) {
+        [parameters setObject:kAFVDUserModelParameterKeyAcessToken forKey:accessToken];
+    }
     
     [self makeURLRequestWithType:kAFVDNetworkCallType_POST endpointURLString:kAFVDUserLoginEndpointURL parameters:parameters success:^(AFVDBaseNetworkModel *networkCallback) {
         
@@ -76,7 +81,7 @@ NSString *kAFVDDeactivateUserEndpointURL                = @"/user/removeUser/";
     NSDictionary *parameters = @{kAFVDUserModelParameterKeyUserName : userName,
                                  kAFVDUserModelParameterKeyAcessToken : accessToken};
     
-    [self makeURLRequestWithType:kAFVDNetworkCallType_POST endpointURLString:kAFVDUserModelEndpointURL parameters:parameters success:^(AFVDBaseNetworkModel *networkCallback) {
+    [self makeURLRequestWithType:kAFVDNetworkCallType_POST endpointURLString:kAFVDUserLogoutEndpointURL parameters:parameters success:^(AFVDBaseNetworkModel *networkCallback) {
         
         success(networkCallback);
     } failure:^(NSError *error) {
@@ -159,9 +164,14 @@ NSString *kAFVDDeactivateUserEndpointURL                = @"/user/removeUser/";
 #pragma mark - Deactivate user
 - (void)postDeactivateUser:(NSString *)userName password:(NSString *)password accessToken:(NSString *)accessToken success:(AFVDBaseNetworkSuccess)success failure:(AFVDBaseNetworkFailure)failure {
     
-    NSDictionary *parameters = @{kAFVDUserModelParameterKeyUserName : userName,
-                                 kAFVDUserModelParameterKeyPassword : password,
-                                 kAFVDUserModelParameterKeyAcessToken : (!getAccessToken || [getAccessToken isEqualToString: @""]) ? @"" : getAccessToken};
+    
+    NSMutableDictionary *parameters = [[NSMutableDictionary alloc] initWithDictionary:
+                                       @{kAFVDUserModelParameterKeyUserName : userName,
+                                         kAFVDUserModelParameterKeyPassword : password}];
+    
+    if(accessToken) {
+        [parameters setObject:kAFVDUserModelParameterKeyAcessToken forKey:accessToken];
+    }
     
     [self makeURLRequestWithType:kAFVDNetworkCallType_POST endpointURLString:kAFVDDeactivateUserEndpointURL parameters:parameters success:^(AFVDBaseNetworkModel *networkCallback) {
         

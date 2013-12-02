@@ -7,12 +7,25 @@
 //
 
 #import "AFVDAppDelegate.h"
+#import "AFVDKeychain.h"
 #import "AFVDViewController.h"
+
+@interface AFVDAppDelegate () {
+    
+    AFVDKeychain    *_keychain;
+}
+
+@end
 
 @implementation AFVDAppDelegate
 
+#pragma mark - UIApplicationDelegate
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    //Keychain
+    [self createKeychain];
+    
+    //Window and view controller
     _window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     _window.rootViewController = [[AFVDViewController alloc] initWithNibName:nil bundle:nil];;
     [_window makeKeyAndVisible];
@@ -45,6 +58,17 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+#pragma mark - Keychain
+- (void)createKeychain {
+    
+    _keychain = [AFVDKeychain keychain];
+}
+
+- (void)saveKeychain {
+    
+    [_keychain save];
 }
 
 @end

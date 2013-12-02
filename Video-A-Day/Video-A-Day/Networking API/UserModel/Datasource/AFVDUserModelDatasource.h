@@ -14,7 +14,7 @@
 - (void)fetchUserModelWithUserName:(NSString *)userName accessToken:(NSString *)accessToken success:(AFVDBaseNetworkSuccess)success failure:(AFVDBaseNetworkFailure)failure;
 
 #pragma mark - User login
-- (void)postLoginUserWithUsername:(NSString *)userName password:(NSString *)password success:(AFVDBaseNetworkSuccess)success failure:(AFVDBaseNetworkFailure)failure;
+- (void)postLoginUserWithUsername:(NSString *)userName password:(NSString *)password accessToken:(NSString *)accessToken success:(AFVDBaseNetworkSuccess)success failure:(AFVDBaseNetworkFailure)failure;
 
 #pragma mark - User logout
 - (void)postLogoutUserWithUsername:(NSString *)userName accessToken:(NSString *)accessToken success:(AFVDBaseNetworkSuccess)success failure:(AFVDBaseNetworkFailure)failure;

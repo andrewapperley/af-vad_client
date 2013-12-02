@@ -6,6 +6,7 @@
 //  Copyright (c) 2013 AFApps. All rights reserved.
 //
 
+#import "AFVDKeychain.h"
 #import "AFVDUserModelDatasource.h"
 #import "AFVDUserModelFactory.h"
 
@@ -30,18 +31,21 @@
 }
 
 #pragma mark - User login / fetch user model and access token
-- (void)fetchUserModelAndAccessTokenWithUserName:(NSString *)userName andPassword:(NSString *)password success:(AFVDUserLoginSuccess)success failure:(AFVDBaseNetworkFailure)failure {
+- (void)fetchUserModelAndAccessTokenWithUserName:(NSString *)userName andPassword:(NSString *)password accessToken:(NSString *)accessToken success:(AFVDUserLoginSuccess)success failure:(AFVDBaseNetworkFailure)failure {
     
-    [[AFVDUserModelDatasource sharedDataSource] postLoginUserWithUsername:userName password:password success:^(AFVDBaseNetworkModel *networkCallback) {
+    [[AFVDUserModelDatasource sharedDataSource] postLoginUserWithUsername:userName password:password accessToken:accessToken success:^(AFVDBaseNetworkModel *networkCallback) {
         
         AFVDUserModel *model = nil;
         
+        NSString *accessToken;
+        
         if(networkCallback.success) {
             model = [self userModelForData:networkCallback.responseData];
-            setAccessToken(networkCallback.responseData[@"access_token"]);
+            accessToken = networkCallback.responseData[@"access_token"];
+            [AFVDKeychain keychain].accessToken = accessToken;
         }
         
-        success(model, getAccessToken, networkCallback);
+        success(model, accessToken, networkCallback);
     } failure:^(NSError *error) {
        
         failure(error);

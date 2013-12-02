@@ -21,7 +21,7 @@ typedef void(^AFVDUsernameAvailabilitySuccess)(AFVDBaseNetworkModel *networkCall
 - (void)fetchUserModelWithUserName:(NSString *)userName accessToken:(NSString *)accessToken success:(AFVDUserModelSuccess)success failure:(AFVDBaseNetworkFailure)failure;
 
 #pragma mark - User login / fetch user model and access token
-- (void)fetchUserModelAndAccessTokenWithUserName:(NSString *)userName andPassword:(NSString *)password success:(AFVDUserLoginSuccess)success failure:(AFVDBaseNetworkFailure)failure;
+- (void)fetchUserModelAndAccessTokenWithUserName:(NSString *)userName andPassword:(NSString *)password accessToken:(NSString *)accessToken success:(AFVDUserLoginSuccess)success failure:(AFVDBaseNetworkFailure)failure;
 
 #pragma mark - User logout
 - (void)fetchLogoutUserWithUsername:(NSString *)userName accessToken:(NSString *)accessToken success:(AFVDBaseNetworkSuccess)success failure:(AFVDBaseNetworkFailure)failure;
