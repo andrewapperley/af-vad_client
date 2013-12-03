@@ -41,7 +41,12 @@ NSString *const kAFVDAccessToken            = @"userAccessToken";
     _accessToken = accessToken;
     
 #warning TODO : Save to user defaults and / or iCloud
-    [[NSUserDefaults standardUserDefaults] setObject:_accessToken forKey:kAFVDAccessToken];
+    
+    if(_accessToken) {
+        [[NSUserDefaults standardUserDefaults] setObject:_accessToken forKey:kAFVDAccessToken];
+    } else {
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:kAFVDAccessToken];
+    }
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 

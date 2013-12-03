@@ -23,7 +23,6 @@ NSString *kAFVDCreateUserModelEndpointURL               = @"/user/";
 //Update user endpoint
 NSString *kAFVDUpdateUserModelEndpointURL               = @"/user/updateUser/";
 NSString *kAFVDUpdateUserModelParameterKeyChanges       = @"changes";
-NSString *kAFVDUpdateUserModelParameterKeyRelationships = @"relationships";
 
 //User login endpoint
 NSString *kAFVDUserLoginEndpointURL                     = @"/user/login/";
@@ -111,7 +110,7 @@ NSString *kAFVDDeactivateUserEndpointURL                = @"/user/removeUser/";
 }
 
 #pragma mark - Update user
-- (void)postUpdateUserWithUsername:(NSString *)userName accessToken:(NSString *)accessToken displayName:(NSString *)displayName email:(NSString *)email profileImage:(NSData *)profileImage relationships:(NSSet *)relationships success:(AFVDBaseNetworkSuccess)success failure:(AFVDBaseNetworkFailure)failure {
+- (void)postUpdateUserWithUsername:(NSString *)userName accessToken:(NSString *)accessToken displayName:(NSString *)displayName email:(NSString *)email profileImage:(NSData *)profileImage success:(AFVDBaseNetworkSuccess)success failure:(AFVDBaseNetworkFailure)failure {
     
     NSString *profileImageString = [profileImage base64EncodedStringWithOptions:NSDataBase64EncodingEndLineWithCarriageReturn];
     
@@ -125,10 +124,6 @@ NSString *kAFVDDeactivateUserEndpointURL                = @"/user/removeUser/";
         [changes setObject:profileImageString forKey:kAFVDUserModelParameterKeyProfileImage];
     }
 
-    if(relationships) {
-        [changes setObject:[relationships allObjects] forKey:kAFVDUpdateUserModelParameterKeyRelationships];
-    }
-    
     if(email) {
         [changes setObject:email forKey:kAFVDUserModelParameterKeyEmail];
     }

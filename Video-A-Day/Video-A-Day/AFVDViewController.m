@@ -16,7 +16,7 @@
 #import "AFVDVideoModelFactory.h"
 #import "AFVDRelationshipModelFactory.h"
 
-NSString *userName = @"jfuellert001";
+NSString *userName = @"jfuellert0001";
 NSString *displayName = @"Nice Display Name";
 NSString *otherUserName = @"someOtherUsername";
 NSString *playlistId = @"d65cab706962faf9396aa94e4193ddb9";
@@ -38,12 +38,10 @@ NSString *email = @"email@email.com";
 //    //Already created both users and will fail saying user already exists so there is no point in calling this
 //    //as it works :)
 //    [self createUser];
-    [self loginUser];
+//    [self loginUser];
 //    [self checkIfUsernameIsAvailable];
 //    [self fetchUserModel];
-#warning TODO : Check when server is updated
 //    [self updateUser];
-#warning ENDTODO : Check when server is updated
 //    [self logoutUser];
 //
 //    //Videos
@@ -51,13 +49,12 @@ NSString *email = @"email@email.com";
 //    [self fetchRelationshipModel];
 //    [self fetchVideoModel];
 //    [self createVideo];
-#warning ENDTODO : Check when server is updated
-
-    //Relationship
+//
+//    //Relationship
 //    [self createRelationship];
 //    [self fetchRelationshipModelIds];
 //    [self fetchRelationshipModelFromId];
-
+#warning ENDTODO : Check when server is updated
 }
 
 - (void)createUser {
@@ -113,9 +110,8 @@ NSString *email = @"email@email.com";
     NSLog(@"Start AFVDUpdateUser");
     
     NSData *testProfileImageData = UIImageJPEGRepresentation([UIImage imageNamed:@"face.jpg"], 1) ;
-    NSSet *relationshipSet = [NSSet setWithObjects:@"9823y4923r28793y987", @"wiuwe9r83r2oiu3r2362", nil];
     
-    [modelFactory updateUserWithUsername:userName accessToken:[self accessToken] displayName:@"New Display Name" email:email profileImage:testProfileImageData relationships:relationshipSet success:^(AFVDBaseNetworkModel *networkCallback) {
+    [modelFactory updateUserWithUsername:userName accessToken:[self accessToken] displayName:@"Jeremy" email:email profileImage:testProfileImageData success:^(AFVDBaseNetworkModel *networkCallback) {
         
         if(networkCallback.success) {
             
@@ -208,6 +204,7 @@ NSString *email = @"email@email.com";
         if(networkCallback.success) {
             
             NSLog(@"Finish Logout user - Success");
+            [self setAccessToken:nil];
         } else {
             NSLog(@"Finish Logout user - Failure %d - %@", networkCallback.responseCode, networkCallback.responseMessage);
         }

@@ -23,7 +23,7 @@
 - (void)postCreateUsername:(NSString *)userName password:(NSString *)password displayName:(NSString *)displayName email:(NSString *)email profileImage:(NSData *)profileImage success:(AFVDBaseNetworkSuccess)success failure:(AFVDBaseNetworkFailure)failure;
 
 #pragma mark - Update user
-- (void)postUpdateUserWithUsername:(NSString *)userName accessToken:(NSString *)accessToken displayName:(NSString *)displayName email:(NSString *)email profileImage:(NSData *)profileImage relationships:(NSSet *)relationships success:(AFVDBaseNetworkSuccess)success failure:(AFVDBaseNetworkFailure)failure;
+- (void)postUpdateUserWithUsername:(NSString *)userName accessToken:(NSString *)accessToken displayName:(NSString *)displayName email:(NSString *)email profileImage:(NSData *)profileImage success:(AFVDBaseNetworkSuccess)success failure:(AFVDBaseNetworkFailure)failure;
 
 #pragma mark - Check if username is available
 - (void)checkIfUsernameIsAvailable:(NSString *)userName success:(AFVDBaseNetworkSuccess)success failure:(AFVDBaseNetworkFailure)failure;

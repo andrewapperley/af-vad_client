@@ -33,7 +33,7 @@ typedef void(^AFVDUsernameAvailabilitySuccess)(AFVDBaseNetworkModel *networkCall
 - (void)createUserWithUsername:(NSString *)userName password:(NSString *)password displayName:(NSString *)displayName email:(NSString *)email profileImage:(NSData *)profileImage success:(AFVDUserCreationSuccess)success failure:(AFVDBaseNetworkFailure)failure;
 
 #pragma mark - Update user
-- (void)updateUserWithUsername:(NSString *)userName accessToken:(NSString *)accessToken displayName:(NSString *)displayName email:(NSString *)email profileImage:(NSData *)profileImage relationships:(NSSet *)relationships success:(AFVDUserCreationSuccess)success failure:(AFVDBaseNetworkFailure)failure;
+- (void)updateUserWithUsername:(NSString *)userName accessToken:(NSString *)accessToken displayName:(NSString *)displayName email:(NSString *)email profileImage:(NSData *)profileImage success:(AFVDUserCreationSuccess)success failure:(AFVDBaseNetworkFailure)failure;
 
 #pragma mark - Check if username is available
 - (void)checkIfUsernameIsAvailable:(NSString *)userName success:(AFVDUsernameAvailabilitySuccess)success failure:(AFVDBaseNetworkFailure)failure;

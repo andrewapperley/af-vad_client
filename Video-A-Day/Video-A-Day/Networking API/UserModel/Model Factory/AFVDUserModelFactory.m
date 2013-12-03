@@ -89,9 +89,9 @@
 }
 
 #pragma mark - Update user
-- (void)updateUserWithUsername:(NSString *)userName accessToken:(NSString *)accessToken displayName:(NSString *)displayName email:(NSString *)email profileImage:(NSData *)profileImage relationships:(NSSet *)relationships success:(AFVDUserCreationSuccess)success failure:(AFVDBaseNetworkFailure)failure {
-    
-    [[AFVDUserModelDatasource sharedDataSource] postUpdateUserWithUsername:userName accessToken:accessToken displayName:displayName email:email profileImage:profileImage relationships:relationships success:^(AFVDBaseNetworkModel *networkCallback) {
+- (void)updateUserWithUsername:(NSString *)userName accessToken:(NSString *)accessToken displayName:(NSString *)displayName email:(NSString *)email profileImage:(NSData *)profileImage success:(AFVDUserCreationSuccess)success failure:(AFVDBaseNetworkFailure)failure {
+
+    [[AFVDUserModelDatasource sharedDataSource] postUpdateUserWithUsername:userName accessToken:accessToken displayName:displayName email:email profileImage:profileImage success:^(AFVDBaseNetworkModel *networkCallback) {
         
         success(networkCallback);
     } failure:^(NSError *error) {
