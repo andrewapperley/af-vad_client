@@ -26,6 +26,7 @@ NSString *kAFVDVideoCreationModelParameterKeyRelationshipId = @"relationship_id"
 NSString *kAFVDVideoCreationModelParameterKeyVideoContent   = @"video_content";
 NSString *kAFVDVideoCreationModelParameterKeyDate           = @"date";
 NSString *kAFVDVideoCreationModelParameterKeyThumbnail      = @"video_thumbnail";
+NSString *kAFVDVideoCreationModelParameterKeyDescription      = @"description";
 
 @implementation AFVDVideoModelDatasource
 
@@ -63,14 +64,15 @@ NSString *kAFVDVideoCreationModelParameterKeyThumbnail      = @"video_thumbnail"
 }
 
 #pragma mark - Video creation
-- (void)postVideoModelWithUserName:(NSString *)userName relationshipId:(NSString *)relationshipId videoContent:(NSString *)videoContent date:(NSString *)date accessToken:(NSString *)accessToken videoThumbnail:(NSString *)videoThumbnail success:(AFVDBaseNetworkSuccess)success failure:(AFVDBaseNetworkFailure)failure {
+- (void)postVideoModelWithUserName:(NSString *)userName relationshipId:(NSString *)relationshipId videoContent:(NSString *)videoContent date:(NSString *)date accessToken:(NSString *)accessToken videoThumbnail:(NSString *)videoThumbnail videoDescription:(NSString *)description success:(AFVDBaseNetworkSuccess)success failure:(AFVDBaseNetworkFailure)failure {
     
     NSDictionary *parameters = @{kAFVDVideoModelParameterKeyUserName : userName,
                                  kAFVDVideoCreationModelParameterKeyRelationshipId : relationshipId,
                                  kAFVDVideoCreationModelParameterKeyVideoContent : videoContent,
                                  kAFVDVideoCreationModelParameterKeyDate : date,
                                  kAFVDVideoModelParameterKeyAcessToken : accessToken,
-                                 kAFVDVideoCreationModelParameterKeyThumbnail : videoThumbnail};
+                                 kAFVDVideoCreationModelParameterKeyThumbnail : videoThumbnail,
+                                 kAFVDVideoCreationModelParameterKeyDescription : description};
     
     [self makeURLRequestWithType:kAFVDNetworkCallType_POST endpointURLString:kAFVDVideoCreationModelEndpointURL parameters:parameters success:^(AFVDBaseNetworkModel *networkCallback) {
         

@@ -16,12 +16,12 @@
 #import "AFVDVideoModelFactory.h"
 #import "AFVDRelationshipModelFactory.h"
 
-NSString *userName = @"jfuellert0001";
+NSString *userName = @"jfuellert1111";
 NSString *displayName = @"Nice Display Name";
 NSString *otherUserName = @"someOtherUsername";
 NSString *playlistId = @"d65cab706962faf9396aa94e4193ddb9";
 NSString *password = @"Abcde321";
-NSString *relationshipId = @"a06b085bea0843446b52c525ab1a84ed";
+NSString *relationshipId = @"b176c60beb462d8640690c25f8e533db";
 NSString *email = @"email@email.com";
 
 @interface AFVDViewController ()
@@ -48,7 +48,7 @@ NSString *email = @"email@email.com";
 #warning TODO : Check when server is updated
 //    [self fetchRelationshipModel];
 //    [self fetchVideoModel];
-//    [self createVideo];
+    [self createVideo];
 //
 //    //Relationship
 //    [self createRelationship];
@@ -288,18 +288,21 @@ NSString *email = @"email@email.com";
     NSLog(@"Start VideoCreation");
 
     //Video content
-    NSString *testVideoString = @"5646w5e4r62438we9r849df";
-    NSData *videoData = [testVideoString dataUsingEncoding:NSUTF8StringEncoding];
+//    NSString *testVideoString = @"5646w5e4r62438we9r849df";
+    NSData *videoData = [NSData dataWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"baileys_5sec" ofType:@"mov"]];//[testVideoString dataUsingEncoding:NSUTF8StringEncoding];
     NSString *videoContent = [videoData base64EncodedStringWithOptions:0];
 
     //Video thumbnail
-    NSString *testThumbnailString = @"5646w5e4r62438we9r849df";
-    NSData *thumbnailData = [testThumbnailString dataUsingEncoding:NSUTF8StringEncoding];
+//    NSString *testThumbnailString = @"5646w5e4r62438we9r849df";
+    NSData *thumbnailData = UIImageJPEGRepresentation([UIImage imageNamed:@"face.jpg"], 1) ;
+
     NSString *thumbnailContent = [thumbnailData base64EncodedStringWithOptions:0];
 
     NSString *date = @"2013-11-17";
     
-    [modelFactory postVideoModelWithUserName:userName relationshipId:relationshipId videoContent:videoContent date:date accessToken:[self accessToken] videoThumbnail:thumbnailContent success:^(AFVDBaseNetworkModel *networkCallback) {
+    NSString *description = @"This is a video!";
+    
+    [modelFactory postVideoModelWithUserName:userName relationshipId:relationshipId videoContent:videoContent date:date accessToken:[self accessToken] videoThumbnail:thumbnailContent andVideoDescription:description success:^(AFVDBaseNetworkModel *networkCallback) {
         
         if(networkCallback.success) {
             

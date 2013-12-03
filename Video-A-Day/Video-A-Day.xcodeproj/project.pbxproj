@@ -20,6 +20,7 @@
 		0F2FC70F1837303900611873 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F2FC6EE1837303800611873 /* UIKit.framework */; };
 		0F2FC7171837303900611873 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0F2FC7151837303900611873 /* InfoPlist.strings */; };
 		0F2FC7191837303900611873 /* Video_A_DayTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F2FC7181837303900611873 /* Video_A_DayTests.m */; };
+		0F553BB3184D97E200941506 /* baileys_5sec.mov in Resources */ = {isa = PBXBuildFile; fileRef = 0F553BB2184D97E200941506 /* baileys_5sec.mov */; };
 		0F79613A183DC81900920C59 /* face.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0F796139183DC81900920C59 /* face.jpg */; };
 		0F79613E183EE64E00920C59 /* AFVDUrlHasher.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F79613D183EE64E00920C59 /* AFVDUrlHasher.m */; };
 		7610BC5B183B1108003CE193 /* AFVDRelationshipModelDatasource.m in Sources */ = {isa = PBXBuildFile; fileRef = 7610BC5A183B1108003CE193 /* AFVDRelationshipModelDatasource.m */; };
@@ -69,6 +70,7 @@
 		0F2FC7141837303900611873 /* Video-A-DayTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Video-A-DayTests-Info.plist"; sourceTree = "<group>"; };
 		0F2FC7161837303900611873 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		0F2FC7181837303900611873 /* Video_A_DayTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Video_A_DayTests.m; sourceTree = "<group>"; };
+		0F553BB2184D97E200941506 /* baileys_5sec.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = baileys_5sec.mov; sourceTree = "<group>"; };
 		0F79613718394FF100920C59 /* AFVDConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFVDConstants.h; sourceTree = "<group>"; };
 		0F796139183DC81900920C59 /* face.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = face.jpg; sourceTree = "<group>"; };
 		0F79613C183EE64E00920C59 /* AFVDUrlHasher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFVDUrlHasher.h; sourceTree = "<group>"; };
@@ -222,6 +224,7 @@
 		0F796138183DC81900920C59 /* Assets-TEMP */ = {
 			isa = PBXGroup;
 			children = (
+				0F553BB2184D97E200941506 /* baileys_5sec.mov */,
 				0F796139183DC81900920C59 /* face.jpg */,
 			);
 			path = "Assets-TEMP";
@@ -498,6 +501,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0F553BB3184D97E200941506 /* baileys_5sec.mov in Resources */,
 				0F2FC7061837303900611873 /* Images.xcassets in Resources */,
 				0F79613A183DC81900920C59 /* face.jpg in Resources */,
 				0F2FC6F51837303800611873 /* InfoPlist.strings in Resources */,
@@ -637,7 +641,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
-					"IS_LOCAL_MACHINE=0",
+					"IS_LOCAL_MACHINE=1",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;

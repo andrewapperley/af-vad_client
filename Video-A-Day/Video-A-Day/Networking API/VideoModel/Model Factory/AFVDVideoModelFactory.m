@@ -48,9 +48,9 @@
 }
 
 #pragma mark - Post video creation
-- (void)postVideoModelWithUserName:(NSString *)userName relationshipId:(NSString *)relationshipId videoContent:(NSString *)videoContent date:(NSString *)date accessToken:(NSString *)accessToken videoThumbnail:(NSString *)videoThumbnail success:(AFVDBaseNetworkSuccess)success failure:(AFVDBaseNetworkFailure)failure {
+- (void)postVideoModelWithUserName:(NSString *)userName relationshipId:(NSString *)relationshipId videoContent:(NSString *)videoContent date:(NSString *)date accessToken:(NSString *)accessToken videoThumbnail:(NSString *)videoThumbnail andVideoDescription:(NSString *)description success:(AFVDBaseNetworkSuccess)success failure:(AFVDBaseNetworkFailure)failure {
 
-    [[AFVDVideoModelDatasource sharedDataSource] postVideoModelWithUserName:userName relationshipId:relationshipId videoContent:videoContent date:date accessToken:accessToken videoThumbnail:videoThumbnail success:^(AFVDBaseNetworkModel *networkCallback) {
+    [[AFVDVideoModelDatasource sharedDataSource] postVideoModelWithUserName:userName relationshipId:relationshipId videoContent:videoContent date:date accessToken:accessToken videoThumbnail:videoThumbnail videoDescription:description success:^(AFVDBaseNetworkModel *networkCallback) {
         
         success(networkCallback);
     } failure:^(NSError *error) {
