@@ -64,12 +64,20 @@ NSString *kAFVDVideoCreationModelParameterKeyDescription      = @"description";
 }
 
 #pragma mark - Video creation
-- (void)postVideoModelWithUserName:(NSString *)userName relationshipId:(NSString *)relationshipId videoContent:(NSString *)videoContent date:(NSString *)date accessToken:(NSString *)accessToken videoThumbnail:(NSString *)videoThumbnail videoDescription:(NSString *)description success:(AFVDBaseNetworkSuccess)success failure:(AFVDBaseNetworkFailure)failure {
+- (void)postVideoModelWithUserName:(NSString *)userName relationshipId:(NSString *)relationshipId videoContent:(NSString *)videoContent date:(NSDate *)date accessToken:(NSString *)accessToken videoThumbnail:(NSString *)videoThumbnail videoDescription:(NSString *)description success:(AFVDBaseNetworkSuccess)success failure:(AFVDBaseNetworkFailure)failure {
+    
+    static NSDateFormatter *dateFormat;
+    
+    if(!dateFormat) {
+        dateFormat = [[NSDateFormatter alloc] init];
+        [dateFormat setDateFormat:kAFVDBaseNetworkDefaultDateFormat];
+        [dateFormat setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US_POSIX"]];
+    }
     
     NSDictionary *parameters = @{kAFVDVideoModelParameterKeyUserName : userName,
                                  kAFVDVideoCreationModelParameterKeyRelationshipId : relationshipId,
                                  kAFVDVideoCreationModelParameterKeyVideoContent : videoContent,
-                                 kAFVDVideoCreationModelParameterKeyDate : date,
+                                 kAFVDVideoCreationModelParameterKeyDate : [dateFormat stringFromDate:date],
                                  kAFVDVideoModelParameterKeyAcessToken : accessToken,
                                  kAFVDVideoCreationModelParameterKeyThumbnail : videoThumbnail,
                                  kAFVDVideoCreationModelParameterKeyDescription : description};

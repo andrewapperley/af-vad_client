@@ -26,6 +26,8 @@
 		7610BC5B183B1108003CE193 /* AFVDRelationshipModelDatasource.m in Sources */ = {isa = PBXBuildFile; fileRef = 7610BC5A183B1108003CE193 /* AFVDRelationshipModelDatasource.m */; };
 		7610BC5E183B1137003CE193 /* AFVDRelationshipModelFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 7610BC5D183B1137003CE193 /* AFVDRelationshipModelFactory.m */; };
 		7610BC61183B119C003CE193 /* AFVDRelationshipModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7610BC60183B119C003CE193 /* AFVDRelationshipModel.m */; };
+		7657BBF4184EE1A1004CA559 /* AFVDBaseNetworkStatics.m in Sources */ = {isa = PBXBuildFile; fileRef = 7657BBF3184EE1A1004CA559 /* AFVDBaseNetworkStatics.m */; };
+		7657BBF5184EE1A1004CA559 /* AFVDBaseNetworkStatics.m in Sources */ = {isa = PBXBuildFile; fileRef = 7657BBF3184EE1A1004CA559 /* AFVDBaseNetworkStatics.m */; };
 		7677BA6D18373A6B00F3EDC9 /* AFVDBaseNetworkDatasource.m in Sources */ = {isa = PBXBuildFile; fileRef = 7677BA6218373A6B00F3EDC9 /* AFVDBaseNetworkDatasource.m */; };
 		7677BA6E18373A6B00F3EDC9 /* AFVDUserModelDatasource.m in Sources */ = {isa = PBXBuildFile; fileRef = 7677BA6618373A6B00F3EDC9 /* AFVDUserModelDatasource.m */; };
 		7677BA6F18373A6B00F3EDC9 /* AFVDUserModelFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 7677BA6918373A6B00F3EDC9 /* AFVDUserModelFactory.m */; };
@@ -83,6 +85,7 @@
 		7610BC5F183B119C003CE193 /* AFVDRelationshipModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFVDRelationshipModel.h; path = RelationshipModel/Models/AFVDRelationshipModel.h; sourceTree = "<group>"; };
 		7610BC60183B119C003CE193 /* AFVDRelationshipModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AFVDRelationshipModel.m; path = RelationshipModel/Models/AFVDRelationshipModel.m; sourceTree = "<group>"; };
 		7650E2C51845B4D100224380 /* AFVDBaseNetworkStatics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFVDBaseNetworkStatics.h; sourceTree = "<group>"; };
+		7657BBF3184EE1A1004CA559 /* AFVDBaseNetworkStatics.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFVDBaseNetworkStatics.m; sourceTree = "<group>"; };
 		7677BA6118373A6B00F3EDC9 /* AFVDBaseNetworkDatasource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFVDBaseNetworkDatasource.h; sourceTree = "<group>"; };
 		7677BA6218373A6B00F3EDC9 /* AFVDBaseNetworkDatasource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFVDBaseNetworkDatasource.m; sourceTree = "<group>"; };
 		7677BA6518373A6B00F3EDC9 /* AFVDUserModelDatasource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFVDUserModelDatasource.h; sourceTree = "<group>"; };
@@ -280,6 +283,7 @@
 			isa = PBXGroup;
 			children = (
 				7650E2C51845B4D100224380 /* AFVDBaseNetworkStatics.h */,
+				7657BBF3184EE1A1004CA559 /* AFVDBaseNetworkStatics.m */,
 				7677BA6018373A6B00F3EDC9 /* BaseNetworkDatasource */,
 				76C65195183809E5003C7F7D /* BaseNetworkModel */,
 				7696C7DC184C363500B270FC /* Keychain */,
@@ -564,6 +568,7 @@
 				0F2FC6F71837303800611873 /* main.m in Sources */,
 				76C651AF18385CB1003C7F7D /* AFVDVideoRelationshipModel.m in Sources */,
 				0F79613E183EE64E00920C59 /* AFVDUrlHasher.m in Sources */,
+				7657BBF4184EE1A1004CA559 /* AFVDBaseNetworkStatics.m in Sources */,
 				7696C7DF184C366000B270FC /* AFVDKeychain.m in Sources */,
 				0F2FC6FB1837303800611873 /* AFVDAppDelegate.m in Sources */,
 				76C6519818380A14003C7F7D /* AFVDBaseNetworkModel.m in Sources */,
@@ -582,6 +587,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7657BBF5184EE1A1004CA559 /* AFVDBaseNetworkStatics.m in Sources */,
 				0F2FC7191837303900611873 /* Video_A_DayTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -641,7 +647,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
-					"IS_LOCAL_MACHINE=1",
+					"IS_LOCAL_MACHINE=0",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;

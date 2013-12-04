@@ -16,7 +16,7 @@
 #import "AFVDVideoModelFactory.h"
 #import "AFVDRelationshipModelFactory.h"
 
-NSString *userName = @"jfuellert1111";
+NSString *userName = @"jfuellert001";
 NSString *displayName = @"Nice Display Name";
 NSString *otherUserName = @"someOtherUsername";
 NSString *playlistId = @"d65cab706962faf9396aa94e4193ddb9";
@@ -45,16 +45,14 @@ NSString *email = @"email@email.com";
 //    [self logoutUser];
 //
 //    //Videos
-#warning TODO : Check when server is updated
 //    [self fetchRelationshipModel];
 //    [self fetchVideoModel];
-    [self createVideo];
+//    [self createVideo];
 //
 //    //Relationship
 //    [self createRelationship];
-//    [self fetchRelationshipModelIds];
+    [self fetchRelationshipModels];       //TODO
 //    [self fetchRelationshipModelFromId];
-#warning ENDTODO : Check when server is updated
 }
 
 - (void)createUser {
@@ -298,7 +296,7 @@ NSString *email = @"email@email.com";
 
     NSString *thumbnailContent = [thumbnailData base64EncodedStringWithOptions:0];
 
-    NSString *date = @"2013-11-17";
+    NSDate *date = [NSDate date];
     
     NSString *description = @"This is a video!";
     
@@ -342,25 +340,25 @@ NSString *email = @"email@email.com";
     }];
 }
 
-- (void)fetchRelationshipModelIds {
+- (void)fetchRelationshipModels {
     
     AFVDRelationshipModelFactory *modelFactory = [[AFVDRelationshipModelFactory alloc] init];
     
-    NSLog(@"Start RelationshipModelIds");
+    NSLog(@"Start RelationshipModels");
     
-    [modelFactory fetchRelationshipModelIdsWithUserName:userName accessToken:[self accessToken] success:^(NSArray *relationshipIds, AFVDBaseNetworkModel *networkCallback) {
+    [modelFactory fetchRelationshipModelsWithUserName:userName accessToken:[self accessToken] success:^(NSArray *relationshipIds, AFVDBaseNetworkModel *networkCallback) {
 
         if(networkCallback.success) {
             
-            NSLog(@"Finish RelationshipModelIds - Success");
+            NSLog(@"Finish RelationshipModels - Success");
             NSLog(@"Relationship Ids : %@", relationshipIds);
             
         } else {
-            NSLog(@"Finish RelationshipModelIds - Failure %d - %@", networkCallback.responseCode, networkCallback.responseMessage);
+            NSLog(@"Finish RelationshipModels - Failure %d - %@", networkCallback.responseCode, networkCallback.responseMessage);
         }
     } failure:^(NSError *error) {
         
-        NSLog(@"Finish RelationshipModelIds - Failure %d - %@", error.code, error.localizedDescription);
+        NSLog(@"Finish RelationshipModels - Failure %d - %@", error.code, error.localizedDescription);
     }];
 }
 

@@ -11,7 +11,7 @@
 #import "AFVDRelationshipModel.h"
 
 typedef void(^AFVDRelationshipModelSuccess)(AFVDRelationshipModel *relationshipModel, AFVDBaseNetworkModel *networkCallback);
-typedef void(^AFVDRelationshipIdsSuccess)(NSArray *relationshipIds, AFVDBaseNetworkModel *networkCallback);
+typedef void(^AFVDRelationshipIdsSuccess)(NSArray *relationshipModels, AFVDBaseNetworkModel *networkCallback);
 typedef void(^AFVDRelationshipCreationSuccess)(AFVDBaseNetworkModel *networkCallback);
 
 @interface AFVDRelationshipModelFactory : NSObject
@@ -20,7 +20,7 @@ typedef void(^AFVDRelationshipCreationSuccess)(AFVDBaseNetworkModel *networkCall
 - (void)fetchRelationshipModelWithUserName:(NSString *)userName accessToken:(NSString *)accessToken relationshipId:(NSString *)relationshipId success:(AFVDRelationshipModelSuccess)success failure:(AFVDBaseNetworkFailure)failure;
 
 #pragma mark - Fetch relationship Ids
-- (void)fetchRelationshipModelIdsWithUserName:(NSString *)userName accessToken:(NSString *)accessToken success:(AFVDRelationshipIdsSuccess)success failure:(AFVDBaseNetworkFailure)failure;
+- (void)fetchRelationshipModelsWithUserName:(NSString *)userName accessToken:(NSString *)accessToken success:(AFVDRelationshipIdsSuccess)success failure:(AFVDBaseNetworkFailure)failure;
 
 #pragma mark - Post relationship creation
 - (void)postRelationshipModelWithUserName:(NSString *)userName accessToken:(NSString *)accessToken startDate:(NSString *)startDate endDate:(NSString *)endDate users:(NSArray *)users success:(AFVDRelationshipCreationSuccess)success failure:(AFVDBaseNetworkFailure)failure;

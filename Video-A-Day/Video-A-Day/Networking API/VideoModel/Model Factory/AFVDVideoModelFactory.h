@@ -25,6 +25,6 @@ typedef void(^AFVDVideoCreationModelSuccess)(AFVDBaseNetworkModel *networkCallba
 - (void)fetchVideoRelationshipModelWithUserName:(NSString *)userName relationshipId:(NSString *)relationshipId accessToken:(NSString *)accessToken success:(AFVDVideoRelationshipModelSuccess)success failure:(AFVDBaseNetworkFailure)failure;
 
 #pragma mark - Post video creation
-- (void)postVideoModelWithUserName:(NSString *)userName relationshipId:(NSString *)relationshipId videoContent:(NSString *)videoContent date:(NSString *)date accessToken:(NSString *)accessToken videoThumbnail:(NSString *)videoThumbnail andVideoDescription:(NSString *)description success:(AFVDVideoCreationModelSuccess)success failure:(AFVDBaseNetworkFailure)failure;
+- (void)postVideoModelWithUserName:(NSString *)userName relationshipId:(NSString *)relationshipId videoContent:(NSString *)videoContent date:(NSDate *)date accessToken:(NSString *)accessToken videoThumbnail:(NSString *)videoThumbnail andVideoDescription:(NSString *)description success:(AFVDVideoCreationModelSuccess)success failure:(AFVDBaseNetworkFailure)failure;
 
 @end

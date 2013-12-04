@@ -48,7 +48,7 @@
 }
 
 #pragma mark - Post video creation
-- (void)postVideoModelWithUserName:(NSString *)userName relationshipId:(NSString *)relationshipId videoContent:(NSString *)videoContent date:(NSString *)date accessToken:(NSString *)accessToken videoThumbnail:(NSString *)videoThumbnail andVideoDescription:(NSString *)description success:(AFVDBaseNetworkSuccess)success failure:(AFVDBaseNetworkFailure)failure {
+- (void)postVideoModelWithUserName:(NSString *)userName relationshipId:(NSString *)relationshipId videoContent:(NSString *)videoContent date:(NSDate *)date accessToken:(NSString *)accessToken videoThumbnail:(NSString *)videoThumbnail andVideoDescription:(NSString *)description success:(AFVDBaseNetworkSuccess)success failure:(AFVDBaseNetworkFailure)failure {
 
     [[AFVDVideoModelDatasource sharedDataSource] postVideoModelWithUserName:userName relationshipId:relationshipId videoContent:videoContent date:date accessToken:accessToken videoThumbnail:videoThumbnail videoDescription:description success:^(AFVDBaseNetworkModel *networkCallback) {
         
@@ -103,7 +103,16 @@
     AFVDVideoModel *model = [[AFVDVideoModel alloc] init];
     
     //User info
-    [model setValue:data[@"date"] forKey:@"date"];
+    static NSDateFormatter *dateFormat;
+    
+    if(!dateFormat) {
+        dateFormat = [[NSDateFormatter alloc] init];
+        [dateFormat setDateFormat:kAFVDBaseNetworkDefaultDateFormat];
+        [dateFormat setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US_POSIX"]];
+    }
+    
+    NSDate *date = [dateFormat dateFromString:data[@"date"]];
+    [model setValue:date forKey:@"date"];
     [model setValue:data[@"thumbnail_path"] forKey:@"thumbnailURL"];
     [model setValue:data[@"video_id"] forKey:@"videoId"];
     [model setValue:data[@"video_path"] forKey:@"videoURL"];

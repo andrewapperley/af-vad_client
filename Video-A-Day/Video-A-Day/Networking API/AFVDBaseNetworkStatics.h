@@ -17,3 +17,6 @@ typedef void(^AFVDBaseNetworkFailure)(NSError *error);
 #ifndef BASE_NETWORK_URL
 #define BASE_NETWORK_URL (IS_LOCAL_MACHINE ? @"http://192.168.0.14:5000" : @"http://99.232.33.159:5000")
 #endif
+
+#pragma mark - Network date formatting
+extern NSString *kAFVDBaseNetworkDefaultDateFormat;

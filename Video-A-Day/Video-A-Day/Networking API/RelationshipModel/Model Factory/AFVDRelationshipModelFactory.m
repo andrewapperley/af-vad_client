@@ -8,6 +8,7 @@
 
 #import "AFVDRelationshipModelDatasource.h"
 #import "AFVDRelationshipModelFactory.h"
+#import "AFVDUserModel.h"
 
 @implementation AFVDRelationshipModelFactory
 
@@ -19,7 +20,9 @@
         AFVDRelationshipModel *model = nil;
         
         if(networkCallback.success) {
-            model = [self relationshipModelForData:networkCallback.responseData];
+            
+            NSDictionary *relationshipDictionary = networkCallback.responseData[@"relationship"];
+            model = [self relationshipModelForData:relationshipDictionary];
         }
         
         success(model, networkCallback);
@@ -29,15 +32,15 @@
     }];
 }
 
-#pragma mark - Fetch relationship Ids
-- (void)fetchRelationshipModelIdsWithUserName:(NSString *)userName accessToken:(NSString *)accessToken success:(AFVDRelationshipIdsSuccess)success failure:(AFVDBaseNetworkFailure)failure {
+#pragma mark - Fetch relationship models
+- (void)fetchRelationshipModelsWithUserName:(NSString *)userName accessToken:(NSString *)accessToken success:(AFVDRelationshipIdsSuccess)success failure:(AFVDBaseNetworkFailure)failure {
     
-    [[AFVDRelationshipModelDatasource sharedDataSource] fetchRelationshipModelWithUserName:userName accessToken:accessToken success:^(AFVDBaseNetworkModel *networkCallback) {
+    [[AFVDRelationshipModelDatasource sharedDataSource] fetchRelationshipModelsWithUserName:userName accessToken:accessToken success:^(AFVDBaseNetworkModel *networkCallback) {
         
         NSArray *relationshipIds = nil;
         
         if(networkCallback.success) {
-            relationshipIds = [self relationshipIdsForData:networkCallback.responseData];
+            relationshipIds = [self relationshipModelsForData:networkCallback.responseData];
         }
         
         success(relationshipIds, networkCallback);
@@ -64,27 +67,68 @@
     
     AFVDRelationshipModel *model = [[AFVDRelationshipModel alloc] init];
     
-    NSDictionary *relationshipDictionary = data[@"relationship"];
+    //Relationship id
+    [model setValue:data[@"relationship_id"] forKey:@"relationshipId"];
     
-    //User info
-    [model setValue:relationshipDictionary[@"relationship_id"] forKey:@"relationshipId"];
-    [model setValue:relationshipDictionary[@"start_date"] forKey:@"startDate"];
-    [model setValue:relationshipDictionary[@"end_date"] forKey:@"endDate"];
-    [model setValue:relationshipDictionary[@"playlists"] forKey:@"playlists"];
-    [model setValue:relationshipDictionary[@"users"] forKey:@"users"];
+    //User models
+    NSDictionary *userOneModelData = data[@"user1"];
+    if(userOneModelData) {
+        AFVDUserModel *userOneModel = [self userModelForData:userOneModelData];
+        [model setValue:userOneModel forKey:@"userOne"];
+    }
     
-    BOOL shouldHideVideosUntilEndDateIsMet = [relationshipDictionary[@"private"] boolValue];
-    model.shouldHideVideosUntilEndDateIsMet = shouldHideVideosUntilEndDateIsMet;
+    NSDictionary *userTwoModelData = data[@"user2"];
+    if(userTwoModelData) {
+        AFVDUserModel *userTwoModel = [self userModelForData:userTwoModelData];
+        [model setValue:userTwoModel forKey:@"userTwo"];
+    }
+    
+    //Dates
+    static NSDateFormatter *dateFormat;
+    
+    if(!dateFormat) {
+        dateFormat = [[NSDateFormatter alloc] init];
+        [dateFormat setDateFormat:kAFVDBaseNetworkDefaultDateFormat];
+        [dateFormat setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US_POSIX"]];
+    }
+    
+    NSDate *startDate = [dateFormat dateFromString:data[@"start_date"]];
+    [model setValue:startDate forKey:@"startDate"];
+    
+    NSDate *endDate = [dateFormat dateFromString:data[@"end_date"]];
+    [model setValue:endDate forKey:@"endDate"];
+
+    //Finished
+    BOOL finished = [data[@"finished"] boolValue];
+    model.finished = finished;
     
     return model;
 }
 
-#pragma mark - Relationship ids
-- (NSArray *)relationshipIdsForData:(NSDictionary *)data {
+#pragma mark - Relationship models
+- (NSArray *)relationshipModelsForData:(NSDictionary *)data {
     
-    NSArray *relationshipIds = data[@"relationships"];
+    NSArray *relationshipsArray = data[@"relationships"];
+    NSMutableArray *relationshipModels = [[NSMutableArray alloc] initWithCapacity:relationshipsArray.count];
     
-    return relationshipIds;
+    for(NSDictionary *relationshipDictionary in relationshipsArray) {
+        
+        AFVDRelationshipModel *model = [self relationshipModelForData:relationshipDictionary];
+        [relationshipModels addObject:model];
+    }
+    
+    return relationshipModels;
+}
+
+#pragma mark - User model
+- (AFVDUserModel *)userModelForData:(NSDictionary *)data {
+    
+    AFVDUserModel *model = [[AFVDUserModel alloc] init];
+    
+    [model setValue:data[@"profile_image"] forKey:@"userImageUrl"];
+    [model setValue:data[@"display_name"] forKey:@"displayName"];
+    
+    return model;
 }
 
 @end

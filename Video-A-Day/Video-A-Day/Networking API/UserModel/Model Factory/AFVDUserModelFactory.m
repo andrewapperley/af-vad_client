@@ -125,10 +125,10 @@
     [model setValue:userDictionary[@"username"] forKey:@"userName"];
     [model setValue:userDictionary[@"email"] forKey:@"email"];
     [model setValue:userDictionary[@"profile_image"] forKey:@"userImageUrl"];
+    [model setValue:userDictionary[@"display_name"] forKey:@"displayName"];
     
     NSArray *relationshipsArray = userDictionary[@"relationships"];
-    NSSet *relationshipsSet = [NSSet setWithArray:relationshipsArray];
-    [model setValue:relationshipsSet forKey:@"relationships"];
+    [model setValue:relationshipsArray forKey:@"relationships"];
 
     BOOL isDeactivated = [userDictionary[@"deactivated"] boolValue];
     model.isDeactivated = isDeactivated;

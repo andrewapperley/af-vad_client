@@ -10,7 +10,7 @@
 
 @interface AFVDVideoModel : NSObject
 
-@property (nonatomic, strong, readonly) NSString *date;
+@property (nonatomic, strong, readonly) NSDate *date;
 @property (nonatomic, strong, readonly) NSString *thumbnailURL;
 @property (nonatomic, strong, readonly) NSString *videoId;
 @property (nonatomic, strong, readonly) NSString *videoURL;

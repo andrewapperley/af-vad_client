@@ -14,8 +14,8 @@ NSString *kAFVDRelationshipFromIdModelParameterKeyUserName      = @"username";
 NSString *kAFVDRelationshipFromIdModelParameterKeyAcessToken    = @"access_token";
 NSString *kAFVDRelationshipFromIdModelParameterKeyId            = @"relationship_id";
 
-//Relationship Ids
-NSString *kAFVDRelationshipIdsEndpointURL                       = @"/user/relationships/";
+//Relationship models
+NSString *kAFVDRelationshipModelsEndpointURL                    = @"/user/relationships/";
 
 //Relationship creation
 NSString *kAFVDRelationshipCreateEndpointURL                    = @"/user/relationship/";
@@ -41,13 +41,13 @@ NSString *kAFVDRelationshipCreateParameterKeyEndDate            = @"end_date";
     }];
 }
 
-#pragma mark - Relationship Ids
-- (void)fetchRelationshipModelWithUserName:(NSString *)userName accessToken:(NSString *)accessToken success:(AFVDBaseNetworkSuccess)success failure:(AFVDBaseNetworkFailure)failure {
+#pragma mark - Relationship models
+- (void)fetchRelationshipModelsWithUserName:(NSString *)userName accessToken:(NSString *)accessToken success:(AFVDBaseNetworkSuccess)success failure:(AFVDBaseNetworkFailure)failure {
     
     NSDictionary *parameters = @{kAFVDRelationshipFromIdModelParameterKeyUserName : userName,
                                  kAFVDRelationshipFromIdModelParameterKeyAcessToken : accessToken};
     
-    [self makeURLRequestWithType:kAFVDNetworkCallType_GET endpointURLString:kAFVDRelationshipIdsEndpointURL parameters:parameters success:^(AFVDBaseNetworkModel *networkCallback) {
+    [self makeURLRequestWithType:kAFVDNetworkCallType_GET endpointURLString:kAFVDRelationshipModelsEndpointURL parameters:parameters success:^(AFVDBaseNetworkModel *networkCallback) {
         
         success(networkCallback);
     } failure:^(NSError *error) {

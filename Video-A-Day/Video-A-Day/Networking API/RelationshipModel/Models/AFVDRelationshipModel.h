@@ -8,13 +8,15 @@
 
 #import <Foundation/Foundation.h>
 
+@class AFVDUserModel;
+
 @interface AFVDRelationshipModel : NSObject
 
 @property (nonatomic, strong, readonly) NSString *relationshipId;
-@property (nonatomic, strong, readonly) NSString *startDate;
-@property (nonatomic, strong, readonly) NSString *endDate;
-@property (nonatomic, strong, readonly) NSArray *playlists;
-@property (nonatomic, strong, readonly) NSArray *users;
-@property (nonatomic) BOOL shouldHideVideosUntilEndDateIsMet;
+@property (nonatomic, strong, readonly) AFVDUserModel *userOne;
+@property (nonatomic, strong, readonly) AFVDUserModel *userTwo;
+@property (nonatomic, strong, readonly) NSDate *startDate;
+@property (nonatomic, strong, readonly) NSDate *endDate;
+@property (nonatomic) BOOL finished;
 
 @end
