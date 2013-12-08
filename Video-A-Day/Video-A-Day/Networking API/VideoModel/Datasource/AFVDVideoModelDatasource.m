@@ -11,14 +11,12 @@
 NSString *kAFVDVideoModelParameterKeyUserName               = @"username";
 NSString *kAFVDVideoModelParameterKeyAcessToken             = @"access_token";
 
-//Video playlist
-NSString *kAFVDVideoPlaylistModelEndpointURL                = @"/video/getVideos/";
-NSString *kAFVDVideoPlaylistModelParameterKeyPlaylistId     = @"playlist_id";
-NSString *kAFVDVideoPlaylistModelParameterKeyPage           = @"page";
-
-//Video relationship playlist
-NSString *kAFVDVideoRelationshipModelEndpointURL            = @"/video/playlists/";
-NSString *kAFVDVideoRelationshipModelParameterKeyId         = @"relationship_id";
+//Videos at page index
+NSString *kAFVDVideoModelsEndpointURL                       = @"/video/getVideos/";
+NSString *kAFVDVideoModelsParameterKeyRelationshipId        = @"relationship_id";
+NSString *kAFVDVideoModelsParameterKeyPage                  = @"page";
+NSString *kAFVDVideoModelsParameterKeyType                  = @"type";
+NSString *kAFVDVideoModelsParameterKeySecondUser            = @"user2";
 
 //Video creation
 NSString *kAFVDVideoCreationModelEndpointURL                = @"/video/";
@@ -26,45 +24,19 @@ NSString *kAFVDVideoCreationModelParameterKeyRelationshipId = @"relationship_id"
 NSString *kAFVDVideoCreationModelParameterKeyVideoContent   = @"video_content";
 NSString *kAFVDVideoCreationModelParameterKeyDate           = @"date";
 NSString *kAFVDVideoCreationModelParameterKeyThumbnail      = @"video_thumbnail";
-NSString *kAFVDVideoCreationModelParameterKeyDescription      = @"description";
+NSString *kAFVDVideoCreationModelParameterKeyDescription    = @"description";
+
+//Favourites
+NSString *kAFVDFavouriteVideoModelGetEndpointURL            = @"/video/favourites/";
+NSString *kAFVDFavouriteVideoModelSetEndpointURL            = @"/video/setfavourite/";
+NSString *kAFVDFavouriteVideoModelRemoveEndpointURL         = @"/video/unsetfavourite/";
+NSString *kAFVDFavouriteVideoModelVideoId                   = @"video_id";
+NSString *kAFVDFavouriteVideoModelFavouriteDate             = @"fav_date";
 
 @implementation AFVDVideoModelDatasource
 
-#pragma mark - Video playlist
-- (void)fetchVideoPlaylistModelWithUserName:(NSString *)userName playlistId:(NSString *)playlistId accessToken:(NSString *)accessToken pageIndex:(NSUInteger)pageIndex success:(AFVDBaseNetworkSuccess)success failure:(AFVDBaseNetworkFailure)failure {
-    
-    NSDictionary *parameters = @{kAFVDVideoModelParameterKeyUserName : userName,
-                                 kAFVDVideoPlaylistModelParameterKeyPlaylistId : playlistId,
-                                 kAFVDVideoModelParameterKeyAcessToken : accessToken,
-                                 kAFVDVideoPlaylistModelParameterKeyPage : [NSString stringWithFormat:@"%d",pageIndex]};
-    
-    [self makeURLRequestWithType:kAFVDNetworkCallType_GET endpointURLString:kAFVDVideoPlaylistModelEndpointURL parameters:parameters success:^(AFVDBaseNetworkModel *networkCallback) {
-        
-        success(networkCallback);
-    } failure:^(NSError *error) {
-        
-        failure(error);
-    }];
-}
-
-#pragma mark - Video relationship playlist
-- (void)fetchVideoRelationshipModelWithUserName:(NSString *)userName relationshipId:(NSString *)relationshipId accessToken:(NSString *)accessToken success:(AFVDBaseNetworkSuccess)success failure:(AFVDBaseNetworkFailure)failure {
-    
-    NSDictionary *parameters = @{kAFVDVideoModelParameterKeyUserName : userName,
-                                 kAFVDVideoRelationshipModelParameterKeyId : relationshipId,
-                                 kAFVDVideoModelParameterKeyAcessToken : accessToken};
-    
-    [self makeURLRequestWithType:kAFVDNetworkCallType_GET endpointURLString:kAFVDVideoRelationshipModelEndpointURL parameters:parameters success:^(AFVDBaseNetworkModel *networkCallback) {
-        
-        success(networkCallback);
-    } failure:^(NSError *error) {
-        
-        failure(error);
-    }];
-}
-
 #pragma mark - Video creation
-- (void)postVideoModelWithUserName:(NSString *)userName relationshipId:(NSString *)relationshipId videoContent:(NSString *)videoContent date:(NSDate *)date accessToken:(NSString *)accessToken videoThumbnail:(NSString *)videoThumbnail videoDescription:(NSString *)description success:(AFVDBaseNetworkSuccess)success failure:(AFVDBaseNetworkFailure)failure {
+- (void)postCreateVideoModelWithUserName:(NSString *)userName relationshipId:(NSString *)relationshipId videoContent:(NSString *)videoContent date:(NSDate *)date accessToken:(NSString *)accessToken videoThumbnail:(NSString *)videoThumbnail videoDescription:(NSString *)description success:(AFVDBaseNetworkSuccess)success failure:(AFVDBaseNetworkFailure)failure {
     
     static NSDateFormatter *dateFormat;
     
@@ -83,6 +55,106 @@ NSString *kAFVDVideoCreationModelParameterKeyDescription      = @"description";
                                  kAFVDVideoCreationModelParameterKeyDescription : description};
     
     [self makeURLRequestWithType:kAFVDNetworkCallType_POST endpointURLString:kAFVDVideoCreationModelEndpointURL parameters:parameters success:^(AFVDBaseNetworkModel *networkCallback) {
+        
+        success(networkCallback);
+    } failure:^(NSError *error) {
+        
+        failure(error);
+    }];
+}
+
+#pragma mark - Videos at page index
+- (void)fetchVideosAtPageIndex:(NSUInteger)pageIndex userName:(NSString *)userName accessToken:(NSString *)accessToken success:(AFVDBaseNetworkSuccess)success failure:(AFVDBaseNetworkFailure)failure {
+    
+    NSDictionary *parameters = @{kAFVDVideoModelParameterKeyUserName : userName,
+                                 kAFVDVideoModelParameterKeyAcessToken : accessToken,
+                                 kAFVDVideoModelsParameterKeyType : @"selfType",
+                                 kAFVDVideoModelsParameterKeyPage : [NSString stringWithFormat:@"%d",pageIndex]};
+    
+    [self makeURLRequestWithType:kAFVDNetworkCallType_GET endpointURLString:kAFVDVideoModelsEndpointURL parameters:parameters success:^(AFVDBaseNetworkModel *networkCallback) {
+        
+        success(networkCallback);
+    } failure:^(NSError *error) {
+        
+        failure(error);
+    }];
+}
+
+#pragma mark - Relationship videos at page index
+- (void)fetchRelationshipVideosAtPageIndex:(NSUInteger)pageIndex userName:(NSString *)userName secondUser:(NSString *)secondUser accessToken:(NSString *)accessToken relationshipId:(NSString *)relationshipId success:(AFVDBaseNetworkSuccess)success failure:(AFVDBaseNetworkFailure)failure {
+    
+    NSMutableDictionary *parameters = [[NSMutableDictionary alloc] initWithDictionary:
+                               @{kAFVDVideoModelParameterKeyUserName : userName,
+                                 kAFVDVideoModelParameterKeyAcessToken : accessToken,
+                                 kAFVDVideoModelsParameterKeyType : @"relationshipType",
+                                 kAFVDVideoModelsParameterKeyPage : [NSString stringWithFormat:@"%d",pageIndex]}];
+    
+    if(secondUser) {
+        [parameters setValue:kAFVDVideoModelsParameterKeySecondUser forKey:secondUser];
+    }
+    
+    if(relationshipId) {
+        [parameters setValue:kAFVDVideoModelsParameterKeyRelationshipId forKey:relationshipId];
+    }
+    
+    [self makeURLRequestWithType:kAFVDNetworkCallType_GET endpointURLString:kAFVDVideoModelsEndpointURL parameters:parameters success:^(AFVDBaseNetworkModel *networkCallback) {
+        
+        success(networkCallback);
+    } failure:^(NSError *error) {
+        
+        failure(error);
+    }];
+}
+
+#pragma mark - Fetch favourite videos
+- (void)fetchFavouriteVideosAtPageIndex:(NSUInteger)pageIndex userName:(NSString *)userName accessToken:(NSString *)accessToken success:(AFVDBaseNetworkSuccess)success failure:(AFVDBaseNetworkFailure)failure {
+    
+    NSDictionary *parameters = @{kAFVDVideoModelParameterKeyUserName : userName,
+                                 kAFVDVideoModelParameterKeyAcessToken : accessToken,
+                                 kAFVDVideoModelsParameterKeyPage : [NSString stringWithFormat:@"%d",pageIndex]};
+    
+    [self makeURLRequestWithType:kAFVDNetworkCallType_GET endpointURLString:kAFVDFavouriteVideoModelGetEndpointURL parameters:parameters success:^(AFVDBaseNetworkModel *networkCallback) {
+        
+        success(networkCallback);
+    } failure:^(NSError *error) {
+        
+        failure(error);
+    }];
+}
+
+#pragma mark - Set favourite video
+- (void)postSetFavouriteVideoWithUserName:(NSString *)userName accessToken:(NSString *)accessToken videoId:(NSString *)videoId favouritedDate:(NSDate *)date success:(AFVDBaseNetworkSuccess)success failure:(AFVDBaseNetworkFailure)failure {
+    
+    static NSDateFormatter *dateFormat;
+    
+    if(!dateFormat) {
+        dateFormat = [[NSDateFormatter alloc] init];
+        [dateFormat setDateFormat:kAFVDBaseNetworkDefaultDateFormat];
+        [dateFormat setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US_POSIX"]];
+    }
+    
+    NSDictionary *parameters = @{kAFVDVideoModelParameterKeyUserName : userName,
+                                 kAFVDVideoModelParameterKeyAcessToken : accessToken,
+                                 kAFVDFavouriteVideoModelVideoId : videoId,
+                                 kAFVDFavouriteVideoModelFavouriteDate : [dateFormat stringFromDate:date]};
+    
+    [self makeURLRequestWithType:kAFVDNetworkCallType_POST endpointURLString:kAFVDFavouriteVideoModelSetEndpointURL parameters:parameters success:^(AFVDBaseNetworkModel *networkCallback) {
+        
+        success(networkCallback);
+    } failure:^(NSError *error) {
+        
+        failure(error);
+    }];
+}
+
+#pragma mark - Remove favourite video
+- (void)postRemoveFavouriteVideoWithUserName:(NSString *)userName accessToken:(NSString *)accessToken videoId:(NSString *)videoId success:(AFVDBaseNetworkSuccess)success failure:(AFVDBaseNetworkFailure)failure {
+    
+    NSDictionary *parameters = @{kAFVDVideoModelParameterKeyUserName : userName,
+                                 kAFVDVideoModelParameterKeyAcessToken : accessToken,
+                                 kAFVDFavouriteVideoModelVideoId : videoId};
+    
+    [self makeURLRequestWithType:kAFVDNetworkCallType_POST endpointURLString:kAFVDFavouriteVideoModelRemoveEndpointURL parameters:parameters success:^(AFVDBaseNetworkModel *networkCallback) {
         
         success(networkCallback);
     } failure:^(NSError *error) {

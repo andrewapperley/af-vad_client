@@ -11,10 +11,22 @@
 
 @implementation AFVDVideoModelFactory
 
-#pragma mark - Fetch video playlist
-- (void)fetchVideoPlaylistModelWithUserName:(NSString *)userName playlistId:(NSString *)playlistId accessToken:(NSString *)accessToken pageIndex:(NSUInteger)pageIndex success:(AFVDVideoPlaylistModelSuccess)success failure:(AFVDBaseNetworkFailure)failure {
+#pragma mark - Post video creation
+- (void)postVideoModelWithUserName:(NSString *)userName relationshipId:(NSString *)relationshipId videoContent:(NSString *)videoContent date:(NSDate *)date accessToken:(NSString *)accessToken videoThumbnail:(NSString *)videoThumbnail andVideoDescription:(NSString *)description success:(AFVDVideoCreationModelSuccess)success failure:(AFVDBaseNetworkFailure)failure {
     
-    [[AFVDVideoModelDatasource sharedDataSource] fetchVideoPlaylistModelWithUserName:userName playlistId:playlistId accessToken:accessToken pageIndex:pageIndex success:^(AFVDBaseNetworkModel *networkCallback) {
+    [[AFVDVideoModelDatasource sharedDataSource] postCreateVideoModelWithUserName:userName relationshipId:relationshipId videoContent:videoContent date:date accessToken:accessToken videoThumbnail:videoThumbnail videoDescription:description success:^(AFVDBaseNetworkModel *networkCallback) {
+        
+        success(networkCallback);
+    } failure:^(NSError *error) {
+       
+        failure(error);
+    }];
+}
+
+#pragma mark - Videos at page index
+- (void)videosAtPageIndex:(NSUInteger)pageIndex userName:(NSString *)userName accessToken:(NSString *)accessToken success:(AFVDVideoList)success failure:(AFVDBaseNetworkFailure)failure {
+    
+    [[AFVDVideoModelDatasource sharedDataSource] fetchVideosAtPageIndex:pageIndex userName:userName accessToken:accessToken success:^(AFVDBaseNetworkModel *networkCallback) {
         
         AFVDVideoPlaylistModel *model = nil;
         
@@ -24,33 +36,47 @@
         
         success(model, networkCallback);
     } failure:^(NSError *error) {
-        
-        failure(error);
-    }];
-}
-
-#pragma mark - Fetch video relationship playlist
-- (void)fetchVideoRelationshipModelWithUserName:(NSString *)userName relationshipId:(NSString *)relationshipId accessToken:(NSString *)accessToken success:(AFVDVideoRelationshipModelSuccess)success failure:(AFVDBaseNetworkFailure)failure {
-    
-    [[AFVDVideoModelDatasource sharedDataSource] fetchVideoRelationshipModelWithUserName:userName relationshipId:relationshipId accessToken:accessToken success:^(AFVDBaseNetworkModel *networkCallback) {
-        
-        AFVDVideoRelationshipModel *model = nil;
-        
-        if(networkCallback.success) {
-            model = [self videoRelationshipModelForData:networkCallback.responseData];
-        }
-        
-        success(model, networkCallback);
-    } failure:^(NSError *error) {
        
         failure(error);
     }];
 }
 
-#pragma mark - Post video creation
-- (void)postVideoModelWithUserName:(NSString *)userName relationshipId:(NSString *)relationshipId videoContent:(NSString *)videoContent date:(NSDate *)date accessToken:(NSString *)accessToken videoThumbnail:(NSString *)videoThumbnail andVideoDescription:(NSString *)description success:(AFVDBaseNetworkSuccess)success failure:(AFVDBaseNetworkFailure)failure {
+#pragma mark - Relationship videos at page index
+- (void)relationshipVideosAtPageIndex:(NSUInteger)pageIndex userName:(NSString *)userName secondUser:(NSString *)secondUser accessToken:(NSString *)accessToken relationshipId:(NSString *)relationshipId success:(AFVDVideoList)success failure:(AFVDBaseNetworkFailure)failure {
+    
+    [[AFVDVideoModelDatasource sharedDataSource] fetchVideosAtPageIndex:pageIndex userName:userName accessToken:accessToken success:^(AFVDBaseNetworkModel *networkCallback) {
+        
+        AFVDVideoPlaylistModel *model = nil;
+        
+        if(networkCallback.success) {
+            model = [self videoPlaylistModelForData:networkCallback.responseData];
+        }
+    } failure:^(NSError *error) {
+        
+        failure(error);
+    }];
+}
 
-    [[AFVDVideoModelDatasource sharedDataSource] postVideoModelWithUserName:userName relationshipId:relationshipId videoContent:videoContent date:date accessToken:accessToken videoThumbnail:videoThumbnail videoDescription:description success:^(AFVDBaseNetworkModel *networkCallback) {
+#pragma mark - Fetch favourite videos
+- (void)favouriteVideosAtPageIndex:(NSUInteger)pageIndex userName:(NSString *)userName accessToken:(NSString *)accessToken success:(AFVDVideoList)success failure:(AFVDBaseNetworkFailure)failure {
+    
+    [[AFVDVideoModelDatasource sharedDataSource] fetchFavouriteVideosAtPageIndex:pageIndex userName:userName accessToken:accessToken success:^(AFVDBaseNetworkModel *networkCallback) {
+        
+        AFVDVideoPlaylistModel *model = nil;
+        
+        if(networkCallback.success) {
+            model = [self videoPlaylistModelForData:networkCallback.responseData];
+        }
+    } failure:^(NSError *error) {
+        
+        failure(error);
+    }];
+}
+
+#pragma mark - Set favourite video
+- (void)setFavouriteVideoWithUserName:(NSString *)userName accessToken:(NSString *)accessToken videoId:(NSString *)videoId favouritedDate:(NSDate *)date success:(AFVDBaseNetworkSuccess)success failure:(AFVDBaseNetworkFailure)failure {
+    
+    [[AFVDVideoModelDatasource sharedDataSource] postSetFavouriteVideoWithUserName:userName accessToken:accessToken videoId:videoId favouritedDate:date success:^(AFVDBaseNetworkModel *networkCallback) {
         
         success(networkCallback);
     } failure:^(NSError *error) {
@@ -59,18 +85,16 @@
     }];
 }
 
-#pragma mark - Video relationship model
-- (AFVDVideoRelationshipModel *)videoRelationshipModelForData:(NSDictionary *)data {
+#pragma mark - Remove favourite video
+- (void)removeFavouriteVideoWithUserName:(NSString *)userName accessToken:(NSString *)accessToken videoId:(NSString *)videoId success:(AFVDBaseNetworkSuccess)success failure:(AFVDBaseNetworkFailure)failure {
     
-    AFVDVideoRelationshipModel *model = [[AFVDVideoRelationshipModel alloc] init];
-    
-    NSArray *playlistIdPairs = data[@"playlists"];
-    
-    if(playlistIdPairs) {
-        [model setValue:playlistIdPairs forKey:@"playlistIds"];
-    }
-    
-    return model;
+    [[AFVDVideoModelDatasource sharedDataSource] postRemoveFavouriteVideoWithUserName:userName accessToken:accessToken videoId:videoId success:^(AFVDBaseNetworkModel *networkCallback) {
+        
+        success(networkCallback);
+    } failure:^(NSError *error) {
+        
+        failure(error);
+    }];
 }
 
 #pragma mark - Video playlist model

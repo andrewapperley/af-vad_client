@@ -37,24 +37,24 @@ NSString *email = @"email@email.com";
     //User
 //    [self createUser];
 //    [self fetchUserModel];
-    [self deactivateUser];
+#warning TEST     [self deactivateUser];
 //    [self updateUser];
 //    [self checkIfUsernameIsAvailable];
 //    [self loginUser];
 //    [self logoutUser];
-    [self updateToken];
+#warning TEST    [self updateToken];
 //
 //    //Relationship
 //    [self createRelationship];
 //    [self fetchRelationshipModels];
-//    [self fetchRelationshipModel];
+//    [self fetchRelationshipModelFromId];
 //    
 //    //Videos
 //    [self createVideo];
-#warning TODO    [self fetchVideoModelsAtPageIndex];
-#warning TODO    [self fetchFavouriteVideoModelsAtPageIndex];
-#warning TODO    [self setUserFavouritedVideo];
-#warning TODO    [self unsetUserFavouritedVideo];
+[self fetchVideoModelsAtPageIndex];
+#warning TEST    [self fetchFavouriteVideoModelsAtPageIndex];
+#warning TEST    [self setUserFavouritedVideo];
+#warning TEST    [self unsetUserFavouritedVideo];
 //    [self fetchVideoModel];
 }
 
@@ -104,6 +104,95 @@ NSString *email = @"email@email.com";
     } failure:^(NSError *error) {
         
         NSLog(@"Finish UpdateToken - Failure %d - %@", error.code, error.localizedDescription);
+    }];
+}
+
+- (void)fetchVideoModelsAtPageIndex {
+    
+    AFVDVideoModelFactory *modelFactory = [[AFVDVideoModelFactory alloc] init];
+    
+    NSLog(@"Start AFVDFetchModelsAtIndex");
+    
+    NSUInteger pageIndex = 0;
+    [modelFactory videosAtPageIndex:pageIndex userName:userName accessToken:[self accessToken] success:^(AFVDVideoPlaylistModel *videoPlaylistModel, AFVDBaseNetworkModel *networkCallback) {
+        
+        if(networkCallback.success) {
+            
+            NSLog(@"Finish AFVDFetchModelsAtIndex - Success %d - %@", networkCallback.responseCode, networkCallback.responseMessage);
+            NSLog(@"Count : %d\nModels - %@", videoPlaylistModel.totalNumberOfPages, videoPlaylistModel.videos);
+        } else {
+            NSLog(@"Finish AFVDFetchModelsAtIndex - Failure %d - %@", networkCallback.responseCode, networkCallback.responseMessage);
+        }
+    } failure:^(NSError *error) {
+        
+        NSLog(@"Finish AFVDFetchModelsAtIndex - Failure %d - %@", error.code, error.localizedDescription);
+    }];
+}
+
+- (void)fetchFavouriteVideoModelsAtPageIndex {
+    
+    AFVDVideoModelFactory *modelFactory = [[AFVDVideoModelFactory alloc] init];
+    
+    NSLog(@"Start AFVDFetchFavouriteVideos");
+    
+    NSUInteger pageIndex = 0;
+    [modelFactory favouriteVideosAtPageIndex:pageIndex userName:userName accessToken:[self accessToken] success:^(AFVDVideoPlaylistModel *videoPlaylistModel, AFVDBaseNetworkModel *networkCallback) {
+        
+        if(networkCallback.success) {
+            
+            NSLog(@"Finish AFVDFetchFavouriteVideos - Success %d - %@", networkCallback.responseCode, networkCallback.responseMessage);
+            NSLog(@"Count : %d\nModels - %@", videoPlaylistModel.totalNumberOfPages, videoPlaylistModel.videos);
+        } else {
+            NSLog(@"Finish AFVDFetchFavouriteVideos - Failure %d - %@", networkCallback.responseCode, networkCallback.responseMessage);
+        }
+    } failure:^(NSError *error) {
+        
+        NSLog(@"Finish AFVDFetchFavouriteVideos - Failure %d - %@", error.code, error.localizedDescription);
+    }];
+}
+
+- (void)setUserFavouritedVideo {
+    
+    AFVDVideoModelFactory *modelFactory = [[AFVDVideoModelFactory alloc] init];
+    
+    NSLog(@"Start AFVDSetFavouriteVideo");
+    
+    NSString *videoId = @"652634546253546";
+    NSDate *date = [NSDate date];
+    
+    [modelFactory setFavouriteVideoWithUserName:userName accessToken:[self accessToken] videoId:videoId favouritedDate:date success:^(AFVDBaseNetworkModel *networkCallback) {
+        
+        if(networkCallback.success) {
+            
+            NSLog(@"Finish AFVDSetFavouriteVideo - Success %d - %@", networkCallback.responseCode, networkCallback.responseMessage);
+        } else {
+            NSLog(@"Finish AFVDSetFavouriteVideo - Failure %d - %@", networkCallback.responseCode, networkCallback.responseMessage);
+        }
+    } failure:^(NSError *error) {
+        
+        NSLog(@"Finish AFVDSetFavouriteVideo - Failure %d - %@", error.code, error.localizedDescription);
+    }];
+}
+
+- (void)unsetUserFavouritedVideo {
+    
+    AFVDVideoModelFactory *modelFactory = [[AFVDVideoModelFactory alloc] init];
+
+    NSLog(@"Start AFVDRemoveFavouriteVideo");
+    
+    NSString *videoId = @"652634546253546";
+    
+    [modelFactory removeFavouriteVideoWithUserName:userName accessToken:[self accessToken] videoId:videoId success:^(AFVDBaseNetworkModel *networkCallback) {
+        
+        if(networkCallback.success) {
+            
+            NSLog(@"Finish AFVDRemoveFavouriteVideo - Success %d - %@", networkCallback.responseCode, networkCallback.responseMessage);
+        } else {
+            NSLog(@"Finish AFVDRemoveFavouriteVideo - Failure %d - %@", networkCallback.responseCode, networkCallback.responseMessage);
+        }
+    } failure:^(NSError *error) {
+        
+        NSLog(@"Finish AFVDRemoveFavouriteVideo - Failure %d - %@", error.code, error.localizedDescription);
     }];
 }
 
@@ -258,36 +347,15 @@ NSString *email = @"email@email.com";
     }];
 }
 
-- (void)fetchRelationshipModel {
-    
-    AFVDVideoModelFactory *modelFactory = [[AFVDVideoModelFactory alloc] init];
-    
-    NSLog(@"Start AFVDVideoRelationshipModel");
-    
-    [modelFactory fetchVideoRelationshipModelWithUserName:userName relationshipId:relationshipId accessToken:[self accessToken] success:^(AFVDVideoRelationshipModel *videoRelationshipModel, AFVDBaseNetworkModel *networkCallback) {
-        
-        if(networkCallback.success) {
-            
-            NSLog(@"Finish AFVDVideoRelationshipModel - Success");
-            
-        } else {
-            NSLog(@"Finish AFVDVideoRelationshipModel - Failure %d - %@", networkCallback.responseCode, networkCallback.responseMessage);
-        }
-    } failure:^(NSError *error) {
-        
-        NSLog(@"Finish AFVDVideoRelationshipModel - Failure %d - %@", error.code, error.localizedDescription);
-    }];
-}
-
 - (void)fetchVideoModel {
     
     AFVDVideoModelFactory *modelFactory = [[AFVDVideoModelFactory alloc] init];
     
-    NSUInteger pageIndex = 1;
+    NSUInteger pageIndex = 0;
     
     NSLog(@"Start AFVDVideoPlaylistModel");
     
-    [modelFactory fetchVideoPlaylistModelWithUserName:userName playlistId:playlistId accessToken:[self accessToken] pageIndex:pageIndex success:^(AFVDVideoPlaylistModel *videoPlaylistModel, AFVDBaseNetworkModel *networkCallback) {
+    [modelFactory videosAtPageIndex:pageIndex userName:userName accessToken:[self accessToken] success:^(AFVDVideoPlaylistModel *videoPlaylistModel, AFVDBaseNetworkModel *networkCallback) {
         
         if(networkCallback.success) {
             

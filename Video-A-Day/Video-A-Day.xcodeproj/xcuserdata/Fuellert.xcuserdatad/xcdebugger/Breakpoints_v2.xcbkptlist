@@ -9,44 +9,12 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Video-A-Day/Networking API/VideoModel/Model Factory/AFVDVideoModelFactory.m"
-            timestampString = "407222032.526344"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "69"
-            endingLineNumber = "69"
-            landmarkName = "-videoRelationshipModelForData:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Video-A-Day/Networking API/VideoModel/Model Factory/AFVDVideoModelFactory.m"
-            timestampString = "407222032.526344"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "67"
-            endingLineNumber = "67"
-            landmarkName = "-videoRelationshipModelForData:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "Video-A-Day/AFVDViewController.m"
-            timestampString = "408165685.289329"
+            timestampString = "408236728.244781"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "137"
-            endingLineNumber = "137"
+            startingLineNumber = "226"
+            endingLineNumber = "226"
             landmarkName = "-updateUser"
             landmarkType = "5">
             <Locations>
@@ -57,11 +25,11 @@
                   symbolName = "-[AFVDViewController updateUser]"
                   moduleName = "Video-A-Day"
                   urlString = "file:///Users/Fuellert/Documents/VideoADayApp/af-vad_client/Video-A-Day/Video-A-Day/AFVDViewController.m"
-                  timestampString = "408165685.600164"
+                  timestampString = "408236728.58944"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "138"
-                  endingLineNumber = "138"
+                  startingLineNumber = "227"
+                  endingLineNumber = "227"
                   offsetFromSymbolStart = "197">
                </Location>
                <Location
@@ -71,11 +39,11 @@
                   symbolName = "__32-[AFVDViewController updateUser]_block_invoke"
                   moduleName = "Video-A-Day"
                   urlString = "file:///Users/Fuellert/Documents/VideoADayApp/af-vad_client/Video-A-Day/Video-A-Day/AFVDViewController.m"
-                  timestampString = "408165685.600477"
+                  timestampString = "408236728.589738"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "138"
-                  endingLineNumber = "138"
+                  startingLineNumber = "227"
+                  endingLineNumber = "227"
                   offsetFromSymbolStart = "50">
                </Location>
             </Locations>

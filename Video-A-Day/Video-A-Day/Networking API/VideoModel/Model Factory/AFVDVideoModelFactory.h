@@ -12,19 +12,27 @@
 #import "AFVDVideoPlaylistModel.h"
 #import "AFVDVideoRelationshipModel.h"
 
-typedef void(^AFVDVideoPlaylistModelSuccess)(AFVDVideoPlaylistModel *videoPlaylistModel, AFVDBaseNetworkModel *networkCallback);
-typedef void(^AFVDVideoRelationshipModelSuccess)(AFVDVideoRelationshipModel *videoRelationshipModel, AFVDBaseNetworkModel *networkCallback);
 typedef void(^AFVDVideoCreationModelSuccess)(AFVDBaseNetworkModel *networkCallback);
+typedef void(^AFVDVideoList)(AFVDVideoPlaylistModel *videoPlaylistModel, AFVDBaseNetworkModel *networkCallback);
 
 @interface AFVDVideoModelFactory : NSObject
 
-#pragma mark - Fetch video playlist
-- (void)fetchVideoPlaylistModelWithUserName:(NSString *)userName playlistId:(NSString *)playlistId accessToken:(NSString *)accessToken pageIndex:(NSUInteger)pageIndex success:(AFVDVideoPlaylistModelSuccess)success failure:(AFVDBaseNetworkFailure)failure;
-
-#pragma mark - Fetch video relationship playlist
-- (void)fetchVideoRelationshipModelWithUserName:(NSString *)userName relationshipId:(NSString *)relationshipId accessToken:(NSString *)accessToken success:(AFVDVideoRelationshipModelSuccess)success failure:(AFVDBaseNetworkFailure)failure;
-
 #pragma mark - Post video creation
 - (void)postVideoModelWithUserName:(NSString *)userName relationshipId:(NSString *)relationshipId videoContent:(NSString *)videoContent date:(NSDate *)date accessToken:(NSString *)accessToken videoThumbnail:(NSString *)videoThumbnail andVideoDescription:(NSString *)description success:(AFVDVideoCreationModelSuccess)success failure:(AFVDBaseNetworkFailure)failure;
+
+#pragma mark - Videos at page index
+- (void)videosAtPageIndex:(NSUInteger)pageIndex userName:(NSString *)userName accessToken:(NSString *)accessToken success:(AFVDVideoList)success failure:(AFVDBaseNetworkFailure)failure;
+
+#pragma mark - Relationship videos at page index
+- (void)relationshipVideosAtPageIndex:(NSUInteger)pageIndex userName:(NSString *)userName secondUser:(NSString *)secondUser accessToken:(NSString *)accessToken relationshipId:(NSString *)relationshipId success:(AFVDVideoList)success failure:(AFVDBaseNetworkFailure)failure;
+
+#pragma mark - Fetch favourite videos
+- (void)favouriteVideosAtPageIndex:(NSUInteger)pageIndex userName:(NSString *)userName accessToken:(NSString *)accessToken success:(AFVDVideoList)success failure:(AFVDBaseNetworkFailure)failure;
+
+#pragma mark - Set favourite video
+- (void)setFavouriteVideoWithUserName:(NSString *)userName accessToken:(NSString *)accessToken videoId:(NSString *)videoId favouritedDate:(NSDate *)date success:(AFVDBaseNetworkSuccess)success failure:(AFVDBaseNetworkFailure)failure;
+
+#pragma mark - Remove favourite video
+- (void)removeFavouriteVideoWithUserName:(NSString *)userName accessToken:(NSString *)accessToken videoId:(NSString *)videoId success:(AFVDBaseNetworkSuccess)success failure:(AFVDBaseNetworkFailure)failure;
 
 @end
