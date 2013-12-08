@@ -42,11 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Video-A-Day/AFVDViewController.m"
-            timestampString = "407820403.91448"
+            timestampString = "408165685.289329"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "111"
-            endingLineNumber = "111"
+            startingLineNumber = "137"
+            endingLineNumber = "137"
             landmarkName = "-updateUser"
             landmarkType = "5">
             <Locations>
@@ -57,11 +57,11 @@
                   symbolName = "-[AFVDViewController updateUser]"
                   moduleName = "Video-A-Day"
                   urlString = "file:///Users/Fuellert/Documents/VideoADayApp/af-vad_client/Video-A-Day/Video-A-Day/AFVDViewController.m"
-                  timestampString = "407822845.995832"
+                  timestampString = "408165685.600164"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "112"
-                  endingLineNumber = "112"
+                  startingLineNumber = "138"
+                  endingLineNumber = "138"
                   offsetFromSymbolStart = "197">
                </Location>
                <Location
@@ -71,11 +71,11 @@
                   symbolName = "__32-[AFVDViewController updateUser]_block_invoke"
                   moduleName = "Video-A-Day"
                   urlString = "file:///Users/Fuellert/Documents/VideoADayApp/af-vad_client/Video-A-Day/Video-A-Day/AFVDViewController.m"
-                  timestampString = "407822845.996133"
+                  timestampString = "408165685.600477"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "112"
-                  endingLineNumber = "112"
+                  startingLineNumber = "138"
+                  endingLineNumber = "138"
                   offsetFromSymbolStart = "50">
                </Location>
             </Locations>

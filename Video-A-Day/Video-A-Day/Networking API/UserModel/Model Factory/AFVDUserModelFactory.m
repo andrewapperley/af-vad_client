@@ -114,6 +114,25 @@
     }];
 }
 
+#pragma mark - Update token
+- (void)fetchUserUpdateTokenWithUsername:(NSString *)userName accessToken:(NSString *)accessToken success:(AFVDUserUpdateTokenSuccess)success failure:(AFVDBaseNetworkFailure)failure {
+    
+    [[AFVDUserModelDatasource sharedDataSource] postUpdateTokenWithUsername:userName accessToken:accessToken success:^(AFVDBaseNetworkModel *networkCallback) {
+        
+        NSString *accessToken;
+        
+        if(networkCallback.success) {
+            accessToken = networkCallback.responseData[@"access_token"];
+            [AFVDKeychain keychain].accessToken = accessToken;
+        }
+        
+        success(accessToken, networkCallback);
+    } failure:^(NSError *error) {
+        
+        failure(error);
+    }];
+}
+
 #pragma mark - User model
 - (AFVDUserModel *)userModelForData:(NSDictionary *)data {
     

@@ -177,4 +177,19 @@ NSString *kAFVDDeactivateUserEndpointURL                = @"/user/removeUser/";
     }];
 }
 
+#pragma mark - Update token
+- (void)postUpdateTokenWithUsername:(NSString *)userName accessToken:(NSString *)accessToken success:(AFVDBaseNetworkSuccess)success failure:(AFVDBaseNetworkFailure)failure {
+    
+    NSDictionary *parameters = @{kAFVDUserModelParameterKeyUserName : userName,
+                                 kAFVDUserModelParameterKeyAcessToken : accessToken};
+    
+    [self makeURLRequestWithType:kAFVDNetworkCallType_POST endpointURLString:kAFVDDeactivateUserEndpointURL parameters:parameters success:^(AFVDBaseNetworkModel *networkCallback) {
+        
+        success(networkCallback);
+    } failure:^(NSError *error) {
+        
+        failure(error);
+    }];
+}
+
 @end

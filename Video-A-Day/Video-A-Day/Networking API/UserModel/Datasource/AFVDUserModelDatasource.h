@@ -31,4 +31,7 @@
 #pragma mark - Deactivate user
 - (void)postDeactivateUser:(NSString *)userName password:(NSString *)password accessToken:(NSString *)accessToken success:(AFVDBaseNetworkSuccess)success failure:(AFVDBaseNetworkFailure)failure;
 
+#pragma mark - Update token
+- (void)postUpdateTokenWithUsername:(NSString *)userName accessToken:(NSString *)accessToken success:(AFVDBaseNetworkSuccess)success failure:(AFVDBaseNetworkFailure)failure;
+
 @end

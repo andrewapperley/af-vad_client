@@ -14,6 +14,7 @@ typedef void(^AFVDUserLoginSuccess)(AFVDUserModel *userModel, NSString *accessTo
 typedef void(^AFVDUserModelSuccess)(AFVDUserModel *userModel, AFVDBaseNetworkModel *networkCallback);
 typedef void(^AFVDUserCreationSuccess)(AFVDBaseNetworkModel *networkCallback);
 typedef void(^AFVDUsernameAvailabilitySuccess)(AFVDBaseNetworkModel *networkCallback, BOOL isUsernameAvailable);
+typedef void(^AFVDUserUpdateTokenSuccess)(NSString *accessToken, AFVDBaseNetworkModel *networkCallback);
 
 @interface AFVDUserModelFactory : NSObject
 
@@ -37,5 +38,8 @@ typedef void(^AFVDUsernameAvailabilitySuccess)(AFVDBaseNetworkModel *networkCall
 
 #pragma mark - Check if username is available
 - (void)checkIfUsernameIsAvailable:(NSString *)userName success:(AFVDUsernameAvailabilitySuccess)success failure:(AFVDBaseNetworkFailure)failure;
+
+#pragma mark - Update token
+- (void)fetchUserUpdateTokenWithUsername:(NSString *)userName accessToken:(NSString *)accessToken success:(AFVDUserUpdateTokenSuccess)success failure:(AFVDBaseNetworkFailure)failure;
 
 @end

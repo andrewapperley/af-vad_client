@@ -35,24 +35,27 @@ NSString *email = @"email@email.com";
     [super viewDidLoad];
 
     //User
-//    //Already created both users and will fail saying user already exists so there is no point in calling this
-//    //as it works :)
 //    [self createUser];
-//    [self loginUser];
-//    [self checkIfUsernameIsAvailable];
 //    [self fetchUserModel];
+    [self deactivateUser];
 //    [self updateUser];
+//    [self checkIfUsernameIsAvailable];
+//    [self loginUser];
 //    [self logoutUser];
-//
-//    //Videos
-//    [self fetchRelationshipModel];
-//    [self fetchVideoModel];
-//    [self createVideo];
+    [self updateToken];
 //
 //    //Relationship
 //    [self createRelationship];
-    [self fetchRelationshipModels];       //TODO
-//    [self fetchRelationshipModelFromId];
+//    [self fetchRelationshipModels];
+//    [self fetchRelationshipModel];
+//    
+//    //Videos
+//    [self createVideo];
+#warning TODO    [self fetchVideoModelsAtPageIndex];
+#warning TODO    [self fetchFavouriteVideoModelsAtPageIndex];
+#warning TODO    [self setUserFavouritedVideo];
+#warning TODO    [self unsetUserFavouritedVideo];
+//    [self fetchVideoModel];
 }
 
 - (void)createUser {
@@ -78,6 +81,29 @@ NSString *email = @"email@email.com";
     } failure:^(NSError *error) {
         
         NSLog(@"Finish AFVDCreateUser - Failure %d - %@", error.code, error.localizedDescription);
+    }];
+}
+
+- (void)updateToken {
+    
+    AFVDUserModelFactory *modelFactory = [[AFVDUserModelFactory alloc] init];
+    
+    NSLog(@"Start UpdateToken");
+        
+    [modelFactory fetchUserUpdateTokenWithUsername:userName accessToken:[self accessToken] success:^(NSString *accessToken, AFVDBaseNetworkModel *networkCallback) {
+        
+        if(networkCallback.success) {
+            
+            NSLog(@"Finish UpdateToken - Success %d - %@", networkCallback.responseCode, networkCallback.responseMessage);
+            NSLog(@"Access token : %@", accessToken);
+            
+        } else {
+            NSLog(@"Finish UpdateToken - Failure %d - %@", networkCallback.responseCode, networkCallback.responseMessage);
+        }
+        
+    } failure:^(NSError *error) {
+        
+        NSLog(@"Finish UpdateToken - Failure %d - %@", error.code, error.localizedDescription);
     }];
 }
 
