@@ -51,7 +51,7 @@ NSString *email = @"email@email.com";
 //    
 //    //Videos
 //    [self createVideo];
-[self fetchVideoModelsAtPageIndex];
+#warning TEST    [self fetchVideoModelsAtPageIndex];
 #warning TEST    [self fetchFavouriteVideoModelsAtPageIndex];
 #warning TEST    [self setUserFavouritedVideo];
 #warning TEST    [self unsetUserFavouritedVideo];
