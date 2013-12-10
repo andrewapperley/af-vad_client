@@ -16,12 +16,12 @@
 #import "AFVDVideoModelFactory.h"
 #import "AFVDRelationshipModelFactory.h"
 
-NSString *userName = @"jfuellert001";
-NSString *displayName = @"Nice Display Name";
-NSString *otherUserName = @"someOtherUsername";
+NSString *userName = @"andrewApperley123";
+NSString *displayName = @"a_apperley";
+NSString *otherUserName = @"andrewApperley12345";
 NSString *playlistId = @"d65cab706962faf9396aa94e4193ddb9";
 NSString *password = @"Abcde321";
-NSString *relationshipId = @"b176c60beb462d8640690c25f8e533db";
+NSString *relationshipId = @"97fb98a484426f662c389bc9f686a1ee";
 NSString *email = @"email@email.com";
 
 @interface AFVDViewController ()
@@ -351,7 +351,7 @@ NSString *email = @"email@email.com";
     
     AFVDVideoModelFactory *modelFactory = [[AFVDVideoModelFactory alloc] init];
     
-    NSUInteger pageIndex = 0;
+    NSUInteger pageIndex = 1;
     
     NSLog(@"Start AFVDVideoPlaylistModel");
     
@@ -415,8 +415,8 @@ NSString *email = @"email@email.com";
 
     NSLog(@"Start RelationshipCreation");
 
-    NSString *startDate = @"2013-11-19";
-    NSString *endDate = @"2014-11-19";
+    NSString *startDate = [[NSDate date] description];//@"2013-11-19";
+    NSString *endDate = [[NSDate date] description];//@"2014-11-19";
     NSArray *users = @[userName, otherUserName];
     
     [modelFactory postRelationshipModelWithUserName:userName accessToken:[self accessToken] startDate:startDate endDate:endDate users:users success:^(AFVDBaseNetworkModel *networkCallback) {
