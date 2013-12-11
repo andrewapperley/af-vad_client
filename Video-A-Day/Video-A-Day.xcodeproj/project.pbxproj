@@ -33,6 +33,7 @@
 		7677BA6F18373A6B00F3EDC9 /* AFVDUserModelFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 7677BA6918373A6B00F3EDC9 /* AFVDUserModelFactory.m */; };
 		7677BA7018373A6B00F3EDC9 /* AFVDUserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7677BA6C18373A6B00F3EDC9 /* AFVDUserModel.m */; };
 		7696C7DF184C366000B270FC /* AFVDKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = 7696C7DE184C366000B270FC /* AFVDKeychain.m */; };
+		76BD304118581CC00009E418 /* AFVDTimeline.m in Sources */ = {isa = PBXBuildFile; fileRef = 76BD304018581CC00009E418 /* AFVDTimeline.m */; };
 		76C651931838003D003C7F7D /* NSDictionary+NSDictionary_NSDataConversion.m in Sources */ = {isa = PBXBuildFile; fileRef = 76C651921838003D003C7F7D /* NSDictionary+NSDictionary_NSDataConversion.m */; };
 		76C6519818380A14003C7F7D /* AFVDBaseNetworkModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 76C6519718380A14003C7F7D /* AFVDBaseNetworkModel.m */; };
 		76C651A7183840E4003C7F7D /* AFVDVideoModelDatasource.m in Sources */ = {isa = PBXBuildFile; fileRef = 76C651A0183840E4003C7F7D /* AFVDVideoModelDatasource.m */; };
@@ -96,6 +97,8 @@
 		7677BA6C18373A6B00F3EDC9 /* AFVDUserModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFVDUserModel.m; sourceTree = "<group>"; };
 		7696C7DD184C366000B270FC /* AFVDKeychain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFVDKeychain.h; path = Keychain/AFVDKeychain.h; sourceTree = "<group>"; };
 		7696C7DE184C366000B270FC /* AFVDKeychain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AFVDKeychain.m; path = Keychain/AFVDKeychain.m; sourceTree = "<group>"; };
+		76BD303F18581CC00009E418 /* AFVDTimeline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFVDTimeline.h; path = Timeline/AFVDTimeline.h; sourceTree = "<group>"; };
+		76BD304018581CC00009E418 /* AFVDTimeline.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AFVDTimeline.m; path = Timeline/AFVDTimeline.m; sourceTree = "<group>"; };
 		76C651911838003D003C7F7D /* NSDictionary+NSDictionary_NSDataConversion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDictionary+NSDictionary_NSDataConversion.h"; path = "AF/AFCategory/NSDictionary+NSDataConversion/NSDictionary+NSDictionary_NSDataConversion.h"; sourceTree = "<group>"; };
 		76C651921838003D003C7F7D /* NSDictionary+NSDictionary_NSDataConversion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSDictionary+NSDictionary_NSDataConversion.m"; path = "AF/AFCategory/NSDictionary+NSDataConversion/NSDictionary+NSDictionary_NSDataConversion.m"; sourceTree = "<group>"; };
 		76C6519618380A14003C7F7D /* AFVDBaseNetworkModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFVDBaseNetworkModel.h; path = "Base Network Model/AFVDBaseNetworkModel.h"; sourceTree = "<group>"; };
@@ -173,6 +176,7 @@
 		0F2FC6F01837303800611873 /* Video-A-Day */ = {
 			isa = PBXGroup;
 			children = (
+				76BD303E18581CA90009E418 /* Timeline */,
 				0F796138183DC81900920C59 /* Assets-TEMP */,
 				76C6518E1837FFCD003C7F7D /* AF */,
 				0F2FC6F91837303800611873 /* AFVDAppDelegate.h */,
@@ -349,6 +353,15 @@
 				7696C7DE184C366000B270FC /* AFVDKeychain.m */,
 			);
 			name = Keychain;
+			sourceTree = "<group>";
+		};
+		76BD303E18581CA90009E418 /* Timeline */ = {
+			isa = PBXGroup;
+			children = (
+				76BD303F18581CC00009E418 /* AFVDTimeline.h */,
+				76BD304018581CC00009E418 /* AFVDTimeline.m */,
+			);
+			name = Timeline;
 			sourceTree = "<group>";
 		};
 		76C6518E1837FFCD003C7F7D /* AF */ = {
@@ -561,6 +574,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0F2FC7041837303900611873 /* AFVDViewController.m in Sources */,
+				76BD304118581CC00009E418 /* AFVDTimeline.m in Sources */,
 				7677BA7018373A6B00F3EDC9 /* AFVDUserModel.m in Sources */,
 				7677BA6E18373A6B00F3EDC9 /* AFVDUserModelDatasource.m in Sources */,
 				7677BA6F18373A6B00F3EDC9 /* AFVDUserModelFactory.m in Sources */,
