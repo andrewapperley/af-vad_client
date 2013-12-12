@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0F10E3C51859375200FC1433 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F10E3C41859375200FC1433 /* AVFoundation.framework */; };
+		0F10E3CB18593B8B00FC1433 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F10E3CA18593B8B00FC1433 /* CoreMedia.framework */; };
+		0F10E3CD18593B9A00FC1433 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F10E3CC18593B9A00FC1433 /* MediaPlayer.framework */; };
+		0F10E3CF18593BAE00FC1433 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F10E3CE18593BAE00FC1433 /* MobileCoreServices.framework */; };
+		0F10E3DA18594B9600FC1433 /* AFVideoCaptureController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F10E3D918594B9600FC1433 /* AFVideoCaptureController.m */; };
+		0F10E3DD18594FA800FC1433 /* AFVideoCaptureControls.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F10E3DC18594FA800FC1433 /* AFVideoCaptureControls.m */; };
 		0F2FC6EB1837303800611873 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F2FC6EA1837303800611873 /* Foundation.framework */; };
 		0F2FC6ED1837303800611873 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F2FC6EC1837303800611873 /* CoreGraphics.framework */; };
 		0F2FC6EF1837303800611873 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F2FC6EE1837303800611873 /* UIKit.framework */; };
@@ -54,6 +60,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0F10E3C41859375200FC1433 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		0F10E3C818593B8200FC1433 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
+		0F10E3CA18593B8B00FC1433 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		0F10E3CC18593B9A00FC1433 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
+		0F10E3CE18593BAE00FC1433 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		0F10E3D818594B9600FC1433 /* AFVideoCaptureController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFVideoCaptureController.h; sourceTree = "<group>"; };
+		0F10E3D918594B9600FC1433 /* AFVideoCaptureController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFVideoCaptureController.m; sourceTree = "<group>"; };
+		0F10E3DB18594FA700FC1433 /* AFVideoCaptureControls.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFVideoCaptureControls.h; sourceTree = "<group>"; };
+		0F10E3DC18594FA800FC1433 /* AFVideoCaptureControls.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFVideoCaptureControls.m; sourceTree = "<group>"; };
 		0F2FC6E71837303800611873 /* Video-A-Day.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Video-A-Day.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0F2FC6EA1837303800611873 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		0F2FC6EC1837303800611873 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -118,6 +133,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0F10E3CF18593BAE00FC1433 /* MobileCoreServices.framework in Frameworks */,
+				0F10E3CD18593B9A00FC1433 /* MediaPlayer.framework in Frameworks */,
+				0F10E3CB18593B8B00FC1433 /* CoreMedia.framework in Frameworks */,
+				0F10E3C51859375200FC1433 /* AVFoundation.framework in Frameworks */,
 				0F2FC6ED1837303800611873 /* CoreGraphics.framework in Frameworks */,
 				0F2FC6EF1837303800611873 /* UIKit.framework in Frameworks */,
 				0F2FC6EB1837303800611873 /* Foundation.framework in Frameworks */,
@@ -138,6 +157,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0F10E3D718594B8200FC1433 /* AFVideoCapture */ = {
+			isa = PBXGroup;
+			children = (
+				0F10E3D818594B9600FC1433 /* AFVideoCaptureController.h */,
+				0F10E3D918594B9600FC1433 /* AFVideoCaptureController.m */,
+				0F10E3DB18594FA700FC1433 /* AFVideoCaptureControls.h */,
+				0F10E3DC18594FA800FC1433 /* AFVideoCaptureControls.m */,
+			);
+			name = AFVideoCapture;
+			path = AF/AFVideoCapture;
+			sourceTree = "<group>";
+		};
 		0F2FC6DE1837303800611873 = {
 			isa = PBXGroup;
 			children = (
@@ -161,6 +192,11 @@
 		0F2FC6E91837303800611873 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0F10E3CE18593BAE00FC1433 /* MobileCoreServices.framework */,
+				0F10E3CC18593B9A00FC1433 /* MediaPlayer.framework */,
+				0F10E3CA18593B8B00FC1433 /* CoreMedia.framework */,
+				0F10E3C818593B8200FC1433 /* AssetsLibrary.framework */,
+				0F10E3C41859375200FC1433 /* AVFoundation.framework */,
 				0F2FC6EA1837303800611873 /* Foundation.framework */,
 				0F2FC6EC1837303800611873 /* CoreGraphics.framework */,
 				0F2FC6EE1837303800611873 /* UIKit.framework */,
@@ -354,6 +390,7 @@
 		76C6518E1837FFCD003C7F7D /* AF */ = {
 			isa = PBXGroup;
 			children = (
+				0F10E3D718594B8200FC1433 /* AFVideoCapture */,
 				76C6518F1837FFFD003C7F7D /* AFCategory */,
 			);
 			name = AF;
@@ -573,11 +610,13 @@
 				0F2FC6FB1837303800611873 /* AFVDAppDelegate.m in Sources */,
 				76C6519818380A14003C7F7D /* AFVDBaseNetworkModel.m in Sources */,
 				76C651A7183840E4003C7F7D /* AFVDVideoModelDatasource.m in Sources */,
+				0F10E3DD18594FA800FC1433 /* AFVideoCaptureControls.m in Sources */,
 				76C651A8183840E4003C7F7D /* AFVDVideoModelFactory.m in Sources */,
 				7677BA6D18373A6B00F3EDC9 /* AFVDBaseNetworkDatasource.m in Sources */,
 				76C651931838003D003C7F7D /* NSDictionary+NSDictionary_NSDataConversion.m in Sources */,
 				7610BC5B183B1108003CE193 /* AFVDRelationshipModelDatasource.m in Sources */,
 				76C651AC18384647003C7F7D /* AFVDVideoPlaylistModel.m in Sources */,
+				0F10E3DA18594B9600FC1433 /* AFVideoCaptureController.m in Sources */,
 				76C651A9183840E4003C7F7D /* AFVDVideoModel.m in Sources */,
 				7610BC5E183B1137003CE193 /* AFVDRelationshipModelFactory.m in Sources */,
 			);

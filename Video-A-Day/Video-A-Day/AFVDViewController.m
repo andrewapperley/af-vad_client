@@ -51,7 +51,7 @@ NSString *email = @"email@email.com";
 //
 //    //Relationship
 //    [self createRelationship];
-    [self fetchRelationshipModels];       //TODO
+//    [self fetchRelationshipModels];       //TODO
 //    [self fetchRelationshipModelFromId];
 }
 
