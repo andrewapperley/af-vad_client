@@ -14,7 +14,6 @@
 
 @interface AFVideoCaptureController : UIViewController <AFVideoCaptureControlsDelegate, AVCaptureFileOutputRecordingDelegate>
 
-- (void)setupVideoCaptureProperties;
 - (AVCaptureDeviceInput *)videoCameraForDevicePosition:(AVCaptureDevicePosition)position;
 
 @end

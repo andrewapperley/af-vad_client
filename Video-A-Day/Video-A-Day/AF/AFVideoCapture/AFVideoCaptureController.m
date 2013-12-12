@@ -11,7 +11,7 @@
 @interface AFVideoCaptureController ()
 {
     AVCaptureSession *captureSession;
-    AVCaptureDeviceInput *cameraInput;
+    AVCaptureDeviceInput *cameraInputDevice;
     AVCaptureMovieFileOutput *cameraOutput;
     AVCaptureVideoPreviewLayer *previewWindow;
     AFVideoCaptureControls *mainControls;
@@ -21,20 +21,53 @@
 
 @implementation AFVideoCaptureController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        captureSession = [[AVCaptureSession alloc] init];
-        [self setupVideoCaptureProperties];
-    }
-    return self;
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
+
+    captureSession = [[AVCaptureSession alloc] init];
+
+    //create video input
+    
+    AVCaptureDevice *videoDevice = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
+    
+    if (videoDevice) {
+        NSError *error;
+        cameraInputDevice = [AVCaptureDeviceInput deviceInputWithDevice:videoDevice error:&error];
+        if (cameraInputDevice) {
+            if ([captureSession canAddInput:cameraInputDevice]) {
+                [captureSession addInput:cameraInputDevice];
+            }
+        }
+    }
+    
+    //create audio input
+    
+    AVCaptureDevice *audioDevice = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeAudio];
+    if (audioDevice) {
+        NSError *error;
+        AVCaptureDeviceInput *audioInput = [AVCaptureDeviceInput deviceInputWithDevice:audioDevice error:&error];
+        if (audioInput) {
+            [captureSession addInput:audioInput];
+        }
+    }
+    
+    //set session preset
+    
+    [captureSession setSessionPreset:AVCaptureSessionPresetMedium];
+    
+    // setup output properties
+    
+    [self setupVideoOutputProperties];
+    
+    //setup preview layer
+    
+    previewWindow = [[AVCaptureVideoPreviewLayer alloc] initWithSession:captureSession];
+    [previewWindow setVideoGravity:AVLayerVideoGravityResizeAspectFill];
+    previewWindow.frame = CGRectMake(10, 10, 300, 300);
+    [self.view.layer addSublayer:previewWindow];
+    
+    [captureSession startRunning];
 }
 
 - (void)didReceiveMemoryWarning
@@ -47,7 +80,7 @@
 #pragma VideoCapture methods
 #pragma -
 
-- (void)setupVideoCaptureProperties {
+- (void)setupVideoOutputProperties {
     
 }
 
