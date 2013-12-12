@@ -33,6 +33,8 @@
 		7677BA6F18373A6B00F3EDC9 /* AFVDUserModelFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 7677BA6918373A6B00F3EDC9 /* AFVDUserModelFactory.m */; };
 		7677BA7018373A6B00F3EDC9 /* AFVDUserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7677BA6C18373A6B00F3EDC9 /* AFVDUserModel.m */; };
 		7696C7DF184C366000B270FC /* AFVDKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = 7696C7DE184C366000B270FC /* AFVDKeychain.m */; };
+		76AD7E5B18596F0E006EBA8B /* AFVDTimelineCanvas.m in Sources */ = {isa = PBXBuildFile; fileRef = 76AD7E5A18596F0E006EBA8B /* AFVDTimelineCanvas.m */; };
+		76AD7E6018596FCC006EBA8B /* AFVDTimelineCanvasLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 76AD7E5F18596FCC006EBA8B /* AFVDTimelineCanvasLayout.m */; };
 		76BD304118581CC00009E418 /* AFVDTimeline.m in Sources */ = {isa = PBXBuildFile; fileRef = 76BD304018581CC00009E418 /* AFVDTimeline.m */; };
 		76C651931838003D003C7F7D /* NSDictionary+NSDictionary_NSDataConversion.m in Sources */ = {isa = PBXBuildFile; fileRef = 76C651921838003D003C7F7D /* NSDictionary+NSDictionary_NSDataConversion.m */; };
 		76C6519818380A14003C7F7D /* AFVDBaseNetworkModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 76C6519718380A14003C7F7D /* AFVDBaseNetworkModel.m */; };
@@ -97,6 +99,10 @@
 		7677BA6C18373A6B00F3EDC9 /* AFVDUserModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFVDUserModel.m; sourceTree = "<group>"; };
 		7696C7DD184C366000B270FC /* AFVDKeychain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFVDKeychain.h; path = Keychain/AFVDKeychain.h; sourceTree = "<group>"; };
 		7696C7DE184C366000B270FC /* AFVDKeychain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AFVDKeychain.m; path = Keychain/AFVDKeychain.m; sourceTree = "<group>"; };
+		76AD7E5918596F0E006EBA8B /* AFVDTimelineCanvas.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFVDTimelineCanvas.h; path = Timeline/AFVDTimelineCanvas/AFVDTimelineCanvas.h; sourceTree = "<group>"; };
+		76AD7E5A18596F0E006EBA8B /* AFVDTimelineCanvas.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AFVDTimelineCanvas.m; path = Timeline/AFVDTimelineCanvas/AFVDTimelineCanvas.m; sourceTree = "<group>"; };
+		76AD7E5E18596FCC006EBA8B /* AFVDTimelineCanvasLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFVDTimelineCanvasLayout.h; path = Timeline/AFVDTimelineCanvasLayout/AFVDTimelineCanvasLayout.h; sourceTree = "<group>"; };
+		76AD7E5F18596FCC006EBA8B /* AFVDTimelineCanvasLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AFVDTimelineCanvasLayout.m; path = Timeline/AFVDTimelineCanvasLayout/AFVDTimelineCanvasLayout.m; sourceTree = "<group>"; };
 		76BD303F18581CC00009E418 /* AFVDTimeline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFVDTimeline.h; path = Timeline/AFVDTimeline.h; sourceTree = "<group>"; };
 		76BD304018581CC00009E418 /* AFVDTimeline.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AFVDTimeline.m; path = Timeline/AFVDTimeline.m; sourceTree = "<group>"; };
 		76C651911838003D003C7F7D /* NSDictionary+NSDictionary_NSDataConversion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDictionary+NSDictionary_NSDataConversion.h"; path = "AF/AFCategory/NSDictionary+NSDataConversion/NSDictionary+NSDictionary_NSDataConversion.h"; sourceTree = "<group>"; };
@@ -355,11 +361,31 @@
 			name = Keychain;
 			sourceTree = "<group>";
 		};
+		76AD7E5818596EC3006EBA8B /* AFVDTimelineCanvas */ = {
+			isa = PBXGroup;
+			children = (
+				76AD7E5918596F0E006EBA8B /* AFVDTimelineCanvas.h */,
+				76AD7E5A18596F0E006EBA8B /* AFVDTimelineCanvas.m */,
+			);
+			name = AFVDTimelineCanvas;
+			sourceTree = "<group>";
+		};
+		76AD7E5D18596FA0006EBA8B /* AFVDTimelineCanvasLayout */ = {
+			isa = PBXGroup;
+			children = (
+				76AD7E5E18596FCC006EBA8B /* AFVDTimelineCanvasLayout.h */,
+				76AD7E5F18596FCC006EBA8B /* AFVDTimelineCanvasLayout.m */,
+			);
+			name = AFVDTimelineCanvasLayout;
+			sourceTree = "<group>";
+		};
 		76BD303E18581CA90009E418 /* Timeline */ = {
 			isa = PBXGroup;
 			children = (
 				76BD303F18581CC00009E418 /* AFVDTimeline.h */,
 				76BD304018581CC00009E418 /* AFVDTimeline.m */,
+				76AD7E5818596EC3006EBA8B /* AFVDTimelineCanvas */,
+				76AD7E5D18596FA0006EBA8B /* AFVDTimelineCanvasLayout */,
 			);
 			name = Timeline;
 			sourceTree = "<group>";
@@ -578,10 +604,12 @@
 				7677BA7018373A6B00F3EDC9 /* AFVDUserModel.m in Sources */,
 				7677BA6E18373A6B00F3EDC9 /* AFVDUserModelDatasource.m in Sources */,
 				7677BA6F18373A6B00F3EDC9 /* AFVDUserModelFactory.m in Sources */,
+				76AD7E6018596FCC006EBA8B /* AFVDTimelineCanvasLayout.m in Sources */,
 				7610BC61183B119C003CE193 /* AFVDRelationshipModel.m in Sources */,
 				0F2FC6F71837303800611873 /* main.m in Sources */,
 				76C651AF18385CB1003C7F7D /* AFVDVideoRelationshipModel.m in Sources */,
 				0F79613E183EE64E00920C59 /* AFVDUrlHasher.m in Sources */,
+				76AD7E5B18596F0E006EBA8B /* AFVDTimelineCanvas.m in Sources */,
 				7657BBF4184EE1A1004CA559 /* AFVDBaseNetworkStatics.m in Sources */,
 				7696C7DF184C366000B270FC /* AFVDKeychain.m in Sources */,
 				0F2FC6FB1837303800611873 /* AFVDAppDelegate.m in Sources */,

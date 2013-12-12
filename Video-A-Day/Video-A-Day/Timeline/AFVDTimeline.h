@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AFVDTimeline : UIView
+@interface AFVDTimeline : UIViewController
 
 @end
