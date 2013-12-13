@@ -182,17 +182,17 @@
 		0F2FC6F01837303800611873 /* Video-A-Day */ = {
 			isa = PBXGroup;
 			children = (
-				76BD303E18581CA90009E418 /* Timeline */,
-				0F796138183DC81900920C59 /* Assets-TEMP */,
 				76C6518E1837FFCD003C7F7D /* AF */,
 				0F2FC6F91837303800611873 /* AFVDAppDelegate.h */,
 				0F2FC6FA1837303800611873 /* AFVDAppDelegate.m */,
 				0F2FC7021837303900611873 /* AFVDViewController.h */,
 				0F2FC7031837303900611873 /* AFVDViewController.m */,
+				0F796138183DC81900920C59 /* Assets-TEMP */,
 				0F79613518394DBE00920C59 /* Constants */,
 				0F2FC7051837303900611873 /* Images.xcassets */,
 				7677BA5F18373A6B00F3EDC9 /* Networking API */,
 				0F2FC6F11837303800611873 /* Supporting Files */,
+				76BD303E18581CA90009E418 /* Timeline */,
 			);
 			path = "Video-A-Day";
 			sourceTree = "<group>";

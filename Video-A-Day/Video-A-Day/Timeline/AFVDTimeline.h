@@ -8,6 +8,17 @@
 
 #import <UIKit/UIKit.h>
 
+@class AFVDTimeline;
+
+@protocol AFVDTimelineDelegate <NSObject>
+
+- (void)timelineWillReachEnd:(AFVDTimeline *)timeline;
+- (void)timelineDidReachEnd:(AFVDTimeline *)timeline;
+
+@end
+
 @interface AFVDTimeline : UIViewController
+
+@property (nonatomic, weak) id<AFVDTimelineDelegate> delegate;
 
 @end
