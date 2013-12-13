@@ -16,6 +16,7 @@
 #import "AFVDVideoModelFactory.h"
 #import "AFVDRelationshipModelFactory.h"
 #import "AFVideoCaptureController.h"
+#import "AFVideoCaptureConfig.h"
 
 NSString *userName = @"jfuellert001";
 NSString *displayName = @"Nice Display Name";
@@ -54,7 +55,8 @@ NSString *email = @"email@email.com";
 //    [self createRelationship];
 //    [self fetchRelationshipModels];       //TODO
 //    [self fetchRelationshipModelFromId];
-    AFVideoCaptureController *vc = [[AFVideoCaptureController alloc] init];
+    AFVideoCaptureConfig *config = [[AFVideoCaptureConfig alloc] initWithDefaultConfig];
+    AFVideoCaptureController *vc = [[AFVideoCaptureController alloc] initWithConfig:config];
     [self addChildViewController:vc];
     [self.view addSubview:vc.view];
 }

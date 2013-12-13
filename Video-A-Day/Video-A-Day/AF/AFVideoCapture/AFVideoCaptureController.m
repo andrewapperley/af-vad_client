@@ -15,18 +15,30 @@
     AVCaptureMovieFileOutput *cameraOutput;
     AVCaptureVideoPreviewLayer *previewWindow;
     AFVideoCaptureControls *mainControls;
+    NSString *tempOutputPath;
+    AFVideoCaptureConfig *currentConfig;
 }
 
 @end
 
 @implementation AFVideoCaptureController
 
+- (id)initWithConfig:(AFVideoCaptureConfig *)config {
+    self = [super init];
+    if (self) {
+        currentConfig = config;
+    }
+    return self;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 
+    [self setOutputURL];
+    
     captureSession = [[AVCaptureSession alloc] init];
-
+    [captureSession beginConfiguration];
     //create video input
     
     AVCaptureDevice *videoDevice = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
@@ -52,22 +64,24 @@
         }
     }
     
-    //set session preset
-    
-    [captureSession setSessionPreset:AVCaptureSessionPresetMedium];
-    
     // setup output properties
-    
-    [self setupVideoOutputProperties];
+    //setup a video output
+    if(!cameraOutput) {
+        cameraOutput = [[AVCaptureMovieFileOutput alloc] init];
+    }
     
     //setup preview layer
-    
     previewWindow = [[AVCaptureVideoPreviewLayer alloc] initWithSession:captureSession];
-    [previewWindow setVideoGravity:AVLayerVideoGravityResizeAspectFill];
-    previewWindow.frame = CGRectMake(10, 10, 300, 300);
+    
+    [captureSession addOutput:cameraOutput];
+    [self setupVideoOutputProperties];
+
     [self.view.layer addSublayer:previewWindow];
     
+    [captureSession commitConfiguration];
     [captureSession startRunning];
+
+    [self startCapturingVideo];
 }
 
 - (void)didReceiveMemoryWarning
@@ -80,12 +94,34 @@
 #pragma VideoCapture methods
 #pragma -
 
+- (void)previewWindowFrame:(CGRect)newFrame {
+    previewWindow.frame = newFrame;
+    [self.view.layer layoutSublayers];
+}
+
 - (void)setupVideoOutputProperties {
-    
+    captureSession.usesApplicationAudioSession = FALSE;
+    previewWindow.frame = currentConfig.previewWindowFrame;
+    [captureSession setSessionPreset:[currentConfig AFVideoCapturePresetToString:currentConfig.preset]];
+    cameraOutput.maxRecordedDuration = currentConfig.maxDurationTime;
 }
 
 - (AVCaptureDeviceInput *)videoCameraForDevicePosition:(AVCaptureDevicePosition)position {
     return nil;
+}
+
+- (void)setOutputURL {
+    tempOutputPath = [[NSString alloc] initWithFormat:@"%@tempOutput.mov", NSTemporaryDirectory()];
+}
+
+- (NSURL *)outputURL {
+    return [NSURL fileURLWithPath:tempOutputPath];
+}
+
+- (void)removeTempVideoOutput {
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    if ([fileManager fileExistsAtPath:tempOutputPath])
+        [[NSFileManager defaultManager] removeItemAtPath:tempOutputPath error:nil];
 }
 
 #pragma -
@@ -94,10 +130,17 @@
 
 - (void)startCapturingVideo {
     
+    if(captureSession.isRunning && cameraOutput.isRecording)
+        [cameraOutput stopRecording];
+    
+    [self removeTempVideoOutput];
+    
+    [cameraOutput startRecordingToOutputFileURL:[self outputURL] recordingDelegate:self];
+    
 }
 
 - (void)closeVideoCaptureController {
-    
+
 }
 
 - (void)recaptureVideo {
@@ -113,6 +156,10 @@
 #pragma -
 
 - (void)captureOutput:(AVCaptureFileOutput *)captureOutput didFinishRecordingToOutputFileAtURL:(NSURL *)outputFileURL fromConnections:(NSArray *)connections error:(NSError *)error {
+    
+}
+
+- (void)captureOutput:(AVCaptureFileOutput *)captureOutput didStartRecordingToOutputFileAtURL:(NSURL *)fileURL fromConnections:(NSArray *)connections {
     
 }
 

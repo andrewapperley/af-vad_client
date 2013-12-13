@@ -11,9 +11,12 @@
 #import <CoreMedia/CoreMedia.h>
 #import <AVFoundation/AVFoundation.h>
 #import "AFVideoCaptureControls.h"
+#import "AFVideoCaptureConfig.h"
 
 @interface AFVideoCaptureController : UIViewController <AFVideoCaptureControlsDelegate, AVCaptureFileOutputRecordingDelegate>
 
-- (AVCaptureDeviceInput *)videoCameraForDevicePosition:(AVCaptureDevicePosition)position;
+- (id)initWithConfig:(AFVideoCaptureConfig *)config;
+
+- (void)previewWindowFrame:(CGRect)newFrame;
 
 @end
