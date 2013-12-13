@@ -140,14 +140,41 @@
 }
 
 - (void)closeVideoCaptureController {
-
+    [cameraOutput stopRecording];
+    [captureSession stopRunning];
 }
 
 - (void)recaptureVideo {
     
 }
 
-- (void)videoCaptureDeviceSwitched:(NSInteger)device {
+- (void)videoCaptureDeviceSwitched:(AVCaptureDevicePosition)devicePosition {
+    if(captureSession.isRunning && cameraOutput.isRecording)
+        [cameraOutput stopRecording];
+    
+    NSArray *devicesAvailable = [AVCaptureDevice devicesWithMediaType:AVMediaTypeVideo];
+    
+    AVCaptureDevice *newDevice;
+    
+    for (AVCaptureDevice *device in devicesAvailable) {
+        if (device.position == devicePosition) {
+            newDevice = device;
+            break;
+        }
+    }
+    
+    [captureSession beginConfiguration];
+    
+    NSError *error;
+    
+    if (newDevice) {
+        [captureSession removeInput:cameraInputDevice];
+        cameraInputDevice = [AVCaptureDeviceInput deviceInputWithDevice:newDevice error:&error];
+    }
+
+    [captureSession addInput:cameraInputDevice];
+    
+    [captureSession commitConfiguration];
     
 }
 
@@ -156,11 +183,15 @@
 #pragma -
 
 - (void)captureOutput:(AVCaptureFileOutput *)captureOutput didFinishRecordingToOutputFileAtURL:(NSURL *)outputFileURL fromConnections:(NSArray *)connections error:(NSError *)error {
-    
+    [self videoCaptureDeviceSwitched:AVCaptureDevicePositionFront];
 }
 
 - (void)captureOutput:(AVCaptureFileOutput *)captureOutput didStartRecordingToOutputFileAtURL:(NSURL *)fileURL fromConnections:(NSArray *)connections {
     
+}
+
+- (void)dealloc {
+
 }
 
 @end

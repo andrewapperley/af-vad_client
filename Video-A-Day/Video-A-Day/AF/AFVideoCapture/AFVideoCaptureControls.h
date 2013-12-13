@@ -7,14 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
-@class AVCaptureDevice;
+#import <AVFoundation/AVFoundation.h>
+
 @protocol AFVideoCaptureControlsDelegate <NSObject>
 
 @required
 - (void)startCapturingVideo;
 - (void)closeVideoCaptureController;
 - (void)recaptureVideo;
-- (void)videoCaptureDeviceSwitched:(NSInteger)device;
+- (void)videoCaptureDeviceSwitched:(AVCaptureDevicePosition)device;
 
 @end
 
