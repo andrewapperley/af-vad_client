@@ -21,6 +21,7 @@
     AFVideoCapturePreset preset;
     AVCaptureVideoDataOutput *videoDataOutput;
     dispatch_queue_t videoDataOutputQueue;
+    NSTimer *recordedDurationTimer;
 }
 
 @end
@@ -42,13 +43,13 @@
 }
 
 + (instancetype)initWithDefaultConfig {
-    return [[AFVideoCaptureController alloc] initWithMaxDuration:CMTimeMake(600, 30) andWindowSize:CGRectMake(10, 10, 300, 300) andPreset:AFVideoCapturePreset_Medium];
+    return [[AFVideoCaptureController alloc] initWithMaxDuration:CMTimeMake(300, 30) andWindowSize:CGRectMake(10, 30, 300, 300) andPreset:AFVideoCapturePreset_Medium];
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
+    
     [self setOutputURL];
     
     captureSession = [[AVCaptureSession alloc] init];
@@ -82,6 +83,7 @@
     //setup a video output
     if(!cameraOutput) {
         cameraOutput = [[AVCaptureMovieFileOutput alloc] init];
+        [cameraOutput addObserver:self forKeyPath:@"recordedDuration" options:NSKeyValueObservingOptionNew context:nil];
     }
     
     if (!videoDataOutput) {
@@ -100,7 +102,7 @@
     [captureSession startRunning];
 
     //setup controls
-    mainControls = [[AFVideoCaptureControls alloc] initWithFrame:CGRectMake(previewWindowFrame.origin.x, previewWindowFrame.size.height + previewWindowFrame.origin.y + 5, previewWindowFrame.size.width, 30)];
+    mainControls = [[AFVideoCaptureControls alloc] initWithFrame:CGRectMake(previewWindowFrame.origin.x, previewWindowFrame.origin.y, previewWindowFrame.size.width, previewWindowFrame.size.height)];
     mainControls.delegate = self;
     [self.view addSubview:mainControls];
 }
@@ -177,7 +179,12 @@
     [self removeTempVideoOutput];
     
     [cameraOutput startRecordingToOutputFileURL:[self outputURL] recordingDelegate:self];
+    recordedDurationTimer = [NSTimer scheduledTimerWithTimeInterval:0.5f target:self selector:@selector(broadcastRecordedDuration) userInfo:nil repeats:TRUE];
     
+}
+
+- (void)broadcastRecordedDuration {
+    [mainControls setRecordingTime:(cameraOutput.recordedDuration.value/cameraOutput.recordedDuration.timescale)];
 }
 
 - (void)closeVideoCaptureController {
@@ -198,12 +205,11 @@
 
 - (void)recaptureVideo {
     //reset timer text to 00:00
+    [mainControls setRecordingTime:0];
     [self startCapturingVideo];
 }
 
 - (void)videoCaptureDeviceSwitched:(AVCaptureDevicePosition)devicePosition {
-    if(captureSession.isRunning && cameraOutput.isRecording)
-        [cameraOutput stopRecording];
     
     NSArray *devicesAvailable = [AVCaptureDevice devicesWithMediaType:AVMediaTypeVideo];
     
@@ -268,7 +274,10 @@
 #pragma -
 
 - (void)captureOutput:(AVCaptureFileOutput *)captureOutput didFinishRecordingToOutputFileAtURL:(NSURL *)outputFileURL fromConnections:(NSArray *)connections error:(NSError *)error {
-    
+    if([error.userInfo[@"NSLocalizedFailureReason"] isEqualToString:@"The recording reached the maximum allowable length."])
+        [mainControls setRecordingTime:(maxDurationTime.value/maxDurationTime.timescale)];
+    [recordedDurationTimer invalidate];
+    recordedDurationTimer = nil;
 }
 
 - (void)captureOutput:(AVCaptureFileOutput *)captureOutput didStartRecordingToOutputFileAtURL:(NSURL *)fileURL fromConnections:(NSArray *)connections {
@@ -277,6 +286,8 @@
 
 - (void)dealloc {
     mainControls.delegate = nil;
+    [recordedDurationTimer invalidate];
+    recordedDurationTimer = nil;
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
