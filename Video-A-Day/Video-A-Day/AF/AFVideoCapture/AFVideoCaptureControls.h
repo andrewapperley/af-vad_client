@@ -21,4 +21,8 @@
 
 @interface AFVideoCaptureControls : UIView
 
+@property (nonatomic, weak) id <AFVideoCaptureControlsDelegate> delegate;
+
+- (void)changeRecordingButtonState:(BOOL)lrecording;
+- (void)setRecordingTime:(NSInteger)newTime;
 @end

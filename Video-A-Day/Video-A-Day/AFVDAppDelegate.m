@@ -22,6 +22,7 @@
 #pragma mark - UIApplicationDelegate
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
     //Keychain
     [self createKeychain];
     

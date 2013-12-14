@@ -11,11 +11,19 @@
 #import <CoreMedia/CoreMedia.h>
 #import <AVFoundation/AVFoundation.h>
 #import "AFVideoCaptureControls.h"
-#import "AFVideoCaptureConfig.h"
 
-@interface AFVideoCaptureController : UIViewController <AFVideoCaptureControlsDelegate, AVCaptureFileOutputRecordingDelegate>
+typedef enum {
+    AFVideoCapturePreset_Low = 0,
+    AFVideoCapturePreset_Medium = 1,
+    AFVideoCapturePreset_High = 2
+} AFVideoCapturePreset;
 
-- (id)initWithConfig:(AFVideoCaptureConfig *)config;
+@interface AFVideoCaptureController : UIViewController <AFVideoCaptureControlsDelegate, AVCaptureFileOutputRecordingDelegate,
+    AVCaptureVideoDataOutputSampleBufferDelegate>
+
+- (instancetype) initWithMaxDuration:(CMTime)duration andWindowSize:(CGRect)rect andPreset:(AFVideoCapturePreset)lpreset;
+
++ (instancetype)initWithDefaultConfig;
 
 - (void)previewWindowFrame:(CGRect)newFrame;
 
