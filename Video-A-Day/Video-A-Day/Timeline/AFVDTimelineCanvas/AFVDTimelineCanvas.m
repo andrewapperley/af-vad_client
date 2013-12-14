@@ -82,4 +82,10 @@ NSString *kAFVDTimelineCanvasCellIdentifier = @"timelineCanvasCellIdentifier";
     [_collectionView reloadData];
 }
 
+#pragma mark - Dealloc
+- (void)dealloc {
+    
+    _delegate = nil;
+}
+
 @end

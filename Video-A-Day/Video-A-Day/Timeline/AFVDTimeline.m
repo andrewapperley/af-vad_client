@@ -9,7 +9,7 @@
 #import "AFVDTimeline.h"
 #import "AFVDTimelineCanvas.h"
 
-@interface AFVDTimeline () {
+@interface AFVDTimeline () <AFVDTimelineCanvasDelegate> {
     
     AFVDTimelineCanvas  *_timelineCanvas;
 }
@@ -47,15 +47,48 @@
     self.view = _timelineCanvas;
 }
 
-#warning TODO
-//- (void)timelineWillReachEnd:(AFVDTimeline *)timeline;
-//- (void)timelineDidReachEnd:(AFVDTimeline *)timeline;
-#warning ENDTODO
+#pragma mark - AFVDTimelineCanvasDelegate
+- (void)timelineCanvasWillReachEnd:(AFVDTimelineCanvas *)timeline {
+    
+    if([_delegate respondsToSelector:@selector(timelineWillReadEnd:)]) {
+        
+        [_delegate timelineWillReadEnd:self];
+    }
+    
+    [_dataSource timeline:self willLoadAppendedData:^(NSArray *data) {
+        
+        if(data) {
+            
+            [_timelineCanvas appendData:data];
+        }
+    }];
+}
+
+- (void)timelineCanvasDidReachEnd:(AFVDTimelineCanvas *)timeline {
+    
+    if([_delegate respondsToSelector:@selector(timelineDidReadEnd:)]) {
+        
+        [_delegate timelineDidReadEnd:self];
+    }
+}
+
+#pragma mark - Reload
+- (void)reloadData {
+    
+    [_dataSource timeline:self willLoadInitialData:^(NSArray *data) {
+        
+        if(data) {
+            
+            [_timelineCanvas setData:data];
+        }
+    }];
+}
 
 #pragma mark - Dealloc
 - (void)dealloc {
     
     _delegate = nil;
+    _dataSource = nil;
 }
 
 @end
