@@ -7,6 +7,7 @@
 //
 
 #import "AFVDTimelineCanvas.h"
+#import "AFVDTimelineCanvasCell.h"
 #import "AFVDTimelineCanvasLayout.h"
 
 NSString *kAFVDTimelineCanvasCellIdentifier = @"timelineCanvasCellIdentifier";
@@ -41,7 +42,7 @@ NSString *kAFVDTimelineCanvasCellIdentifier = @"timelineCanvasCellIdentifier";
 
     //Collection view
     _collectionView = [[UICollectionView alloc] initWithFrame:self.bounds collectionViewLayout:collectionViewLayout];
-    [_collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:kAFVDTimelineCanvasCellIdentifier];
+    [_collectionView registerClass:[AFVDTimelineCanvasCell class] forCellWithReuseIdentifier:kAFVDTimelineCanvasCellIdentifier];
     _collectionView.dataSource = self;
     _collectionView.delegate = self;
     [self addSubview:_collectionView];
@@ -58,15 +59,40 @@ NSString *kAFVDTimelineCanvasCellIdentifier = @"timelineCanvasCellIdentifier";
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     
-#warning TODO
-    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kAFVDTimelineCanvasCellIdentifier forIndexPath:indexPath];
+    //Cell
+    AFVDTimelineCanvasCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kAFVDTimelineCanvasCellIdentifier forIndexPath:indexPath];
     
-    if(!cell) {
-        cell = [[UICollectionViewCell alloc] initWithFrame:CGRectMake(0, 0, 50, 50)];
-        cell.backgroundColor = [UIColor greenColor];
-    }
-    
+    //Data
+    id data = _data[indexPath.row];
+    [cell setData:data];
+        
     return cell;
+}
+
+#pragma mark - UIScrollViewDelegate
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    
+    for(AFVDTimelineCanvasCell *cell in _collectionView.visibleCells) {
+        
+#warning TODO : CALCULATE POSITION
+        CGPoint cellPosition;
+        [cell setCellPosition:cellPosition withinContainer:_collectionView.bounds];
+    }
+}
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+    
+#warning TODO
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
+    
+#warning TODO
+}
+
+-  (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView {
+    
+#warning TODO
 }
 
 #pragma mark - Data handling

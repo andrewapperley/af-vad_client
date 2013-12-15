@@ -35,6 +35,7 @@
 		7696C7DF184C366000B270FC /* AFVDKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = 7696C7DE184C366000B270FC /* AFVDKeychain.m */; };
 		76AD7E5B18596F0E006EBA8B /* AFVDTimelineCanvas.m in Sources */ = {isa = PBXBuildFile; fileRef = 76AD7E5A18596F0E006EBA8B /* AFVDTimelineCanvas.m */; };
 		76AD7E6018596FCC006EBA8B /* AFVDTimelineCanvasLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 76AD7E5F18596FCC006EBA8B /* AFVDTimelineCanvasLayout.m */; };
+		76AFA111185D73AD0015B402 /* AFVDTimelineCanvasCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 76AFA110185D73AD0015B402 /* AFVDTimelineCanvasCell.m */; };
 		76BD304118581CC00009E418 /* AFVDTimeline.m in Sources */ = {isa = PBXBuildFile; fileRef = 76BD304018581CC00009E418 /* AFVDTimeline.m */; };
 		76C651931838003D003C7F7D /* NSDictionary+NSDictionary_NSDataConversion.m in Sources */ = {isa = PBXBuildFile; fileRef = 76C651921838003D003C7F7D /* NSDictionary+NSDictionary_NSDataConversion.m */; };
 		76C6519818380A14003C7F7D /* AFVDBaseNetworkModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 76C6519718380A14003C7F7D /* AFVDBaseNetworkModel.m */; };
@@ -103,6 +104,8 @@
 		76AD7E5A18596F0E006EBA8B /* AFVDTimelineCanvas.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AFVDTimelineCanvas.m; path = Timeline/AFVDTimelineCanvas/AFVDTimelineCanvas.m; sourceTree = "<group>"; };
 		76AD7E5E18596FCC006EBA8B /* AFVDTimelineCanvasLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFVDTimelineCanvasLayout.h; path = Timeline/AFVDTimelineCanvasLayout/AFVDTimelineCanvasLayout.h; sourceTree = "<group>"; };
 		76AD7E5F18596FCC006EBA8B /* AFVDTimelineCanvasLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AFVDTimelineCanvasLayout.m; path = Timeline/AFVDTimelineCanvasLayout/AFVDTimelineCanvasLayout.m; sourceTree = "<group>"; };
+		76AFA10F185D73AD0015B402 /* AFVDTimelineCanvasCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFVDTimelineCanvasCell.h; sourceTree = "<group>"; };
+		76AFA110185D73AD0015B402 /* AFVDTimelineCanvasCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFVDTimelineCanvasCell.m; sourceTree = "<group>"; };
 		76BD303F18581CC00009E418 /* AFVDTimeline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFVDTimeline.h; path = Timeline/AFVDTimeline.h; sourceTree = "<group>"; };
 		76BD304018581CC00009E418 /* AFVDTimeline.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AFVDTimeline.m; path = Timeline/AFVDTimeline.m; sourceTree = "<group>"; };
 		76C651911838003D003C7F7D /* NSDictionary+NSDictionary_NSDataConversion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDictionary+NSDictionary_NSDataConversion.h"; path = "AF/AFCategory/NSDictionary+NSDataConversion/NSDictionary+NSDictionary_NSDataConversion.h"; sourceTree = "<group>"; };
@@ -379,12 +382,23 @@
 			name = AFVDTimelineCanvasLayout;
 			sourceTree = "<group>";
 		};
+		76AFA10E185D73AD0015B402 /* AFVDTimelineCanvasCell */ = {
+			isa = PBXGroup;
+			children = (
+				76AFA10F185D73AD0015B402 /* AFVDTimelineCanvasCell.h */,
+				76AFA110185D73AD0015B402 /* AFVDTimelineCanvasCell.m */,
+			);
+			name = AFVDTimelineCanvasCell;
+			path = Timeline/AFVDTimelineCanvasCell;
+			sourceTree = "<group>";
+		};
 		76BD303E18581CA90009E418 /* Timeline */ = {
 			isa = PBXGroup;
 			children = (
 				76BD303F18581CC00009E418 /* AFVDTimeline.h */,
 				76BD304018581CC00009E418 /* AFVDTimeline.m */,
 				76AD7E5818596EC3006EBA8B /* AFVDTimelineCanvas */,
+				76AFA10E185D73AD0015B402 /* AFVDTimelineCanvasCell */,
 				76AD7E5D18596FA0006EBA8B /* AFVDTimelineCanvasLayout */,
 			);
 			name = Timeline;
@@ -622,6 +636,7 @@
 				76C651AC18384647003C7F7D /* AFVDVideoPlaylistModel.m in Sources */,
 				76C651A9183840E4003C7F7D /* AFVDVideoModel.m in Sources */,
 				7610BC5E183B1137003CE193 /* AFVDRelationshipModelFactory.m in Sources */,
+				76AFA111185D73AD0015B402 /* AFVDTimelineCanvasCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

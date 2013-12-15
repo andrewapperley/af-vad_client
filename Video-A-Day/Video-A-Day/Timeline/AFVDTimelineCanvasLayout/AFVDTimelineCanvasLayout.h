@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AFVDTimelineCanvasLayout : UICollectionViewLayout
+@interface AFVDTimelineCanvasLayout : UICollectionViewFlowLayout
 
 @end
