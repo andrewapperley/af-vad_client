@@ -14,7 +14,6 @@
 		0F10E3DA18594B9600FC1433 /* AFVideoCaptureController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F10E3D918594B9600FC1433 /* AFVideoCaptureController.m */; };
 		0F10E3DD18594FA800FC1433 /* AFVideoCaptureControls.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F10E3DC18594FA800FC1433 /* AFVideoCaptureControls.m */; };
 		0F2FC6EB1837303800611873 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F2FC6EA1837303800611873 /* Foundation.framework */; };
-		0F2FC6ED1837303800611873 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F2FC6EC1837303800611873 /* CoreGraphics.framework */; };
 		0F2FC6EF1837303800611873 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F2FC6EE1837303800611873 /* UIKit.framework */; };
 		0F2FC6F51837303800611873 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0F2FC6F31837303800611873 /* InfoPlist.strings */; };
 		0F2FC6F71837303800611873 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F2FC6F61837303800611873 /* main.m */; };
@@ -29,6 +28,10 @@
 		0F553BB3184D97E200941506 /* baileys_5sec.mov in Resources */ = {isa = PBXBuildFile; fileRef = 0F553BB2184D97E200941506 /* baileys_5sec.mov */; };
 		0F79613A183DC81900920C59 /* face.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0F796139183DC81900920C59 /* face.jpg */; };
 		0F79613E183EE64E00920C59 /* AFVDUrlHasher.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F79613D183EE64E00920C59 /* AFVDUrlHasher.m */; };
+		0FB5E9871862763600EE0B0D /* AFVDVideoFilterController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FB5E9861862763600EE0B0D /* AFVDVideoFilterController.m */; };
+		0FF441D418626A3200ADAD2C /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FF441D318626A3100ADAD2C /* CoreVideo.framework */; };
+		0FF441D618626A5300ADAD2C /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FF441D518626A5300ADAD2C /* OpenGLES.framework */; };
+		0FF441D818626A5D00ADAD2C /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FF441D718626A5D00ADAD2C /* QuartzCore.framework */; };
 		7610BC5B183B1108003CE193 /* AFVDRelationshipModelDatasource.m in Sources */ = {isa = PBXBuildFile; fileRef = 7610BC5A183B1108003CE193 /* AFVDRelationshipModelDatasource.m */; };
 		7610BC5E183B1137003CE193 /* AFVDRelationshipModelFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 7610BC5D183B1137003CE193 /* AFVDRelationshipModelFactory.m */; };
 		7610BC61183B119C003CE193 /* AFVDRelationshipModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7610BC60183B119C003CE193 /* AFVDRelationshipModel.m */; };
@@ -92,6 +95,12 @@
 		0F796139183DC81900920C59 /* face.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = face.jpg; sourceTree = "<group>"; };
 		0F79613C183EE64E00920C59 /* AFVDUrlHasher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFVDUrlHasher.h; sourceTree = "<group>"; };
 		0F79613D183EE64E00920C59 /* AFVDUrlHasher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFVDUrlHasher.m; sourceTree = "<group>"; };
+		0FB5E9851862763600EE0B0D /* AFVDVideoFilterController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFVDVideoFilterController.h; sourceTree = "<group>"; };
+		0FB5E9861862763600EE0B0D /* AFVDVideoFilterController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFVDVideoFilterController.m; sourceTree = "<group>"; };
+		0FF441D11862637900ADAD2C /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
+		0FF441D318626A3100ADAD2C /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
+		0FF441D518626A5300ADAD2C /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
+		0FF441D718626A5D00ADAD2C /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		68F6FAF547E94320A258E720 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		7610BC59183B1108003CE193 /* AFVDRelationshipModelDatasource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFVDRelationshipModelDatasource.h; path = RelationshipModel/Datasource/AFVDRelationshipModelDatasource.h; sourceTree = "<group>"; };
 		7610BC5A183B1108003CE193 /* AFVDRelationshipModelDatasource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AFVDRelationshipModelDatasource.m; path = RelationshipModel/Datasource/AFVDRelationshipModelDatasource.m; sourceTree = "<group>"; };
@@ -133,11 +142,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0FF441D818626A5D00ADAD2C /* QuartzCore.framework in Frameworks */,
+				0FF441D618626A5300ADAD2C /* OpenGLES.framework in Frameworks */,
+				0FF441D418626A3200ADAD2C /* CoreVideo.framework in Frameworks */,
 				0F10E3CF18593BAE00FC1433 /* MobileCoreServices.framework in Frameworks */,
 				0F10E3CD18593B9A00FC1433 /* MediaPlayer.framework in Frameworks */,
 				0F10E3CB18593B8B00FC1433 /* CoreMedia.framework in Frameworks */,
 				0F10E3C51859375200FC1433 /* AVFoundation.framework in Frameworks */,
-				0F2FC6ED1837303800611873 /* CoreGraphics.framework in Frameworks */,
 				0F2FC6EF1837303800611873 /* UIKit.framework in Frameworks */,
 				0F2FC6EB1837303800611873 /* Foundation.framework in Frameworks */,
 				DE22E73248484FF5A1D84D53 /* libPods.a in Frameworks */,
@@ -160,6 +171,8 @@
 		0F10E3D718594B8200FC1433 /* AFVideoCapture */ = {
 			isa = PBXGroup;
 			children = (
+				0FB5E9851862763600EE0B0D /* AFVDVideoFilterController.h */,
+				0FB5E9861862763600EE0B0D /* AFVDVideoFilterController.m */,
 				0F10E3D818594B9600FC1433 /* AFVideoCaptureController.h */,
 				0F10E3D918594B9600FC1433 /* AFVideoCaptureController.m */,
 				0F10E3DB18594FA700FC1433 /* AFVideoCaptureControls.h */,
@@ -173,10 +186,10 @@
 			isa = PBXGroup;
 			children = (
 				0F2FC6E91837303800611873 /* Frameworks */,
+				68F6FAF547E94320A258E720 /* Pods.xcconfig */,
 				0F2FC6E81837303800611873 /* Products */,
 				0F2FC6F01837303800611873 /* Video-A-Day */,
 				0F2FC7121837303900611873 /* Video-A-DayTests */,
-				68F6FAF547E94320A258E720 /* Pods.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -192,6 +205,10 @@
 		0F2FC6E91837303800611873 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0FF441D718626A5D00ADAD2C /* QuartzCore.framework */,
+				0FF441D518626A5300ADAD2C /* OpenGLES.framework */,
+				0FF441D318626A3100ADAD2C /* CoreVideo.framework */,
+				0FF441D11862637900ADAD2C /* CoreImage.framework */,
 				0F10E3CE18593BAE00FC1433 /* MobileCoreServices.framework */,
 				0F10E3CC18593B9A00FC1433 /* MediaPlayer.framework */,
 				0F10E3CA18593B8B00FC1433 /* CoreMedia.framework */,
@@ -611,6 +628,7 @@
 				76C6519818380A14003C7F7D /* AFVDBaseNetworkModel.m in Sources */,
 				76C651A7183840E4003C7F7D /* AFVDVideoModelDatasource.m in Sources */,
 				0F10E3DD18594FA800FC1433 /* AFVideoCaptureControls.m in Sources */,
+				0FB5E9871862763600EE0B0D /* AFVDVideoFilterController.m in Sources */,
 				76C651A8183840E4003C7F7D /* AFVDVideoModelFactory.m in Sources */,
 				7677BA6D18373A6B00F3EDC9 /* AFVDBaseNetworkDatasource.m in Sources */,
 				76C651931838003D003C7F7D /* NSDictionary+NSDictionary_NSDataConversion.m in Sources */,

@@ -11,7 +11,7 @@
 @interface AFVideoCaptureControls ()
 {
     UIButton *recordButton;
-    UIButton *reRecordButton;
+    UIButton *resetButton;
     UILabel *recordingTime;
     UIButton *changeCameraButton;
     UIButton *closeButton;
@@ -50,10 +50,10 @@
     closeButton.backgroundColor = [UIColor redColor];
     [closeButton addTarget:self action:@selector(closeButtonPressed) forControlEvents:UIControlEventTouchUpInside];
     
-    reRecordButton = [[UIButton alloc] initWithFrame:CGRectMake(40, height - 30, 30, 30)];
-    [reRecordButton setTitle:@"RR" forState:UIControlStateNormal];
-    reRecordButton.backgroundColor = [UIColor greenColor];
-    [reRecordButton addTarget:self action:@selector(reRecordButtonPressed) forControlEvents:UIControlEventTouchUpInside];
+    resetButton = [[UIButton alloc] initWithFrame:CGRectMake(40, height - 30, 30, 30)];
+    [resetButton setTitle:@"RS" forState:UIControlStateNormal];
+    resetButton.backgroundColor = [UIColor greenColor];
+    [resetButton addTarget:self action:@selector(resetButtonPressed) forControlEvents:UIControlEventTouchUpInside];
     
     recordButton = [[UIButton alloc] initWithFrame:CGRectMake(80, height - 30, 30, 30)];
     [recordButton setTitle:@"R" forState:UIControlStateNormal];
@@ -71,7 +71,7 @@
     
     [self addSubview:changeCameraButton];
     [self addSubview:closeButton];
-    [self addSubview:reRecordButton];
+    [self addSubview:resetButton];
     [self addSubview:recordButton];
     [self addSubview:recordingTime];
 }
@@ -101,7 +101,7 @@
     [_delegate startCapturingVideo];
 }
 
-- (void)reRecordButtonPressed {
+- (void)resetButtonPressed {
     [_delegate recaptureVideo];
 }
 

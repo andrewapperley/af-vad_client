@@ -15,11 +15,11 @@
 typedef enum {
     AFVideoCapturePreset_Low = 0,
     AFVideoCapturePreset_Medium = 1,
-    AFVideoCapturePreset_High = 2
+    AFVideoCapturePreset_High = 2,
+    AFVideoCapturePreset_640x480 = 3
 } AFVideoCapturePreset;
 
-@interface AFVideoCaptureController : UIViewController <AFVideoCaptureControlsDelegate, AVCaptureFileOutputRecordingDelegate,
-    AVCaptureVideoDataOutputSampleBufferDelegate>
+@interface AFVideoCaptureController : UIViewController <AFVideoCaptureControlsDelegate, AVCaptureFileOutputRecordingDelegate>
 
 - (instancetype) initWithMaxDuration:(CMTime)duration andWindowSize:(CGRect)rect andPreset:(AFVideoCapturePreset)lpreset;
 

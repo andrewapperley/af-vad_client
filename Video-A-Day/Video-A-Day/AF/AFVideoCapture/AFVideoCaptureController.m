@@ -7,6 +7,7 @@
 //
 
 #import "AFVideoCaptureController.h"
+#import "AFVDVideoFilterController.h"
 
 @interface AFVideoCaptureController ()
 {
@@ -19,8 +20,6 @@
     CMTime maxDurationTime;
     CGRect previewWindowFrame;
     AFVideoCapturePreset preset;
-    AVCaptureVideoDataOutput *videoDataOutput;
-    dispatch_queue_t videoDataOutputQueue;
     NSTimer *recordedDurationTimer;
 }
 
@@ -34,10 +33,6 @@
         maxDurationTime = duration;
         previewWindowFrame = rect;
         preset = lpreset;
-
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                               selector:@selector(deviceOrientationDidChange)
-                                   name:UIDeviceOrientationDidChangeNotification object:nil];
     }
     return self;
 }
@@ -83,19 +78,16 @@
     //setup a video output
     if(!cameraOutput) {
         cameraOutput = [[AVCaptureMovieFileOutput alloc] init];
-        [cameraOutput addObserver:self forKeyPath:@"recordedDuration" options:NSKeyValueObservingOptionNew context:nil];
     }
-    
-    if (!videoDataOutput) {
-        videoDataOutput = [[AVCaptureVideoDataOutput alloc] init];
-    }
-    
+
     //setup preview layer
     previewWindow = [[AVCaptureVideoPreviewLayer alloc] initWithSession:captureSession];
-
-    [captureSession addOutput:cameraOutput];
+    
     [self setupVideoOutputProperties];
 
+    if ( [captureSession canAddOutput:cameraOutput] )
+        [captureSession addOutput:cameraOutput];
+    
     [self.view.layer addSublayer:previewWindow];
     
     [captureSession commitConfiguration];
@@ -117,7 +109,7 @@
 #pragma Setup Properties
 
 - (NSString *)AFVideoCapturePresetToString:(AFVideoCapturePreset)lpreset {
-    NSArray *AFVideoCapturePresets = @[@"AVCaptureSessionPresetLow", @"AVCaptureSessionPresetMedium", @"AVCaptureSessionPresetHigh"];
+    NSArray *AFVideoCapturePresets = @[@"AVCaptureSessionPresetLow", @"AVCaptureSessionPresetMedium", @"AVCaptureSessionPresetHigh", @"AFVideoCapturePreset_640x480"];
     return AFVideoCapturePresets[lpreset];
 }
 
@@ -131,16 +123,8 @@
         [previewWindow.connection setVideoOrientation:AVCaptureVideoOrientationPortrait];
     }
     [captureSession setSessionPreset:[self AFVideoCapturePresetToString:preset]];
-    NSDictionary *rgbOutputSettings = [NSDictionary dictionaryWithObject:
-                                       [NSNumber numberWithInt:kCMPixelFormat_32BGRA] forKey:(id)kCVPixelBufferPixelFormatTypeKey];
-    videoDataOutputQueue = dispatch_queue_create("VideoDataOutputQueue", DISPATCH_QUEUE_SERIAL);
-    [videoDataOutput setSampleBufferDelegate:self queue:videoDataOutputQueue];
-    [videoDataOutput setVideoSettings:rgbOutputSettings];
-    [videoDataOutput setAlwaysDiscardsLateVideoFrames:YES];
+
     cameraOutput.maxRecordedDuration = maxDurationTime;
-    if ( [captureSession canAddOutput:videoDataOutput] )
-        [captureSession addOutput:videoDataOutput];
-    [[videoDataOutput connectionWithMediaType:AVMediaTypeVideo] setEnabled:NO];
 }
 
 #pragma -
@@ -173,8 +157,6 @@
 - (void)startCapturingVideo {
     NSLog(@"recording");
     //make recording button blink or something
-    if(captureSession.isRunning && cameraOutput.isRecording)
-        [cameraOutput stopRecording];
     
     [self removeTempVideoOutput];
     
@@ -204,12 +186,16 @@
 }
 
 - (void)recaptureVideo {
-    //reset timer text to 00:00
     [mainControls setRecordingTime:0];
-    [self startCapturingVideo];
+    [recordedDurationTimer invalidate];
+    recordedDurationTimer = nil;
+    if(captureSession.isRunning && cameraOutput.isRecording)
+        [cameraOutput stopRecording];
 }
 
 - (void)videoCaptureDeviceSwitched:(AVCaptureDevicePosition)devicePosition {
+    
+    [mainControls setRecordingTime:0];
     
     NSArray *devicesAvailable = [AVCaptureDevice devicesWithMediaType:AVMediaTypeVideo];
     
@@ -235,53 +221,48 @@
     
     [captureSession commitConfiguration];
     
-}
-
-- (void)deviceOrientationDidChange {
-    
-    UIDeviceOrientation deviceOrientation = [[UIDevice currentDevice] orientation];
-    
-    AVCaptureVideoOrientation newOrientation;
-    
-    if (deviceOrientation == UIDeviceOrientationPortrait){
-        newOrientation = AVCaptureVideoOrientationPortrait;
-    }
-    else if (deviceOrientation == UIDeviceOrientationPortraitUpsideDown){
-        newOrientation = AVCaptureVideoOrientationPortraitUpsideDown;
-    }
-    
-    // AVCapture and UIDevice have opposite meanings for landscape left and right (AVCapture orientation is the same as UIInterfaceOrientation)
-    else if (deviceOrientation == UIDeviceOrientationLandscapeLeft){
-        newOrientation = AVCaptureVideoOrientationLandscapeRight;
-    }
-    else if (deviceOrientation == UIDeviceOrientationLandscapeRight){
-        newOrientation = AVCaptureVideoOrientationLandscapeLeft;
-    }
-    
-    else if (deviceOrientation == UIDeviceOrientationUnknown){
-        newOrientation = AVCaptureVideoOrientationPortrait;
-    }
-    
-    else{
-        newOrientation = AVCaptureVideoOrientationPortrait;
-    }
-    
-    [previewWindow.connection setVideoOrientation:newOrientation];
-}
+} 
 
 #pragma -
 #pragma AVCaptureFileOutputRecordingDelegate Methods
 #pragma -
 
 - (void)captureOutput:(AVCaptureFileOutput *)captureOutput didFinishRecordingToOutputFileAtURL:(NSURL *)outputFileURL fromConnections:(NSArray *)connections error:(NSError *)error {
+    
     if([error.userInfo[@"NSLocalizedFailureReason"] isEqualToString:@"The recording reached the maximum allowable length."])
         [mainControls setRecordingTime:(maxDurationTime.value/maxDurationTime.timescale)];
-    [recordedDurationTimer invalidate];
-    recordedDurationTimer = nil;
+    
+    switch (error.code) {
+        /*This code is for when switching devices while recording*/
+        case -11818:
+            return;
+            break;
+            
+        /*This error code is for when we have completed a recording*/
+        case -11810:
+            /*Invalidate the timer, stop the recording and session*/
+            [recordedDurationTimer invalidate];
+            recordedDurationTimer = nil;
+            [cameraOutput stopRecording];
+            [captureSession stopRunning];
+            
+            /*Present filter view controller and dismiss this view controller*/
+            AFVDVideoFilterController *videoFilterView = [[AFVDVideoFilterController alloc] initWithVideoURL:[self outputURL]];
+            [self.navigationController presentViewController:videoFilterView animated:TRUE completion:nil];
+            
+            [self removeFromParentViewController];
+
+            break;
+    }
 }
 
 - (void)captureOutput:(AVCaptureFileOutput *)captureOutput didStartRecordingToOutputFileAtURL:(NSURL *)fileURL fromConnections:(NSArray *)connections {
     
+}
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
+    return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
 - (void)dealloc {
