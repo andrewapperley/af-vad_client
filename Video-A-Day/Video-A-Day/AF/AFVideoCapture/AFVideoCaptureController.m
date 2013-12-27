@@ -21,6 +21,8 @@
     CGRect previewWindowFrame;
     AFVideoCapturePreset preset;
     NSTimer *recordedDurationTimer;
+    UIButton *shareButton;
+    UIButton *addFilterButton;
 }
 
 @end
@@ -97,6 +99,7 @@
     mainControls = [[AFVideoCaptureControls alloc] initWithFrame:CGRectMake(previewWindowFrame.origin.x, previewWindowFrame.origin.y, previewWindowFrame.size.width, previewWindowFrame.size.height)];
     mainControls.delegate = self;
     [self.view addSubview:mainControls];
+    [self addShareAndFilterButtons];
 }
 
 - (void)didReceiveMemoryWarning
@@ -155,13 +158,22 @@
 #pragma -
 
 - (void)startCapturingVideo {
-    NSLog(@"recording");
-    //make recording button blink or something
     
+    /*Stop the recording if it's in progress and show the share / add filter buttons*/
+    if(captureSession.isRunning && cameraOutput.isRecording) {
+        [cameraOutput stopRecording];
+        [self showFilterShareButtons:TRUE];
+        NSLog(@"Recording Stopped");
+        return;
+    }
+    
+    NSLog(@"recording");
     [self removeTempVideoOutput];
     
     [cameraOutput startRecordingToOutputFileURL:[self outputURL] recordingDelegate:self];
     recordedDurationTimer = [NSTimer scheduledTimerWithTimeInterval:0.5f target:self selector:@selector(broadcastRecordedDuration) userInfo:nil repeats:TRUE];
+    
+    [self showFilterShareButtons:FALSE];
     
 }
 
@@ -186,11 +198,12 @@
 }
 
 - (void)recaptureVideo {
-    [mainControls setRecordingTime:0];
     [recordedDurationTimer invalidate];
     recordedDurationTimer = nil;
-    if(captureSession.isRunning && cameraOutput.isRecording)
-        [cameraOutput stopRecording];
+    [cameraOutput stopRecording];
+    [mainControls setRecordingTime:0];
+    [self removeTempVideoOutput];
+    [self showFilterShareButtons:FALSE];
 }
 
 - (void)videoCaptureDeviceSwitched:(AVCaptureDevicePosition)devicePosition {
@@ -224,14 +237,69 @@
 } 
 
 #pragma -
+#pragma UI Update Methods
+#pragma -
+
+- (void)showFilterShareButtons:(BOOL)show {
+    if (show) {
+        addFilterButton.enabled = shareButton.enabled = TRUE;
+        addFilterButton.alpha = shareButton.alpha = 1;
+    } else {
+        addFilterButton.enabled = shareButton.enabled = FALSE;
+        addFilterButton.alpha = shareButton.alpha = 0.3f;
+    }
+}
+
+- (void)addShareAndFilterButtons {
+    addFilterButton = [[UIButton alloc] initWithFrame:CGRectMake(10, 370, 145, 40)];
+    addFilterButton.backgroundColor = [UIColor redColor];
+    [addFilterButton setTitle:@"Add FIlter" forState:UIControlStateNormal];
+    [addFilterButton addTarget:self action:@selector(addFilterButtonClicked) forControlEvents:UIControlEventTouchUpInside];
+    
+    shareButton = [[UIButton alloc] initWithFrame:CGRectMake(addFilterButton.frame.size.width + 15, 370, 145, 40)];
+    shareButton.backgroundColor = [UIColor purpleColor];
+    [shareButton setTitle:@"Share" forState:UIControlStateNormal];
+    [shareButton addTarget:self action:@selector(shareButtonClicked) forControlEvents:UIControlEventTouchUpInside];
+    
+    [self showFilterShareButtons:FALSE];
+    
+    [self.view addSubview:addFilterButton];
+    [self.view addSubview:shareButton];
+}
+
+#pragma -
+#pragma Share / Add Filter Button Methods
+#pragma -
+
+- (void)shareButtonClicked {
+    NSLog(@"Share");
+}
+
+- (void)addFilterButtonClicked {
+    /*Invalidate the timer, stop the recording and session*/
+    [recordedDurationTimer invalidate];
+    recordedDurationTimer = nil;
+    [cameraOutput stopRecording];
+    [captureSession stopRunning];
+    
+    /*Present filter view controller and dismiss this view controller*/
+    AFVDVideoFilterController *videoFilterView = [[AFVDVideoFilterController alloc] initWithVideoURL:[self outputURL]];
+    [self.navigationController presentViewController:videoFilterView animated:TRUE completion:nil];
+    
+    [self removeFromParentViewController];
+}
+
+#pragma -
 #pragma AVCaptureFileOutputRecordingDelegate Methods
 #pragma -
 
 - (void)captureOutput:(AVCaptureFileOutput *)captureOutput didFinishRecordingToOutputFileAtURL:(NSURL *)outputFileURL fromConnections:(NSArray *)connections error:(NSError *)error {
     
-    if([error.userInfo[@"NSLocalizedFailureReason"] isEqualToString:@"The recording reached the maximum allowable length."])
+    if([error.userInfo[@"NSLocalizedFailureReason"] isEqualToString:@"The recording reached the maximum allowable length."]) {
+        [recordedDurationTimer invalidate];
+        recordedDurationTimer = nil;
         [mainControls setRecordingTime:(maxDurationTime.value/maxDurationTime.timescale)];
-    
+    }
     switch (error.code) {
         /*This code is for when switching devices while recording*/
         case -11818:
@@ -240,18 +308,10 @@
             
         /*This error code is for when we have completed a recording*/
         case -11810:
-            /*Invalidate the timer, stop the recording and session*/
-            [recordedDurationTimer invalidate];
-            recordedDurationTimer = nil;
             [cameraOutput stopRecording];
-            [captureSession stopRunning];
-            
-            /*Present filter view controller and dismiss this view controller*/
-            AFVDVideoFilterController *videoFilterView = [[AFVDVideoFilterController alloc] initWithVideoURL:[self outputURL]];
-            [self.navigationController presentViewController:videoFilterView animated:TRUE completion:nil];
-            
-            [self removeFromParentViewController];
-
+            [self showFilterShareButtons:TRUE];
+            NSLog(@"Recording Stopped");
+            return;
             break;
     }
 }
