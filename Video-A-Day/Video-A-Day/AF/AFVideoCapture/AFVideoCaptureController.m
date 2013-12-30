@@ -71,8 +71,10 @@
     if (audioDevice) {
         NSError *error;
         AVCaptureDeviceInput *audioInput = [AVCaptureDeviceInput deviceInputWithDevice:audioDevice error:&error];
-        if (audioInput) {
-            [captureSession addInput:audioInput];
+        if (audioInput && !error) {
+            if([captureSession canAddInput:audioInput]) {
+                [captureSession addInput:audioInput];
+            }
         }
     }
     
@@ -87,8 +89,9 @@
     
     [self setupVideoOutputProperties];
 
-    if ( [captureSession canAddOutput:cameraOutput] )
+    if ( [captureSession canAddOutput:cameraOutput] ) {
         [captureSession addOutput:cameraOutput];
+    }
     
     [self.view.layer addSublayer:previewWindow];
     
@@ -117,7 +120,6 @@
 }
 
 - (void)setupVideoOutputProperties {
-    captureSession.usesApplicationAudioSession = FALSE;
     previewWindow.videoGravity = AVLayerVideoGravityResizeAspectFill;
     previewWindow.delegate = self;
     previewWindow.frame = previewWindowFrame;
@@ -171,6 +173,8 @@
     [self removeTempVideoOutput];
     
     [cameraOutput startRecordingToOutputFileURL:[self outputURL] recordingDelegate:self];
+    [recordedDurationTimer invalidate];
+    recordedDurationTimer = nil;
     recordedDurationTimer = [NSTimer scheduledTimerWithTimeInterval:0.5f target:self selector:@selector(broadcastRecordedDuration) userInfo:nil repeats:TRUE];
     
     [self showFilterShareButtons:FALSE];
@@ -198,9 +202,13 @@
 }
 
 - (void)recaptureVideo {
-    [recordedDurationTimer invalidate];
-    recordedDurationTimer = nil;
-    [cameraOutput stopRecording];
+    if (recordedDurationTimer.isValid) {
+        [recordedDurationTimer invalidate];
+        recordedDurationTimer = nil;
+    }
+    if (cameraOutput.isRecording) {
+         [cameraOutput stopRecording];
+    }
     [mainControls setRecordingTime:0];
     [self removeTempVideoOutput];
     [self showFilterShareButtons:FALSE];

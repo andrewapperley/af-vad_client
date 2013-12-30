@@ -88,8 +88,9 @@ static const NSInteger tileSpacingBuffer = 10;
         s.tag = i;
         [s addTarget:self action:@selector(getFilterFromButtonPress:) forControlEvents:UIControlEventTouchUpInside];
         [s setBackgroundImage:[AFVDVideoFilterController imageWithColor:[UIColor yellowColor]] forState:UIControlStateSelected];
-        if(i == 0)
+        if(i == 0) {
             s.selected = TRUE;
+        }
         [filterGrid addSubview:s];
     }
     
@@ -115,6 +116,7 @@ static const NSInteger tileSpacingBuffer = 10;
     movieFile = [[GPUImageMovie alloc] initWithURL:videoURL];
     movieFile.playAtActualSpeed = TRUE;
     movieFile.shouldRepeat = TRUE;
+    movieFile.playSound = TRUE;
 }
 
 #pragma mark - Save Video After Processing

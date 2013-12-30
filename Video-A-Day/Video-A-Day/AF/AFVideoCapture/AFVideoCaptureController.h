@@ -11,6 +11,7 @@
 #import <CoreMedia/CoreMedia.h>
 #import <AVFoundation/AVFoundation.h>
 #import "AFVideoCaptureControls.h"
+#import <MessageUI/MessageUI.h>
 
 typedef enum {
     AFVideoCapturePreset_Low = 0,
@@ -19,7 +20,7 @@ typedef enum {
     AFVideoCapturePreset_640x480 = 3
 } AFVideoCapturePreset;
 
-@interface AFVideoCaptureController : UIViewController <AFVideoCaptureControlsDelegate, AVCaptureFileOutputRecordingDelegate>
+@interface AFVideoCaptureController : UIViewController <AFVideoCaptureControlsDelegate, AVCaptureFileOutputRecordingDelegate, MFMailComposeViewControllerDelegate>
 
 - (instancetype) initWithMaxDuration:(CMTime)duration andWindowSize:(CGRect)rect andPreset:(AFVideoCapturePreset)lpreset;
 
