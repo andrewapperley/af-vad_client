@@ -22,6 +22,7 @@ static const NSInteger tileSpacingBuffer = 10;
     GPUImageView *previewView;
     UIScrollView *filterGrid;
     NSArray *filterList;
+    UIButton *shareButton;
 }
 
 @end
@@ -32,8 +33,20 @@ static const NSInteger tileSpacingBuffer = 10;
     self = [super init];
     if (self) {
         videoURL = lvideoURL;
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pauseFilterView) name:UIApplicationWillResignActiveNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resumeFilterView) name:UIApplicationWillEnterForegroundNotification object:nil];
     }
     return self;
+}
+
+#pragma mark - Resume/Pause Filter Processing
+
+- (void)pauseFilterView {
+    [movieFile endProcessing];
+}
+
+- (void)resumeFilterView {
+    [movieFile startProcessing];
 }
 
 - (void)viewDidLoad
@@ -47,7 +60,7 @@ static const NSInteger tileSpacingBuffer = 10;
     [self applyFilter:filterList[0]];
 }
 
-#pragma mark Set the filter list array
+#pragma mark - Set the filter list array
 
 - (void)setupFilterList {
     filterList = [[NSArray alloc] initWithObjects:@"GPUImageVignetteFilter",
@@ -69,6 +82,15 @@ static const NSInteger tileSpacingBuffer = 10;
 - (void)setupUI {
     [self setupPreviewView];
     [self setupFilterGrid];
+    [self setupShareButton];
+}
+
+- (void)setupShareButton {
+    shareButton = [[UIButton alloc] initWithFrame:CGRectMake((self.view.frame.size.width - 145) / 2, filterGrid.frame.origin.y + filterGrid.frame.size.height + 20, 145, 40)];
+    shareButton.backgroundColor = [UIColor greenColor];
+    [shareButton setTitle:@"Share" forState:UIControlStateNormal];
+    [shareButton addTarget:self action:@selector(shareButtonClicked) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:shareButton];
 }
 
 - (void)setupPreviewView {
@@ -122,12 +144,12 @@ static const NSInteger tileSpacingBuffer = 10;
 #pragma mark - Save Video After Processing
 
 - (void)setupMovieWriter {
-//    movieWriter = [[GPUImageMovieWriter alloc] initWithMovieURL:[self outputURL] size:CGSizeMake(640, 480)];
-//    movieFile.audioEncodingTarget = movieWriter;
+    movieWriter = [[GPUImageMovieWriter alloc] initWithMovieURL:[self outputURL] size:CGSizeMake(640, 480)];
+    movieFile.audioEncodingTarget = movieWriter;
 }
 
 - (void)saveVideoFile {
-//    [movieWriter startRecordingInOrientation:CGAffineTransformMakeRotation(-90)];
+    [movieWriter startRecordingInOrientation:CGAffineTransformMakeRotation(-90)];
 }
 
 #pragma mark - FIlter
@@ -191,6 +213,12 @@ static const NSInteger tileSpacingBuffer = 10;
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+#pragma mark - Share button method
+
+- (void)shareButtonClicked {
+    NSLog(@"Shared");
 }
 
 - (void)didReceiveMemoryWarning
