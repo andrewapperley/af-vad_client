@@ -23,6 +23,10 @@
     NSTimer *recordedDurationTimer;
     UIButton *shareButton;
     UIButton *addFilterButton;
+    
+    /*Preview controller that plays the file which was just recorded - This is so they have a preview with audio*/
+    AVPlayer *previewPlayer;
+    AVPlayerLayer *previewPlayerLayer;
 }
 
 @end
@@ -86,6 +90,22 @@
 
     //setup preview layer
     previewWindow = [[AVCaptureVideoPreviewLayer alloc] initWithSession:captureSession];
+    
+    //setup the final preview for the recorded video file
+    previewPlayer = [[AVPlayer alloc] initWithURL:nil];
+    
+    previewPlayer.actionAtItemEnd = AVPlayerActionAtItemEndNone;
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(previewDidReachEnd:)
+                                                 name:AVPlayerItemDidPlayToEndTimeNotification
+                                               object:nil];
+    
+    previewPlayerLayer = [AVPlayerLayer playerLayerWithPlayer:previewPlayer];
+    previewPlayerLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
+    previewPlayerLayer.frame = previewWindowFrame;
+    
+    [self.view.layer addSublayer:previewPlayerLayer];
     
     [self setupVideoOutputProperties];
 
@@ -163,13 +183,32 @@
     
     /*Stop the recording if it's in progress and show the share / add filter buttons*/
     if(captureSession.isRunning && cameraOutput.isRecording) {
-        [cameraOutput stopRecording];
-        [self showFilterShareButtons:TRUE];
-        NSLog(@"Recording Stopped");
+        [UIView animateWithDuration:0.5f delay:0 options:UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationCurveEaseInOut animations:^{
+            previewWindow.opacity = 0;
+        } completion:^(BOOL finished) {
+            [cameraOutput stopRecording];
+            [captureSession stopRunning];
+            [self showFilterShareButtons:TRUE];
+            [previewPlayer replaceCurrentItemWithPlayerItem:[AVPlayerItem playerItemWithURL:[self outputURL]]];
+            [previewPlayer play];
+            NSLog(@"Recording Stopped");
+        }];
         return;
     }
     
     NSLog(@"recording");
+    
+    if (!captureSession.isRunning) {
+        [captureSession startRunning];
+    }
+    
+    [UIView animateWithDuration:0.5f delay:0 options:UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationCurveEaseInOut animations:^{
+        previewWindow.opacity = 1;
+    } completion:^(BOOL finished) {
+        [previewPlayer replaceCurrentItemWithPlayerItem:[AVPlayerItem playerItemWithURL:nil]];
+        [previewPlayer pause];
+    }];
+    
     [self removeTempVideoOutput];
     
     [cameraOutput startRecordingToOutputFileURL:[self outputURL] recordingDelegate:self];
@@ -186,6 +225,9 @@
 }
 
 - (void)closeVideoCaptureController {
+    
+    /*THIS DOESNT WORK BECAUSE WE NEED TO SETUP VC STUFF*/
+    
     NSLog(@"closing");
     [cameraOutput stopRecording];
     [captureSession stopRunning];
@@ -209,6 +251,16 @@
     if (cameraOutput.isRecording) {
          [cameraOutput stopRecording];
     }
+    
+    [UIView animateWithDuration:0.5f delay:0 options:UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationCurveEaseInOut animations:^{
+        previewWindow.opacity = 1;
+    } completion:^(BOOL finished) {
+        [captureSession startRunning];
+        [previewPlayer replaceCurrentItemWithPlayerItem:[AVPlayerItem playerItemWithURL:nil]];
+        [previewPlayer pause];
+        NSLog(@"Recording Reset");
+    }];
+    
     [mainControls setRecordingTime:0];
     [self removeTempVideoOutput];
     [self showFilterShareButtons:FALSE];
@@ -328,6 +380,16 @@
     
 }
 
+#pragma -
+#pragma Preview Player Notifications
+#pragma -
+
+- (void)previewDidReachEnd:(NSNotification *)event {
+    AVPlayerItem *p = [event object];
+    [p seekToTime:kCMTimeZero];
+    [previewPlayer play];
+}
+
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
@@ -337,6 +399,7 @@
     mainControls.delegate = nil;
     [recordedDurationTimer invalidate];
     recordedDurationTimer = nil;
+    [[NSNotificationCenter defaultCenter] removeObserver:previewPlayer];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
