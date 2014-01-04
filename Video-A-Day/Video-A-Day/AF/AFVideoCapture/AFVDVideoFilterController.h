@@ -7,8 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GPUImage.h"
+#import <MessageUI/MessageUI.h>
 
-@interface AFVDVideoFilterController : UIViewController
+@interface AFVDVideoFilterController : UIViewController<GPUImageMovieWriterDelegate, MFMailComposeViewControllerDelegate>
 
 - (instancetype)initWithVideoURL:(NSURL *)lvideoURL;
 

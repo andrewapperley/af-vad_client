@@ -40,7 +40,7 @@
 }
 
 + (instancetype)initWithDefaultConfig {
-    return [[AFVideoCaptureController alloc] initWithMaxDuration:CMTimeMake(300, 30) andWindowSize:CGRectMake(10, 30, 300, 300) andPreset:AFVideoCapturePreset_Medium];
+    return [[AFVideoCaptureController alloc] initWithMaxDuration:CMTimeMake(600, 30) andWindowSize:CGRectMake(10, 30, 300, 300) andPreset:AFVideoCapturePreset_Medium];
 }
 
 - (void)viewDidLoad
@@ -142,7 +142,7 @@
 }
 
 - (void)setOutputURL {
-    tempOutputPath = [[NSString alloc] initWithFormat:@"%@tempOutput.mov", NSTemporaryDirectory()];
+    tempOutputPath = [[NSString alloc] initWithFormat:@"%@tempOutput.m4v", NSTemporaryDirectory()];
 }
 
 - (NSURL *)outputURL {

@@ -7,7 +7,7 @@
 //
 
 #import "AFVDVideoFilterController.h"
-#import "GPUImage.h"
+
 
 static const NSInteger tileSize = 40;
 static const NSInteger tileSpacingBuffer = 10;
@@ -23,6 +23,9 @@ static const NSInteger tileSpacingBuffer = 10;
     UIScrollView *filterGrid;
     NSArray *filterList;
     UIButton *shareButton;
+    UIView *processingBlocker;
+    UIActivityIndicatorView *processingBlockerSpinner;
+    MFMailComposeViewController *mailComposer;
 }
 
 @end
@@ -60,6 +63,10 @@ static const NSInteger tileSpacingBuffer = 10;
     [self applyFilter:filterList[0]];
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    mailComposer = [[MFMailComposeViewController alloc]init];
+}
+
 #pragma mark - Set the filter list array
 
 - (void)setupFilterList {
@@ -83,6 +90,7 @@ static const NSInteger tileSpacingBuffer = 10;
     [self setupPreviewView];
     [self setupFilterGrid];
     [self setupShareButton];
+    [self setupProcessingBlocker];
 }
 
 - (void)setupShareButton {
@@ -120,6 +128,16 @@ static const NSInteger tileSpacingBuffer = 10;
     [self.view addSubview:filterGrid];
 }
 
+- (void)setupProcessingBlocker {
+    processingBlocker = [[UIView alloc] initWithFrame:self.view.frame];
+    processingBlocker.backgroundColor = [UIColor blackColor];
+    processingBlocker.alpha = 0;
+    
+    processingBlockerSpinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    processingBlockerSpinner.center = processingBlocker.center;
+    [processingBlocker addSubview:processingBlockerSpinner];
+}
+
 /*TEMP*/
 + (UIImage *)imageWithColor:(UIColor *)color {
     CGRect rect = CGRectMake(0, 0, 1, 1);
@@ -138,31 +156,58 @@ static const NSInteger tileSpacingBuffer = 10;
     movieFile = [[GPUImageMovie alloc] initWithURL:videoURL];
     movieFile.playAtActualSpeed = TRUE;
     movieFile.shouldRepeat = TRUE;
-    movieFile.playSound = TRUE;
 }
 
 #pragma mark - Save Video After Processing
 
 - (void)setupMovieWriter {
     movieWriter = [[GPUImageMovieWriter alloc] initWithMovieURL:[self outputURL] size:CGSizeMake(640, 480)];
+    
+    movieWriter.delegate = self;
+    movieFile.playAtActualSpeed = FALSE;
+    movieWriter.shouldPassthroughAudio = TRUE;
     movieFile.audioEncodingTarget = movieWriter;
+    [movieFile enableSynchronizedEncodingUsingMovieWriter:movieWriter];
+}
+
+- (void)endPreviewView {
+    [previewView endProcessing];
+    [filter removeTarget:previewView];
+    [previewView removeFromSuperview];
 }
 
 - (void)saveVideoFile {
-    [movieWriter startRecordingInOrientation:CGAffineTransformMakeRotation(-90)];
+    
+    [movieFile endProcessing];
+    
+    [self setupMovieWriter];
+    [self endPreviewView];
+    [self removeTempVideoOutput];
+
+    [filter addTarget:movieWriter];
+    [movieWriter startRecordingInOrientation:CGAffineTransformMakeRotation(M_PI * 90 / 180.0)];
+    [movieFile startProcessing];
+    
+    [self.view addSubview:processingBlocker];
+    [UIView animateWithDuration:0.5f animations:^{
+        processingBlocker.alpha = 0.6f;
+    } completion:^(BOOL finished) {
+        [processingBlockerSpinner startAnimating];
+    }];
+
 }
 
 #pragma mark - FIlter
 
 - (void)getFilterFromButtonPress:(UIButton *)sender {
-    
+    filterGrid.userInteractionEnabled = FALSE;
     [self applyFilter:filterList[sender.tag]];
     /*TEMP I will eventually hold onto the last selected button*/
     for (UIButton *b in filterGrid.subviews) {
         b.selected = FALSE;
     }
     sender.selected = TRUE;
-    
+    filterGrid.userInteractionEnabled = TRUE;
 }
 
 - (void)applyFilter:(NSString *)newFilter {
@@ -195,7 +240,7 @@ static const NSInteger tileSpacingBuffer = 10;
 #pragma mark - File URL
 
 - (void)setOutputURL {
-    tempOutputPath = [[NSString alloc] initWithFormat:@"%@tempOutput_filtered.mov", NSTemporaryDirectory()];
+    tempOutputPath = [[NSString alloc] initWithFormat:@"%@tempOutput_filtered.m4v", NSTemporaryDirectory()];
 }
 
 - (NSURL *)outputURL {
@@ -203,9 +248,11 @@ static const NSInteger tileSpacingBuffer = 10;
 }
 
 - (void)removeTempVideoOutput {
+    unlink([tempOutputPath UTF8String]);
     NSFileManager *fileManager = [NSFileManager defaultManager];
-    if ([fileManager fileExistsAtPath:tempOutputPath])
+    if ([fileManager fileExistsAtPath:tempOutputPath]) {
         [[NSFileManager defaultManager] removeItemAtPath:tempOutputPath error:nil];
+    }
 }
 
 #pragma mark - Rotation
@@ -219,7 +266,53 @@ static const NSInteger tileSpacingBuffer = 10;
 
 - (void)shareButtonClicked {
     NSLog(@"Shared");
+    [self saveVideoFile];
 }
+
+#pragma mark - GPUImageMovieWriterDelegate methods
+
+- (void)cleanupVideoFilter {
+    movieWriter.delegate = nil;
+    [movieFile endProcessing];
+//    [previewView endProcessing];
+    if (filter) {
+        [filter removeTarget:movieWriter];
+//        [filter removeTarget:previewView];
+        [movieFile removeTarget:filter];
+        filter = nil;
+    }
+     [movieWriter finishRecording];
+}
+
+- (void)movieRecordingCompleted {
+    NSLog(@"Movie saved");
+    [self cleanupVideoFilter];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [UIView animateWithDuration:0.5f animations:^{
+            processingBlocker.alpha = 0;
+        } completion:^(BOOL finished) {
+            [processingBlockerSpinner stopAnimating];
+            [processingBlocker removeFromSuperview];
+        }];
+         [self displayComposerSheet];
+    });
+}
+
+- (void)displayComposerSheet
+{
+    mailComposer.mailComposeDelegate = self;
+    [mailComposer setSubject:@"Test mail"];
+    [mailComposer setMessageBody:@"Testing message for the test mail" isHTML:NO];
+    NSData *data = [NSData dataWithContentsOfURL:[self outputURL]];
+    [mailComposer addAttachmentData:data mimeType:@"video/m4v" fileName:@"abc.m4v"];
+     [self presentModalViewController:mailComposer animated:YES];
+}
+
+- (void)movieRecordingFailedWithError:(NSError *)error {
+    NSLog(@"Movie saving ended in error %@", error.localizedDescription);
+}
+
+#pragma mark - Cleanup
 
 - (void)didReceiveMemoryWarning
 {
