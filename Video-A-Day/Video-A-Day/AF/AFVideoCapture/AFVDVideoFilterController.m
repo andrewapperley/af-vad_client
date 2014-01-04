@@ -70,18 +70,40 @@ static const NSInteger tileSpacingBuffer = 10;
 #pragma mark - Set the filter list array
 
 - (void)setupFilterList {
-    filterList = [[NSArray alloc] initWithObjects:@"GPUImageVignetteFilter",
-                                                                        @"GPUImageToonFilter",
-                                                                        @"GPUImagePixellateFilter",
-                                                                        @"GPUImageColorInvertFilter",
-                                                                        @"GPUImageSepiaFilter",
-                                                                        @"GPUImageGaussianBlurFilter",
-                                                                        @"GPUImageSwirlFilter",
-                                                                        @"GPUImageGrayscaleFilter",
-                                                                        @"GPUImageBoxBlurFilter",
-                                                                        @"GPUImageTiltShiftFilter",
-                                                                        @"GPUImagePolkaDotFilter",
-                                                                        @"GPUImageMotionBlurFilter", nil];
+    
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSDictionary *filterListJSON;
+    
+    /*Home Directory filter list, this is a copy of the downloaded version after the user purchases an add-on pack*/
+    NSString *downloadedJSONList = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0] stringByAppendingString:@"/AFVideoFilterList.json"];
+    
+    /*Check if they downloaded the file*/
+    if (![fileManager fileExistsAtPath:downloadedJSONList]) {
+        filterListJSON = [NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"AFVideoFilterDefaultList" ofType:@"json"]] options:NSJSONReadingMutableContainers error:nil];
+    } else {
+         filterListJSON = [NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfFile:downloadedJSONList] options:NSJSONReadingMutableContainers error:nil];
+    }
+    
+    /*If the default one or the downloaded one fail to load we load an inline version of the default list*/
+    if (!filterListJSON) {
+        filterList = [[NSArray alloc] initWithObjects:
+                      @"GPUImageVignetteFilter",
+                      @"GPUImageToonFilter",
+                      @"GPUImagePixellateFilter",
+                      @"GPUImageColorInvertFilter",
+                      @"GPUImageSepiaFilter",
+                      @"GPUImageGaussianBlurFilter",
+                      @"GPUImageSwirlFilter",
+                      @"GPUImageGrayscaleFilter",
+                      @"GPUImageBoxBlurFilter",
+                      @"GPUImageTiltShiftFilter",
+                      @"GPUImagePolkaDotFilter",
+                      @"GPUImageMotionBlurFilter", nil];
+        return;
+    }
+    
+    /*Grab the array of filters from the dictionary and assign them to the filter list var*/
+    filterList = [[NSArray alloc] initWithArray:filterListJSON[@"filter_list"]];
 }
 
 #pragma mark - Setup UI (Preview screen and filter grid)
