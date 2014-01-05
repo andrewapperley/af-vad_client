@@ -22,12 +22,13 @@
 #pragma mark - UIApplicationDelegate
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
     //Keychain
     [self createKeychain];
     
     //Window and view controller
     _window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    _window.rootViewController = [[AFVDViewController alloc] initWithNibName:nil bundle:nil];;
+    _window.rootViewController = [[AFVDViewController alloc] initWithNibName:nil bundle:nil];
     [_window makeKeyAndVisible];
     
     return YES;

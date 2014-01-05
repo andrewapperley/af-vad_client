@@ -15,6 +15,7 @@
 #import "AFVDUserModelFactory.h"
 #import "AFVDVideoModelFactory.h"
 #import "AFVDRelationshipModelFactory.h"
+#import "AFVideoCaptureController.h"
 
 NSString *userName = @"andrewApperley123";
 NSString *displayName = @"a_apperley";
@@ -25,7 +26,9 @@ NSString *relationshipId = @"97fb98a484426f662c389bc9f686a1ee";
 NSString *email = @"email@email.com";
 
 @interface AFVDViewController ()
-
+{
+    AFVideoCaptureController *vc;
+}
 @end
 
 @implementation AFVDViewController
@@ -35,27 +38,31 @@ NSString *email = @"email@email.com";
     [super viewDidLoad];
 
     //User
-//    [self createUser];
-//    [self fetchUserModel];
+    //    [self createUser];
+    //    [self fetchUserModel];
 #warning TEST     [self deactivateUser];
-//    [self updateUser];
-//    [self checkIfUsernameIsAvailable];
-//    [self loginUser];
-//    [self logoutUser];
+    //    [self updateUser];
+    //    [self checkIfUsernameIsAvailable];
+    //    [self loginUser];
+    //    [self logoutUser];
 #warning TEST    [self updateToken];
-//
-//    //Relationship
-//    [self createRelationship];
-//    [self fetchRelationshipModels];
-//    [self fetchRelationshipModelFromId];
-//    
-//    //Videos
-//    [self createVideo];
+    //
+    //    //Relationship
+    //    [self createRelationship];
+    //    [self fetchRelationshipModels];
+    //    [self fetchRelationshipModelFromId];
+    //
+    //    //Videos
+    //    [self createVideo];
 #warning TEST    [self fetchVideoModelsAtPageIndex];
 #warning TEST    [self fetchFavouriteVideoModelsAtPageIndex];
 #warning TEST    [self setUserFavouritedVideo];
 #warning TEST    [self unsetUserFavouritedVideo];
 //    [self fetchVideoModel];
+    //    [self fetchVideoModel];
+    vc = [AFVideoCaptureController captureControllerWithDefaults];
+    [self addChildViewController:vc];
+    [self.view addSubview:vc.view];
 }
 
 - (void)createUser {
