@@ -24,7 +24,7 @@ typedef enum {
 
 - (instancetype) initWithMaxDuration:(CMTime)duration andWindowSize:(CGRect)rect andPreset:(AFVideoCapturePreset)lpreset;
 
-+ (instancetype)initWithDefaultConfig;
++ (instancetype)captureControllerWithDefaults;
 
 - (void)previewWindowFrame:(CGRect)newFrame;
 

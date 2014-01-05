@@ -7,35 +7,38 @@
 //
 
 #import "AFVDVideoFilterController.h"
+#import "AFVDFilterTileButton.h"
 
-
-static const NSInteger tileSize = 40;
-static const NSInteger tileSpacingBuffer = 10;
-
+static const NSInteger kTileSize = 40;
+static const NSInteger kTileSpacingBuffer = 10;
+static const CGFloat kProcessingBlockerAnimationDuration = 0.5f;
+static const NSString *kOutputFilteredFileName = @"tempOutput_filtered.m4v";
 @interface AFVDVideoFilterController ()
 {
-    GPUImageMovie *movieFile;
-    NSURL *videoURL;
-    NSString *tempOutputPath;
-    GPUImageOutput<GPUImageInput> *filter;
-    GPUImageMovieWriter *movieWriter;
-    GPUImageView *previewView;
-    UIScrollView *filterGrid;
-    NSArray *filterList;
-    UIButton *shareButton;
-    UIView *processingBlocker;
-    UIActivityIndicatorView *processingBlockerSpinner;
-    MFMailComposeViewController *mailComposer;
+    GPUImageMovie *_movieFile;
+    NSURL *_videoURL;
+    NSString *_tempOutputPath;
+    GPUImageOutput<GPUImageInput> *_filter;
+    GPUImageMovieWriter *_movieWriter;
+    GPUImageView *_previewView;
+    UIScrollView *_filterGrid;
+    NSArray *_filterList;
+    UIButton *_shareButton;
+    UIView *_processingBlocker;
+    UIActivityIndicatorView *_processingBlockerSpinner;
+    CGSize _movieWriterSize;
+    AFVDFilterTileButton *_selectedTile;
 }
 
 @end
 
 @implementation AFVDVideoFilterController
 
-- (instancetype)initWithVideoURL:(NSURL *)lvideoURL {
+- (instancetype)initWithVideoURL:(NSURL *)lvideoURL andMovieSize:(CGSize)movieWriterSize {
     self = [super init];
     if (self) {
-        videoURL = lvideoURL;
+        _videoURL = lvideoURL;
+        _movieWriterSize = movieWriterSize;
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pauseFilterView) name:UIApplicationWillResignActiveNotification object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resumeFilterView) name:UIApplicationWillEnterForegroundNotification object:nil];
     }
@@ -45,11 +48,11 @@ static const NSInteger tileSpacingBuffer = 10;
 #pragma mark - Resume/Pause Filter Processing
 
 - (void)pauseFilterView {
-    [movieFile endProcessing];
+    [_movieFile endProcessing];
 }
 
 - (void)resumeFilterView {
-    [movieFile startProcessing];
+    [_movieFile startProcessing];
 }
 
 - (void)viewDidLoad
@@ -60,11 +63,7 @@ static const NSInteger tileSpacingBuffer = 10;
     [self setupFilterList];
     [self setupUI];
     [self setupMovieFile];
-    [self applyFilter:filterList[0]];
-}
-
-- (void)viewDidAppear:(BOOL)animated {
-    mailComposer = [[MFMailComposeViewController alloc]init];
+    [self applyFilter:_filterList[0]];
 }
 
 #pragma mark - Set the filter list array
@@ -86,7 +85,7 @@ static const NSInteger tileSpacingBuffer = 10;
     
     /*If the default one or the downloaded one fail to load we load an inline version of the default list*/
     if (!filterListJSON) {
-        filterList = [[NSArray alloc] initWithObjects:
+        _filterList = [[NSArray alloc] initWithObjects:
                       @"GPUImageVignetteFilter",
                       @"GPUImageToonFilter",
                       @"GPUImagePixellateFilter",
@@ -103,7 +102,7 @@ static const NSInteger tileSpacingBuffer = 10;
     }
     
     /*Grab the array of filters from the dictionary and assign them to the filter list var*/
-    filterList = [[NSArray alloc] initWithArray:filterListJSON[@"filter_list"]];
+    _filterList = [[NSArray alloc] initWithArray:filterListJSON[@"filter_list"]];
 }
 
 #pragma mark - Setup UI (Preview screen and filter grid)
@@ -116,48 +115,54 @@ static const NSInteger tileSpacingBuffer = 10;
 }
 
 - (void)setupShareButton {
-    shareButton = [[UIButton alloc] initWithFrame:CGRectMake((self.view.frame.size.width - 145) / 2, filterGrid.frame.origin.y + filterGrid.frame.size.height + 20, 145, 40)];
-    shareButton.backgroundColor = [UIColor greenColor];
-    [shareButton setTitle:@"Share" forState:UIControlStateNormal];
-    [shareButton addTarget:self action:@selector(shareButtonClicked) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:shareButton];
+    _shareButton = [[UIButton alloc] initWithFrame:CGRectMake((self.view.frame.size.width - 145) / 2, _filterGrid.frame.origin.y + _filterGrid.frame.size.height + 20, 145, 40)];
+    _shareButton.backgroundColor = [UIColor greenColor];
+    [_shareButton setTitle:@"Share" forState:UIControlStateNormal];
+    [_shareButton addTarget:self action:@selector(shareButtonClicked) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:_shareButton];
 }
 
 - (void)setupPreviewView {
-    previewView = [[GPUImageView alloc] initWithFrame:CGRectMake(10, 30, 300, 300)];
-    previewView.fillMode = kGPUImageFillModePreserveAspectRatioAndFill;
-    [previewView setInputRotation:kGPUImageRotateRight atIndex:0];
-    [self.view addSubview:previewView];
+    _previewView = [[GPUImageView alloc] initWithFrame:CGRectMake(10, 30, 300, 300)];
+    _previewView.fillMode = kGPUImageFillModePreserveAspectRatioAndFill;
+    [_previewView setInputRotation:kGPUImageRotateRight atIndex:0];
+    [self.view addSubview:_previewView];
 }
 
 - (void)setupFilterGrid {
-    filterGrid = [[UIScrollView alloc] initWithFrame:CGRectMake(10, previewView.frame.origin.y + previewView.frame.size.height + 20, 300, tileSize)];
-    filterGrid.showsHorizontalScrollIndicator = filterGrid.showsVerticalScrollIndicator = FALSE;
+    _filterGrid = [[UIScrollView alloc] initWithFrame:CGRectMake(10, _previewView.frame.origin.y + _previewView.frame.size.height + 20, 300, kTileSize)];
+    _filterGrid.showsHorizontalScrollIndicator = _filterGrid.showsVerticalScrollIndicator = FALSE;
     
-    for (uint i = 0; i < filterList.count; i++) {
-        UIButton *s = [[UIButton alloc] initWithFrame:CGRectMake(((tileSize + tileSpacingBuffer)*i), 0, tileSize, tileSize)];
+    NSUInteger i = 0;
+    
+    for (NSString *filter in _filterList) {
+        AFVDFilterTileButton *s = [[AFVDFilterTileButton alloc] initWithFrame:CGRectMake(((kTileSize + kTileSpacingBuffer)*i), 0, kTileSize, kTileSize) andFilter:filter];
+        //Temp
         s.backgroundColor = [UIColor redColor];
-        s.tag = i;
-        [s addTarget:self action:@selector(getFilterFromButtonPress:) forControlEvents:UIControlEventTouchUpInside];
+        //end Temp
+        [s addTarget:self action:@selector(filterFromButtonPress:) forControlEvents:UIControlEventTouchUpInside];
         [s setBackgroundImage:[AFVDVideoFilterController imageWithColor:[UIColor yellowColor]] forState:UIControlStateSelected];
         if(i == 0) {
             s.selected = TRUE;
+            _selectedTile = s;
         }
-        [filterGrid addSubview:s];
+        [_filterGrid addSubview:s];
+        
+        i++;
     }
     
-    filterGrid.contentSize = CGSizeMake(filterGrid.contentSize.width + ((tileSize + tileSpacingBuffer)*filterList.count), tileSize);
-    [self.view addSubview:filterGrid];
+    _filterGrid.contentSize = CGSizeMake(_filterGrid.contentSize.width + ((kTileSize + kTileSpacingBuffer)*_filterList.count), kTileSize);
+    [self.view addSubview:_filterGrid];
 }
 
 - (void)setupProcessingBlocker {
-    processingBlocker = [[UIView alloc] initWithFrame:self.view.frame];
-    processingBlocker.backgroundColor = [UIColor blackColor];
-    processingBlocker.alpha = 0;
+    _processingBlocker = [[UIView alloc] initWithFrame:self.view.frame];
+    _processingBlocker.backgroundColor = [UIColor blackColor];
+    _processingBlocker.alpha = 0;
     
-    processingBlockerSpinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-    processingBlockerSpinner.center = processingBlocker.center;
-    [processingBlocker addSubview:processingBlockerSpinner];
+    _processingBlockerSpinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    _processingBlockerSpinner.center = _processingBlocker.center;
+    [_processingBlocker addSubview:_processingBlockerSpinner];
 }
 
 /*TEMP*/
@@ -175,61 +180,59 @@ static const NSInteger tileSpacingBuffer = 10;
 
 #pragma mark - Setup Movie File
 - (void)setupMovieFile {
-    movieFile = [[GPUImageMovie alloc] initWithURL:videoURL];
-    movieFile.playAtActualSpeed = TRUE;
-    movieFile.shouldRepeat = TRUE;
+    _movieFile = [[GPUImageMovie alloc] initWithURL:_videoURL];
+    _movieFile.playAtActualSpeed = TRUE;
+    _movieFile.shouldRepeat = TRUE;
 }
 
 #pragma mark - Save Video After Processing
 
 - (void)setupMovieWriter {
-    movieWriter = [[GPUImageMovieWriter alloc] initWithMovieURL:[self outputURL] size:CGSizeMake(640, 480)];
+    _movieWriter = [[GPUImageMovieWriter alloc] initWithMovieURL:[self outputURL] size:_movieWriterSize];
     
-    movieWriter.delegate = self;
-    movieFile.playAtActualSpeed = FALSE;
-    movieWriter.shouldPassthroughAudio = TRUE;
-    movieFile.audioEncodingTarget = movieWriter;
-    [movieFile enableSynchronizedEncodingUsingMovieWriter:movieWriter];
+    _movieWriter.delegate = self;
+    _movieFile.playAtActualSpeed = FALSE;
+    _movieWriter.shouldPassthroughAudio = TRUE;
+    _movieFile.audioEncodingTarget = _movieWriter;
+    [_movieFile enableSynchronizedEncodingUsingMovieWriter:_movieWriter];
 }
 
 - (void)endPreviewView {
-    [previewView endProcessing];
-    [filter removeTarget:previewView];
-    [previewView removeFromSuperview];
+    [_previewView endProcessing];
+    [_filter removeTarget:_previewView];
+    [_previewView removeFromSuperview];
 }
 
 - (void)saveVideoFile {
     
-    [movieFile endProcessing];
+    [_movieFile endProcessing];
     
     [self setupMovieWriter];
     [self endPreviewView];
     [self removeTempVideoOutput];
 
-    [filter addTarget:movieWriter];
-    [movieWriter startRecordingInOrientation:CGAffineTransformMakeRotation(M_PI * 90 / 180.0)];
-    [movieFile startProcessing];
+    [_filter addTarget:_movieWriter];
+    [_movieWriter startRecordingInOrientation:CGAffineTransformMakeRotation(M_PI * 90 / 180.0)];
+    [_movieFile startProcessing];
     
-    [self.view addSubview:processingBlocker];
-    [UIView animateWithDuration:0.5f animations:^{
-        processingBlocker.alpha = 0.6f;
+    [self.view addSubview:_processingBlocker];
+    [UIView animateWithDuration:kProcessingBlockerAnimationDuration animations:^{
+        _processingBlocker.alpha = 0.6f;
     } completion:^(BOOL finished) {
-        [processingBlockerSpinner startAnimating];
+        [_processingBlockerSpinner startAnimating];
     }];
 
 }
 
 #pragma mark - FIlter
 
-- (void)getFilterFromButtonPress:(UIButton *)sender {
-    filterGrid.userInteractionEnabled = FALSE;
-    [self applyFilter:filterList[sender.tag]];
-    /*TEMP I will eventually hold onto the last selected button*/
-    for (UIButton *b in filterGrid.subviews) {
-        b.selected = FALSE;
-    }
+- (void)filterFromButtonPress:(AFVDFilterTileButton *)sender {
+    _filterGrid.userInteractionEnabled = FALSE;
+    [self applyFilter:sender.filterName];
+    _selectedTile.selected = FALSE;
     sender.selected = TRUE;
-    filterGrid.userInteractionEnabled = TRUE;
+    _selectedTile = sender;
+    _filterGrid.userInteractionEnabled = TRUE;
 }
 
 - (void)applyFilter:(NSString *)newFilter {
@@ -238,42 +241,42 @@ static const NSInteger tileSpacingBuffer = 10;
     Class filterClassFromNewFilterString = NSClassFromString(newFilter);
     
     /*Stop current processing to speed up filter switching*/
-    [movieFile endProcessing];
+    [_movieFile endProcessing];
     
     /*Check if a filter was applied previously and then remove the filter from the processor*/
-    if (filter) {
-        [filter removeTarget:previewView];
-        [movieFile removeTarget:filter];
-        filter = nil;
+    if (_filter) {
+        [_filter removeTarget:_previewView];
+        [_movieFile removeTarget:_filter];
+        _filter = nil;
     }
     
     /*Create the new filter from the newFilter name*/
-    filter = [[filterClassFromNewFilterString alloc] init];
+    _filter = [[filterClassFromNewFilterString alloc] init];
     /*Rotate the Preview screens input because the filters are on the side always :s*/
-    [previewView setInputRotation:kGPUImageRotateRight atIndex:0];
+    [_previewView setInputRotation:kGPUImageRotateRight atIndex:0];
     
     /*Add the filter and movieFile together then start processing again*/
-    [filter addTarget:previewView];
-    [movieFile addTarget:filter];
-    [movieFile startProcessing];
+    [_filter addTarget:_previewView];
+    [_movieFile addTarget:_filter];
+    [_movieFile startProcessing];
     
 }
 
 #pragma mark - File URL
 
 - (void)setOutputURL {
-    tempOutputPath = [[NSString alloc] initWithFormat:@"%@tempOutput_filtered.m4v", NSTemporaryDirectory()];
+    _tempOutputPath = [[NSString alloc] initWithFormat:@"%@%@", NSTemporaryDirectory(), kOutputFilteredFileName];
 }
 
 - (NSURL *)outputURL {
-    return [NSURL fileURLWithPath:tempOutputPath];
+    return [NSURL fileURLWithPath:_tempOutputPath];
 }
 
 - (void)removeTempVideoOutput {
-    unlink([tempOutputPath UTF8String]);
+    unlink([_tempOutputPath UTF8String]);
     NSFileManager *fileManager = [NSFileManager defaultManager];
-    if ([fileManager fileExistsAtPath:tempOutputPath]) {
-        [[NSFileManager defaultManager] removeItemAtPath:tempOutputPath error:nil];
+    if ([fileManager fileExistsAtPath:_tempOutputPath]) {
+        [[NSFileManager defaultManager] removeItemAtPath:_tempOutputPath error:nil];
     }
 }
 
@@ -294,40 +297,33 @@ static const NSInteger tileSpacingBuffer = 10;
 #pragma mark - GPUImageMovieWriterDelegate methods
 
 - (void)cleanupVideoFilter {
-    movieWriter.delegate = nil;
-    [movieFile endProcessing];
-//    [previewView endProcessing];
-    if (filter) {
-        [filter removeTarget:movieWriter];
-//        [filter removeTarget:previewView];
-        [movieFile removeTarget:filter];
-        filter = nil;
+    
+    _movieWriter.delegate = nil;
+    [_movieFile endProcessing];
+    
+    if (_filter) {
+        [_filter removeTarget:_movieWriter];
+        [_movieFile removeTarget:_filter];
+        _filter = nil;
     }
-     [movieWriter finishRecording];
+     [_movieWriter finishRecording];
 }
 
 - (void)movieRecordingCompleted {
     NSLog(@"Movie saved");
     [self cleanupVideoFilter];
+    
+    /*GPUImageMovieWriter runs the delegate method from the background thread so I update the UI in the main thread*/
+    
+    /*I think this will change as we will be making an app wide spinner with optinal touchBlocker that will handle the animation stuff*/
     dispatch_async(dispatch_get_main_queue(), ^{
         [UIView animateWithDuration:0.5f animations:^{
-            processingBlocker.alpha = 0;
+            _processingBlocker.alpha = 0;
         } completion:^(BOOL finished) {
-            [processingBlockerSpinner stopAnimating];
-            [processingBlocker removeFromSuperview];
+            [_processingBlockerSpinner stopAnimating];
+            [_processingBlocker removeFromSuperview];
         }];
-         [self displayComposerSheet];
     });
-}
-
-- (void)displayComposerSheet
-{
-    mailComposer.mailComposeDelegate = self;
-    [mailComposer setSubject:@"Test mail"];
-    [mailComposer setMessageBody:@"Testing message for the test mail" isHTML:NO];
-    NSData *data = [NSData dataWithContentsOfURL:[self outputURL]];
-    [mailComposer addAttachmentData:data mimeType:@"video/m4v" fileName:@"abc.m4v"];
-     [self presentModalViewController:mailComposer animated:YES];
 }
 
 - (void)movieRecordingFailedWithError:(NSError *)error {

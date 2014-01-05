@@ -9,6 +9,8 @@
 #import "AFVideoCaptureController.h"
 #import "AFVDVideoFilterController.h"
 
+static const CGFloat kDurationBroadcastFrequency = 0.5f;
+
 @interface AFVideoCaptureController ()
 {
     AVCaptureSession *captureSession;
@@ -23,6 +25,7 @@
     NSTimer *recordedDurationTimer;
     UIButton *shareButton;
     UIButton *addFilterButton;
+    CGSize _videoDimensions;
     
     /*Preview controller that plays the file which was just recorded - This is so they have a preview with audio*/
     AVPlayer *previewPlayer;
@@ -43,7 +46,7 @@
     return self;
 }
 
-+ (instancetype)initWithDefaultConfig {
++ (instancetype)captureControllerWithDefaults {
     return [[AFVideoCaptureController alloc] initWithMaxDuration:CMTimeMake(600, 30) andWindowSize:CGRectMake(10, 30, 300, 300) andPreset:AFVideoCapturePreset_Medium];
 }
 
@@ -54,6 +57,7 @@
     [self setOutputURL];
     
     captureSession = [[AVCaptureSession alloc] init];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(grabVideoDimensions:) name:AVCaptureInputPortFormatDescriptionDidChangeNotification object:nil];
     [captureSession beginConfiguration];
     //create video input
     
@@ -214,7 +218,7 @@
     [cameraOutput startRecordingToOutputFileURL:[self outputURL] recordingDelegate:self];
     [recordedDurationTimer invalidate];
     recordedDurationTimer = nil;
-    recordedDurationTimer = [NSTimer scheduledTimerWithTimeInterval:0.5f target:self selector:@selector(broadcastRecordedDuration) userInfo:nil repeats:TRUE];
+    recordedDurationTimer = [NSTimer scheduledTimerWithTimeInterval:kDurationBroadcastFrequency target:self selector:@selector(broadcastRecordedDuration) userInfo:nil repeats:TRUE];
     
     [self showFilterShareButtons:FALSE];
     
@@ -241,6 +245,14 @@
         [self.view removeFromSuperview];
         [self removeFromParentViewController];
     }];
+}
+
+- (void)grabVideoDimensions:(NSNotification *)event {
+    AVCaptureInputPort *port = event.object;
+    CMFormatDescriptionRef formatDescription = port.formatDescription;
+    CMVideoDimensions dimensions = CMVideoFormatDescriptionGetDimensions(formatDescription);
+    _videoDimensions = CGSizeMake(dimensions.height, dimensions.width);
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:AVCaptureInputPortFormatDescriptionDidChangeNotification object:nil];
 }
 
 - (void)recaptureVideo {
@@ -343,7 +355,8 @@
     [captureSession stopRunning];
     
     /*Present filter view controller and dismiss this view controller*/
-    AFVDVideoFilterController *videoFilterView = [[AFVDVideoFilterController alloc] initWithVideoURL:[self outputURL]];
+    
+    AFVDVideoFilterController *videoFilterView = [[AFVDVideoFilterController alloc] initWithVideoURL:[self outputURL] andMovieSize:_videoDimensions];
     [self.navigationController presentViewController:videoFilterView animated:TRUE completion:nil];
     
     [self removeFromParentViewController];

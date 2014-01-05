@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0F06A6DE18788C4D0021E10C /* AFVideoFilterDefaultList.json in Resources */ = {isa = PBXBuildFile; fileRef = 0F06A6DD18788C4D0021E10C /* AFVideoFilterDefaultList.json */; };
+		0F06A6E1187922570021E10C /* AFVDFilterTileButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F06A6E0187922570021E10C /* AFVDFilterTileButton.m */; };
 		0F10E3C51859375200FC1433 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F10E3C41859375200FC1433 /* AVFoundation.framework */; };
 		0F10E3CB18593B8B00FC1433 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F10E3CA18593B8B00FC1433 /* CoreMedia.framework */; };
 		0F10E3CD18593B9A00FC1433 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F10E3CC18593B9A00FC1433 /* MediaPlayer.framework */; };
@@ -68,6 +69,8 @@
 
 /* Begin PBXFileReference section */
 		0F06A6DD18788C4D0021E10C /* AFVideoFilterDefaultList.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = AFVideoFilterDefaultList.json; sourceTree = "<group>"; };
+		0F06A6DF187922570021E10C /* AFVDFilterTileButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFVDFilterTileButton.h; sourceTree = "<group>"; };
+		0F06A6E0187922570021E10C /* AFVDFilterTileButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFVDFilterTileButton.m; sourceTree = "<group>"; };
 		0F10E3C41859375200FC1433 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		0F10E3C818593B8200FC1433 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		0F10E3CA18593B8B00FC1433 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
@@ -189,6 +192,8 @@
 				0F10E3DB18594FA700FC1433 /* AFVideoCaptureControls.h */,
 				0F10E3DC18594FA800FC1433 /* AFVideoCaptureControls.m */,
 				0F06A6DD18788C4D0021E10C /* AFVideoFilterDefaultList.json */,
+				0F06A6DF187922570021E10C /* AFVDFilterTileButton.h */,
+				0F06A6E0187922570021E10C /* AFVDFilterTileButton.m */,
 			);
 			name = AFVideoCapture;
 			path = AF/AFVideoCapture;
@@ -648,6 +653,7 @@
 				76C651A8183840E4003C7F7D /* AFVDVideoModelFactory.m in Sources */,
 				7677BA6D18373A6B00F3EDC9 /* AFVDBaseNetworkDatasource.m in Sources */,
 				76C651931838003D003C7F7D /* NSDictionary+NSDictionary_NSDataConversion.m in Sources */,
+				0F06A6E1187922570021E10C /* AFVDFilterTileButton.m in Sources */,
 				7610BC5B183B1108003CE193 /* AFVDRelationshipModelDatasource.m in Sources */,
 				76C651AC18384647003C7F7D /* AFVDVideoPlaylistModel.m in Sources */,
 				0F10E3DA18594B9600FC1433 /* AFVideoCaptureController.m in Sources */,

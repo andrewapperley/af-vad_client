@@ -56,7 +56,7 @@ NSString *email = @"email@email.com";
 //    [self createRelationship];
 //    [self fetchRelationshipModels];       //TODO
 //    [self fetchRelationshipModelFromId];
-    vc = [AFVideoCaptureController initWithDefaultConfig];
+    vc = [AFVideoCaptureController captureControllerWithDefaults];
     [self addChildViewController:vc];
     [self.view addSubview:vc.view];
 }
