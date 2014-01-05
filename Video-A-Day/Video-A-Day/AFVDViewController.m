@@ -37,25 +37,27 @@ NSString *email = @"email@email.com";
 {
     [super viewDidLoad];
 
-    //User
-//    //Already created both users and will fail saying user already exists so there is no point in calling this
-//    //as it works :)
-//    [self createUser];
-//    [self loginUser];
-//    [self checkIfUsernameIsAvailable];
-//    [self fetchUserModel];
-//    [self updateUser];
-//    [self logoutUser];
-//
-//    //Videos
-//    [self fetchRelationshipModel];
-//    [self fetchVideoModel];
-//    [self createVideo];
-//
-//    //Relationship
-//    [self createRelationship];
-//    [self fetchRelationshipModels];       //TODO
-//    [self fetchRelationshipModelFromId];
+    //    [self createUser];
+    //    [self fetchUserModel];
+#warning TEST     [self deactivateUser];
+    //    [self updateUser];
+    //    [self checkIfUsernameIsAvailable];
+    //    [self loginUser];
+    //    [self logoutUser];
+#warning TEST    [self updateToken];
+    //
+    //    //Relationship
+    //    [self createRelationship];
+    //    [self fetchRelationshipModels];
+    //    [self fetchRelationshipModelFromId];
+    //
+    //    //Videos
+    //    [self createVideo];
+#warning TEST    [self fetchVideoModelsAtPageIndex];
+#warning TEST    [self fetchFavouriteVideoModelsAtPageIndex];
+#warning TEST    [self setUserFavouritedVideo];
+#warning TEST    [self unsetUserFavouritedVideo];
+    //    [self fetchVideoModel];
     vc = [AFVideoCaptureController captureControllerWithDefaults];
     [self addChildViewController:vc];
     [self.view addSubview:vc.view];
