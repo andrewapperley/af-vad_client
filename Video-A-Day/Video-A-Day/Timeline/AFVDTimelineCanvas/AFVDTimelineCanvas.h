@@ -20,11 +20,9 @@
 @interface AFVDTimelineCanvas : UIView
 
 @property (nonatomic, weak) id<AFVDTimelineCanvasDelegate> delegate;
+@property (nonatomic, strong) NSMutableArray *data;
 
 #pragma mark - Data handling
-/** Set the timeline data. */
-- (void)setData:(NSArray *)data;
-
 /** Append data to the existing timeline canvas data. This will resize the collection view's content size. */
 - (void)appendData:(NSArray *)data;
 

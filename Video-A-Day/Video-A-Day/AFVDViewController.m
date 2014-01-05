@@ -31,6 +31,13 @@
     [self.view addSubview:timeline.view];
     
     [timeline reloadData];
+    
+#warning TEMP
+    
+    UIView *uglyAssLine = [[UIView alloc] initWithFrame:CGRectMake(0, (self.view.bounds.size.height / 2) - 1, self.view.bounds.size.width, 2)];
+    uglyAssLine.backgroundColor = [UIColor redColor];
+    [self.view addSubview:uglyAssLine];
+#warning ENDTEMP
 }
 
 #pragma mark - AFVDTimelineDataSource
@@ -38,7 +45,7 @@
     
     NSMutableArray *array = [[NSMutableArray alloc] init];
     
-    for(NSUInteger i = 0; i < 200; i++) {
+    for(NSUInteger i = 0; i < 20; i++) {
     
         [array addObject:@(i)];
     }

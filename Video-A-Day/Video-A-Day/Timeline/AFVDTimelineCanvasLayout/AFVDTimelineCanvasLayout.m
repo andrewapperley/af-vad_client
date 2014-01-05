@@ -10,4 +10,16 @@
 
 @implementation AFVDTimelineCanvasLayout
 
+#pragma mark - Init
+- (instancetype)init {
+    
+    self = [super init];
+    if(self) {
+        
+        self.minimumLineSpacing         = 0;
+        self.minimumInteritemSpacing    = 0;
+    }
+    return self;
+}
+
 @end

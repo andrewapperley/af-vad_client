@@ -8,6 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
+typedef NS_OPTIONS(NSUInteger, AFVDTimelineCanvasCellBackgroundLinePosition) {
+    
+    kAFVDTimelineCanvasCellBackgroundLinePosition_None   = 0,
+    kAFVDTimelineCanvasCellBackgroundLinePosition_Top    = 1 << 0,
+    kAFVDTimelineCanvasCellBackgroundLinePosition_Bottom = 1 << 1
+};
+
 @interface AFVDTimelineCanvasCell : UICollectionViewCell
 
 #pragma mark - Data
@@ -16,6 +23,12 @@
 
 #pragma mark - Position
 /** Sets the position relative to it's visible container. */
-- (void)setCellPosition:(CGPoint)cellPosition withinContainer:(CGRect)container;
+- (void)checkCellPositionInView:(UIView *)view;
+
+#pragma mark - Background line position
+- (void)setBackgroundLinePosition:(AFVDTimelineCanvasCellBackgroundLinePosition)position;
+
+#pragma mark - Cell height
++ (CGFloat)cellHeight;
 
 @end

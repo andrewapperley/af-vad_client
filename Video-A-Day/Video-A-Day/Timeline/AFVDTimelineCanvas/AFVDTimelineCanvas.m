@@ -10,14 +10,13 @@
 #import "AFVDTimelineCanvasCell.h"
 #import "AFVDTimelineCanvasLayout.h"
 
-NSString *kAFVDTimelineCanvasCellIdentifier = @"timelineCanvasCellIdentifier";
+#pragma mark - Constants
+NSString *kAFVDTimelineCanvas_CellIdentifier = @"kAFVDTimelineCanvasCellIdentifier";
 
 @interface AFVDTimelineCanvas () <UICollectionViewDelegate, UICollectionViewDataSource> {
     
     UICollectionView    *_collectionView;
 }
-
-@property (nonatomic, strong) NSMutableArray *data;
 
 @end
 
@@ -39,12 +38,18 @@ NSString *kAFVDTimelineCanvasCellIdentifier = @"timelineCanvasCellIdentifier";
 
     //Collection view layout
     AFVDTimelineCanvasLayout *collectionViewLayout = [[AFVDTimelineCanvasLayout alloc] init];
+    collectionViewLayout.itemSize = CGSizeMake(self.bounds.size.width, [AFVDTimelineCanvasCell cellHeight]);
 
     //Collection view
     _collectionView = [[UICollectionView alloc] initWithFrame:self.bounds collectionViewLayout:collectionViewLayout];
-    [_collectionView registerClass:[AFVDTimelineCanvasCell class] forCellWithReuseIdentifier:kAFVDTimelineCanvasCellIdentifier];
+    [_collectionView registerClass:[AFVDTimelineCanvasCell class] forCellWithReuseIdentifier:kAFVDTimelineCanvas_CellIdentifier];
     _collectionView.dataSource = self;
     _collectionView.delegate = self;
+    
+    //Collection view inset
+    CGFloat edgeInset = CGRectGetMidY(self.bounds) - ([AFVDTimelineCanvasCell cellHeight] / 2);
+    _collectionView.contentInset = UIEdgeInsetsMake(edgeInset, 0, edgeInset, 0);
+    
     [self addSubview:_collectionView];
 }
 
@@ -60,12 +65,32 @@ NSString *kAFVDTimelineCanvasCellIdentifier = @"timelineCanvasCellIdentifier";
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     
     //Cell
-    AFVDTimelineCanvasCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kAFVDTimelineCanvasCellIdentifier forIndexPath:indexPath];
+    AFVDTimelineCanvasCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kAFVDTimelineCanvas_CellIdentifier forIndexPath:indexPath];
     
     //Data
     id data = _data[indexPath.row];
     [cell setData:data];
+    
+    //Set background line position
+    AFVDTimelineCanvasCellBackgroundLinePosition position = kAFVDTimelineCanvasCellBackgroundLinePosition_None;
+    
+    BOOL hasTop    = indexPath.row > 0;
+    BOOL hasBottom = indexPath.row < _data.count - 1;
+    
+    if(hasTop && hasBottom) {
         
+        position = kAFVDTimelineCanvasCellBackgroundLinePosition_Top & kAFVDTimelineCanvasCellBackgroundLinePosition_Bottom;
+
+    } else if(hasTop) {
+        
+        position = kAFVDTimelineCanvasCellBackgroundLinePosition_Top;
+    } else if(hasBottom) {
+        
+        position = kAFVDTimelineCanvasCellBackgroundLinePosition_Bottom;
+    }
+    
+    [cell setBackgroundLinePosition:position];
+    
     return cell;
 }
 
@@ -75,24 +100,47 @@ NSString *kAFVDTimelineCanvasCellIdentifier = @"timelineCanvasCellIdentifier";
     for(AFVDTimelineCanvasCell *cell in _collectionView.visibleCells) {
         
 #warning TODO : CALCULATE POSITION
-        CGPoint cellPosition;
-        [cell setCellPosition:cellPosition withinContainer:_collectionView.bounds];
+        if([cell isKindOfClass:[AFVDTimelineCanvasCell class]]) {
+            
+            [cell checkCellPositionInView:self];
+        }
     }
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
     
-#warning TODO
+    [self positionToCanvasCell:scrollView];
 }
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
     
-#warning TODO
+    [self positionToCanvasCell:scrollView];
 }
 
--  (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView {
+- (void)positionToCanvasCell:(UIScrollView *)scrollView {
     
-#warning TODO
+    CGFloat contentYOffset = scrollView.contentOffset.y + scrollView.contentInset.top;
+    
+    //Calculate current cell based on content position
+    CGFloat cellHeight = [AFVDTimelineCanvasCell cellHeight];
+    CGFloat currentYOffset = 0.0f;
+    NSUInteger cellIndex = 0;
+    
+    while(TRUE) {
+        
+        if(currentYOffset >= contentYOffset - (cellHeight * 0.5)) {
+            
+            break;
+        }
+        
+        currentYOffset += cellHeight;
+        cellIndex ++;
+    }
+    
+    cellIndex = MIN(cellIndex, _data.count - 1);
+    NSLog(@"cellIndex : %d", cellIndex);
+    
+    [_collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:cellIndex inSection:0] atScrollPosition:UICollectionViewScrollPositionCenteredVertically animated:TRUE];
 }
 
 #pragma mark - Data handling
