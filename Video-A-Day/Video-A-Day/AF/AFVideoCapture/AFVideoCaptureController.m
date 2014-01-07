@@ -10,6 +10,7 @@
 #import "AFVDVideoFilterController.h"
 
 static const CGFloat kDurationBroadcastFrequency = 0.5f;
+static const CGFloat kPreviewViewAnimationDuration = 0.5f;
 
 @interface AFVideoCaptureController ()
 {
@@ -136,7 +137,7 @@ static const CGFloat kDurationBroadcastFrequency = 0.5f;
 }
 
 #pragma -
-#pragma Setup Properties
+#pragma mark - Setup Properties
 
 - (NSString *)AFVideoCapturePresetToString:(AFVideoCapturePreset)lpreset {
     NSArray *AFVideoCapturePresets = @[@"AVCaptureSessionPresetLow", @"AVCaptureSessionPresetMedium", @"AVCaptureSessionPresetHigh", @"AFVideoCapturePreset_640x480"];
@@ -151,13 +152,15 @@ static const CGFloat kDurationBroadcastFrequency = 0.5f;
     {
         [previewWindow.connection setVideoOrientation:AVCaptureVideoOrientationPortrait];
     }
+    [previewWindow.connection setAutomaticallyAdjustsVideoMirroring:FALSE];
+    [previewWindow.connection setVideoMirrored:FALSE];
     [captureSession setSessionPreset:[self AFVideoCapturePresetToString:preset]];
 
     cameraOutput.maxRecordedDuration = maxDurationTime;
 }
 
 #pragma -
-#pragma VideoCapture methods
+#pragma mark - VideoCapture methods
 #pragma -
 
 - (void)previewWindowFrame:(CGRect)newFrame {
@@ -180,14 +183,14 @@ static const CGFloat kDurationBroadcastFrequency = 0.5f;
 }
 
 #pragma -
-#pragma AFVideoCaptureControlsDelegate Methods
+#pragma mark - AFVideoCaptureControlsDelegate Methods
 #pragma -
 
 - (void)startCapturingVideo {
     
     /*Stop the recording if it's in progress and show the share / add filter buttons*/
     if(captureSession.isRunning && cameraOutput.isRecording) {
-        [UIView animateWithDuration:0.5f delay:0 options:UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationCurveEaseInOut animations:^{
+        [UIView animateWithDuration:kPreviewViewAnimationDuration delay:0 options:UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationCurveEaseIn animations:^{
             previewWindow.opacity = 0;
         } completion:^(BOOL finished) {
             [cameraOutput stopRecording];
@@ -206,7 +209,7 @@ static const CGFloat kDurationBroadcastFrequency = 0.5f;
         [captureSession startRunning];
     }
     
-    [UIView animateWithDuration:0.5f delay:0 options:UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationCurveEaseInOut animations:^{
+    [UIView animateWithDuration:kPreviewViewAnimationDuration delay:0 options:UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationCurveEaseIn animations:^{
         previewWindow.opacity = 1;
     } completion:^(BOOL finished) {
         [previewPlayer replaceCurrentItemWithPlayerItem:[AVPlayerItem playerItemWithURL:nil]];
@@ -264,14 +267,18 @@ static const CGFloat kDurationBroadcastFrequency = 0.5f;
          [cameraOutput stopRecording];
     }
     
-    [UIView animateWithDuration:0.5f delay:0 options:UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationCurveEaseInOut animations:^{
-        previewWindow.opacity = 1;
-    } completion:^(BOOL finished) {
-        [captureSession startRunning];
-        [previewPlayer replaceCurrentItemWithPlayerItem:[AVPlayerItem playerItemWithURL:nil]];
-        [previewPlayer pause];
-        NSLog(@"Recording Reset");
-    }];
+    if (previewPlayer.currentItem) {
+        [UIView animateWithDuration:kPreviewViewAnimationDuration delay:0 options:UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationCurveEaseIn animations:^{
+            previewWindow.opacity = 1;
+        } completion:^(BOOL finished) {
+            if (!captureSession.isRunning) {
+                [captureSession startRunning];
+            }
+            [previewPlayer replaceCurrentItemWithPlayerItem:[AVPlayerItem playerItemWithURL:nil]];
+            [previewPlayer pause];
+            NSLog(@"Recording Reset");
+        }];
+    }
     
     [mainControls setRecordingTime:0];
     [self removeTempVideoOutput];
@@ -280,7 +287,18 @@ static const CGFloat kDurationBroadcastFrequency = 0.5f;
 
 - (void)videoCaptureDeviceSwitched:(AVCaptureDevicePosition)devicePosition {
     
+    if (recordedDurationTimer.isValid) {
+        [recordedDurationTimer invalidate];
+        recordedDurationTimer = nil;
+    }
+    
+    if (cameraOutput.isRecording) {
+        [cameraOutput stopRecording];
+    }
+    
     [mainControls setRecordingTime:0];
+    [self removeTempVideoOutput];
+    [self showFilterShareButtons:FALSE];
     
     NSArray *devicesAvailable = [AVCaptureDevice devicesWithMediaType:AVMediaTypeVideo];
     
@@ -292,7 +310,7 @@ static const CGFloat kDurationBroadcastFrequency = 0.5f;
             break;
         }
     }
-    
+    [captureSession stopRunning];
     [captureSession beginConfiguration];
     
     NSError *error;
@@ -300,16 +318,31 @@ static const CGFloat kDurationBroadcastFrequency = 0.5f;
     if (newDevice) {
         [captureSession removeInput:cameraInputDevice];
         cameraInputDevice = [AVCaptureDeviceInput deviceInputWithDevice:newDevice error:&error];
+        if (error) {
+            NSAssert(!error, error.localizedDescription);
+            return;
+        }
     }
 
     [captureSession addInput:cameraInputDevice];
     
     [captureSession commitConfiguration];
+    [captureSession startRunning];
+    
+    if (previewPlayer.currentItem) {
+        [UIView animateWithDuration:kPreviewViewAnimationDuration delay:0 options:UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationCurveEaseIn animations:^{
+            previewWindow.opacity = 1;
+        } completion:^(BOOL finished) {
+            [previewPlayer replaceCurrentItemWithPlayerItem:[AVPlayerItem playerItemWithURL:nil]];
+            [previewPlayer pause];
+            NSLog(@"Camera Switched");
+        }];
+    }
     
 } 
 
 #pragma -
-#pragma UI Update Methods
+#pragma mark - UI Update Methods
 #pragma -
 
 - (void)showFilterShareButtons:(BOOL)show {
@@ -340,7 +373,7 @@ static const CGFloat kDurationBroadcastFrequency = 0.5f;
 }
 
 #pragma -
-#pragma Share / Add Filter Button Methods
+#pragma mark - Share / Add Filter Button Methods
 #pragma -
 
 - (void)shareButtonClicked {
@@ -363,7 +396,7 @@ static const CGFloat kDurationBroadcastFrequency = 0.5f;
 }
 
 #pragma -
-#pragma AVCaptureFileOutputRecordingDelegate Methods
+#pragma mark - AVCaptureFileOutputRecordingDelegate Methods
 #pragma -
 
 - (void)captureOutput:(AVCaptureFileOutput *)captureOutput didFinishRecordingToOutputFileAtURL:(NSURL *)outputFileURL fromConnections:(NSArray *)connections error:(NSError *)error {
@@ -394,7 +427,7 @@ static const CGFloat kDurationBroadcastFrequency = 0.5f;
 }
 
 #pragma -
-#pragma Preview Player Notifications
+#pragma mark - Preview Player Notifications
 #pragma -
 
 - (void)previewDidReachEnd:(NSNotification *)event {
