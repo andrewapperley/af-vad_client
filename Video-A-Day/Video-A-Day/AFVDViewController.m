@@ -40,29 +40,29 @@ NSString *email = @"email@email.com";
     //User
     //    [self createUser];
     //    [self fetchUserModel];
-#warning TEST     [self deactivateUser];
-    //    [self updateUser];
-    //    [self checkIfUsernameIsAvailable];
-    //    [self loginUser];
-    //    [self logoutUser];
-#warning TEST    [self updateToken];
-    //
-    //    //Relationship
-    //    [self createRelationship];
-    //    [self fetchRelationshipModels];
-    //    [self fetchRelationshipModelFromId];
-    //
-    //    //Videos
-    //    [self createVideo];
-#warning TEST    [self fetchVideoModelsAtPageIndex];
-#warning TEST    [self fetchFavouriteVideoModelsAtPageIndex];
-#warning TEST    [self setUserFavouritedVideo];
-#warning TEST    [self unsetUserFavouritedVideo];
+//#warning TEST     [self deactivateUser];
+//    //    [self updateUser];
+//    //    [self checkIfUsernameIsAvailable];
+//    //    [self loginUser];
+//    //    [self logoutUser];
+//#warning TEST    [self updateToken];
+//    //
+//    //    //Relationship
+//    //    [self createRelationship];
+//    //    [self fetchRelationshipModels];
+//    //    [self fetchRelationshipModelFromId];
+//    //
+//    //    //Videos
+//    //    [self createVideo];
+//#warning TEST    [self fetchVideoModelsAtPageIndex];
+//#warning TEST    [self fetchFavouriteVideoModelsAtPageIndex];
+//#warning TEST    [self setUserFavouritedVideo];
+//#warning TEST    [self unsetUserFavouritedVideo];
 //    [self fetchVideoModel];
     //    [self fetchVideoModel];
-    vc = [AFVideoCaptureController captureControllerWithDefaults];
-    [self addChildViewController:vc];
-    [self.view addSubview:vc.view];
+//    vc = [AFVideoCaptureController captureControllerWithDefaults];
+//    [self addChildViewController:vc];
+//    [self.view addSubview:vc.view];
 }
 
 - (void)createUser {
