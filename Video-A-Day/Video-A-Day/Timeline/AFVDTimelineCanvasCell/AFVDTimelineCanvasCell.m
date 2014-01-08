@@ -7,19 +7,24 @@
 //
 
 #import <AFNetworking/UIImageView+AFNetworking.h>
+#import "AFVDBaseNetworkStatics.h"
 #import "AFVDTimelineCanvasCell.h"
 #import <QuartzCore/QuartzCore.h>
 
 #pragma mark - Constants
 //Cell
-CGFloat const kAFVDTimelineCanvasCell_CellHeight                 = 80.0f;
+CGFloat const kAFVDTimelineCanvasCell_CellHeight                 = 85.0f;
 
 //Background width
-CGFloat const kAFVDTimelineCanvasCell_BackgroundLineWidth        = 1.0f;
+CGFloat const kAFVDTimelineCanvasCell_BackgroundLineWidth        = 2.0f;
+
+//Small portrait
+CGFloat const kAFVDTimelineCanvasCell_SmallPortraitWidthHeight   = 24.0f;
+CGFloat const kAFVDTimelineCanvasCell_SmallPortraitBorderWidth   = kAFVDTimelineCanvasCell_BackgroundLineWidth;
 
 //Portrait
 CGFloat const kAFVDTimelineCanvasCell_PortraitBorderWidth        = kAFVDTimelineCanvasCell_BackgroundLineWidth;
-CGFloat const kAFVDTimelineCanvasCell_PortraitMinWidthHeight     = 40.0f;
+CGFloat const kAFVDTimelineCanvasCell_PortraitMinWidthHeight     = 44.0f;
 CGFloat const kAFVDTimelineCanvasCell_PortraitMaxWidthHeight     = kAFVDTimelineCanvasCell_CellHeight;
 
 //Portrait sizing threshold
@@ -28,7 +33,10 @@ CGFloat const kAFVDTimelineCanvasCell_PortraitResizeThreshold    = 20.0f;
 @interface AFVDTimelineCanvasCell () {
     
     UIView      *_backgroundLine;
+    UIImageView *_smallPortraitImageView;
     UIImageView *_portraitImageView;
+    UILabel     *_usernameLabel;
+    UILabel     *_dateLabel;
 }
 
 @end
@@ -41,43 +49,143 @@ CGFloat const kAFVDTimelineCanvasCell_PortraitResizeThreshold    = 20.0f;
     self = [super initWithFrame:frame];
     if(self) {
         
+#warning TEMP
         self.backgroundColor = [UIColor blueColor];
         self.layer.borderWidth = 1;
         self.layer.borderColor = [UIColor yellowColor].CGColor;
+#warning ENDTEMP
         [self createLineBackground];
+        [self createSmallPortraitImageView];
         [self createPortraitImageView];
+        [self createUsernameLabel];
+        [self createDateLabel];
     }
     return self;
 }
 
 - (void)createLineBackground {
     
-    _backgroundLine = [[UIView alloc] initWithFrame:CGRectMake(CGRectGetMidX(self.frame) - (kAFVDTimelineCanvasCell_BackgroundLineWidth / 2), 0, kAFVDTimelineCanvasCell_BackgroundLineWidth, self.bounds.size.height)];
+    _backgroundLine = [[UIView alloc] initWithFrame:CGRectMake(CGRectGetMidX(self.bounds) - (kAFVDTimelineCanvasCell_BackgroundLineWidth * 0.5f), 0, kAFVDTimelineCanvasCell_BackgroundLineWidth, CGRectGetHeight(self.bounds))];
     _backgroundLine.backgroundColor = [UIColor whiteColor];
     [self addSubview:_backgroundLine];
+}
+
+- (void)createSmallPortraitImageView {
+    
+    CGFloat padding     = 15.0f;
+    CGFloat topOffset   = 6.0f;
+    
+    //Small portrait image
+    _smallPortraitImageView = [[UIImageView alloc] initWithFrame:CGRectMake(padding, ceil((self.bounds.size.height - kAFVDTimelineCanvasCell_SmallPortraitWidthHeight) * 0.5f) - topOffset, kAFVDTimelineCanvasCell_SmallPortraitWidthHeight, kAFVDTimelineCanvasCell_SmallPortraitWidthHeight)];
+    
+    //Border and corner radius
+    _smallPortraitImageView.layer.borderWidth = kAFVDTimelineCanvasCell_SmallPortraitBorderWidth;
+    _smallPortraitImageView.layer.borderColor = _backgroundLine.backgroundColor.CGColor;
+    _smallPortraitImageView.layer.shouldRasterize = TRUE;
+    _smallPortraitImageView.layer.allowsEdgeAntialiasing = TRUE;
+    _smallPortraitImageView.layer.cornerRadius = ceil(CGRectGetWidth(_smallPortraitImageView.frame) * 0.5f);
+    _smallPortraitImageView.layer.masksToBounds = TRUE;
+    
+    [self addSubview:_smallPortraitImageView];
 }
 
 - (void)createPortraitImageView {
     
     //Portrait image
-    _portraitImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, kAFVDTimelineCanvasCell_PortraitMinWidthHeight, kAFVDTimelineCanvasCell_PortraitMinWidthHeight)];
-    [self addSubview:_portraitImageView];
+    _portraitImageView = [[UIImageView alloc] initWithFrame:CGRectMake(ceil((self.bounds.size.width - kAFVDTimelineCanvasCell_PortraitMinWidthHeight) * 0.5f), ceil((self.bounds.size.height - kAFVDTimelineCanvasCell_PortraitMinWidthHeight) * 0.5f), kAFVDTimelineCanvasCell_PortraitMinWidthHeight, kAFVDTimelineCanvasCell_PortraitMinWidthHeight)];
     
     //Border and corner radius
     _portraitImageView.layer.borderWidth = kAFVDTimelineCanvasCell_PortraitBorderWidth;
     _portraitImageView.layer.borderColor = _backgroundLine.backgroundColor.CGColor;
     _portraitImageView.layer.shouldRasterize = TRUE;
     _portraitImageView.layer.allowsEdgeAntialiasing = TRUE;
-    _portraitImageView.layer.cornerRadius = trunc(CGRectGetWidth(_portraitImageView.frame) / 2);
+    _portraitImageView.layer.cornerRadius = ceil(CGRectGetWidth(_portraitImageView.frame) * 0.5f);
     _portraitImageView.layer.masksToBounds = TRUE;
+    
+    [self addSubview:_portraitImageView];
+}
+
+- (void)createUsernameLabel {
+
+    CGFloat padding         = 2.0f;
+    CGFloat extraLabelWidth = 5.0f;
+    
+    _usernameLabel                  = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMinX(_smallPortraitImageView.frame) - extraLabelWidth, CGRectGetMaxY(_smallPortraitImageView.frame) + padding, CGRectGetWidth(_smallPortraitImageView.bounds) + (extraLabelWidth * 2), 0)];
+    _usernameLabel.numberOfLines    = 0;
+    _usernameLabel.backgroundColor  = [UIColor clearColor];
+    _usernameLabel.textColor        = [UIColor whiteColor];
+    _usernameLabel.textAlignment    = NSTextAlignmentCenter;
+    _usernameLabel.font             = [UIFont fontWithName:@"Helvetica" size:7];
+#warning TODO : FONT
+    
+    [self addSubview:_usernameLabel];
+}
+
+- (void)createDateLabel {
+    
+    CGFloat padding = 10.0f;
+    
+    _dateLabel                  = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.bounds) - padding, CGRectGetHeight(self.bounds))];
+    _dateLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleRightMargin;
+    _dateLabel.numberOfLines    = 2;
+    _dateLabel.backgroundColor  = [UIColor clearColor];
+    _dateLabel.textColor        = [UIColor whiteColor];
+    _dateLabel.textAlignment    = NSTextAlignmentRight;
+    _dateLabel.font             = [UIFont fontWithName:@"Helvetica" size:7];
+#warning TODO : FONT
+    
+    [self addSubview:_dateLabel];
 }
 
 #pragma mark - Data
 - (void)setData:(id)data {
     
-#warning TODO
+#warning TEMP
+    [self createImage:[NSURL URLWithString:@"https://pbs.twimg.com/profile_images/378800000703808793/2f6dcc6353959ce2009d9ec7bf84baca.jpeg"]];
+    [self createDate:[NSDate date]];
+    [self createUsername:@"Some Username"];
+#warning ENDTEMP
+}
+
+- (void)createImage:(NSURL *)url {
     
-    [_portraitImageView setImageWithURL:[NSURL URLWithString:@"https://pbs.twimg.com/profile_images/378800000703808793/2f6dcc6353959ce2009d9ec7bf84baca.jpeg"]];
+    [_smallPortraitImageView setImageWithURL:url];
+    [_portraitImageView setImageWithURL:url];
+}
+
+- (void)createDate:(NSDate *)date {
+    
+    //Date formatters
+    static NSDateFormatter *dateFormat;
+    
+    if(!dateFormat) {
+        dateFormat = [[NSDateFormatter alloc] init];
+        [dateFormat setDateFormat:kAFVDBaseNetworkDefaultDateDisplayMonthDayYearFormat];
+        [dateFormat setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US_POSIX"]];
+    }
+    
+    static NSDateFormatter *timeFormat;
+    
+    if(!timeFormat) {
+        timeFormat = [[NSDateFormatter alloc] init];
+        [timeFormat setDateFormat:kAFVDBaseNetworkDefaultDateDisplayHourMinutesFormat];
+        [timeFormat setLocale:dateFormat.locale];
+    }
+    
+    //Date strings
+    NSMutableString *fullDateString = [[NSMutableString alloc] init];
+    
+    [fullDateString appendString:[dateFormat stringFromDate:date]];
+    [fullDateString appendString:@"\n"];
+    [fullDateString appendString:[timeFormat stringFromDate:date]];
+
+    _dateLabel.text = fullDateString;
+}
+
+- (void)createUsername:(NSString *)username {
+    
+    _usernameLabel.text = username;
+    [_usernameLabel sizeToFit];
 }
 
 #pragma mark - Position
@@ -85,8 +193,29 @@ CGFloat const kAFVDTimelineCanvasCell_PortraitResizeThreshold    = 20.0f;
     
 #warning TODO :    kAFVDTimelineCanvasCell_PortraitResizeThreshold
     
-//    CGRect localRectContainer = view.frame;
-//    CGPoint localPositioninContainer = self.frame.origin;
+    /*
+     
+     Handles portrait color
+     Handles date alpha / parallax
+     Handles small portrait parallax
+     
+     */
+    
+    
+    CGRect localRectContainer = view.frame;
+    CGPoint localPositioninContainer = self.frame.origin;
+    
+    NSLog(@"localPositioninContainer.y : %f", localPositioninContainer.y);
+    
+//    CGFloat localRectContainerHeight = CGRectGetHeight(localRectContainer);
+//    
+//    while(localPositioninContainer.y > localRectContainerHeight) {
+//        
+//        localPositioninContainer.y -= localRectContainerHeight;
+//    }
+//    
+//    NSLog(@"self.center : %@", NSStringFromCGPoint(self.center));
+//
 //    
 //    //Default size
 //    CGSize defaultCellSize = CGSizeMake(kAFVDTimelineCanvasCell_PortraitMinWidthHeight, kAFVDTimelineCanvasCell_PortraitMinWidthHeight);
@@ -130,17 +259,19 @@ CGFloat const kAFVDTimelineCanvasCell_PortraitResizeThreshold    = 20.0f;
 //         CGRect frame             = CGRectMake(portraitLeft, portraitTop, portraitWidth, portraitHeight);
 //        [self animatePortraitImageToFrame:frame];
 //    }
-
 }
 
 - (void)animatePortraitImageToFrame:(CGRect)frame {
     
 #warning TEMP....SHOULD BE CA ANIMATION
-    [UIView animateWithDuration:0.15f animations:^{
-        //Portrait view frame
-        _portraitImageView.frame = frame;
-        _portraitImageView.layer.cornerRadius = trunc(CGRectGetWidth(frame) / 2);
-    }];
+    
+    [CATransaction begin];
+    [CATransaction setAnimationDuration:0.15f];
+    
+    _portraitImageView.frame = frame;
+    _portraitImageView.layer.cornerRadius = trunc(CGRectGetWidth(frame) / 2);
+    
+    [CATransaction commit];
 }
 
 #pragma mark - Background line position
@@ -159,17 +290,17 @@ CGFloat const kAFVDTimelineCanvasCell_PortraitResizeThreshold    = 20.0f;
         //Top and bottom lines
         if(position & kAFVDTimelineCanvasCellBackgroundLinePosition_Top && position & kAFVDTimelineCanvasCellBackgroundLinePosition_Bottom) {
             
-            _backgroundLine.frame = CGRectMake(left, 0, width, CGRectGetHeight(self.frame));
+            _backgroundLine.frame = CGRectMake(left, 0, width, CGRectGetHeight(self.bounds));
             
             //Top line
         } else if(position & kAFVDTimelineCanvasCellBackgroundLinePosition_Top) {
             
-            _backgroundLine.frame = CGRectMake(left, 0, width, CGRectGetMidY(self.frame));
+            _backgroundLine.frame = CGRectMake(left, 0, width, ceil(CGRectGetHeight(self.bounds) / 2));
             
             //Bottom line
         } else if(position & kAFVDTimelineCanvasCellBackgroundLinePosition_Bottom) {
             
-            _backgroundLine.frame = CGRectMake(left, CGRectGetMidY(self.frame), width, CGRectGetMidY(self.frame));
+            _backgroundLine.frame = CGRectMake(left, CGRectGetMidY(self.bounds), width, ceil(CGRectGetHeight(self.bounds) / 2));
         }
     }
 }

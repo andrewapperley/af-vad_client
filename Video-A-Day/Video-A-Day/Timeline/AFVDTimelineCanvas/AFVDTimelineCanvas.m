@@ -67,20 +67,32 @@ NSString *kAFVDTimelineCanvas_CellIdentifier = @"kAFVDTimelineCanvasCellIdentifi
     //Cell
     AFVDTimelineCanvasCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kAFVDTimelineCanvas_CellIdentifier forIndexPath:indexPath];
     
+    if(!cell) {
+        
+        cell = [[AFVDTimelineCanvasCell alloc] init];
+    }
+    
     //Data
     id data = _data[indexPath.row];
     [cell setData:data];
     
     //Set background line position
+    [self setCellBackgroundLinePosition:cell index:indexPath.row];
+    
+    return cell;
+}
+
+- (void)setCellBackgroundLinePosition:(AFVDTimelineCanvasCell *)cell index:(NSUInteger)index {
+    
     AFVDTimelineCanvasCellBackgroundLinePosition position = kAFVDTimelineCanvasCellBackgroundLinePosition_None;
     
-    BOOL hasTop    = indexPath.row > 0;
-    BOOL hasBottom = indexPath.row < _data.count - 1;
+    BOOL hasTop    = index > 0;
+    BOOL hasBottom = index < _data.count - 1;
     
     if(hasTop && hasBottom) {
         
         position = kAFVDTimelineCanvasCellBackgroundLinePosition_Top & kAFVDTimelineCanvasCellBackgroundLinePosition_Bottom;
-
+        
     } else if(hasTop) {
         
         position = kAFVDTimelineCanvasCellBackgroundLinePosition_Top;
@@ -90,8 +102,6 @@ NSString *kAFVDTimelineCanvas_CellIdentifier = @"kAFVDTimelineCanvasCellIdentifi
     }
     
     [cell setBackgroundLinePosition:position];
-    
-    return cell;
 }
 
 #pragma mark - UIScrollViewDelegate
@@ -128,7 +138,7 @@ NSString *kAFVDTimelineCanvas_CellIdentifier = @"kAFVDTimelineCanvasCellIdentifi
     
     while(TRUE) {
         
-        if(currentYOffset >= contentYOffset - (cellHeight * 0.5)) {
+        if(currentYOffset >= contentYOffset - ceil((cellHeight * 0.5f))) {
             
             break;
         }
@@ -138,7 +148,6 @@ NSString *kAFVDTimelineCanvas_CellIdentifier = @"kAFVDTimelineCanvasCellIdentifi
     }
     
     cellIndex = MIN(cellIndex, _data.count - 1);
-    NSLog(@"cellIndex : %d", cellIndex);
     
     [_collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:cellIndex inSection:0] atScrollPosition:UICollectionViewScrollPositionCenteredVertically animated:TRUE];
 }
