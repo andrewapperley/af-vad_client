@@ -13,22 +13,28 @@
 
 #pragma mark - Constants
 //Cell
-CGFloat const kAFVDTimelineCanvasCell_CellHeight                 = 85.0f;
+CGFloat const kAFVDTimelineCanvasCell_CellHeight                = 85.0f;
 
 //Background width
-CGFloat const kAFVDTimelineCanvasCell_BackgroundLineWidth        = 2.0f;
+CGFloat const kAFVDTimelineCanvasCell_BackgroundLineWidth       = 2.0f;
 
 //Small portrait
-CGFloat const kAFVDTimelineCanvasCell_SmallPortraitWidthHeight   = 24.0f;
-CGFloat const kAFVDTimelineCanvasCell_SmallPortraitBorderWidth   = kAFVDTimelineCanvasCell_BackgroundLineWidth;
+CGFloat const kAFVDTimelineCanvasCell_SmallPortraitWidthHeight  = 24.0f;
+CGFloat const kAFVDTimelineCanvasCell_SmallPortraitBorderWidth  = kAFVDTimelineCanvasCell_BackgroundLineWidth;
 
 //Portrait
-CGFloat const kAFVDTimelineCanvasCell_PortraitBorderWidth        = kAFVDTimelineCanvasCell_BackgroundLineWidth;
-CGFloat const kAFVDTimelineCanvasCell_PortraitMinWidthHeight     = 44.0f;
-CGFloat const kAFVDTimelineCanvasCell_PortraitMaxWidthHeight     = kAFVDTimelineCanvasCell_CellHeight;
+CGFloat const kAFVDTimelineCanvasCell_PortraitBorderWidth       = kAFVDTimelineCanvasCell_BackgroundLineWidth;
+CGFloat const kAFVDTimelineCanvasCell_PortraitMinWidthHeight    = 44.0f;
+CGFloat const kAFVDTimelineCanvasCell_PortraitMaxWidthHeight    = kAFVDTimelineCanvasCell_CellHeight;
 
 //Portrait sizing threshold
-CGFloat const kAFVDTimelineCanvasCell_PortraitResizeThreshold    = 20.0f;
+CGFloat const kAFVDTimelineCanvasCell_PortraitResizeThreshold   = 20.0f;
+
+//Portrait hue
+CGFloat const kAFVDTimelineCanvasCell_Hue                       = 90.0f;
+
+//Date label
+CGFloat const kAFVDTimelineCanvasCell_MinDateLabelAlpha         = 0.6f;
 
 @interface AFVDTimelineCanvasCell () {
     
@@ -201,77 +207,77 @@ CGFloat const kAFVDTimelineCanvasCell_PortraitResizeThreshold    = 20.0f;
      
      */
     
-    
+    //Cell y position
     CGRect localRectContainer = view.frame;
     CGPoint localPositioninContainer = self.frame.origin;
+    NSUInteger localRectContainerHeight = floor(CGRectGetHeight(localRectContainer));
+    NSUInteger localPositioninContainerY = floor(localPositioninContainer.y);
     
-    NSLog(@"localPositioninContainer.y : %f", localPositioninContainer.y);
+    localPositioninContainerY %= localRectContainerHeight;
     
-//    CGFloat localRectContainerHeight = CGRectGetHeight(localRectContainer);
-//    
-//    while(localPositioninContainer.y > localRectContainerHeight) {
-//        
-//        localPositioninContainer.y -= localRectContainerHeight;
-//    }
-//    
-//    NSLog(@"self.center : %@", NSStringFromCGPoint(self.center));
-//
-//    
-//    //Default size
-//    CGSize defaultCellSize = CGSizeMake(kAFVDTimelineCanvasCell_PortraitMinWidthHeight, kAFVDTimelineCanvasCell_PortraitMinWidthHeight);
-//    
-//#warning TODO kAFVDTimelineCanvasCell_PortraitResizeThreshold
-//
-//    //Check if container view has cell position
-//    if(CGRectContainsPoint(view.frame, localPositioninContainer)) {
-//        
-//#warning TODO kAFVDTimelineCanvasCell_PortraitResizeThreshold
-//        //Calculate position percentage for top position and container with threshold
-//        CGFloat positionPerentage = (localPositioninContainer.y / view.bounds.size.height);
-//
-////        if(positionPerentage > 0.5f) {
-////
-////            positionPerentage -= 0.5f;
-////        }
-//        
-//        NSLog(@"positionPerentage : %f", positionPerentage);
-//
-//        //Center portrait image
-//        CGFloat portraitWidth     = MAX(kAFVDTimelineCanvasCell_PortraitMinWidthHeight, MIN(kAFVDTimelineCanvasCell_PortraitMaxWidthHeight * positionPerentage, kAFVDTimelineCanvasCell_PortraitMaxWidthHeight));
-//        CGFloat portraitHeight    = portraitWidth;
-//        CGFloat portraitLeft      = (self.bounds.size.width - portraitWidth) * 0.5f;
-//        CGFloat portraitTop       = (self.bounds.size.height - portraitHeight) * 0.5f;
-//
-//        //Portrait view frame
-//        CGRect frame             = CGRectMake(portraitLeft, portraitTop, portraitWidth, portraitHeight);
-//        [self animatePortraitImageToFrame:frame];
-//
-//    //Cell is default and won't need resizing
-//    } else if(!CGSizeEqualToSize(_portraitImageView.bounds.size, defaultCellSize)) {
-//
-//        //Center portrait image
-//        CGFloat portraitWidth     = defaultCellSize.width;
-//        CGFloat portraitHeight    = defaultCellSize.height;
-//        CGFloat portraitLeft      = (self.bounds.size.width - portraitWidth) * 0.5f;
-//        CGFloat portraitTop       = (self.bounds.size.height - portraitHeight) * 0.5f;
-//
-//        //Portrait view frame
-//         CGRect frame             = CGRectMake(portraitLeft, portraitTop, portraitWidth, portraitHeight);
-//        [self animatePortraitImageToFrame:frame];
-//    }
+    //Portrait data
+    CGRect portraitFrame;
+    UIColor *portraitColor;
+    CGFloat hue = (kAFVDTimelineCanvasCell_Hue / 256.0f);
+    CGFloat saturation = 0.0f;
+    
+    //Date data
+    CGFloat dateAlpha = 1.0f;
+    
+#warning TODO kAFVDTimelineCanvasCell_PortraitResizeThreshold
+
+    //Check if container view has cell position
+    if(CGRectContainsPoint(view.frame, CGPointMake(0, localPositioninContainerY))) {
+        
+        //Calculate position percentage for top position and container with threshold
+        CGFloat containerCenterY = view.center.y;
+        CGFloat containerHeight = CGRectGetHeight(view.frame);
+        CGFloat positionDifferenceY = abs(containerCenterY - localPositioninContainerY);
+        CGFloat positionPerentage = (containerHeight - positionDifferenceY) / containerHeight;
+
+        /** Portrait image position. */
+        //Center portrait image
+        CGFloat portraitWidth     = MAX(kAFVDTimelineCanvasCell_PortraitMinWidthHeight, MIN(kAFVDTimelineCanvasCell_PortraitMaxWidthHeight * positionPerentage, kAFVDTimelineCanvasCell_PortraitMaxWidthHeight));
+        CGFloat portraitHeight    = portraitWidth;
+        CGFloat portraitLeft      = (self.bounds.size.width - portraitWidth) * 0.5f;
+        CGFloat portraitTop       = (self.bounds.size.height - portraitHeight) * 0.5f;
+
+        //Portrait view frame
+        portraitFrame             = CGRectMake(portraitLeft, portraitTop, portraitWidth, portraitHeight);
+        
+        /** Portrait color */
+        saturation = 1.0f - MAX(MIN((1.0f - positionPerentage) * 2, 1.0f), 0.0f);
+        
+        /** Date alpha */
+        dateAlpha = MAX(1.0f - MAX(MIN((1.0f - positionPerentage) * 2, 1.0f), 0.0f), kAFVDTimelineCanvasCell_MinDateLabelAlpha);
+    }
+    
+    portraitColor             = [UIColor colorWithHue:hue saturation:saturation brightness:1.0f alpha:1.0f];
+    [self animatePortraitImageToFrame:portraitFrame portraitColor:portraitColor dateAlpha:dateAlpha];
 }
 
-- (void)animatePortraitImageToFrame:(CGRect)frame {
+- (void)animatePortraitImageToFrame:(CGRect)frame portraitColor:(UIColor *)portraitColor dateAlpha:(CGFloat)dateAlpha {
     
 #warning TEMP....SHOULD BE CA ANIMATION
     
-    [CATransaction begin];
-    [CATransaction setAnimationDuration:0.15f];
+    [UIView animateWithDuration:0.15f animations:^{
+        
+        //Portrait image
+        _portraitImageView.frame = frame;
+        _portraitImageView.layer.cornerRadius = trunc(CGRectGetWidth(frame) / 2);
+        _portraitImageView.layer.borderColor = portraitColor.CGColor;
+        
+        //Date
+        _dateLabel.alpha = dateAlpha;
+    }];
     
-    _portraitImageView.frame = frame;
-    _portraitImageView.layer.cornerRadius = trunc(CGRectGetWidth(frame) / 2);
-    
-    [CATransaction commit];
+//    [CATransaction begin];
+//    [CATransaction setAnimationDuration:0.15f];
+//    
+//    _portraitImageView.frame = frame;
+//    _portraitImageView.layer.cornerRadius = trunc(CGRectGetWidth(frame) / 2);
+//    
+//    [CATransaction commit];
 }
 
 #pragma mark - Background line position

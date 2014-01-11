@@ -11,11 +11,17 @@
 #import "AFVDTimelineCanvasLayout.h"
 
 #pragma mark - Constants
-NSString *kAFVDTimelineCanvas_CellIdentifier = @"kAFVDTimelineCanvasCellIdentifier";
+NSString *const kAFVDTimelineCanvas_CellIdentifier              = @"kAFVDTimelineCanvasCellIdentifier";
+
+CGFloat const kAFVDTimelineCanvas_CellMarkerWidth               = 3.0f;
+CGFloat const kAFVDTimelineCanvas_CellMarkerHeight              = 10.0f;
+CGFloat const kAFVDTimelineCanvas_CellMarkerAnimateInDuration   = 0.35f;
+CGFloat const kAFVDTimelineCanvas_CellMarkerAnimateOutDuration  = 0.15f;
 
 @interface AFVDTimelineCanvas () <UICollectionViewDelegate, UICollectionViewDataSource> {
     
     UICollectionView    *_collectionView;
+    UIView              *_currentCellMarker;
 }
 
 @end
@@ -29,6 +35,7 @@ NSString *kAFVDTimelineCanvas_CellIdentifier = @"kAFVDTimelineCanvasCellIdentifi
     if(self) {
       
         [self createCollectionView];
+        [self createCurrentCellMarker];
     }
     return self;
 }
@@ -51,6 +58,15 @@ NSString *kAFVDTimelineCanvas_CellIdentifier = @"kAFVDTimelineCanvasCellIdentifi
     _collectionView.contentInset = UIEdgeInsetsMake(edgeInset, 0, edgeInset, 0);
     
     [self addSubview:_collectionView];
+}
+
+#pragma mark - Create current cell marker
+- (void)createCurrentCellMarker {
+    
+    //Cell marker
+    _currentCellMarker = [[UIView alloc] initWithFrame:CGRectMake(CGRectGetWidth(self.bounds) - kAFVDTimelineCanvas_CellMarkerWidth, (CGRectGetHeight(self.bounds) - kAFVDTimelineCanvas_CellMarkerHeight) / 2, kAFVDTimelineCanvas_CellMarkerWidth, kAFVDTimelineCanvas_CellMarkerHeight)];
+    _currentCellMarker.backgroundColor = [UIColor greenColor];
+    [self addSubview:_currentCellMarker];
 }
 
 #pragma mark - UICollectionViewDelegate
@@ -106,6 +122,22 @@ NSString *kAFVDTimelineCanvas_CellIdentifier = @"kAFVDTimelineCanvasCellIdentifi
 
 #pragma mark - UIScrollViewDelegate
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    
+    if(scrollView.isDecelerating || scrollView.isDragging) {
+        
+        [UIView animateWithDuration:kAFVDTimelineCanvas_CellMarkerAnimateOutDuration animations:^{
+           
+            _currentCellMarker.alpha = 0.25f;
+        }];
+
+    } else {
+        
+        [UIView animateWithDuration:kAFVDTimelineCanvas_CellMarkerAnimateInDuration animations:^{
+            
+            _currentCellMarker.alpha = 1.0f;
+        }];
+    }
+    
     
     for(AFVDTimelineCanvasCell *cell in _collectionView.visibleCells) {
         
