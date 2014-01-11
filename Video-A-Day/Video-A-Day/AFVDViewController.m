@@ -25,6 +25,10 @@ NSString *password = @"Abcde321";
 NSString *relationshipId = @"97fb98a484426f662c389bc9f686a1ee";
 NSString *email = @"email@email.com";
 
+
+#import "AFVD/InitialViewController/AFVDIntialViewController.h"
+
+
 @interface AFVDViewController ()
 {
     AFVideoCaptureController *vc;
@@ -63,6 +67,17 @@ NSString *email = @"email@email.com";
 //    vc = [AFVideoCaptureController captureControllerWithDefaults];
 //    [self addChildViewController:vc];
 //    [self.view addSubview:vc.view];
+    
+    
+    
+    
+    
+    AFVDIntialViewController* inVC = [[AFVDIntialViewController alloc] initWithBackgroundImage:[UIImage imageNamed:@"afvdInitialBackgroundImage.jpg"]];
+    
+    [self addChildViewController:inVC];
+    [self.view addSubview:inVC.view];
+    
+    
 }
 
 - (void)createUser {
