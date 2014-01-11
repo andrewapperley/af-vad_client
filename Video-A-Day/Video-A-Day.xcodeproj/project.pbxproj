@@ -57,6 +57,7 @@
 		0FF441D818626A5D00ADAD2C /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FF441D718626A5D00ADAD2C /* QuartzCore.framework */; };
 		0FF60470187E6F7E00E7DF58 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0FF60472187E6F7E00E7DF58 /* Localizable.strings */; };
 		0FF604751880D75200E7DF58 /* AFVDImageBlur.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FF604741880D75200E7DF58 /* AFVDImageBlur.m */; };
+		0FF604791880E4CC00E7DF58 /* AFVDInitialView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FF604781880E4CC00E7DF58 /* AFVDInitialView.m */; };
 		7610BC5B183B1108003CE193 /* AFVDRelationshipModelDatasource.m in Sources */ = {isa = PBXBuildFile; fileRef = 7610BC5A183B1108003CE193 /* AFVDRelationshipModelDatasource.m */; };
 		7610BC5E183B1137003CE193 /* AFVDRelationshipModelFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 7610BC5D183B1137003CE193 /* AFVDRelationshipModelFactory.m */; };
 		7610BC61183B119C003CE193 /* AFVDRelationshipModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7610BC60183B119C003CE193 /* AFVDRelationshipModel.m */; };
@@ -159,6 +160,8 @@
 		0FF60471187E6F7E00E7DF58 /* en */ = {isa = PBXFileReference; lastKnownFileType = file; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		0FF604731880D75100E7DF58 /* AFVDImageBlur.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFVDImageBlur.h; sourceTree = "<group>"; };
 		0FF604741880D75200E7DF58 /* AFVDImageBlur.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFVDImageBlur.m; sourceTree = "<group>"; };
+		0FF604761880E39B00E7DF58 /* AFVDInitialView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFVDInitialView.h; sourceTree = "<group>"; };
+		0FF604781880E4CC00E7DF58 /* AFVDInitialView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFVDInitialView.m; sourceTree = "<group>"; };
 		68F6FAF547E94320A258E720 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		7610BC59183B1108003CE193 /* AFVDRelationshipModelDatasource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFVDRelationshipModelDatasource.h; path = RelationshipModel/Datasource/AFVDRelationshipModelDatasource.h; sourceTree = "<group>"; };
 		7610BC5A183B1108003CE193 /* AFVDRelationshipModelDatasource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AFVDRelationshipModelDatasource.m; path = RelationshipModel/Datasource/AFVDRelationshipModelDatasource.m; sourceTree = "<group>"; };
@@ -255,6 +258,8 @@
 				0F06A6EE187CF1F70021E10C /* SignupView */,
 				0F06A6F1187CF2080021E10C /* AFVDIntialViewController.h */,
 				0F06A6F2187CF2080021E10C /* AFVDIntialViewController.m */,
+				0FF604761880E39B00E7DF58 /* AFVDInitialView.h */,
+				0FF604781880E4CC00E7DF58 /* AFVDInitialView.m */,
 			);
 			path = InitialViewController;
 			sourceTree = "<group>";
@@ -805,6 +810,7 @@
 			files = (
 				0F2FC7041837303900611873 /* AFVDViewController.m in Sources */,
 				0F06A6F9187CF2340021E10C /* AFVDSignupView.m in Sources */,
+				0FF604791880E4CC00E7DF58 /* AFVDInitialView.m in Sources */,
 				7677BA7018373A6B00F3EDC9 /* AFVDUserModel.m in Sources */,
 				7677BA6E18373A6B00F3EDC9 /* AFVDUserModelDatasource.m in Sources */,
 				7677BA6F18373A6B00F3EDC9 /* AFVDUserModelFactory.m in Sources */,

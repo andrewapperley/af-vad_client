@@ -10,22 +10,14 @@
 
 @implementation AFVDSignupView
 
-- (id)initWithFrame:(CGRect)frame
-{
+- (id)initWithFrame:(CGRect)frame andDelegate:(UIViewController <AFVDInitialViewDelegate> *) delegate {
     self = [super initWithFrame:frame];
     if (self) {
-        // Initialization code
+        self.delegate = delegate;
+        
+        [self.delegate panelViewIsReady];
     }
     return self;
 }
-
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
-{
-    // Drawing code
-}
-*/
 
 @end

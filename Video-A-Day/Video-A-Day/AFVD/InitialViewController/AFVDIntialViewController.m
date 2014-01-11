@@ -25,11 +25,14 @@ static NSInteger kAFVDSignupAndSigninXBuffer = 55;
 static NSInteger kAFVDSignupAndSigninYBuffer = 47;
 static NSInteger kAFVDSignupAndSigninLabelYBuffer = 11;
 static NSInteger kAFVDSignupSlidingPanelHeight = 450;
+static NSInteger kAFVDSigninSlidingPanelHeight = 450;
 static CGFloat panelViewAnimationDuration = 0.6f;
+
 @interface AFVDIntialViewController ()
 {
     UIImageView* _backgroundImageView;
     UIView* _slidingPanel;
+    UIView* _currentPanelView;
 }
 @end
 
@@ -137,15 +140,24 @@ static CGFloat panelViewAnimationDuration = 0.6f;
 #pragma mark - Button Methods
 
 - (void)onSigninSignupButton:(UIControl *)sender {
+    
     self.view.userInteractionEnabled = FALSE;
+    _currentPanelView = nil;
+    
     switch (sender.tag) {
         case AFVDInitialViewOption_Signup:
             [self setPanelHeightAndBlur:kAFVDSignupSlidingPanelHeight];
+            _currentPanelView = [[AFVDSignupView alloc] initWithFrame:CGRectMake(0, 0, _slidingPanel.frame.size.width, _slidingPanel.frame.size.height) andDelegate:self];
             break;
         case AFVDInitialViewOption_Signin:
             [self setPanelHeightAndBlur:kAFVDSignupSlidingPanelHeight];
+            _currentPanelView = [[AFVDSigninView alloc] initWithFrame:CGRectMake(0, 0, _slidingPanel.frame.size.width, _slidingPanel.frame.size.height) andDelegate:self];
             break;
     }
+}
+
+- (void)panelViewIsReady {
+    [_slidingPanel addSubview:_currentPanelView];
     [UIView animateWithDuration:panelViewAnimationDuration animations:^{
         _slidingPanel.frame = CGRectMake(0, (_backgroundImageView.frame.size.height - kAFVDSignupSlidingPanelHeight),  _slidingPanel.frame.size.width,  _slidingPanel.frame.size.width);
     } completion:^(BOOL finished) {
@@ -153,6 +165,7 @@ static CGFloat panelViewAnimationDuration = 0.6f;
     }];
 }
 
+/*Improve the performance here*/
 - (void)setPanelHeightAndBlur:(CGFloat)panelHeight {
     
     for (UIView* v in _slidingPanel.subviews) {

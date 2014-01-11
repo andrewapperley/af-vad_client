@@ -7,13 +7,14 @@
 //
 
 #import "AFViewController.h"
+#import "AFVDInitialView.h"
 
 typedef NS_ENUM(NSInteger, AFVDInitialViewOption) {
     AFVDInitialViewOption_Signup = 0,
     AFVDInitialViewOption_Signin = 1
 };
 
-@interface AFVDIntialViewController : AFViewController
+@interface AFVDIntialViewController : AFViewController <AFVDInitialViewDelegate>
 
 - (id)initWithBackgroundImage:(UIImage *)backgroundImage;
 

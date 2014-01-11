@@ -6,8 +6,8 @@
 //  Copyright (c) 2014 AFApps. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "AFVDInitialView.h"
 
-@interface AFVDSigninView : UIView
+@interface AFVDSigninView : AFVDInitialView
 
 @end
