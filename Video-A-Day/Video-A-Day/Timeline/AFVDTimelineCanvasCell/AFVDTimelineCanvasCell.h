@@ -23,7 +23,7 @@ typedef NS_OPTIONS(NSUInteger, AFVDTimelineCanvasCellBackgroundLinePosition) {
 
 #pragma mark - Position
 /** Sets the position relative to it's visible container. */
-- (void)checkCellPositionInView:(UIView *)view;
+- (void)checkCellPositionInView:(UIView *)view position:(CGPoint)position;
 
 #pragma mark - Background line position
 - (void)setBackgroundLinePosition:(AFVDTimelineCanvasCellBackgroundLinePosition)position;

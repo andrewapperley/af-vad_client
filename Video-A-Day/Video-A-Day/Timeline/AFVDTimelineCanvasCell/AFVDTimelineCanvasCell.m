@@ -192,11 +192,11 @@ CGFloat const kAFVDTimelineCanvasCell_MinDateLabelAlpha         = 0.6f;
 }
 
 #pragma mark - Position
-- (void)checkCellPositionInView:(UIView *)view {
+- (void)checkCellPositionInView:(UIView *)view position:(CGPoint)position {
     
     //Cell y position
     CGRect localRectContainer = view.frame;
-    CGPoint localPositioninContainer = self.frame.origin;
+    CGPoint localPositioninContainer = position;
     NSUInteger localRectContainerHeight = floor(CGRectGetHeight(localRectContainer));
     NSUInteger localPositioninContainerY = floor(localPositioninContainer.y);
     
@@ -211,11 +211,17 @@ CGFloat const kAFVDTimelineCanvasCell_MinDateLabelAlpha         = 0.6f;
     //Small portait data
     CGFloat smallPortraitFrameParallaxMax   = 10.0f;
     CGRect smallPortraitFrame               = CGRectZero;
+    CGFloat smallPortaitParallax            = 0.0f;
+    CGFloat smallPortaitPadding             = 15.0f;
+    CGFloat smallPortaitTopOffset           = 6.0f;
 
     //Username label
     CGRect usernameLabelFrame               = CGRectZero;
+    CGFloat userNamePadding                 = 2.0f;
+    CGFloat userNameExtraLabelWidth         = 5.0f;
     
     //Date data
+    CGFloat dateParallax                    = 0.0f;
     CGFloat dateAlpha                       = 1.0f;
     CGFloat dateLabelFramePadding           = 10.0f;
     CGFloat dateLabelFrameParallaxMax       = 12.0f;
@@ -230,7 +236,7 @@ CGFloat const kAFVDTimelineCanvasCell_MinDateLabelAlpha         = 0.6f;
         CGFloat containerHeight = CGRectGetHeight(view.frame);
         CGFloat positionDifferenceY = abs(containerCenterY - localPositioninContainerY);
         CGFloat positionPerentage = (containerHeight - positionDifferenceY) / containerHeight;
-
+        
         /** Portrait image position. */
         //Center portrait image
         CGFloat portraitWidth     = MAX(kAFVDTimelineCanvasCell_PortraitMinWidthHeight, MIN(kAFVDTimelineCanvasCell_PortraitMaxWidthHeight * positionPerentage, kAFVDTimelineCanvasCell_PortraitMaxWidthHeight));
@@ -248,14 +254,6 @@ CGFloat const kAFVDTimelineCanvasCell_MinDateLabelAlpha         = 0.6f;
         dateAlpha = MAX(1.0f - MAX(MIN((1.0f - positionPerentage) * 2, 1.0f), 0.0f), kAFVDTimelineCanvasCell_MinDateLabelAlpha);
         
         /** Date, small portrait, and user name label position */
-        CGFloat dateParallax            = 0.0f;
-        CGFloat smallPortaitParallax    = 0.0f;
-        
-        CGFloat smallPortaitPadding     = 15.0f;
-        CGFloat smallPortaitTopOffset   = 6.0f;
-        
-        CGFloat userNamePadding         = 2.0f;
-        CGFloat userNameExtraLabelWidth = 5.0f;
         
         //Check if center range is out of frame buffer
         if(localPositioninContainerY > (containerCenterY + dateLabelParallaxBuffer) ||
@@ -289,33 +287,20 @@ CGFloat const kAFVDTimelineCanvasCell_MinDateLabelAlpha         = 0.6f;
 
 - (void)animatePortraitImageToFrame:(CGRect)frame portraitColor:(UIColor *)portraitColor dateAlpha:(CGFloat)dateAlpha dateLabelFrame:(CGRect)dateLabelFrame smallPortraitFrame:(CGRect)smallPortraitFrame usernameLabelFrame:(CGRect)usernameLabelFrame {
     
-#warning TEMP....SHOULD BE CA ANIMATION
+    //Portrait image
+    _portraitImageView.frame = frame;
+    _portraitImageView.layer.cornerRadius = trunc(CGRectGetWidth(frame) / 2);
+    _portraitImageView.layer.borderColor = portraitColor.CGColor;
     
-    [UIView animateWithDuration:0.15f animations:^{
-        
-        //Portrait image
-        _portraitImageView.frame = frame;
-        _portraitImageView.layer.cornerRadius = trunc(CGRectGetWidth(frame) / 2);
-        _portraitImageView.layer.borderColor = portraitColor.CGColor;
-        
-        //Date
-        _dateLabel.alpha = dateAlpha;
-        _dateLabel.frame = dateLabelFrame;
-        
-        //Small portrait and small portrait label
-        _smallPortraitImageView.frame = smallPortraitFrame;
-        
-        //Username label
-        _usernameLabel.frame = usernameLabelFrame;
-    }];
+    //Date
+    _dateLabel.alpha = dateAlpha;
+    _dateLabel.frame = dateLabelFrame;
     
-//    [CATransaction begin];
-//    [CATransaction setAnimationDuration:0.15f];
-//    
-//    _portraitImageView.frame = frame;
-//    _portraitImageView.layer.cornerRadius = trunc(CGRectGetWidth(frame) / 2);
-//    
-//    [CATransaction commit];
+    //Small portrait and small portrait label
+    _smallPortraitImageView.frame = smallPortraitFrame;
+    
+    //Username label
+    _usernameLabel.frame = usernameLabelFrame;
 }
 
 #pragma mark - Background line position

@@ -138,13 +138,20 @@ CGFloat const kAFVDTimelineCanvas_CellMarkerAnimateOutDuration  = 0.15f;
         }];
     }
     
+    CGFloat cellPositionX = 0.0f;
+    CGFloat cellPositionY = 0.0f;
+    CGPoint cellPosition  = CGPointZero;
     
     for(AFVDTimelineCanvasCell *cell in _collectionView.visibleCells) {
         
-#warning TODO : CALCULATE POSITION
         if([cell isKindOfClass:[AFVDTimelineCanvasCell class]]) {
             
-            [cell checkCellPositionInView:self];
+            cellPositionX = cell.frame.origin.x;
+            cellPositionY = cell.frame.origin.y;
+            cellPosition = CGPointMake(cellPositionX, cellPositionY);
+            cellPosition = [cell convertPoint:cellPosition toView:self];
+            
+            [cell checkCellPositionInView:self position:cellPosition];
         }
     }
 }
