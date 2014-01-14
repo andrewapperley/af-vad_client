@@ -23,8 +23,8 @@ static NSInteger kAFVDLogoYBuffer = 53;
 static NSInteger kAFVDSignupAndSigninXBuffer = 55;
 static NSInteger kAFVDSignupAndSigninYBuffer = 47;
 static NSInteger kAFVDSignupAndSigninLabelYBuffer = 11;
-static NSInteger kAFVDSignupSlidingPanelHeight = 450;
-static NSInteger kAFVDSigninSlidingPanelHeight = 450;
+static NSInteger kAFVDSlidingPanelHeight_iPhone5 = 450;
+static NSInteger kAFVDSlidingPanelHeight = 362;
 static CGFloat panelViewAnimationDuration = 0.6f;
 
 @interface AFVDIntialViewController ()
@@ -32,6 +32,7 @@ static CGFloat panelViewAnimationDuration = 0.6f;
     UIImageView* _backgroundImageView;
     UIView* _slidingPanel;
     UIView* _currentPanelView;
+    NSInteger _slidingPaneHeight;
 }
 @end
 
@@ -40,6 +41,7 @@ static CGFloat panelViewAnimationDuration = 0.6f;
 - (id)initWithBackgroundImage:(UIImage *)backgroundImage {
     self = [super init];
     if (self) {
+        _slidingPaneHeight = IS_IPHONE5 ? kAFVDSlidingPanelHeight_iPhone5 : kAFVDSlidingPanelHeight;
         _backgroundImageView = [[UIImageView alloc] initWithImage:backgroundImage];
         _backgroundImageView.userInteractionEnabled = FALSE;
     }
@@ -145,11 +147,11 @@ static CGFloat panelViewAnimationDuration = 0.6f;
     
     switch (sender.tag) {
         case AFVDInitialViewOption_Signup:
-            [self setPanelHeightAndBlur:kAFVDSignupSlidingPanelHeight];
+            [self setPanelHeightAndBlur:_slidingPaneHeight];
             _currentPanelView = [[AFVDSignupView alloc] initWithFrame:CGRectMake(0, 0, _slidingPanel.frame.size.width, _slidingPanel.frame.size.height) andDelegate:self];
         break;
         case AFVDInitialViewOption_Signin:
-            [self setPanelHeightAndBlur:kAFVDSignupSlidingPanelHeight];
+            [self setPanelHeightAndBlur:_slidingPaneHeight];
             _currentPanelView = [[AFVDSigninView alloc] initWithFrame:CGRectMake(0, 0, _slidingPanel.frame.size.width, _slidingPanel.frame.size.height) andDelegate:self];
         break;
     }
@@ -158,7 +160,7 @@ static CGFloat panelViewAnimationDuration = 0.6f;
 - (void)panelViewIsReady:(UIView *)panel {
     [_slidingPanel addSubview:panel];
     [UIView animateWithDuration:panelViewAnimationDuration animations:^{
-        _slidingPanel.frame = CGRectMake(0, (_backgroundImageView.frame.size.height - kAFVDSignupSlidingPanelHeight),  _slidingPanel.frame.size.width,  _slidingPanel.frame.size.height);
+        _slidingPanel.frame = CGRectMake(0, (self.view.frame.size.height - _slidingPaneHeight),  _slidingPanel.frame.size.width,  _slidingPaneHeight);
     } completion:^(BOOL finished) {
         self.view.userInteractionEnabled = TRUE;
     }];

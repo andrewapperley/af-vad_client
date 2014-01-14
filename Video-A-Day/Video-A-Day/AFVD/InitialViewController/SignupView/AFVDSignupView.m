@@ -120,7 +120,7 @@ static NSInteger kAFVDFormItemInputYBufferSize = 8;
 #pragma mark - UITextFieldInput Delegate Methods
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
-    
+    [formScrollView setContentOffset:CGPointMake(0, textField.frame.origin.y - 40) animated:TRUE];
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField; {
@@ -129,6 +129,7 @@ static NSInteger kAFVDFormItemInputYBufferSize = 8;
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
+    [formScrollView setContentOffset:CGPointZero animated:TRUE];
     [textField resignFirstResponder];
     return true;
 }
