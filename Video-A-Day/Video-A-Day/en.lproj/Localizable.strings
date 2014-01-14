@@ -6,6 +6,14 @@
   Copyright (c) 2014 AFApps. All rights reserved.
 */
 
-"creating memories, one blip at a time" : "creating memories, one blip at a time";
-"Sign Up" : "Sign Up";
-"Sign In" : "Sign In";
+/*Initial view*/
+"creating memories, one blip at a time" = "creating memories, one blip at a time";
+"Sign Up" = "Sign Up";
+"Sign In" = "Sign In";
+
+/*Signup Form View*/
+"Username" = "Username";
+"Display Name" = "Display Name";
+"Password" = "Password";
+"Confirm Password" = "Confirm Password";
+"Email" = "Email";

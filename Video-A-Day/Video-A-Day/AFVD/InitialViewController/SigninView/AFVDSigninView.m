@@ -13,9 +13,8 @@
 - (id)initWithFrame:(CGRect)frame andDelegate:(UIViewController <AFVDInitialViewDelegate> *) delegate {
     self = [super initWithFrame:frame];
     if (self) {
-        self.delegate = delegate;
         
-        [self.delegate panelViewIsReady];
+        [self.delegate panelViewIsReady:self];
     }
     return self;
 }

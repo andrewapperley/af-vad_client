@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0F06A6DE18788C4D0021E10C /* AFVideoFilterDefaultList.json in Resources */ = {isa = PBXBuildFile; fileRef = 0F06A6DD18788C4D0021E10C /* AFVideoFilterDefaultList.json */; };
+		0F06A6DE18788C4D0021E10C /* AFVDVideoFilterDefaultList.json in Resources */ = {isa = PBXBuildFile; fileRef = 0F06A6DD18788C4D0021E10C /* AFVDVideoFilterDefaultList.json */; };
 		0F06A6E1187922570021E10C /* AFVDFilterTileButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F06A6E0187922570021E10C /* AFVDFilterTileButton.m */; };
 		0F06A6E5187CEE550021E10C /* AFViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F06A6E4187CEE550021E10C /* AFViewController.m */; };
 		0F06A6F3187CF2080021E10C /* AFVDIntialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F06A6F2187CF2080021E10C /* AFVDIntialViewController.m */; };
@@ -31,9 +31,10 @@
 		0F10E3CB18593B8B00FC1433 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F10E3CA18593B8B00FC1433 /* CoreMedia.framework */; };
 		0F10E3CD18593B9A00FC1433 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F10E3CC18593B9A00FC1433 /* MediaPlayer.framework */; };
 		0F10E3CF18593BAE00FC1433 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F10E3CE18593BAE00FC1433 /* MobileCoreServices.framework */; };
-		0F10E3DA18594B9600FC1433 /* AFVideoCaptureController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F10E3D918594B9600FC1433 /* AFVideoCaptureController.m */; };
-		0F10E3DD18594FA800FC1433 /* AFVideoCaptureControls.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F10E3DC18594FA800FC1433 /* AFVideoCaptureControls.m */; };
+		0F10E3DA18594B9600FC1433 /* AFVDVideoCaptureController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F10E3D918594B9600FC1433 /* AFVDVideoCaptureController.m */; };
+		0F10E3DD18594FA800FC1433 /* AFVDVideoCaptureControls.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F10E3DC18594FA800FC1433 /* AFVDVideoCaptureControls.m */; };
 		0F2141CB1876509500E8BFD5 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F2141CA1876509500E8BFD5 /* MessageUI.framework */; };
+		0F2C8A021884CF000033397C /* AFVDStatics.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F2C8A011884CF000033397C /* AFVDStatics.m */; };
 		0F2FC6EB1837303800611873 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F2FC6EA1837303800611873 /* Foundation.framework */; };
 		0F2FC6EF1837303800611873 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F2FC6EE1837303800611873 /* UIKit.framework */; };
 		0F2FC6F51837303800611873 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0F2FC6F31837303800611873 /* InfoPlist.strings */; };
@@ -89,7 +90,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0F06A6DD18788C4D0021E10C /* AFVideoFilterDefaultList.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = AFVideoFilterDefaultList.json; sourceTree = "<group>"; };
+		0F06A6DD18788C4D0021E10C /* AFVDVideoFilterDefaultList.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = AFVDVideoFilterDefaultList.json; sourceTree = "<group>"; };
 		0F06A6DF187922570021E10C /* AFVDFilterTileButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFVDFilterTileButton.h; sourceTree = "<group>"; };
 		0F06A6E0187922570021E10C /* AFVDFilterTileButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFVDFilterTileButton.m; sourceTree = "<group>"; };
 		0F06A6E3187CEE550021E10C /* AFViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFViewController.h; sourceTree = "<group>"; };
@@ -121,11 +122,13 @@
 		0F10E3CA18593B8B00FC1433 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		0F10E3CC18593B9A00FC1433 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		0F10E3CE18593BAE00FC1433 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
-		0F10E3D818594B9600FC1433 /* AFVideoCaptureController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFVideoCaptureController.h; sourceTree = "<group>"; };
-		0F10E3D918594B9600FC1433 /* AFVideoCaptureController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFVideoCaptureController.m; sourceTree = "<group>"; };
-		0F10E3DB18594FA700FC1433 /* AFVideoCaptureControls.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFVideoCaptureControls.h; sourceTree = "<group>"; };
-		0F10E3DC18594FA800FC1433 /* AFVideoCaptureControls.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFVideoCaptureControls.m; sourceTree = "<group>"; };
+		0F10E3D818594B9600FC1433 /* AFVDVideoCaptureController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFVDVideoCaptureController.h; sourceTree = "<group>"; };
+		0F10E3D918594B9600FC1433 /* AFVDVideoCaptureController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFVDVideoCaptureController.m; sourceTree = "<group>"; };
+		0F10E3DB18594FA700FC1433 /* AFVDVideoCaptureControls.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFVDVideoCaptureControls.h; sourceTree = "<group>"; };
+		0F10E3DC18594FA800FC1433 /* AFVDVideoCaptureControls.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFVDVideoCaptureControls.m; sourceTree = "<group>"; };
 		0F2141CA1876509500E8BFD5 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		0F2C8A001884CF000033397C /* AFVDStatics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFVDStatics.h; sourceTree = "<group>"; };
+		0F2C8A011884CF000033397C /* AFVDStatics.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFVDStatics.m; sourceTree = "<group>"; };
 		0F2FC6E71837303800611873 /* Video-A-Day.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Video-A-Day.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0F2FC6EA1837303800611873 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		0F2FC6EC1837303800611873 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -157,7 +160,7 @@
 		0FF441D318626A3100ADAD2C /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
 		0FF441D518626A5300ADAD2C /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		0FF441D718626A5D00ADAD2C /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		0FF60471187E6F7E00E7DF58 /* en */ = {isa = PBXFileReference; lastKnownFileType = file; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		0FF60471187E6F7E00E7DF58 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		0FF604731880D75100E7DF58 /* AFVDImageBlur.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFVDImageBlur.h; sourceTree = "<group>"; };
 		0FF604741880D75200E7DF58 /* AFVDImageBlur.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFVDImageBlur.m; sourceTree = "<group>"; };
 		0FF604761880E39B00E7DF58 /* AFVDInitialView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFVDInitialView.h; sourceTree = "<group>"; };
@@ -245,8 +248,11 @@
 		0F06A6EB187CF1F70021E10C /* AFVD */ = {
 			isa = PBXGroup;
 			children = (
+				0F10E3D718594B8200FC1433 /* AFVDVideoCapture */,
 				0F06A6EC187CF1F70021E10C /* InitialViewController */,
 				0F06A6EF187CF1F70021E10C /* Other Components */,
+				0F2C8A001884CF000033397C /* AFVDStatics.h */,
+				0F2C8A011884CF000033397C /* AFVDStatics.m */,
 			);
 			path = AFVD;
 			sourceTree = "<group>";
@@ -337,21 +343,21 @@
 			path = "UIImage+Blur";
 			sourceTree = "<group>";
 		};
-		0F10E3D718594B8200FC1433 /* AFVideoCapture */ = {
+		0F10E3D718594B8200FC1433 /* AFVDVideoCapture */ = {
 			isa = PBXGroup;
 			children = (
 				0FB5E9851862763600EE0B0D /* AFVDVideoFilterController.h */,
 				0FB5E9861862763600EE0B0D /* AFVDVideoFilterController.m */,
-				0F10E3D818594B9600FC1433 /* AFVideoCaptureController.h */,
-				0F10E3D918594B9600FC1433 /* AFVideoCaptureController.m */,
-				0F10E3DB18594FA700FC1433 /* AFVideoCaptureControls.h */,
-				0F10E3DC18594FA800FC1433 /* AFVideoCaptureControls.m */,
-				0F06A6DD18788C4D0021E10C /* AFVideoFilterDefaultList.json */,
+				0F10E3D818594B9600FC1433 /* AFVDVideoCaptureController.h */,
+				0F10E3D918594B9600FC1433 /* AFVDVideoCaptureController.m */,
+				0F10E3DB18594FA700FC1433 /* AFVDVideoCaptureControls.h */,
+				0F10E3DC18594FA800FC1433 /* AFVDVideoCaptureControls.m */,
+				0F06A6DD18788C4D0021E10C /* AFVDVideoFilterDefaultList.json */,
 				0F06A6DF187922570021E10C /* AFVDFilterTileButton.h */,
 				0F06A6E0187922570021E10C /* AFVDFilterTileButton.m */,
 			);
-			name = AFVideoCapture;
-			path = AF/AFVideoCapture;
+			name = AFVDVideoCapture;
+			path = ../AF/AFVideoCapture;
 			sourceTree = "<group>";
 		};
 		0F2FC6DE1837303800611873 = {
@@ -587,7 +593,6 @@
 			isa = PBXGroup;
 			children = (
 				0F06A6E2187CEE290021E10C /* AFViewController */,
-				0F10E3D718594B8200FC1433 /* AFVideoCapture */,
 				76C6518F1837FFFD003C7F7D /* AFCategory */,
 			);
 			name = AF;
@@ -751,7 +756,7 @@
 				0F06A70A187CFF690021E10C /* afvdLogoImage@2x.png in Resources */,
 				0F2FC7061837303900611873 /* Images.xcassets in Resources */,
 				0F06A717187E36320021E10C /* signupButton_selected.png in Resources */,
-				0F06A6DE18788C4D0021E10C /* AFVideoFilterDefaultList.json in Resources */,
+				0F06A6DE18788C4D0021E10C /* AFVDVideoFilterDefaultList.json in Resources */,
 				0FF60470187E6F7E00E7DF58 /* Localizable.strings in Resources */,
 				0F79613A183DC81900920C59 /* face.jpg in Resources */,
 				0F2FC6F51837303800611873 /* InfoPlist.strings in Resources */,
@@ -827,17 +832,18 @@
 				0F06A6F6187CF2250021E10C /* AFVDSigninView.m in Sources */,
 				76C6519818380A14003C7F7D /* AFVDBaseNetworkModel.m in Sources */,
 				76C651A7183840E4003C7F7D /* AFVDVideoModelDatasource.m in Sources */,
-				0F10E3DD18594FA800FC1433 /* AFVideoCaptureControls.m in Sources */,
+				0F10E3DD18594FA800FC1433 /* AFVDVideoCaptureControls.m in Sources */,
 				0FB5E9871862763600EE0B0D /* AFVDVideoFilterController.m in Sources */,
 				76C651A8183840E4003C7F7D /* AFVDVideoModelFactory.m in Sources */,
 				7677BA6D18373A6B00F3EDC9 /* AFVDBaseNetworkDatasource.m in Sources */,
 				76C651931838003D003C7F7D /* NSDictionary+NSDictionary_NSDataConversion.m in Sources */,
+				0F2C8A021884CF000033397C /* AFVDStatics.m in Sources */,
 				0F06A6E1187922570021E10C /* AFVDFilterTileButton.m in Sources */,
 				7610BC5B183B1108003CE193 /* AFVDRelationshipModelDatasource.m in Sources */,
 				76C651AC18384647003C7F7D /* AFVDVideoPlaylistModel.m in Sources */,
 				0F06A71F187E3EC00021E10C /* UIImage+ImageEffects.m in Sources */,
 				0FF604751880D75200E7DF58 /* AFVDImageBlur.m in Sources */,
-				0F10E3DA18594B9600FC1433 /* AFVideoCaptureController.m in Sources */,
+				0F10E3DA18594B9600FC1433 /* AFVDVideoCaptureController.m in Sources */,
 				76C651A9183840E4003C7F7D /* AFVDVideoModel.m in Sources */,
 				7610BC5E183B1137003CE193 /* AFVDRelationshipModelFactory.m in Sources */,
 			);

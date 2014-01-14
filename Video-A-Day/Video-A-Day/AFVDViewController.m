@@ -15,7 +15,7 @@
 #import "AFVDUserModelFactory.h"
 #import "AFVDVideoModelFactory.h"
 #import "AFVDRelationshipModelFactory.h"
-#import "AFVideoCaptureController.h"
+#import "AFVDVideoCaptureController.h"
 
 NSString *userName = @"andrewApperley123";
 NSString *displayName = @"a_apperley";
@@ -31,7 +31,7 @@ NSString *email = @"email@email.com";
 
 @interface AFVDViewController ()
 {
-    AFVideoCaptureController *vc;
+    AFVDVideoCaptureController *vc;
 }
 @end
 

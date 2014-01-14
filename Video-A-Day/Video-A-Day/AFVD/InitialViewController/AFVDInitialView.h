@@ -11,7 +11,7 @@
 @protocol AFVDInitialViewDelegate <NSObject>
 
 @required
-- (void)panelViewIsReady;
+- (void)panelViewIsReady:(__weak UIView *)panel;
 @end
 
 @interface AFVDInitialView : UIView

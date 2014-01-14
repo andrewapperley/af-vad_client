@@ -16,5 +16,6 @@
     #import <AFNetworking/UIImageView+AFNetworking.h>
     #import "NSDictionary+NSDictionary_NSDataConversion.h"
     #import "AFVDConstants.h"
+    #import "AFVDStatics.h"
     #import "AFVDImageBlur.h"
 #endif

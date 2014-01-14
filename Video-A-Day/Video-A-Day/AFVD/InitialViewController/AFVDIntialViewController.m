@@ -18,7 +18,6 @@ static NSString* kAFVDSigninImage = @"signinButton";
 static NSString* kAFVDSigninSelectedImage = @"signinButton_selected";
 static NSString* kAFVDSignupSelectedImage = @"signupButton_selected";
 static NSString* kAFVDSignupImage = @"signupButton";
-static NSString* kAFVDNormalFont = @"Helvetica"; //Will be put in a statics file later
 static NSInteger kAFVDCatchPhraseYBuffer = 20;
 static NSInteger kAFVDLogoYBuffer = 53;
 static NSInteger kAFVDSignupAndSigninXBuffer = 55;
@@ -148,16 +147,16 @@ static CGFloat panelViewAnimationDuration = 0.6f;
         case AFVDInitialViewOption_Signup:
             [self setPanelHeightAndBlur:kAFVDSignupSlidingPanelHeight];
             _currentPanelView = [[AFVDSignupView alloc] initWithFrame:CGRectMake(0, 0, _slidingPanel.frame.size.width, _slidingPanel.frame.size.height) andDelegate:self];
-            break;
+        break;
         case AFVDInitialViewOption_Signin:
             [self setPanelHeightAndBlur:kAFVDSignupSlidingPanelHeight];
             _currentPanelView = [[AFVDSigninView alloc] initWithFrame:CGRectMake(0, 0, _slidingPanel.frame.size.width, _slidingPanel.frame.size.height) andDelegate:self];
-            break;
+        break;
     }
 }
 
-- (void)panelViewIsReady {
-    [_slidingPanel addSubview:_currentPanelView];
+- (void)panelViewIsReady:(UIView *)panel {
+    [_slidingPanel addSubview:panel];
     [UIView animateWithDuration:panelViewAnimationDuration animations:^{
         _slidingPanel.frame = CGRectMake(0, (_backgroundImageView.frame.size.height - kAFVDSignupSlidingPanelHeight),  _slidingPanel.frame.size.width,  _slidingPanel.frame.size.width);
     } completion:^(BOOL finished) {
