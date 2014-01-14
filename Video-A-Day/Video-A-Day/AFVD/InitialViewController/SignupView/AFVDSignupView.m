@@ -40,10 +40,16 @@ static NSInteger kAFVDFormItemInputYBufferSize = 8;
 #pragma mark - UI Setup Methods
 
 - (void)setupUI {
+    [self setupScrollView];
     [self setupTitle];
     [self setupForm];
     [self setupButtons];
     [self setupTermsText];
+}
+
+- (void)setupScrollView {
+    formScrollView = [[UIScrollView alloc] initWithFrame:self.bounds];
+    [self addSubview:formScrollView];
 }
 
 - (void)setupTitle {
@@ -55,7 +61,8 @@ static NSInteger kAFVDFormItemInputYBufferSize = 8;
     
     titleLabel.frame = CGRectMake(titleLabel.frame.origin.x, titleLabel.frame.origin.y, titleSize.width, titleSize.height);
     
-    [self addSubview:titleLabel];
+    formScrollView.contentSize = CGSizeMake(formScrollView.contentSize.width, kAFVDTitleXYBuffer + titleSize.height);
+    [formScrollView addSubview:titleLabel];
 }
 
 - (void)setupForm {
@@ -74,18 +81,31 @@ static NSInteger kAFVDFormItemInputYBufferSize = 8;
         
         /*Create Input Boxes*/
         UITextField* textField = [[UITextField alloc] initWithFrame:CGRectMake(formItemLabel.frame.origin.x, formItemLabel.frame.origin.y + formItemLabel.frame.size.height + kAFVDFormItemInputYBufferSize, 262, 27)];
-        textField.font = [UIFont fontWithName:kAFVDNormalFont size:14];
+        textField.font = [UIFont fontWithName:kAFVDNormalFont size:12];
         textField.tag = i;
         textField.delegate = self;
         
-        textField.leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 3, 27)];
-        textField.rightView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 3, 27)];
-        
-        textField.layer.borderWidth = 3;
+        textField.leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 3, textField.frame.size.height)];
+        textField.leftViewMode = UITextFieldViewModeAlways;
+        textField.layer.borderWidth = 1.5;
         textField.layer.borderColor = [UIColor colorWithRed:128/255.0 green:129/255.0 blue:123/255.0 alpha:1].CGColor;
         
-        [self addSubview:formItemLabel];
-        [self addSubview:textField];
+        textField.autocapitalizationType = UITextAutocapitalizationTypeNone;
+        
+        textField.autocorrectionType = UITextAutocorrectionTypeNo;
+        
+        if(i == kAFVDSignupFormItem_Email) {
+            textField.keyboardType = UIKeyboardTypeEmailAddress;
+        } else if (i == kAFVDSignupFormItem_Password || i == kAFVDSignupFormItem_RePassword) {
+            textField.secureTextEntry = TRUE;
+        }
+        
+        [formScrollView addSubview:formItemLabel];
+        [formScrollView addSubview:textField];
+        
+        if (i == formItems.count-1) {
+            formScrollView.contentSize = CGSizeMake(formScrollView.contentSize.width, ((kAFVDFormYStart + (formLabelSize.height + kAFVDFormItemSize)*i) + 10*i) + (kAFVDFormItemInputYBufferSize + textField.frame.size.height));
+        }
     }
 }
 
@@ -106,4 +126,11 @@ static NSInteger kAFVDFormItemInputYBufferSize = 8;
 - (void)textFieldDidEndEditing:(UITextField *)textField; {
     
 }
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    return true;
+}
+
 @end

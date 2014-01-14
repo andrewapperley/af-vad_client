@@ -158,7 +158,7 @@ static CGFloat panelViewAnimationDuration = 0.6f;
 - (void)panelViewIsReady:(UIView *)panel {
     [_slidingPanel addSubview:panel];
     [UIView animateWithDuration:panelViewAnimationDuration animations:^{
-        _slidingPanel.frame = CGRectMake(0, (_backgroundImageView.frame.size.height - kAFVDSignupSlidingPanelHeight),  _slidingPanel.frame.size.width,  _slidingPanel.frame.size.width);
+        _slidingPanel.frame = CGRectMake(0, (_backgroundImageView.frame.size.height - kAFVDSignupSlidingPanelHeight),  _slidingPanel.frame.size.width,  _slidingPanel.frame.size.height);
     } completion:^(BOOL finished) {
         self.view.userInteractionEnabled = TRUE;
     }];
@@ -174,7 +174,6 @@ static CGFloat panelViewAnimationDuration = 0.6f;
     _slidingPanel.frame = CGRectMake(0, _backgroundImageView.frame.size.height, _backgroundImageView.frame.size.width, panelHeight);
     
     UIImageView* temp = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, _slidingPanel.frame.size.width, _slidingPanel.frame.size.height)];
-    temp.contentMode = UIViewContentModeTop;
     
     UIGraphicsBeginImageContext(CGSizeMake(temp.frame.size.width, _backgroundImageView.frame.size.height));
     
