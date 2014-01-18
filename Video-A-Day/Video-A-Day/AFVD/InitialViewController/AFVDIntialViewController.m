@@ -13,18 +13,18 @@
 /*Some of these constants might be useful to other views in the future so they could be
  extracted to another staticsFile*/
 
-static NSString* kAFVDLogoImage = @"afvdLogoImage";
-static NSString* kAFVDSigninImage = @"signinButton";
+static NSString* kAFVDLogoImage = @"AFVDLogo";
+static NSString* kAFVDSigninImage = @"AFVDSigninButton";
 static NSString* kAFVDSigninSelectedImage = @"signinButton_selected";
 static NSString* kAFVDSignupSelectedImage = @"signupButton_selected";
-static NSString* kAFVDSignupImage = @"signupButton";
+static NSString* kAFVDSignupImage = @"AFVDSignupButton";
 static NSInteger kAFVDCatchPhraseYBuffer = 20;
 static NSInteger kAFVDLogoYBuffer = 53;
 static NSInteger kAFVDSignupAndSigninXBuffer = 55;
 static NSInteger kAFVDSignupAndSigninYBuffer = 47;
 static NSInteger kAFVDSignupAndSigninLabelYBuffer = 11;
-static NSInteger kAFVDSlidingPanelHeight_iPhone5 = 450;
-static NSInteger kAFVDSlidingPanelHeight = 362;
+static NSInteger kAFVDSlidingPanelHeight_iPhone5 = 317;//450;
+static NSInteger kAFVDSlidingPanelHeight = 340;
 static CGFloat panelViewAnimationDuration = 0.6f;
 
 @interface AFVDIntialViewController ()
@@ -51,7 +51,7 @@ static CGFloat panelViewAnimationDuration = 0.6f;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-	[self.view addSubview:_backgroundImageView];
+    [self.view addSubview:_backgroundImageView];
     
     [self setupLogo];
     [self setupButtons];

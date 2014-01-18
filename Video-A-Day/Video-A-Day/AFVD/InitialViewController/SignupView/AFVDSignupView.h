@@ -10,10 +10,9 @@
 
 typedef NS_ENUM(NSInteger, kAFVDSignupFormItems) {
     kAFVDSignupFormItem_Username = 0,
-    kAFVDSignupFormItem_Displayname,
+    kAFVDSignupFormItem_Email,
     kAFVDSignupFormItem_Password,
-    kAFVDSignupFormItem_RePassword,
-    kAFVDSignupFormItem_Email
+    kAFVDSignupFormItem_RePassword
 };
 
 @interface AFVDSignupView : AFVDInitialView <UITextFieldDelegate>

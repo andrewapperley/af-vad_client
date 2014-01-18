@@ -10,9 +10,13 @@
 
 static NSInteger kAFVDTitleXYBuffer = 25;
 static NSInteger kAFVDFormItemXBuffer = 25;
-static NSInteger kAFVDFormYStart = 203;
-static NSInteger kAFVDFormItemSize = 55;
+//static NSInteger kAFVDFormYStart = 203;
+//static NSInteger kAFVDFormItemSize = 55;
+static NSInteger kAFVDCloseArrowYMargin = 9;
 static NSInteger kAFVDFormItemInputYBufferSize = 8;
+static NSInteger kAFVDFormScrollViewYMargin = 25;
+static NSInteger kAFVDFormTextViewWidth = 262;
+static NSInteger kAFVDFormTextViewHeight = 27;
 
 @implementation AFVDSignupView
 {
@@ -24,6 +28,7 @@ static NSInteger kAFVDFormItemInputYBufferSize = 8;
     UIImage* profileImage;
     
     UIScrollView* formScrollView;
+    NSInteger currentFormPage;
 }
 
 - (id)initWithFrame:(CGRect)frame andDelegate:(UIViewController <AFVDInitialViewDelegate> *) delegate {
@@ -31,7 +36,7 @@ static NSInteger kAFVDFormItemInputYBufferSize = 8;
     if (self) {
         
         [self setupUI];
-        
+        currentFormPage = 1;
         [self.delegate panelViewIsReady:self];
     }
     return self;
@@ -41,15 +46,30 @@ static NSInteger kAFVDFormItemInputYBufferSize = 8;
 
 - (void)setupUI {
     [self setupScrollView];
+    [self setupCloseArrow];
     [self setupTitle];
     [self setupForm];
-    [self setupButtons];
+    
     [self setupTermsText];
 }
 
 - (void)setupScrollView {
-    formScrollView = [[UIScrollView alloc] initWithFrame:self.bounds];
+    formScrollView = [[UIScrollView alloc] initWithFrame:CGRectZero];
+    formScrollView.scrollEnabled = NO;
+    formScrollView.showsHorizontalScrollIndicator = formScrollView.showsVerticalScrollIndicator = NO;
     [self addSubview:formScrollView];
+}
+
+- (void)setupCloseArrow {
+    UIImageView* closeArrow = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"AFVDPanelCloseArrow"]];
+    closeArrow.frame = CGRectMake((self.frame.size.width - closeArrow.frame.size.width)/2, kAFVDCloseArrowYMargin, closeArrow.frame.size.width, closeArrow.frame.size.height);
+    [self addSubview:closeArrow];
+    
+    [self setupDraggingView];
+}
+
+- (void)setupDraggingView {
+    
 }
 
 - (void)setupTitle {
@@ -61,13 +81,31 @@ static NSInteger kAFVDFormItemInputYBufferSize = 8;
     
     titleLabel.frame = CGRectMake(titleLabel.frame.origin.x, titleLabel.frame.origin.y, titleSize.width, titleSize.height);
     
-    formScrollView.contentSize = CGSizeMake(formScrollView.contentSize.width, kAFVDTitleXYBuffer + titleSize.height);
-    [formScrollView addSubview:titleLabel];
+    [self addSubview:titleLabel];
+    
+    CGFloat formViewStartY = titleLabel.frame.size.height + titleLabel.frame.origin.y + kAFVDFormScrollViewYMargin;
+    
+    formScrollView.frame = CGRectMake(0, formViewStartY, self.frame.size.width, self.frame.size.height - formViewStartY);
 }
 
 - (void)setupForm {
     
-    NSArray* formItems = @[NSLocalizedString(@"Username", nil), NSLocalizedString(@"Display Name", nil), NSLocalizedString(@"Password", nil), NSLocalizedString(@"Confirm Password", nil), NSLocalizedString(@"Email", nil)];
+    /*Create ProfileImage Selector*/
+    NSInteger profileImageSelectorSize      = 100;
+    NSInteger profileImageSelectorYMargin   = 0;
+    UIImage*  profileImageSelectorImage     = [UIImage imageNamed:@"AFVDProfileImageSelector"];
+    
+    
+    UIButton* profileImageSelector = [[UIButton alloc] initWithFrame:CGRectMake((self.frame.size.width - profileImageSelectorSize)/2, profileImageSelectorYMargin, profileImageSelectorSize, profileImageSelectorSize)];
+    [profileImageSelector setImage:profileImageSelectorImage forState:UIControlStateNormal];
+    
+    [formScrollView addSubview:profileImageSelector];
+    
+    /*Create form items*/
+    NSArray* formItems = @[NSLocalizedString(@"Username", nil), NSLocalizedString(@"Email", nil) , NSLocalizedString(@"Password", nil), NSLocalizedString(@"Confirm Password", nil)];
+    NSInteger currentPage = 0;
+    NSInteger itemNumber = 2;
+    NSInteger totalPages = 3;
     
     for (NSUInteger i = 0; i < formItems.count; i++) {
         /*Create the Label*/
@@ -77,13 +115,14 @@ static NSInteger kAFVDFormItemInputYBufferSize = 8;
         
         CGSize formLabelSize = [formItemLabel.text sizeWithAttributes:@{NSFontAttributeName : formItemLabel.font}];
         
-        formItemLabel.frame = CGRectMake(kAFVDFormItemXBuffer, kAFVDFormYStart + (formLabelSize.height + kAFVDFormItemSize)*i, formLabelSize.width, formLabelSize.height);
+        formItemLabel.frame = CGRectMake((self.frame.size.width*currentPage) + kAFVDFormItemXBuffer*1.25, formScrollView.frame.size.height - (formLabelSize.height  + kAFVDFormItemXBuffer*2)*itemNumber, formLabelSize.width, formLabelSize.height);
         
         /*Create Input Boxes*/
-        UITextField* textField = [[UITextField alloc] initWithFrame:CGRectMake(formItemLabel.frame.origin.x, formItemLabel.frame.origin.y + formItemLabel.frame.size.height + kAFVDFormItemInputYBufferSize, 262, 27)];
+        UITextField* textField = [[UITextField alloc] initWithFrame:CGRectMake(formItemLabel.frame.origin.x, formItemLabel.frame.origin.y + formItemLabel.frame.size.height + kAFVDFormItemInputYBufferSize, kAFVDFormTextViewWidth, kAFVDFormTextViewHeight)];
         textField.font = [UIFont fontWithName:kAFVDNormalFont size:12];
         textField.tag = i;
         textField.delegate = self;
+        textField.returnKeyType = UIReturnKeyDone;
         
         textField.leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 3, textField.frame.size.height)];
         textField.leftViewMode = UITextFieldViewModeAlways;
@@ -103,14 +142,16 @@ static NSInteger kAFVDFormItemInputYBufferSize = 8;
         [formScrollView addSubview:formItemLabel];
         [formScrollView addSubview:textField];
         
+        itemNumber--;
+        if (itemNumber == 0) {
+            itemNumber = 2;
+            currentPage++;
+        }
+        
         if (i == formItems.count-1) {
-            formScrollView.contentSize = CGSizeMake(formScrollView.contentSize.width, ((kAFVDFormYStart + (formLabelSize.height + kAFVDFormItemSize)*i) + 10*i) + (kAFVDFormItemInputYBufferSize + textField.frame.size.height));
+            formScrollView.contentSize = CGSizeMake(formScrollView.frame.size.width*totalPages, formScrollView.contentSize.height);
         }
     }
-}
-
-- (void)setupButtons {
-    
 }
 
 - (void)setupTermsText {
@@ -120,7 +161,7 @@ static NSInteger kAFVDFormItemInputYBufferSize = 8;
 #pragma mark - UITextFieldInput Delegate Methods
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
-    [formScrollView setContentOffset:CGPointMake(0, textField.frame.origin.y - 40) animated:TRUE];
+    [formScrollView setContentOffset:CGPointMake(0, textField.frame.origin.y + 2) animated:TRUE];
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField; {

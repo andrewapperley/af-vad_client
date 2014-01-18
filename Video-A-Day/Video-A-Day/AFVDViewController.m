@@ -72,7 +72,7 @@ NSString *email = @"email@email.com";
     
     
     
-    AFVDIntialViewController* inVC = [[AFVDIntialViewController alloc] initWithBackgroundImage:[UIImage imageNamed:@"afvdInitialBackgroundImage.jpg"]];
+    AFVDIntialViewController* inVC = [[AFVDIntialViewController alloc] initWithBackgroundImage:[UIImage imageNamed:@"AFVDFieldBackground"]];
     
     [self addChildViewController:inVC];
     [self.view addSubview:inVC.view];
