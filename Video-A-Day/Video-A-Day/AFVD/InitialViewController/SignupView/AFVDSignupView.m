@@ -140,9 +140,9 @@ static NSInteger kAFVDDraggingViewHeight = 29;
         
         textField.autocorrectionType = UITextAutocorrectionTypeNo;
         
-        if(i == kAFVDSignupFormItem_Email) {
+        if(i == AFVDSignupFormItem_Email) {
             textField.keyboardType = UIKeyboardTypeEmailAddress;
-        } else if (i == kAFVDSignupFormItem_Password || i == kAFVDSignupFormItem_RePassword) {
+        } else if (i == AFVDSignupFormItem_Password || i == AFVDSignupFormItem_RePassword) {
             textField.secureTextEntry = TRUE;
         }
         
@@ -200,10 +200,10 @@ static NSInteger kAFVDDraggingViewHeight = 29;
     
     switch (currentFormPage) {
         case 1:
-            if (textField.tag == kAFVDSignupFormItem_Username) {
-                username = textField.text;
-            } else if (textField.tag == kAFVDSignupFormItem_Email) {
-                email = textField.text;
+            if (textField.tag == AFVDSignupFormItem_Username) {
+                username = ([_signupDelegate validInput:textField.text forType:AFVDSignupFormItem_Username]) ? textField.text : @"";
+            } else if (textField.tag == AFVDSignupFormItem_Email) {
+                email = ([_signupDelegate validInput:textField.text forType:AFVDSignupFormItem_Email]) ? textField.text : @"";
             }
             if (username.length > 0 && email.length > 0) {
                 currentFormPage++;
@@ -211,12 +211,13 @@ static NSInteger kAFVDDraggingViewHeight = 29;
             }
             break;
         case 2:
-            if (textField.tag == kAFVDSignupFormItem_Password) {
+            if (textField.tag == AFVDSignupFormItem_Password) {
                 password = textField.text;
-            } else if (textField.tag == kAFVDSignupFormItem_RePassword) {
+            } else if (textField.tag == AFVDSignupFormItem_RePassword) {
                 repassword = textField.text;
             }
-            if (password && repassword) {
+            
+            if ((password && repassword) && [_signupDelegate validInput:[NSString stringWithFormat:@"%@/*&*/%@",password, repassword] forType:AFVDSignupFormItem_Password]) {
                 currentFormPage++;
                 goToNewPage = YES;
             }
@@ -237,9 +238,15 @@ static NSInteger kAFVDDraggingViewHeight = 29;
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-    [formScrollView setContentOffset:CGPointZero animated:TRUE];
+    [formScrollView setContentOffset:CGPointMake(formScrollView.contentOffset.x, 0) animated:TRUE];
     [textField resignFirstResponder];
     return true;
+}
+
+#pragma mark - Cleanup
+
+- (void)dealloc {
+    _signupDelegate = nil;
 }
 
 @end

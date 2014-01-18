@@ -7,8 +7,6 @@
 //
 
 #import "AFVDIntialViewController.h"
-#import "AFVDSigninView.h"
-#import "AFVDSignupView.h"
 
 /*Some of these constants might be useful to other views in the future so they could be
  extracted to another staticsFile*/
@@ -155,6 +153,7 @@ static CGFloat panelViewAnimationDuration = 0.6f;
         case AFVDInitialViewOption_Signup:
             [self setPanelHeightAndBlur:_slidingPaneHeight];
             _currentPanelView = [[AFVDSignupView alloc] initWithFrame:CGRectMake(0, 0, _slidingPanel.frame.size.width, _slidingPanel.frame.size.height) andDelegate:self];
+            ((AFVDSignupView *)_currentPanelView).signupDelegate = self;
         break;
         case AFVDInitialViewOption_Signin:
             [self setPanelHeightAndBlur:_slidingPaneHeight];
@@ -204,6 +203,42 @@ static CGFloat panelViewAnimationDuration = 0.6f;
         [v removeFromSuperview];
     }
     _currentPanelView = nil;
+}
+
+#pragma mark - AFVDSignupDelegate Methods
+
+- (BOOL)validInput:(NSString *)input forType:(AFVDSignupFormItemTypes)type {
+    
+    input = [input stringByReplacingOccurrencesOfString:@" " withString:@""];
+    
+    switch (type) {
+        case AFVDSignupFormItem_Username:
+            if (input.length >= 5) {
+#warning /*Do username check call here*/
+                return YES;
+            }
+            break;
+        case AFVDSignupFormItem_Email:
+            if ([[NSPredicate predicateWithFormat:@"SELF MATCHES %@", @"[A-Z0-9a-z\\._%+-]+@([A-Za-z0-9-]+\\.)+[A-Za-z]{2,4}"] evaluateWithObject:input]) {
+                return YES;
+            }
+            break;
+        case AFVDSignupFormItem_Password:
+        case AFVDSignupFormItem_RePassword: {
+            NSArray* passwords = [input componentsSeparatedByString:@"/*&*/"];
+            if (passwords.count == 2) {
+                if ([(NSString *)passwords.firstObject isEqualToString:(NSString *)passwords.lastObject]) {
+                    return YES;
+                }
+            }
+            break;
+        }
+    }
+    return NO;
+}
+
+- (void)signUserUpWithModel:(AFVDSignupUserModel *)model {
+    
 }
 
 #pragma mark - Blurring Panel

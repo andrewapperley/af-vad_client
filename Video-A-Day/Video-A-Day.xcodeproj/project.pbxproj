@@ -35,6 +35,7 @@
 		0F10E3DD18594FA800FC1433 /* AFVDVideoCaptureControls.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F10E3DC18594FA800FC1433 /* AFVDVideoCaptureControls.m */; };
 		0F2141CB1876509500E8BFD5 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F2141CA1876509500E8BFD5 /* MessageUI.framework */; };
 		0F2C8A021884CF000033397C /* AFVDStatics.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F2C8A011884CF000033397C /* AFVDStatics.m */; };
+		0F2C8A0C188B408D0033397C /* AFVDSignupUserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F2C8A0B188B408D0033397C /* AFVDSignupUserModel.m */; };
 		0F2FC6EB1837303800611873 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F2FC6EA1837303800611873 /* Foundation.framework */; };
 		0F2FC6EF1837303800611873 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F2FC6EE1837303800611873 /* UIKit.framework */; };
 		0F2FC6F51837303800611873 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0F2FC6F31837303800611873 /* InfoPlist.strings */; };
@@ -129,6 +130,8 @@
 		0F2141CA1876509500E8BFD5 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		0F2C8A001884CF000033397C /* AFVDStatics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFVDStatics.h; sourceTree = "<group>"; };
 		0F2C8A011884CF000033397C /* AFVDStatics.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFVDStatics.m; sourceTree = "<group>"; };
+		0F2C8A0A188B408D0033397C /* AFVDSignupUserModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFVDSignupUserModel.h; sourceTree = "<group>"; };
+		0F2C8A0B188B408D0033397C /* AFVDSignupUserModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFVDSignupUserModel.m; sourceTree = "<group>"; };
 		0F2FC6E71837303800611873 /* Video-A-Day.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Video-A-Day.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0F2FC6EA1837303800611873 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		0F2FC6EC1837303800611873 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -284,6 +287,8 @@
 			children = (
 				0F06A6F7187CF2340021E10C /* AFVDSignupView.h */,
 				0F06A6F8187CF2340021E10C /* AFVDSignupView.m */,
+				0F2C8A0A188B408D0033397C /* AFVDSignupUserModel.h */,
+				0F2C8A0B188B408D0033397C /* AFVDSignupUserModel.m */,
 			);
 			path = SignupView;
 			sourceTree = "<group>";
@@ -832,6 +837,7 @@
 				0F06A6F6187CF2250021E10C /* AFVDSigninView.m in Sources */,
 				76C6519818380A14003C7F7D /* AFVDBaseNetworkModel.m in Sources */,
 				76C651A7183840E4003C7F7D /* AFVDVideoModelDatasource.m in Sources */,
+				0F2C8A0C188B408D0033397C /* AFVDSignupUserModel.m in Sources */,
 				0F10E3DD18594FA800FC1433 /* AFVDVideoCaptureControls.m in Sources */,
 				0FB5E9871862763600EE0B0D /* AFVDVideoFilterController.m in Sources */,
 				76C651A8183840E4003C7F7D /* AFVDVideoModelFactory.m in Sources */,
