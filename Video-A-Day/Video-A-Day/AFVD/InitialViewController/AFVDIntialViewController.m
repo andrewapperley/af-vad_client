@@ -185,7 +185,7 @@ static CGFloat panelViewAnimationDuration = 0.6f;
     CGFloat snapPanelAnimationSpeed = 0;
     
     if (velocity <= -50 || velocity >= 50) {
-        snapPanelAnimationSpeed = 0.2f;
+        snapPanelAnimationSpeed = 0.3f;
     } else if (velocity <= -10 || velocity >= 10) {
         snapPanelAnimationSpeed = 0.4f;
     }
