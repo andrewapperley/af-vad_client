@@ -189,11 +189,50 @@ static NSInteger kAFVDDraggingViewHeight = 29;
 #pragma mark - UITextFieldInput Delegate Methods
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
-    [formScrollView setContentOffset:CGPointMake(0, textField.frame.origin.y + 2) animated:TRUE];
+    [formScrollView setContentOffset:CGPointMake(formScrollView.contentOffset.x, textField.frame.origin.y + 2) animated:YES];
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField; {
     
+    [formScrollView setContentOffset:CGPointMake(formScrollView.contentOffset.x, 0) animated:YES];
+    
+    BOOL goToNewPage = NO;
+    
+    switch (currentFormPage) {
+        case 1:
+            if (textField.tag == kAFVDSignupFormItem_Username) {
+                username = textField.text;
+            } else if (textField.tag == kAFVDSignupFormItem_Email) {
+                email = textField.text;
+            }
+            if (username.length > 0 && email.length > 0) {
+                currentFormPage++;
+                goToNewPage = YES;
+            }
+            break;
+        case 2:
+            if (textField.tag == kAFVDSignupFormItem_Password) {
+                password = textField.text;
+            } else if (textField.tag == kAFVDSignupFormItem_RePassword) {
+                repassword = textField.text;
+            }
+            if (password && repassword) {
+                currentFormPage++;
+                goToNewPage = YES;
+            }
+            break;
+        case 3:
+            
+            break;
+    }
+    
+    if (goToNewPage) {
+        double delayInSeconds = 1.0;
+        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+            [formScrollView setContentOffset:CGPointMake(self.frame.size.width*(currentFormPage-1), 0) animated:YES];
+        });
+    }
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField

@@ -192,15 +192,18 @@ static CGFloat panelViewAnimationDuration = 0.6f;
     
     [UIView animateWithDuration:snapPanelAnimationSpeed delay:0 options:UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationCurveLinear animations:^{
         [_slidingPanel setCenter:CGPointMake([_slidingPanel center].x, MAX(_initialSlidingPanelY, ((closePanel) ? self.view.frame.size.height : _initialSlidingPanelY)))];
-    } completion:nil];
-    
-    if (closePanel) {
-        [self closeSlidingPanel];
-    }
+    } completion:^(BOOL finished) {
+        if (closePanel) {
+            [self closeSlidingPanel];
+        }
+    }];
 }
 
 - (void)closeSlidingPanel {
-    
+    for (UIView* v in _slidingPanel.subviews) {
+        [v removeFromSuperview];
+    }
+    _currentPanelView = nil;
 }
 
 #pragma mark - Blurring Panel
