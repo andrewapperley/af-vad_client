@@ -33,6 +33,11 @@ static CGFloat panelViewAnimationDuration = 0.6f;
     UIView* _slidingPanel;
     UIView* _currentPanelView;
     NSInteger _slidingPaneHeight;
+    NSInteger _initialSlidingPanelY;
+    UIAttachmentBehavior* _panAttachmentBehaviour;
+    UIDynamicAnimator* _animator;
+    UIGravityBehavior* _gravityBehaviour;
+    UIPushBehavior* _pushBehavior;
 }
 @end
 
@@ -133,8 +138,9 @@ static CGFloat panelViewAnimationDuration = 0.6f;
 
 - (void)setupSlidingPanel {
     
-    _slidingPanel = [[UIView alloc] initWithFrame:CGRectMake(0, _backgroundImageView.frame.size.height, _backgroundImageView.frame.size.width, _backgroundImageView.frame.size.height)];
-    
+    _slidingPanel = [[UIView alloc] initWithFrame:CGRectZero];
+    _slidingPanel.layer.anchorPoint = CGPointMake((self.view.frame.size.width - _slidingPanel.frame.size.width)/2, 0);
+    _slidingPanel.frame = CGRectMake(0, _backgroundImageView.frame.size.height, _backgroundImageView.frame.size.width, _backgroundImageView.frame.size.height);
     [self.view addSubview:_slidingPanel];
 }
 
@@ -157,14 +163,47 @@ static CGFloat panelViewAnimationDuration = 0.6f;
     }
 }
 
+#pragma mark - AFVDInitialViewDelegate Methods
+
 - (void)panelViewIsReady:(UIView *)panel {
     [_slidingPanel addSubview:panel];
-    [UIView animateWithDuration:panelViewAnimationDuration animations:^{
+    
+    [UIView animateWithDuration:panelViewAnimationDuration delay:0 options:UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationCurveLinear animations:^{
         _slidingPanel.frame = CGRectMake(0, (self.view.frame.size.height - _slidingPaneHeight),  _slidingPanel.frame.size.width,  _slidingPaneHeight);
     } completion:^(BOOL finished) {
+        _initialSlidingPanelY = _slidingPanel.frame.origin.y;
         self.view.userInteractionEnabled = TRUE;
     }];
+    
 }
+
+- (void)panelViewIsDragged:(CGPoint)panelsPoint closeView:(BOOL)closeView withVelocity:(NSInteger)velocity {
+    [_slidingPanel setCenter:CGPointMake([_slidingPanel center].x, MAX(_initialSlidingPanelY, [_slidingPanel center].y + panelsPoint.y))];
+}
+
+- (void)snapPanelToPositionWithVelocity:(NSInteger)velocity andClosePanel:(BOOL)closePanel {
+    CGFloat snapPanelAnimationSpeed = 0;
+    
+    if (velocity <= -50 || velocity >= 50) {
+        snapPanelAnimationSpeed = 0.2f;
+    } else if (velocity <= -10 || velocity >= 10) {
+        snapPanelAnimationSpeed = 0.4f;
+    }
+    
+    [UIView animateWithDuration:snapPanelAnimationSpeed delay:0 options:UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationCurveLinear animations:^{
+        [_slidingPanel setCenter:CGPointMake([_slidingPanel center].x, MAX(_initialSlidingPanelY, ((closePanel) ? self.view.frame.size.height : _initialSlidingPanelY)))];
+    } completion:nil];
+    
+    if (closePanel) {
+        [self closeSlidingPanel];
+    }
+}
+
+- (void)closeSlidingPanel {
+    
+}
+
+#pragma mark - Blurring Panel
 
 /*Improve the performance here*/
 - (void)setPanelHeightAndBlur:(CGFloat)panelHeight {
@@ -179,7 +218,7 @@ static CGFloat panelViewAnimationDuration = 0.6f;
     
     UIGraphicsBeginImageContext(CGSizeMake(temp.frame.size.width, _backgroundImageView.frame.size.height));
     
-    [self.view.layer renderInContext:UIGraphicsGetCurrentContext()];
+    [_backgroundImageView.layer renderInContext:UIGraphicsGetCurrentContext()];
     
     UIImage* tempImage = UIGraphicsGetImageFromCurrentImageContext();
     
@@ -196,6 +235,7 @@ static CGFloat panelViewAnimationDuration = 0.6f;
     
     temp.image = tempImage;
     UIGraphicsEndImageContext();
+    temp.alpha = 0.98f;
     
     [_slidingPanel addSubview:temp];
 }

@@ -14,7 +14,7 @@ typedef NS_ENUM(NSInteger, AFVDInitialViewOption) {
     AFVDInitialViewOption_Signin = 1
 };
 
-@interface AFVDIntialViewController : AFViewController <AFVDInitialViewDelegate>
+@interface AFVDIntialViewController : AFViewController <AFVDInitialViewDelegate, UIDynamicAnimatorDelegate>
 
 - (id)initWithBackgroundImage:(UIImage *)backgroundImage;
 

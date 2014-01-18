@@ -12,6 +12,8 @@
 
 @required
 - (void)panelViewIsReady:(__weak UIView *)panel;
+- (void)panelViewIsDragged:(CGPoint)panelsPoint closeView:(BOOL)closeView withVelocity:(NSInteger)velocity;
+- (void)snapPanelToPositionWithVelocity:(NSInteger)velocity andClosePanel:(BOOL)closePanel;
 @end
 
 @interface AFVDInitialView : UIView

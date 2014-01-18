@@ -17,6 +17,7 @@ static NSInteger kAFVDFormItemInputYBufferSize = 8;
 static NSInteger kAFVDFormScrollViewYMargin = 25;
 static NSInteger kAFVDFormTextViewWidth = 262;
 static NSInteger kAFVDFormTextViewHeight = 27;
+static NSInteger kAFVDDraggingViewHeight = 29;
 
 @implementation AFVDSignupView
 {
@@ -69,7 +70,13 @@ static NSInteger kAFVDFormTextViewHeight = 27;
 }
 
 - (void)setupDraggingView {
+    UIView* draggingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, kAFVDDraggingViewHeight)];
+    UIPanGestureRecognizer* draggingGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(userIsDraggingView:)];
+    draggingGesture.minimumNumberOfTouches = 1;
+    draggingGesture.maximumNumberOfTouches = 1;
+    [draggingView addGestureRecognizer:draggingGesture];
     
+    [self addSubview:draggingView];
 }
 
 - (void)setupTitle {
@@ -156,6 +163,27 @@ static NSInteger kAFVDFormTextViewHeight = 27;
 
 - (void)setupTermsText {
     
+}
+
+#pragma mark - UIPanGestureMethod
+
+- (void)userIsDraggingView:(UIPanGestureRecognizer *)gesture {
+    
+    BOOL closingView = NO;
+    CGPoint translation = [gesture translationInView:self.superview];
+    
+    if (gesture.state == UIGestureRecognizerStateBegan || gesture.state == UIGestureRecognizerStateChanged) {
+        
+        [self.delegate panelViewIsDragged:translation closeView:closingView withVelocity:0];
+        [gesture setTranslation:CGPointZero inView:self.superview];
+    
+    } else if (gesture.state == UIGestureRecognizerStateEnded) {
+    
+        CGPoint velocity = [gesture velocityInView:self.superview];
+        closingView = (velocity.y > 0.0f) ? YES : NO;
+        [self.delegate snapPanelToPositionWithVelocity:velocity.y andClosePanel:closingView];
+    
+    }
 }
 
 #pragma mark - UITextFieldInput Delegate Methods
