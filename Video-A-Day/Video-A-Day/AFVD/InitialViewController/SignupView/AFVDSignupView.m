@@ -28,6 +28,8 @@ static NSInteger kAFVDDraggingViewHeight = 29;
     NSString* email;
     UIImage* profileImage;
     
+    UIButton* profileImageSelector;
+    CGFloat profileImageSelectorInitialXMargin;
     UIScrollView* formScrollView;
     NSInteger currentFormPage;
 }
@@ -56,7 +58,7 @@ static NSInteger kAFVDDraggingViewHeight = 29;
 
 - (void)setupScrollView {
     formScrollView = [[UIScrollView alloc] initWithFrame:CGRectZero];
-    formScrollView.scrollEnabled = NO;
+    formScrollView.scrollEnabled = YES;
     formScrollView.showsHorizontalScrollIndicator = formScrollView.showsVerticalScrollIndicator = NO;
     [self addSubview:formScrollView];
 }
@@ -81,7 +83,7 @@ static NSInteger kAFVDDraggingViewHeight = 29;
 
 - (void)setupTitle {
     UILabel* titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(kAFVDTitleXYBuffer, kAFVDTitleXYBuffer, 0, 0)];
-    titleLabel.text = NSLocalizedString(@"Sign Up", nil);
+    titleLabel.text = NSLocalizedString(@"AFVDInitialViewSignUp", nil);
     titleLabel.font = [UIFont fontWithName:kAFVDNormalFont size:26];
     
     CGSize titleSize = [titleLabel.text sizeWithAttributes:@{NSFontAttributeName : titleLabel.font}];
@@ -99,17 +101,22 @@ static NSInteger kAFVDDraggingViewHeight = 29;
     
     /*Create ProfileImage Selector*/
     NSInteger profileImageSelectorSize      = 100;
-    NSInteger profileImageSelectorYMargin   = 0;
+    NSInteger profileImageSelectorYMargin   = 20;
     UIImage*  profileImageSelectorImage     = [UIImage imageNamed:@"AFVDProfileImageSelector"];
     
     
-    UIButton* profileImageSelector = [[UIButton alloc] initWithFrame:CGRectMake((self.frame.size.width - profileImageSelectorSize)/2, profileImageSelectorYMargin, profileImageSelectorSize, profileImageSelectorSize)];
+    profileImageSelector = [[UIButton alloc] initWithFrame:CGRectMake((self.frame.size.width - profileImageSelectorSize)/2, profileImageSelectorYMargin, profileImageSelectorSize, profileImageSelectorSize)];
+    profileImageSelectorInitialXMargin = profileImageSelector.frame.origin.x;
     [profileImageSelector setImage:profileImageSelectorImage forState:UIControlStateNormal];
+    profileImageSelector.imageView.contentMode = UIViewContentModeScaleAspectFill;
+    [self createCircleProfileImage];
+    
+    [profileImageSelector addTarget:self action:@selector(onProfileImageSelector) forControlEvents:UIControlEventTouchUpInside];
     
     [formScrollView addSubview:profileImageSelector];
     
     /*Create form items*/
-    NSArray* formItems = @[NSLocalizedString(@"Username", nil), NSLocalizedString(@"Email", nil) , NSLocalizedString(@"Password", nil), NSLocalizedString(@"Confirm Password", nil)];
+    NSArray* formItems = @[NSLocalizedString(@"AFVDSignupFormUsername", nil), NSLocalizedString(@"AFVDSignupFormEmail", nil) , NSLocalizedString(@"AFVDSignupFormPassword", nil), NSLocalizedString(@"AFVDSignupFormConfirmPassword", nil)];
     NSInteger currentPage = 0;
     NSInteger itemNumber = 2;
     NSInteger totalPages = 3;
@@ -159,6 +166,19 @@ static NSInteger kAFVDDraggingViewHeight = 29;
             formScrollView.contentSize = CGSizeMake(formScrollView.frame.size.width*totalPages, formScrollView.contentSize.height);
         }
     }
+    
+    /*Create Submit Button*/
+    NSInteger submitButtonHeight = 32;
+    
+    UIButton* submitButton = [[UIButton alloc] initWithFrame:CGRectMake((self.frame.size.width*(totalPages-1)) + kAFVDFormItemXBuffer, formScrollView.frame.size.height - (submitButtonHeight + kAFVDFormItemXBuffer), self.frame.size.width - kAFVDFormItemXBuffer*2, submitButtonHeight)];
+    [submitButton addTarget:self action:@selector(onSubmitButton) forControlEvents:UIControlEventTouchDragInside];
+    submitButton.layer.borderWidth = 3;
+    submitButton.layer.borderColor = [UIColor colorWithRed:101/255.0f green:101/255.0f blue:90/255.0f alpha:1.0f].CGColor;
+    submitButton.layer.cornerRadius = 5;
+    
+    [submitButton setTitle:NSLocalizedString(@"AFVDSignupFormSubmitButton", nil) forState:UIControlStateNormal];
+    
+    [formScrollView addSubview:submitButton];
 }
 
 - (void)setupTermsText {
@@ -186,10 +206,54 @@ static NSInteger kAFVDDraggingViewHeight = 29;
     }
 }
 
+#pragma mark - ProfileImageSelector Target Method
+
+- (void)onProfileImageSelector {
+    UIImagePickerController* imagePicker = [[UIImagePickerController alloc] init];
+    imagePicker.delegate = self;
+    imagePicker.allowsEditing = YES;
+    [[[[UIApplication sharedApplication] keyWindow] rootViewController] presentViewController:imagePicker animated:YES completion:nil];
+}
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+    if (info[UIImagePickerControllerEditedImage]) {
+        profileImage = [info[UIImagePickerControllerEditedImage] copy];
+    } else {
+        profileImage = [info[UIImagePickerControllerOriginalImage] copy];
+    }
+    [profileImageSelector setImage:profileImage forState:UIControlStateNormal];
+    
+    [picker dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)createCircleProfileImage {
+    
+    NSInteger radius = profileImageSelector.frame.size.width;
+    
+    CAShapeLayer *circle = [CAShapeLayer layer];
+    
+    circle.path = [UIBezierPath bezierPathWithOvalInRect:CGRectMake(0, 0, radius, radius)].CGPath;
+    circle.frame = CGRectMake(0, 0, radius, radius);
+    
+    // Configure the apperence of the circle
+    circle.fillColor = [UIColor blackColor].CGColor;
+    circle.lineWidth = 1;
+    
+    [profileImageSelector.layer setMask:circle];
+}
+
+#pragma mark - Submit Button Target Method
+
+- (void)onSubmitButton {
+    AFVDSignupUserModel* signupModel = [[AFVDSignupUserModel alloc] initWithUsername:username password:password email:email profileImage:(!profileImage) ? profileImageSelector.imageView.image : profileImage];
+    
+    [_signupDelegate signUserUpWithModel:signupModel];
+}
+
 #pragma mark - UITextFieldInput Delegate Methods
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
-    [formScrollView setContentOffset:CGPointMake(formScrollView.contentOffset.x, textField.frame.origin.y + 2) animated:YES];
+    [formScrollView setContentOffset:CGPointMake(formScrollView.contentOffset.x, textField.frame.origin.y - textField.frame.size.height) animated:YES];
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField; {
@@ -232,6 +296,15 @@ static NSInteger kAFVDDraggingViewHeight = 29;
         dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
         dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
             [formScrollView setContentOffset:CGPointMake(self.frame.size.width*(currentFormPage-1), 0) animated:YES];
+            [UIView animateWithDuration:0.3f delay:0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
+                profileImageSelector.alpha = 0;
+            } completion:^(BOOL finished) {
+                profileImageSelector.frame = CGRectMake((self.frame.size.width*(currentFormPage-1)) + profileImageSelectorInitialXMargin, profileImageSelector.frame.origin.y, profileImageSelector.frame.size.width, profileImageSelector.frame.size.height);
+                [UIView animateWithDuration:0.3f delay:0.2f options:UIViewAnimationOptionBeginFromCurrentState animations:^{
+                    profileImageSelector.alpha = 1;
+                } completion:nil];
+            }];
+            
         });
     }
 }
@@ -240,7 +313,7 @@ static NSInteger kAFVDDraggingViewHeight = 29;
 {
     [formScrollView setContentOffset:CGPointMake(formScrollView.contentOffset.x, 0) animated:TRUE];
     [textField resignFirstResponder];
-    return true;
+    return YES;
 }
 
 #pragma mark - Cleanup

@@ -7,13 +7,14 @@
 */
 
 /*Initial view*/
-"creating memories, one blip at a time" = "creating memories, one blip at a time";
-"Sign Up" = "Sign Up";
-"Sign In" = "Sign In";
+"AFVDInitialViewCreating" = "creating memories, one blip at a time";
+"AFVDInitialViewSignUp" = "Sign Up";
+"AFVDInitialViewSignIn" = "Sign In";
 
 /*Signup Form View*/
-"Username" = "Username";
-"Display Name" = "Display Name";
-"Password" = "Password";
-"Confirm Password" = "Confirm Password";
-"Email" = "Email";
+"AFVDSignupFormUsername" = "Username";
+"AFVDSignupFormDisplayName" = "Display Name";
+"AFVDSignupFormPassword" = "Password";
+"AFVDSignupFormConfirmPassword" = "Confirm Password";
+"AFVDSignupFormEmail" = "Email";
+"AFVDSignupFormSubmitButton" = "Sign Up";

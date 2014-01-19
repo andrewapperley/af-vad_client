@@ -21,8 +21,8 @@ static NSInteger kAFVDLogoYBuffer = 53;
 static NSInteger kAFVDSignupAndSigninXBuffer = 55;
 static NSInteger kAFVDSignupAndSigninYBuffer = 47;
 static NSInteger kAFVDSignupAndSigninLabelYBuffer = 11;
-static NSInteger kAFVDSlidingPanelHeight_iPhone5 = 317;//450;
-static NSInteger kAFVDSlidingPanelHeight = 340;
+//static NSInteger kAFVDSlidingPanelHeight_iPhone5 = 400;
+static NSInteger kAFVDSlidingPanelHeight = 380;
 static CGFloat panelViewAnimationDuration = 0.6f;
 
 @interface AFVDIntialViewController ()
@@ -44,7 +44,7 @@ static CGFloat panelViewAnimationDuration = 0.6f;
 - (id)initWithBackgroundImage:(UIImage *)backgroundImage {
     self = [super init];
     if (self) {
-        _slidingPaneHeight = IS_IPHONE5 ? kAFVDSlidingPanelHeight_iPhone5 : kAFVDSlidingPanelHeight;
+        _slidingPaneHeight = kAFVDSlidingPanelHeight;
         _backgroundImageView = [[UIImageView alloc] initWithImage:backgroundImage];
         _backgroundImageView.userInteractionEnabled = FALSE;
     }
@@ -69,7 +69,7 @@ static CGFloat panelViewAnimationDuration = 0.6f;
     logoView.userInteractionEnabled = FALSE;
     
     UILabel* afvdCatchPhraseLabel = [[UILabel alloc] init];
-    afvdCatchPhraseLabel.text = NSLocalizedString(@"creating memories, one blip at a time", nil);
+    afvdCatchPhraseLabel.text = NSLocalizedString(@"AFVDInitialViewCreating", nil);
     afvdCatchPhraseLabel.font = [UIFont fontWithName:kAFVDNormalFont size:16];
     
     CGFloat labelWidth = [afvdCatchPhraseLabel.text sizeWithAttributes:@{NSFontAttributeName : afvdCatchPhraseLabel.font}].width;
@@ -97,7 +97,7 @@ static CGFloat panelViewAnimationDuration = 0.6f;
     [signupButton addTarget:self action:@selector(onSigninSignupButton:) forControlEvents:UIControlEventTouchUpInside];
     
     UILabel* signupLabel = [[UILabel alloc] init];
-    signupLabel.text = NSLocalizedString(@"Sign Up", nil);
+    signupLabel.text = NSLocalizedString(@"AFVDInitialViewSignUp", nil);
     signupLabel.font = [UIFont fontWithName:kAFVDNormalFont size:20];
     
     CGFloat labelWidth = [signupLabel.text sizeWithAttributes:@{NSFontAttributeName : signupLabel.font}].width;
@@ -119,7 +119,7 @@ static CGFloat panelViewAnimationDuration = 0.6f;
     [signinButton addTarget:self action:@selector(onSigninSignupButton:) forControlEvents:UIControlEventTouchUpInside];
     
     UILabel* signinLabel = [[UILabel alloc] init];
-    signinLabel.text = NSLocalizedString(@"Sign In", nil);
+    signinLabel.text = NSLocalizedString(@"AFVDInitialViewSignIn", nil);
     signinLabel.font = [UIFont fontWithName:kAFVDNormalFont size:20];
     
     labelWidth = [signinLabel.text sizeWithAttributes:@{NSFontAttributeName : signinLabel.font}].width;

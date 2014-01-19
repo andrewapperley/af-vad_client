@@ -673,9 +673,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		0F2FC6E61837303800611873 /* Video-A-Day */ = {
+		0F2FC6E61837303800611873 /* Blips */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 0F2FC71C1837303900611873 /* Build configuration list for PBXNativeTarget "Video-A-Day" */;
+			buildConfigurationList = 0F2FC71C1837303900611873 /* Build configuration list for PBXNativeTarget "Blips" */;
 			buildPhases = (
 				96CB87726F714CB8BCD2C282 /* Check Pods Manifest.lock */,
 				0F2FC6E31837303800611873 /* Sources */,
@@ -687,14 +687,14 @@
 			);
 			dependencies = (
 			);
-			name = "Video-A-Day";
+			name = Blips;
 			productName = "Video-A-Day";
 			productReference = 0F2FC6E71837303800611873 /* Video-A-Day.app */;
 			productType = "com.apple.product-type.application";
 		};
-		0F2FC70A1837303900611873 /* Video-A-DayTests */ = {
+		0F2FC70A1837303900611873 /* BlipsTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 0F2FC71F1837303900611873 /* Build configuration list for PBXNativeTarget "Video-A-DayTests" */;
+			buildConfigurationList = 0F2FC71F1837303900611873 /* Build configuration list for PBXNativeTarget "BlipsTests" */;
 			buildPhases = (
 				0F2FC7071837303900611873 /* Sources */,
 				0F2FC7081837303900611873 /* Frameworks */,
@@ -705,7 +705,7 @@
 			dependencies = (
 				0F2FC7111837303900611873 /* PBXTargetDependency */,
 			);
-			name = "Video-A-DayTests";
+			name = BlipsTests;
 			productName = "Video-A-DayTests";
 			productReference = 0F2FC70B1837303900611873 /* Video-A-DayTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -738,8 +738,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				0F2FC6E61837303800611873 /* Video-A-Day */,
-				0F2FC70A1837303900611873 /* Video-A-DayTests */,
+				0F2FC6E61837303800611873 /* Blips */,
+				0F2FC70A1837303900611873 /* BlipsTests */,
 			);
 		};
 /* End PBXProject section */
@@ -869,7 +869,7 @@
 /* Begin PBXTargetDependency section */
 		0F2FC7111837303900611873 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 0F2FC6E61837303800611873 /* Video-A-Day */;
+			target = 0F2FC6E61837303800611873 /* Blips */;
 			targetProxy = 0F2FC7101837303900611873 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -1062,7 +1062,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		0F2FC71C1837303900611873 /* Build configuration list for PBXNativeTarget "Video-A-Day" */ = {
+		0F2FC71C1837303900611873 /* Build configuration list for PBXNativeTarget "Blips" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				0F2FC71D1837303900611873 /* Debug */,
@@ -1071,7 +1071,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		0F2FC71F1837303900611873 /* Build configuration list for PBXNativeTarget "Video-A-DayTests" */ = {
+		0F2FC71F1837303900611873 /* Build configuration list for PBXNativeTarget "BlipsTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				0F2FC7201837303900611873 /* Debug */,

@@ -16,7 +16,7 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "0F2FC6E61837303800611873"
                BuildableName = "Video-A-Day.app"
-               BlueprintName = "Video-A-Day"
+               BlueprintName = "Blips"
                ReferencedContainer = "container:Video-A-Day.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -34,7 +34,7 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "0F2FC70A1837303900611873"
                BuildableName = "Video-A-DayTests.xctest"
-               BlueprintName = "Video-A-DayTests"
+               BlueprintName = "BlipsTests"
                ReferencedContainer = "container:Video-A-Day.xcodeproj">
             </BuildableReference>
          </TestableReference>
@@ -44,7 +44,7 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "0F2FC6E61837303800611873"
             BuildableName = "Video-A-Day.app"
-            BlueprintName = "Video-A-Day"
+            BlueprintName = "Blips"
             ReferencedContainer = "container:Video-A-Day.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -63,7 +63,7 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "0F2FC6E61837303800611873"
             BuildableName = "Video-A-Day.app"
-            BlueprintName = "Video-A-Day"
+            BlueprintName = "Blips"
             ReferencedContainer = "container:Video-A-Day.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -81,7 +81,7 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "0F2FC6E61837303800611873"
             BuildableName = "Video-A-Day.app"
-            BlueprintName = "Video-A-Day"
+            BlueprintName = "Blips"
             ReferencedContainer = "container:Video-A-Day.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

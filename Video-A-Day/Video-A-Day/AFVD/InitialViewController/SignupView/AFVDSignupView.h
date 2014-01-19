@@ -24,7 +24,7 @@ typedef NS_ENUM(NSInteger, AFVDSignupFormItemTypes) {
 
 @end
 
-@interface AFVDSignupView : AFVDInitialView <UITextFieldDelegate>
+@interface AFVDSignupView : AFVDInitialView <UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
 @property(nonatomic, weak)id <AFVDSignupDelegate> signupDelegate;
 
