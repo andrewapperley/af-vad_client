@@ -10,6 +10,7 @@
 
 static NSInteger kAFVDTitleXYBuffer = 25;
 static NSInteger kAFVDFormItemXBuffer = 25;
+static NSInteger kAFVDFormItemYBuffer = 35;
 //static NSInteger kAFVDFormYStart = 203;
 //static NSInteger kAFVDFormItemSize = 55;
 static NSInteger kAFVDCloseArrowYMargin = 9;
@@ -58,7 +59,7 @@ static NSInteger kAFVDDraggingViewHeight = 29;
 
 - (void)setupScrollView {
     formScrollView = [[UIScrollView alloc] initWithFrame:CGRectZero];
-    formScrollView.scrollEnabled = YES;
+    formScrollView.scrollEnabled = NO;
     formScrollView.showsHorizontalScrollIndicator = formScrollView.showsVerticalScrollIndicator = NO;
     [self addSubview:formScrollView];
 }
@@ -129,7 +130,7 @@ static NSInteger kAFVDDraggingViewHeight = 29;
         
         CGSize formLabelSize = [formItemLabel.text sizeWithAttributes:@{NSFontAttributeName : formItemLabel.font}];
         
-        formItemLabel.frame = CGRectMake((self.frame.size.width*currentPage) + kAFVDFormItemXBuffer*1.25, formScrollView.frame.size.height - (formLabelSize.height  + kAFVDFormItemXBuffer*2)*itemNumber, formLabelSize.width, formLabelSize.height);
+        formItemLabel.frame = CGRectMake((self.frame.size.width*currentPage) + kAFVDFormItemXBuffer*1.25, formScrollView.frame.size.height - (formLabelSize.height + kAFVDFormItemYBuffer*2)*itemNumber, formLabelSize.width, formLabelSize.height);
         
         /*Create Input Boxes*/
         UITextField* textField = [[UITextField alloc] initWithFrame:CGRectMake(formItemLabel.frame.origin.x, formItemLabel.frame.origin.y + formItemLabel.frame.size.height + kAFVDFormItemInputYBufferSize, kAFVDFormTextViewWidth, kAFVDFormTextViewHeight)];
@@ -171,7 +172,7 @@ static NSInteger kAFVDDraggingViewHeight = 29;
     NSInteger submitButtonHeight = 32;
     
     UIButton* submitButton = [[UIButton alloc] initWithFrame:CGRectMake((self.frame.size.width*(totalPages-1)) + kAFVDFormItemXBuffer, formScrollView.frame.size.height - (submitButtonHeight + kAFVDFormItemXBuffer), self.frame.size.width - kAFVDFormItemXBuffer*2, submitButtonHeight)];
-    [submitButton addTarget:self action:@selector(onSubmitButton) forControlEvents:UIControlEventTouchDragInside];
+    [submitButton addTarget:self action:@selector(onSubmitButton) forControlEvents:UIControlEventTouchUpInside];
     submitButton.layer.borderWidth = 3;
     submitButton.layer.borderColor = [UIColor colorWithRed:101/255.0f green:101/255.0f blue:90/255.0f alpha:1.0f].CGColor;
     submitButton.layer.cornerRadius = 5;
@@ -285,9 +286,6 @@ static NSInteger kAFVDDraggingViewHeight = 29;
                 currentFormPage++;
                 goToNewPage = YES;
             }
-            break;
-        case 3:
-            
             break;
     }
     

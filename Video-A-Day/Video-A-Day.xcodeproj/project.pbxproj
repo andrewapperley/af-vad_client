@@ -132,7 +132,7 @@
 		0F2C8A011884CF000033397C /* AFVDStatics.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFVDStatics.m; sourceTree = "<group>"; };
 		0F2C8A0A188B408D0033397C /* AFVDSignupUserModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFVDSignupUserModel.h; sourceTree = "<group>"; };
 		0F2C8A0B188B408D0033397C /* AFVDSignupUserModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFVDSignupUserModel.m; sourceTree = "<group>"; };
-		0F2FC6E71837303800611873 /* Video-A-Day.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Video-A-Day.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		0F2FC6E71837303800611873 /* Blips.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Blips.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0F2FC6EA1837303800611873 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		0F2FC6EC1837303800611873 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		0F2FC6EE1837303800611873 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -145,7 +145,7 @@
 		0F2FC7021837303900611873 /* AFVDViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AFVDViewController.h; sourceTree = "<group>"; };
 		0F2FC7031837303900611873 /* AFVDViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AFVDViewController.m; sourceTree = "<group>"; };
 		0F2FC7051837303900611873 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		0F2FC70B1837303900611873 /* Video-A-DayTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Video-A-DayTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		0F2FC70B1837303900611873 /* BlipsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BlipsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0F2FC70C1837303900611873 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		0F2FC7141837303900611873 /* Video-A-DayTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Video-A-DayTests-Info.plist"; sourceTree = "<group>"; };
 		0F2FC7161837303900611873 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -379,8 +379,8 @@
 		0F2FC6E81837303800611873 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				0F2FC6E71837303800611873 /* Video-A-Day.app */,
-				0F2FC70B1837303900611873 /* Video-A-DayTests.xctest */,
+				0F2FC6E71837303800611873 /* Blips.app */,
+				0F2FC70B1837303900611873 /* BlipsTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -689,7 +689,7 @@
 			);
 			name = Blips;
 			productName = "Video-A-Day";
-			productReference = 0F2FC6E71837303800611873 /* Video-A-Day.app */;
+			productReference = 0F2FC6E71837303800611873 /* Blips.app */;
 			productType = "com.apple.product-type.application";
 		};
 		0F2FC70A1837303900611873 /* BlipsTests */ = {
@@ -707,7 +707,7 @@
 			);
 			name = BlipsTests;
 			productName = "Video-A-DayTests";
-			productReference = 0F2FC70B1837303900611873 /* Video-A-DayTests.xctest */;
+			productReference = 0F2FC70B1837303900611873 /* BlipsTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */

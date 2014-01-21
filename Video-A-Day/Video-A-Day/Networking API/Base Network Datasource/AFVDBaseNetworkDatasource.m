@@ -23,9 +23,9 @@ const NSString *kAFVDBaseNetworkKeyPostParam    = @"params";
     //Base request URL
     static NSURL *baseRequestURL;
     
-//    if(!baseRequestURL) {
-//        baseRequestURL = [NSURL URLWithString:BASE_NETWORK_URL];
-//    }
+    if(!baseRequestURL) {
+        baseRequestURL = [NSURL URLWithString:BASE_NETWORK_URL];
+    }
     
     //Create session manager
     AFHTTPSessionManager *sessionManager = [[AFHTTPSessionManager alloc] initWithBaseURL:baseRequestURL];

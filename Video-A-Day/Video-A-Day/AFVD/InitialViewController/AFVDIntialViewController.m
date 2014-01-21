@@ -7,6 +7,7 @@
 //
 
 #import "AFVDIntialViewController.h"
+#import "AFVDUserModelFactory.h"
 
 /*Some of these constants might be useful to other views in the future so they could be
  extracted to another staticsFile*/
@@ -213,7 +214,7 @@ static CGFloat panelViewAnimationDuration = 0.6f;
     
     switch (type) {
         case AFVDSignupFormItem_Username:
-            if (input.length >= 5) {
+            if (input.length >= 3) {
 #warning /*Do username check call here*/
                 return YES;
             }
@@ -238,7 +239,27 @@ static CGFloat panelViewAnimationDuration = 0.6f;
 }
 
 - (void)signUserUpWithModel:(AFVDSignupUserModel *)model {
+    AFVDUserModelFactory *modelFactory = [[AFVDUserModelFactory alloc] init];
     
+    NSLog(@"Start AFVDCreateUser");
+    
+    NSData *profileImageData = UIImageJPEGRepresentation(model.profileImage, 1) ;
+    
+    [modelFactory createUserWithUsername:model.username password:model.password displayName:model.username email:model.email profileImage:profileImageData success:^(AFVDBaseNetworkModel *networkCallback) {
+        
+        if(networkCallback.success) {
+            
+            NSLog(@"Finish AFVDCreateUser - Success %d - %@", networkCallback.responseCode, networkCallback.responseMessage);
+            NSLog(@"Proceed to user login...");
+            
+        } else {
+            NSLog(@"Finish AFVDCreateUser - Failure %d - %@", networkCallback.responseCode, networkCallback.responseMessage);
+        }
+        
+    } failure:^(NSError *error) {
+        
+        NSLog(@"Finish AFVDCreateUser - Failure %d - %@", error.code, error.localizedDescription);
+    }];
 }
 
 #pragma mark - Blurring Panel
