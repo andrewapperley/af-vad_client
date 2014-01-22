@@ -17,8 +17,12 @@
 @end
 
 @interface AFVDInitialView : UIView
+{
+    UIScrollView* formScrollView;
+}
 
 - (id)initWithFrame:(CGRect)frame andDelegate:(UIViewController <AFVDInitialViewDelegate> *) delegate;
-
+- (void)setupTitleWithTitle:(NSString *)title;
+- (void)setupUI NS_REQUIRES_SUPER;
 @property(nonatomic, weak)UIViewController <AFVDInitialViewDelegate>* delegate;
 @end

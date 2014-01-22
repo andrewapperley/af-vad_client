@@ -11,12 +11,24 @@
 @implementation AFVDSigninView
 
 - (id)initWithFrame:(CGRect)frame andDelegate:(UIViewController <AFVDInitialViewDelegate> *) delegate {
-    self = [super initWithFrame:frame];
+    self = [super initWithFrame:frame andDelegate:delegate];
     if (self) {
         
         [self.delegate panelViewIsReady:self];
     }
     return self;
+}
+
+#pragma mark - UI Setup Methods
+
+- (void)setupUI {
+    [super setupUI];
+    [self setupTitleWithTitle:NSLocalizedString(@"AFVDInitialViewSignIn", nil)];
+    [self setupForm];
+}
+
+- (void)setupForm {
+    
 }
 
 @end

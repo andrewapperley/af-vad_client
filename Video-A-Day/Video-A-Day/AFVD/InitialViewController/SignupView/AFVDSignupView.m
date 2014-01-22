@@ -8,17 +8,6 @@
 
 #import "AFVDSignupView.h"
 
-NSInteger kAFVDTitleXYBuffer            = 25;
-NSInteger kAFVDFormItemXBuffer          = 25;
-NSInteger kAFVDFormItemYBuffer          = 35;
-NSInteger kAFVDCloseArrowYMargin        = 9;
-NSInteger kAFVDFormItemInputYBufferSize = 8;
-NSInteger kAFVDFormScrollViewYMargin    = 25;
-NSInteger kAFVDFormTextViewWidth        = 262;
-NSInteger kAFVDFormTextViewHeight       = 27;
-NSInteger kAFVDDraggingViewHeight       = 29;
-NSInteger kAFVDSubmitButtonBottomMargin = 7;
-
 @implementation AFVDSignupView
 {
     NSString* username;
@@ -30,7 +19,6 @@ NSInteger kAFVDSubmitButtonBottomMargin = 7;
     
     UIButton* profileImageSelector;
     CGFloat profileImageSelectorInitialXMargin;
-    UIScrollView* formScrollView;
     NSInteger currentFormPage;
 }
 
@@ -48,51 +36,9 @@ NSInteger kAFVDSubmitButtonBottomMargin = 7;
 #pragma mark - UI Setup Methods
 
 - (void)setupUI {
-    [self setupScrollView];
-    [self setupCloseArrow];
-    [self setupTitle];
+    [super setupUI];
+    [self setupTitleWithTitle:NSLocalizedString(@"AFVDInitialViewSignUp", nil)];
     [self setupForm];
-}
-
-- (void)setupScrollView {
-    formScrollView = [[UIScrollView alloc] initWithFrame:CGRectZero];
-    formScrollView.scrollEnabled = NO;
-    formScrollView.showsHorizontalScrollIndicator = formScrollView.showsVerticalScrollIndicator = NO;
-    [self addSubview:formScrollView];
-}
-
-- (void)setupCloseArrow {
-    UIImageView* closeArrow = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"AFVDPanelCloseArrow"]];
-    closeArrow.frame = CGRectMake((self.frame.size.width - closeArrow.frame.size.width)/2, kAFVDCloseArrowYMargin, closeArrow.frame.size.width, closeArrow.frame.size.height);
-    [self addSubview:closeArrow];
-    
-    [self setupDraggingView];
-}
-
-- (void)setupDraggingView {
-    UIView* draggingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, kAFVDDraggingViewHeight)];
-    UIPanGestureRecognizer* draggingGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(userIsDraggingView:)];
-    draggingGesture.minimumNumberOfTouches = 1;
-    draggingGesture.maximumNumberOfTouches = 1;
-    [draggingView addGestureRecognizer:draggingGesture];
-    
-    [self addSubview:draggingView];
-}
-
-- (void)setupTitle {
-    UILabel* titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(kAFVDTitleXYBuffer, kAFVDTitleXYBuffer, 0, 0)];
-    titleLabel.text = NSLocalizedString(@"AFVDInitialViewSignUp", nil);
-    titleLabel.font = [UIFont fontWithName:kAFVDNormalFont size:26];
-    
-    CGSize titleSize = [titleLabel.text sizeWithAttributes:@{NSFontAttributeName : titleLabel.font}];
-    
-    titleLabel.frame = CGRectMake(titleLabel.frame.origin.x, titleLabel.frame.origin.y, titleSize.width, titleSize.height);
-    
-    [self addSubview:titleLabel];
-    
-    CGFloat formViewStartY = titleLabel.frame.size.height + titleLabel.frame.origin.y + kAFVDFormScrollViewYMargin;
-    
-    formScrollView.frame = CGRectMake(0, formViewStartY, self.frame.size.width, self.frame.size.height - formViewStartY);
 }
 
 - (void)setupForm {
@@ -178,34 +124,13 @@ NSInteger kAFVDSubmitButtonBottomMargin = 7;
     
     [formScrollView addSubview:submitButton];
     
-    UILabel* termsLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, submitButton.frame.origin.y + submitButton.frame.size.height + 10, submitButton.frame.size.width, 20)];
+    UILabel* termsLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, submitButton.frame.origin.y + submitButton.frame.size.height + 10, submitButton.frame.size.width, 0)];
 #warning Setup clicking on the link to open a new view or webview
     termsLabel.text = NSLocalizedString(@"AFVDSignupFormTerms", nil);
     termsLabel.font = [UIFont fontWithName:kAFVDNormalFont size:10];
     [termsLabel sizeToFit];
     termsLabel.center = CGPointMake(submitButton.center.x, termsLabel.center.y);
     [formScrollView addSubview:termsLabel];
-}
-
-#pragma mark - UIPanGestureMethod
-
-- (void)userIsDraggingView:(UIPanGestureRecognizer *)gesture {
-    
-    BOOL closingView = NO;
-    CGPoint translation = [gesture translationInView:self.superview];
-    
-    if (gesture.state == UIGestureRecognizerStateBegan || gesture.state == UIGestureRecognizerStateChanged) {
-        
-        [self.delegate panelViewIsDragged:translation closeView:closingView withVelocity:0];
-        [gesture setTranslation:CGPointZero inView:self.superview];
-    
-    } else if (gesture.state == UIGestureRecognizerStateEnded) {
-    
-        CGPoint velocity = [gesture velocityInView:self.superview];
-        closingView = (velocity.y > 0.0f) ? YES : NO;
-        [self.delegate snapPanelToPositionWithVelocity:velocity.y andClosePanel:closingView];
-    
-    }
 }
 
 #pragma mark - ProfileImageSelector Target Method

@@ -7,3 +7,13 @@
 //
 
 extern NSString* const kAFVDNormalFont;
+extern NSInteger kAFVDTitleXYBuffer;
+extern NSInteger kAFVDFormItemXBuffer;
+extern NSInteger kAFVDFormItemYBuffer;
+extern NSInteger kAFVDCloseArrowYMargin;
+extern NSInteger kAFVDFormItemInputYBufferSize;
+extern NSInteger kAFVDFormScrollViewYMargin;
+extern NSInteger kAFVDFormTextViewWidth;
+extern NSInteger kAFVDFormTextViewHeight;
+extern NSInteger kAFVDDraggingViewHeight;
+extern NSInteger kAFVDSubmitButtonBottomMargin;
