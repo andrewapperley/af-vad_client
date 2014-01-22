@@ -251,6 +251,7 @@ static CGFloat panelViewAnimationDuration = 0.6f;
             
             NSLog(@"Finish AFVDCreateUser - Success %d - %@", networkCallback.responseCode, networkCallback.responseMessage);
             NSLog(@"Proceed to user login...");
+            [self snapPanelToPositionWithVelocity:50 andClosePanel:YES];
             
         } else {
             NSLog(@"Finish AFVDCreateUser - Failure %d - %@", networkCallback.responseCode, networkCallback.responseMessage);

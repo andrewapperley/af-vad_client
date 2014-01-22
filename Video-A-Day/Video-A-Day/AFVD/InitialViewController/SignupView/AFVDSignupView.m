@@ -8,17 +8,16 @@
 
 #import "AFVDSignupView.h"
 
-static NSInteger kAFVDTitleXYBuffer = 25;
-static NSInteger kAFVDFormItemXBuffer = 25;
-static NSInteger kAFVDFormItemYBuffer = 35;
-//static NSInteger kAFVDFormYStart = 203;
-//static NSInteger kAFVDFormItemSize = 55;
-static NSInteger kAFVDCloseArrowYMargin = 9;
-static NSInteger kAFVDFormItemInputYBufferSize = 8;
-static NSInteger kAFVDFormScrollViewYMargin = 25;
-static NSInteger kAFVDFormTextViewWidth = 262;
-static NSInteger kAFVDFormTextViewHeight = 27;
-static NSInteger kAFVDDraggingViewHeight = 29;
+NSInteger kAFVDTitleXYBuffer            = 25;
+NSInteger kAFVDFormItemXBuffer          = 25;
+NSInteger kAFVDFormItemYBuffer          = 35;
+NSInteger kAFVDCloseArrowYMargin        = 9;
+NSInteger kAFVDFormItemInputYBufferSize = 8;
+NSInteger kAFVDFormScrollViewYMargin    = 25;
+NSInteger kAFVDFormTextViewWidth        = 262;
+NSInteger kAFVDFormTextViewHeight       = 27;
+NSInteger kAFVDDraggingViewHeight       = 29;
+NSInteger kAFVDSubmitButtonBottomMargin = 7;
 
 @implementation AFVDSignupView
 {
@@ -53,8 +52,6 @@ static NSInteger kAFVDDraggingViewHeight = 29;
     [self setupCloseArrow];
     [self setupTitle];
     [self setupForm];
-    
-    [self setupTermsText];
 }
 
 - (void)setupScrollView {
@@ -171,19 +168,23 @@ static NSInteger kAFVDDraggingViewHeight = 29;
     /*Create Submit Button*/
     NSInteger submitButtonHeight = 32;
     
-    UIButton* submitButton = [[UIButton alloc] initWithFrame:CGRectMake((self.frame.size.width*(totalPages-1)) + kAFVDFormItemXBuffer, formScrollView.frame.size.height - (submitButtonHeight + kAFVDFormItemXBuffer), self.frame.size.width - kAFVDFormItemXBuffer*2, submitButtonHeight)];
+    UIButton* submitButton = [[UIButton alloc] initWithFrame:CGRectMake((self.frame.size.width*(totalPages-1)) + kAFVDFormItemXBuffer, formScrollView.frame.size.height - (submitButtonHeight + kAFVDFormItemXBuffer) - kAFVDSubmitButtonBottomMargin, self.frame.size.width - kAFVDFormItemXBuffer*2, submitButtonHeight)];
     [submitButton addTarget:self action:@selector(onSubmitButton) forControlEvents:UIControlEventTouchUpInside];
-    submitButton.layer.borderWidth = 3;
+    submitButton.layer.borderWidth = 2;
     submitButton.layer.borderColor = [UIColor colorWithRed:101/255.0f green:101/255.0f blue:90/255.0f alpha:1.0f].CGColor;
     submitButton.layer.cornerRadius = 5;
     
     [submitButton setTitle:NSLocalizedString(@"AFVDSignupFormSubmitButton", nil) forState:UIControlStateNormal];
     
     [formScrollView addSubview:submitButton];
-}
-
-- (void)setupTermsText {
     
+    UILabel* termsLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, submitButton.frame.origin.y + submitButton.frame.size.height + 10, submitButton.frame.size.width, 20)];
+#warning Setup clicking on the link to open a new view or webview
+    termsLabel.text = NSLocalizedString(@"AFVDSignupFormTerms", nil);
+    termsLabel.font = [UIFont fontWithName:kAFVDNormalFont size:10];
+    [termsLabel sizeToFit];
+    termsLabel.center = CGPointMake(submitButton.center.x, termsLabel.center.y);
+    [formScrollView addSubview:termsLabel];
 }
 
 #pragma mark - UIPanGestureMethod
@@ -274,7 +275,7 @@ static NSInteger kAFVDDraggingViewHeight = 29;
                 currentFormPage++;
                 goToNewPage = YES;
             }
-            break;
+        break;
         case 2:
             if (textField.tag == AFVDSignupFormItem_Password) {
                 password = textField.text;
@@ -286,7 +287,7 @@ static NSInteger kAFVDDraggingViewHeight = 29;
                 currentFormPage++;
                 goToNewPage = YES;
             }
-            break;
+        break;
     }
     
     if (goToNewPage) {
