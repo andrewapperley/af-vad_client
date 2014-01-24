@@ -8,6 +8,9 @@
 
 #import "AFVDIntialViewController.h"
 #import "AFVDUserModelFactory.h"
+#import "AFVDSigninUserModel.h"
+#import "AFVDSignupUserModel.h"
+#import "AFVDKeychain.h"
 
 /*Some of these constants might be useful to other views in the future so they could be
  extracted to another staticsFile*/
@@ -159,6 +162,7 @@ static CGFloat panelViewAnimationDuration = 0.6f;
         case AFVDInitialViewOption_Signin:
             [self setPanelHeightAndBlur:_slidingPaneHeight];
             _currentPanelView = [[AFVDSigninView alloc] initWithFrame:CGRectMake(0, 0, _slidingPanel.frame.size.width, _slidingPanel.frame.size.height) andDelegate:self];
+            ((AFVDSigninView *)_currentPanelView).signinDelegate = self;
         break;
     }
 }
@@ -204,6 +208,18 @@ static CGFloat panelViewAnimationDuration = 0.6f;
         [v removeFromSuperview];
     }
     _currentPanelView = nil;
+}
+
+#pragma mark - AFVDSigninDelegate Method
+
+- (void)signUserInWithModel:(AFVDSigninUserModel *)model {
+    AFVDUserModelFactory *modelFactory = [[AFVDUserModelFactory alloc] init];
+    
+    [modelFactory fetchUserModelAndAccessTokenWithUserName:model.username andPassword:model.password accessToken:model.access_token success:^(AFVDUserModel *userModel, NSString *accessToken, AFVDBaseNetworkModel *networkCallback) {
+        
+    } failure:^(NSError *error) {
+        
+    }];
 }
 
 #pragma mark - AFVDSignupDelegate Methods

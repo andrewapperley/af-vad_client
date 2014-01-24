@@ -16,7 +16,7 @@
 - (void)snapPanelToPositionWithVelocity:(NSInteger)velocity andClosePanel:(BOOL)closePanel;
 @end
 
-@interface AFVDInitialView : UIView
+@interface AFVDInitialView : UIView <UITextFieldDelegate>
 {
     UIScrollView* formScrollView;
 }

@@ -7,6 +7,7 @@
 //
 
 #import "AFVDSignupView.h"
+#import "AFVDSignupUserModel.h"
 
 @implementation AFVDSignupView
 {
@@ -179,9 +180,6 @@
 
 #pragma mark - UITextFieldInput Delegate Methods
 
-- (void)textFieldDidBeginEditing:(UITextField *)textField {
-    [formScrollView setContentOffset:CGPointMake(formScrollView.contentOffset.x, textField.frame.origin.y - textField.frame.size.height) animated:YES];
-}
 
 - (void)textFieldDidEndEditing:(UITextField *)textField; {
     
@@ -231,13 +229,6 @@
             
         });
     }
-}
-
-- (BOOL)textFieldShouldReturn:(UITextField *)textField
-{
-    [formScrollView setContentOffset:CGPointMake(formScrollView.contentOffset.x, 0) animated:TRUE];
-    [textField resignFirstResponder];
-    return YES;
 }
 
 #pragma mark - Cleanup

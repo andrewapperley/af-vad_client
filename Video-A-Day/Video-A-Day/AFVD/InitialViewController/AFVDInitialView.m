@@ -1,5 +1,5 @@
 //
-//  AFVD.m
+//  AFVDInitialView.m
 //  Video-A-Day
 //
 //  Created by Andrew Apperley on 1/10/2014.
@@ -13,7 +13,6 @@
 - (id)initWithFrame:(CGRect)frame andDelegate:(UIViewController <AFVDInitialViewDelegate> *) delegate {
     if (self = [super initWithFrame:frame]) {
         _delegate = delegate;
-        [self setupUI];
     }
     return self;
 }
@@ -85,6 +84,21 @@
         
     }
 }
+
+#pragma mark - UITextFieldInput Delegate Methods
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField {
+    [formScrollView setContentOffset:CGPointMake(formScrollView.contentOffset.x, textField.frame.origin.y - textField.frame.size.height) animated:YES];
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [formScrollView setContentOffset:CGPointMake(formScrollView.contentOffset.x, 0) animated:TRUE];
+    [textField resignFirstResponder];
+    return YES;
+}
+
+#pragma mark - Cleanup
 
 - (void)dealloc {
     _delegate = nil;

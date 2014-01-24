@@ -52,6 +52,7 @@
 		0F79613A183DC81900920C59 /* face.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0F796139183DC81900920C59 /* face.jpg */; };
 		0F79613E183EE64E00920C59 /* AFVDUrlHasher.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F79613D183EE64E00920C59 /* AFVDUrlHasher.m */; };
 		0FB5E9871862763600EE0B0D /* AFVDVideoFilterController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FB5E9861862763600EE0B0D /* AFVDVideoFilterController.m */; };
+		0FB9038F1891FA2400FCD55D /* AFVDSigninUserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FB9038E1891FA2400FCD55D /* AFVDSigninUserModel.m */; };
 		0FC8907718712FE100F5E869 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FC8907518712FE100F5E869 /* AudioToolbox.framework */; };
 		0FC8907818712FE100F5E869 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FC8907618712FE100F5E869 /* CoreAudio.framework */; };
 		0FF441D418626A3200ADAD2C /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FF441D318626A3100ADAD2C /* CoreVideo.framework */; };
@@ -157,6 +158,8 @@
 		0F79613D183EE64E00920C59 /* AFVDUrlHasher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFVDUrlHasher.m; sourceTree = "<group>"; };
 		0FB5E9851862763600EE0B0D /* AFVDVideoFilterController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFVDVideoFilterController.h; sourceTree = "<group>"; };
 		0FB5E9861862763600EE0B0D /* AFVDVideoFilterController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFVDVideoFilterController.m; sourceTree = "<group>"; };
+		0FB9038D1891FA2400FCD55D /* AFVDSigninUserModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFVDSigninUserModel.h; sourceTree = "<group>"; };
+		0FB9038E1891FA2400FCD55D /* AFVDSigninUserModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFVDSigninUserModel.m; sourceTree = "<group>"; };
 		0FC8907518712FE100F5E869 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		0FC8907618712FE100F5E869 /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
 		0FF441D11862637900ADAD2C /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
@@ -278,6 +281,8 @@
 			children = (
 				0F06A6F4187CF2250021E10C /* AFVDSigninView.h */,
 				0F06A6F5187CF2250021E10C /* AFVDSigninView.m */,
+				0FB9038D1891FA2400FCD55D /* AFVDSigninUserModel.h */,
+				0FB9038E1891FA2400FCD55D /* AFVDSigninUserModel.m */,
 			);
 			path = SigninView;
 			sourceTree = "<group>";
@@ -835,6 +840,7 @@
 				7696C7DF184C366000B270FC /* AFVDKeychain.m in Sources */,
 				0F2FC6FB1837303800611873 /* AFVDAppDelegate.m in Sources */,
 				0F06A6F6187CF2250021E10C /* AFVDSigninView.m in Sources */,
+				0FB9038F1891FA2400FCD55D /* AFVDSigninUserModel.m in Sources */,
 				76C6519818380A14003C7F7D /* AFVDBaseNetworkModel.m in Sources */,
 				76C651A7183840E4003C7F7D /* AFVDVideoModelDatasource.m in Sources */,
 				0F2C8A0C188B408D0033397C /* AFVDSignupUserModel.m in Sources */,

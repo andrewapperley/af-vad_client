@@ -7,7 +7,8 @@
 //
 
 #import "AFVDInitialView.h"
-#import "AFVDSignupUserModel.h"
+
+@class AFVDSignupUserModel;
 
 typedef NS_ENUM(NSInteger, AFVDSignupFormItemTypes) {
     AFVDSignupFormItem_Username = 0,
@@ -17,14 +18,14 @@ typedef NS_ENUM(NSInteger, AFVDSignupFormItemTypes) {
 };
 
 @protocol AFVDSignupDelegate <NSObject>
-
+@required
 - (BOOL)validInput:(NSString *)input forType:(AFVDSignupFormItemTypes)type;
 - (void)signUserUpWithModel:(AFVDSignupUserModel *)model;
 
 
 @end
 
-@interface AFVDSignupView : AFVDInitialView <UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+@interface AFVDSignupView : AFVDInitialView <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
 @property(nonatomic, weak)id <AFVDSignupDelegate> signupDelegate;
 

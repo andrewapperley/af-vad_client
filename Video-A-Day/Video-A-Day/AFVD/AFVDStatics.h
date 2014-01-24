@@ -10,6 +10,7 @@ extern NSString* const kAFVDNormalFont;
 extern NSInteger kAFVDTitleXYBuffer;
 extern NSInteger kAFVDFormItemXBuffer;
 extern NSInteger kAFVDFormItemYBuffer;
+extern NSInteger kAFVDSigninFormItemYBuffer;
 extern NSInteger kAFVDCloseArrowYMargin;
 extern NSInteger kAFVDFormItemInputYBufferSize;
 extern NSInteger kAFVDFormScrollViewYMargin;
