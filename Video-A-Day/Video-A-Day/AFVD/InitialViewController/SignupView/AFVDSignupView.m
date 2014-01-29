@@ -181,7 +181,7 @@
 #pragma mark - UITextFieldInput Delegate Methods
 
 
-- (void)textFieldDidEndEditing:(UITextField *)textField; {
+- (void)textFieldDidEndEditing:(UITextField *)textField {
     
     [formScrollView setContentOffset:CGPointMake(formScrollView.contentOffset.x, 0) animated:YES];
     

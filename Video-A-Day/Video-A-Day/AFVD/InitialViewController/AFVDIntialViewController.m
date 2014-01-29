@@ -216,9 +216,9 @@ static CGFloat panelViewAnimationDuration = 0.6f;
     AFVDUserModelFactory *modelFactory = [[AFVDUserModelFactory alloc] init];
     
     [modelFactory fetchUserModelAndAccessTokenWithUserName:model.username andPassword:model.password accessToken:model.access_token success:^(AFVDUserModel *userModel, NSString *accessToken, AFVDBaseNetworkModel *networkCallback) {
-        
+        [[[UIAlertView alloc] initWithTitle:@"Login Success" message:[NSString stringWithFormat:@"Your Access Token is: %@",accessToken] delegate:nil cancelButtonTitle:@"Dismiss" otherButtonTitles:nil, nil] show];
     } failure:^(NSError *error) {
-        
+        [[[UIAlertView alloc] initWithTitle:@"Login Failure" message:error.localizedDescription delegate:nil cancelButtonTitle:@"Dismiss" otherButtonTitles:nil, nil] show];
     }];
 }
 

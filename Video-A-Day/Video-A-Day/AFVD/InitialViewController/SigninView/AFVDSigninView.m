@@ -9,6 +9,14 @@
 #import "AFVDSigninView.h"
 #import "AFVDSigninUserModel.h"
 
+@interface AFVDSigninView() {
+    NSString* username;
+    NSString* password;
+    UIButton* submitButton;
+}
+
+@end
+
 @implementation AFVDSigninView
 
 - (id)initWithFrame:(CGRect)frame andDelegate:(UIViewController <AFVDInitialViewDelegate> *) delegate {
@@ -34,7 +42,7 @@
     /*Create Submit Button*/
     NSInteger submitButtonHeight = 32;
     
-    UIButton* submitButton = [[UIButton alloc] initWithFrame:CGRectMake(kAFVDFormItemXBuffer, formScrollView.frame.size.height - (submitButtonHeight + kAFVDFormItemXBuffer) - kAFVDSubmitButtonBottomMargin, self.frame.size.width - kAFVDFormItemXBuffer*2, submitButtonHeight)];
+    submitButton = [[UIButton alloc] initWithFrame:CGRectMake(kAFVDFormItemXBuffer, formScrollView.frame.size.height - (submitButtonHeight + kAFVDFormItemXBuffer) - kAFVDSubmitButtonBottomMargin, self.frame.size.width - kAFVDFormItemXBuffer*2, submitButtonHeight)];
     [submitButton addTarget:self action:@selector(onSubmitButton) forControlEvents:UIControlEventTouchUpInside];
     submitButton.layer.borderWidth = 2;
     submitButton.layer.borderColor = [UIColor colorWithRed:101/255.0f green:101/255.0f blue:90/255.0f alpha:1.0f].CGColor;
@@ -43,7 +51,7 @@
     [submitButton setTitle:NSLocalizedString(@"AFVDSignupFormSubmitButton", nil) forState:UIControlStateNormal];
     
     [formScrollView addSubview:submitButton];
-    
+    submitButton.enabled = NO;
     /*Create username/password textviews*/
     
     NSArray* formItems = @[NSLocalizedString(@"AFVDSignupFormUsername", nil), NSLocalizedString(@"AFVDSignupFormPassword", nil)];
@@ -90,10 +98,32 @@
     }
 }
 
+#pragma mark - UITextViewDelegate Method
+
+- (void)textFieldDidEndEditing:(UITextField *)textField {
+    switch (textField.tag) {
+        case AFVDSigninFormItem_Username:
+            username = textField.text;
+            break;
+            
+        case AFVDSigninFormItem_Password:
+            password = textField.text;
+            break;
+    }
+    submitButton.enabled = (username && password);
+}
+
 #pragma mark - onSubmitButton Method
 
 - (void)onSubmitButton {
-    
+    AFVDSigninUserModel* model = [[AFVDSigninUserModel alloc] initWithUsername:username password:password];
+    [self.signinDelegate signUserInWithModel:model];
+}
+
+#pragma mark - Cleanup
+
+- (void)dealloc {
+    _signinDelegate = nil;
 }
 
 @end
