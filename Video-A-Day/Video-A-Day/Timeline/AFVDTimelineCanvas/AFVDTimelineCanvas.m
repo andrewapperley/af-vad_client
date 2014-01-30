@@ -54,7 +54,7 @@ CGFloat const kAFVDTimelineCanvas_CellMarkerAnimateOutDuration  = 0.15f;
     _collectionView.delegate = self;
     
     //Collection view inset
-    CGFloat edgeInset = CGRectGetMidY(self.bounds) - ([AFVDTimelineCanvasCell cellHeight] / 2);
+    CGFloat edgeInset = CGRectGetMidY(self.bounds) - ([AFVDTimelineCanvasCell cellHeight] * 0.5f);
     _collectionView.contentInset = UIEdgeInsetsMake(edgeInset, 0, edgeInset, 0);
     
     [self addSubview:_collectionView];
@@ -83,41 +83,11 @@ CGFloat const kAFVDTimelineCanvas_CellMarkerAnimateOutDuration  = 0.15f;
     //Cell
     AFVDTimelineCanvasCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kAFVDTimelineCanvas_CellIdentifier forIndexPath:indexPath];
     
-    if(!cell) {
-        
-        cell = [[AFVDTimelineCanvasCell alloc] init];
-    }
-    
     //Data
     id data = _data[indexPath.row];
     [cell setData:data];
-    
-    //Set background line position
-    [self setCellBackgroundLinePosition:cell index:indexPath.row];
-    
+        
     return cell;
-}
-
-- (void)setCellBackgroundLinePosition:(AFVDTimelineCanvasCell *)cell index:(NSUInteger)index {
-    
-    AFVDTimelineCanvasCellBackgroundLinePosition position = kAFVDTimelineCanvasCellBackgroundLinePosition_None;
-    
-    BOOL hasTop    = index > 0;
-    BOOL hasBottom = index < _data.count - 1;
-    
-    if(hasTop && hasBottom) {
-        
-        position = kAFVDTimelineCanvasCellBackgroundLinePosition_Top & kAFVDTimelineCanvasCellBackgroundLinePosition_Bottom;
-        
-    } else if(hasTop) {
-        
-        position = kAFVDTimelineCanvasCellBackgroundLinePosition_Top;
-    } else if(hasBottom) {
-        
-        position = kAFVDTimelineCanvasCellBackgroundLinePosition_Bottom;
-    }
-    
-    [cell setBackgroundLinePosition:position];
 }
 
 #pragma mark - UIScrollViewDelegate
@@ -138,22 +108,26 @@ CGFloat const kAFVDTimelineCanvas_CellMarkerAnimateOutDuration  = 0.15f;
         }];
     }
     
-    CGFloat cellPositionX = 0.0f;
-    CGFloat cellPositionY = 0.0f;
-    CGPoint cellPosition  = CGPointZero;
-    
+    //Parallax
     for(AFVDTimelineCanvasCell *cell in _collectionView.visibleCells) {
         
-        if([cell isKindOfClass:[AFVDTimelineCanvasCell class]]) {
-            
-            cellPositionX = cell.frame.origin.x;
-            cellPositionY = cell.frame.origin.y;
-            cellPosition = CGPointMake(cellPositionX, cellPositionY);
-            cellPosition = [cell convertPoint:cellPosition toView:self];
-            
-            [cell checkCellPositionInView:self position:cellPosition];
-        }
+        CGFloat position = [self parallaxPositionForCell:cell];
+        [cell setParallaxPosition:position];
     }
+}
+
+- (CGFloat)parallaxPositionForCell:(UICollectionViewCell *)cell {
+    
+    CGRect frame = cell.frame;
+    CGPoint point = [[cell superview] convertPoint:frame.origin toView:_collectionView];
+    
+    const CGFloat minY = CGRectGetMinY(_collectionView.bounds) - CGRectGetHeight(frame);
+    const CGFloat maxY = CGRectGetMaxY(_collectionView.bounds);
+    
+    const CGFloat minPos = -1.0f;
+    const CGFloat maxPos = 1.0f;
+    
+    return (maxPos - minPos) / (maxY - minY) * (point.y - minY) + minPos;
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
@@ -188,7 +162,7 @@ CGFloat const kAFVDTimelineCanvas_CellMarkerAnimateOutDuration  = 0.15f;
     
     cellIndex = MIN(cellIndex, _data.count - 1);
     
-    [_collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:cellIndex inSection:0] atScrollPosition:UICollectionViewScrollPositionCenteredVertically animated:TRUE];
+    [_collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:cellIndex inSection:0] atScrollPosition:UICollectionViewScrollPosit0 animated:TRUE];
 }
 
 #pragma mark - Data handling
