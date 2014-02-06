@@ -34,6 +34,9 @@
 		0F10E3DA18594B9600FC1433 /* AFVDVideoCaptureController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F10E3D918594B9600FC1433 /* AFVDVideoCaptureController.m */; };
 		0F10E3DD18594FA800FC1433 /* AFVDVideoCaptureControls.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F10E3DC18594FA800FC1433 /* AFVDVideoCaptureControls.m */; };
 		0F2141CB1876509500E8BFD5 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F2141CA1876509500E8BFD5 /* MessageUI.framework */; };
+		0F21EFA6189D5BDC001706FD /* SSKeychain.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0F21EFA0189D5BDC001706FD /* SSKeychain.strings */; };
+		0F21EFA7189D5BDC001706FD /* SSKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F21EFA3189D5BDC001706FD /* SSKeychain.m */; };
+		0F21EFA8189D5BDC001706FD /* SSKeychainQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F21EFA5189D5BDC001706FD /* SSKeychainQuery.m */; };
 		0F2C8A021884CF000033397C /* AFVDStatics.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F2C8A011884CF000033397C /* AFVDStatics.m */; };
 		0F2C8A0C188B408D0033397C /* AFVDSignupUserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F2C8A0B188B408D0033397C /* AFVDSignupUserModel.m */; };
 		0F2FC6EB1837303800611873 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F2FC6EA1837303800611873 /* Foundation.framework */; };
@@ -129,6 +132,11 @@
 		0F10E3DB18594FA700FC1433 /* AFVDVideoCaptureControls.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFVDVideoCaptureControls.h; sourceTree = "<group>"; };
 		0F10E3DC18594FA800FC1433 /* AFVDVideoCaptureControls.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFVDVideoCaptureControls.m; sourceTree = "<group>"; };
 		0F2141CA1876509500E8BFD5 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		0F21EFA1189D5BDC001706FD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = SSKeychain.strings; sourceTree = "<group>"; };
+		0F21EFA2189D5BDC001706FD /* SSKeychain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SSKeychain.h; path = Keychain/SSKeychain.h; sourceTree = "<group>"; };
+		0F21EFA3189D5BDC001706FD /* SSKeychain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SSKeychain.m; path = Keychain/SSKeychain.m; sourceTree = "<group>"; };
+		0F21EFA4189D5BDC001706FD /* SSKeychainQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SSKeychainQuery.h; path = Keychain/SSKeychainQuery.h; sourceTree = "<group>"; };
+		0F21EFA5189D5BDC001706FD /* SSKeychainQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SSKeychainQuery.m; path = Keychain/SSKeychainQuery.m; sourceTree = "<group>"; };
 		0F2C8A001884CF000033397C /* AFVDStatics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFVDStatics.h; sourceTree = "<group>"; };
 		0F2C8A011884CF000033397C /* AFVDStatics.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFVDStatics.m; sourceTree = "<group>"; };
 		0F2C8A0A188B408D0033397C /* AFVDSignupUserModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFVDSignupUserModel.h; sourceTree = "<group>"; };
@@ -370,6 +378,27 @@
 			path = ../AF/AFVideoCapture;
 			sourceTree = "<group>";
 		};
+		0F21EF9E189D5BCB001706FD /* SSKeychain */ = {
+			isa = PBXGroup;
+			children = (
+				0F21EF9F189D5BDC001706FD /* en.lproj */,
+				0F21EFA2189D5BDC001706FD /* SSKeychain.h */,
+				0F21EFA3189D5BDC001706FD /* SSKeychain.m */,
+				0F21EFA4189D5BDC001706FD /* SSKeychainQuery.h */,
+				0F21EFA5189D5BDC001706FD /* SSKeychainQuery.m */,
+			);
+			name = SSKeychain;
+			sourceTree = "<group>";
+		};
+		0F21EF9F189D5BDC001706FD /* en.lproj */ = {
+			isa = PBXGroup;
+			children = (
+				0F21EFA0189D5BDC001706FD /* SSKeychain.strings */,
+			);
+			name = en.lproj;
+			path = Keychain/en.lproj;
+			sourceTree = "<group>";
+		};
 		0F2FC6DE1837303800611873 = {
 			isa = PBXGroup;
 			children = (
@@ -593,6 +622,7 @@
 		7696C7DC184C363500B270FC /* Keychain */ = {
 			isa = PBXGroup;
 			children = (
+				0F21EF9E189D5BCB001706FD /* SSKeychain */,
 				7696C7DD184C366000B270FC /* AFVDKeychain.h */,
 				7696C7DE184C366000B270FC /* AFVDKeychain.m */,
 			);
@@ -757,6 +787,7 @@
 				0F06A710187E2B980021E10C /* signinButton@2x.png in Resources */,
 				0F06A71A187E36320021E10C /* signinButton@2x_selected.png in Resources */,
 				0F06A70F187E2B980021E10C /* signinButton.png in Resources */,
+				0F21EFA6189D5BDC001706FD /* SSKeychain.strings in Resources */,
 				0F06A708187CFF690021E10C /* afvdInitialBackgroundImage@2x.jpg in Resources */,
 				0F06A718187E36320021E10C /* signupButton@2x_selected.png in Resources */,
 				0F06A711187E2B980021E10C /* signupButton.png in Resources */,
@@ -828,6 +859,7 @@
 				0FF604791880E4CC00E7DF58 /* AFVDInitialView.m in Sources */,
 				7677BA7018373A6B00F3EDC9 /* AFVDUserModel.m in Sources */,
 				7677BA6E18373A6B00F3EDC9 /* AFVDUserModelDatasource.m in Sources */,
+				0F21EFA7189D5BDC001706FD /* SSKeychain.m in Sources */,
 				7677BA6F18373A6B00F3EDC9 /* AFVDUserModelFactory.m in Sources */,
 				0F06A6F3187CF2080021E10C /* AFVDIntialViewController.m in Sources */,
 				0F06A6E5187CEE550021E10C /* AFViewController.m in Sources */,
@@ -846,6 +878,7 @@
 				0F2C8A0C188B408D0033397C /* AFVDSignupUserModel.m in Sources */,
 				0F10E3DD18594FA800FC1433 /* AFVDVideoCaptureControls.m in Sources */,
 				0FB5E9871862763600EE0B0D /* AFVDVideoFilterController.m in Sources */,
+				0F21EFA8189D5BDC001706FD /* SSKeychainQuery.m in Sources */,
 				76C651A8183840E4003C7F7D /* AFVDVideoModelFactory.m in Sources */,
 				7677BA6D18373A6B00F3EDC9 /* AFVDBaseNetworkDatasource.m in Sources */,
 				76C651931838003D003C7F7D /* NSDictionary+NSDictionary_NSDataConversion.m in Sources */,
@@ -881,6 +914,14 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		0F21EFA0189D5BDC001706FD /* SSKeychain.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0F21EFA1189D5BDC001706FD /* en */,
+			);
+			name = SSKeychain.strings;
+			sourceTree = "<group>";
+		};
 		0F2FC6F31837303800611873 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (

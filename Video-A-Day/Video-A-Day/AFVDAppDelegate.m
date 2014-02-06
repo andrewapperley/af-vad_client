@@ -67,9 +67,4 @@
     _keychain = [AFVDKeychain keychain];
 }
 
-- (void)saveKeychain {
-    
-    [_keychain save];
-}
-
 @end

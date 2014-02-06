@@ -77,6 +77,8 @@ NSString *email = @"email@email.com";
     [self addChildViewController:inVC];
     [self.view addSubview:inVC.view];
     
+    [self setAccessToken:@"thisisatoken" andExpiryDate:@"dsfds"];
+    
     
 }
 
@@ -339,7 +341,7 @@ NSString *email = @"email@email.com";
         if(networkCallback.success) {
             
             NSLog(@"Finish Logout user - Success");
-            [self setAccessToken:nil];
+            [self setAccessToken:nil andExpiryDate:nil];
         } else {
             NSLog(@"Finish Logout user - Failure %d - %@", networkCallback.responseCode, networkCallback.responseMessage);
         }
@@ -501,9 +503,9 @@ NSString *email = @"email@email.com";
 }
 
 #pragma mark - Token handling
-- (void)setAccessToken:(NSString *)accessToken {
+- (void)setAccessToken:(NSString *)accessToken andExpiryDate:(NSString *)expiryDate {
     
-    [[AFVDKeychain keychain] setAccessToken:accessToken];
+    [[AFVDKeychain keychain] setAccessToken:accessToken andExpiryDate:expiryDate];
 }
 
 - (NSString *)accessToken {

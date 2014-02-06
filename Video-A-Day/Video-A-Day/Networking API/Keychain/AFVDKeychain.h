@@ -11,9 +11,10 @@
 @interface AFVDKeychain : NSObject
 
 @property (nonatomic, strong) NSString *accessToken;
+@property (nonatomic, strong) NSString *expiryDate;
 
 #pragma mark - Saving
-- (void)save;
+- (void)setAccessToken:(NSString *)accessToken andExpiryDate:(NSString *)expiryDate;
 
 #pragma mark - Singleton
 + (instancetype)keychain;
