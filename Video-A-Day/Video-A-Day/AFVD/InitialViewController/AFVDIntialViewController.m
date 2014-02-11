@@ -140,7 +140,7 @@ static CGFloat panelViewAnimationDuration = 0.6f;
 
 - (void)setupSlidingPanel {
     
-    _slidingPanel = [[UIView alloc] initWithFrame:CGRectZero];
+    _slidingPanel = [[UIView alloc] init];
     _slidingPanel.layer.anchorPoint = CGPointMake((self.view.frame.size.width - _slidingPanel.frame.size.width)/2, 0);
     _slidingPanel.frame = CGRectMake(0, _backgroundImageView.frame.size.height, _backgroundImageView.frame.size.width, _backgroundImageView.frame.size.height);
     [self.view addSubview:_slidingPanel];
@@ -181,7 +181,7 @@ static CGFloat panelViewAnimationDuration = 0.6f;
     
 }
 
-- (void)panelViewIsDragged:(CGPoint)panelsPoint closeView:(BOOL)closeView withVelocity:(NSInteger)velocity {
+- (void)panelViewIsDragged:(CGPoint)panelsPoint closeView:(BOOL)closeView withVelocity:(CGFloat)velocity {
     [_slidingPanel setCenter:CGPointMake([_slidingPanel center].x, MAX(_initialSlidingPanelY, [_slidingPanel center].y + panelsPoint.y))];
 }
 
@@ -295,8 +295,7 @@ static CGFloat panelViewAnimationDuration = 0.6f;
     
     UIGraphicsBeginImageContext(CGSizeMake(temp.frame.size.width, _backgroundImageView.frame.size.height));
     
-    [_backgroundImageView.layer renderInContext:UIGraphicsGetCurrentContext()];
-    
+    [_backgroundImageView drawViewHierarchyInRect:CGRectMake(0, 0, temp.frame.size.width, _backgroundImageView.frame.size.height) afterScreenUpdates:NO];
     UIImage* tempImage = UIGraphicsGetImageFromCurrentImageContext();
     
     CGImageRef cgImage = tempImage.CGImage;

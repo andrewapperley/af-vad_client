@@ -12,7 +12,7 @@
 
 @required
 - (void)panelViewIsReady:(__weak UIView *)panel;
-- (void)panelViewIsDragged:(CGPoint)panelsPoint closeView:(BOOL)closeView withVelocity:(NSInteger)velocity;
+- (void)panelViewIsDragged:(CGPoint)panelsPoint closeView:(BOOL)closeView withVelocity:(CGFloat)velocity;
 - (void)snapPanelToPositionWithVelocity:(NSInteger)velocity andClosePanel:(BOOL)closePanel;
 @end
 

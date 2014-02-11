@@ -73,7 +73,7 @@
     
     if (gesture.state == UIGestureRecognizerStateBegan || gesture.state == UIGestureRecognizerStateChanged) {
         
-        [self.delegate panelViewIsDragged:translation closeView:closingView withVelocity:0];
+        [self.delegate panelViewIsDragged:translation closeView:closingView withVelocity:[gesture velocityInView:self.superview].y];
         [gesture setTranslation:CGPointZero inView:self.superview];
         
     } else if (gesture.state == UIGestureRecognizerStateEnded) {

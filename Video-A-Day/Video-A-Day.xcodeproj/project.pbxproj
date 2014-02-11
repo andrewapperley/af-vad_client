@@ -179,6 +179,7 @@
 		0FF604741880D75200E7DF58 /* AFVDImageBlur.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFVDImageBlur.m; sourceTree = "<group>"; };
 		0FF604761880E39B00E7DF58 /* AFVDInitialView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFVDInitialView.h; sourceTree = "<group>"; };
 		0FF604781880E4CC00E7DF58 /* AFVDInitialView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFVDInitialView.m; sourceTree = "<group>"; };
+		0FF9E6B818A48352004624EE /* liblibGyro.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = liblibGyro.a; path = "../../../ES/LibGyro/libGyro/qtcreator/build-libGyro-iphonesimulator_clang_Qt_5_2_1_for_iOS-Debug/liblibGyro.a"; sourceTree = "<group>"; };
 		68F6FAF547E94320A258E720 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		7610BC59183B1108003CE193 /* AFVDRelationshipModelDatasource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFVDRelationshipModelDatasource.h; path = RelationshipModel/Datasource/AFVDRelationshipModelDatasource.h; sourceTree = "<group>"; };
 		7610BC5A183B1108003CE193 /* AFVDRelationshipModelDatasource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AFVDRelationshipModelDatasource.m; path = RelationshipModel/Datasource/AFVDRelationshipModelDatasource.m; sourceTree = "<group>"; };
@@ -422,6 +423,7 @@
 		0F2FC6E91837303800611873 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0FF9E6B818A48352004624EE /* liblibGyro.a */,
 				0F2141CA1876509500E8BFD5 /* MessageUI.framework */,
 				0FC8907518712FE100F5E869 /* AudioToolbox.framework */,
 				0FC8907618712FE100F5E869 /* CoreAudio.framework */,
@@ -1034,6 +1036,10 @@
 				GCC_PREFIX_HEADER = "Video-A-Day/Video-A-Day-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = "";
 				INFOPLIST_FILE = "Video-A-Day/Video-A-Day-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Users/andrewapperley/PersonalProjects/ES/LibGyro/libGyro/qtcreator/build-libGyro-iphonesimulator_clang_Qt_5_2_1_for_iOS-Debug",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WARNING_CFLAGS = "";
 				WRAPPER_EXTENSION = app;
@@ -1050,6 +1056,10 @@
 				GCC_PREFIX_HEADER = "Video-A-Day/Video-A-Day-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = "";
 				INFOPLIST_FILE = "Video-A-Day/Video-A-Day-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Users/andrewapperley/PersonalProjects/ES/LibGyro/libGyro/qtcreator/build-libGyro-iphonesimulator_clang_Qt_5_2_1_for_iOS-Debug",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
