@@ -9,6 +9,7 @@
 #import "AFVDKeychain.h"
 #import "SSKeychain.h"
 #import "SSKeychainQuery.h"
+#import "AFVDBaseNetworkStatics.h"
 #import <Security/Security.h>
 
 //Keys
@@ -29,6 +30,7 @@ NSString *const kAFVDAccessTokenExpiry              = @"userAccessTokenExpiry";
         
         [self registerForNotifications];
         [self loadiCloudToken];
+        [self loadAccessToken];
     }
     return self;
 }
@@ -47,6 +49,22 @@ NSString *const kAFVDAccessTokenExpiry              = @"userAccessTokenExpiry";
     [SSKeychain setPassword:accessToken forService:kAFVDAccessToken account:iCloudTokenName()];
     [SSKeychain setPassword:expiryDate forService:kAFVDAccessTokenExpiry account:iCloudTokenName()];
 
+}
+
+- (BOOL)accessTokenValid {
+    return ((_accessToken && _expiryDate) && [self accessTokenNotExpired]);
+}
+
+- (BOOL)accessTokenNotExpired {
+    
+    NSDateFormatter* expiryDateFormatter    = [[NSDateFormatter alloc] init];
+    expiryDateFormatter                     = [[NSDateFormatter alloc] init];
+    [expiryDateFormatter setDateFormat:kAFVDBaseNetworkDefaultDateFormat];
+    [expiryDateFormatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US_POSIX"]];
+    NSDate* expiryDate                      = [expiryDateFormatter dateFromString:_expiryDate];
+    NSDate* currentDate                     = [expiryDateFormatter dateFromString:[expiryDateFormatter stringFromDate:[NSDate date]]];
+    
+    return ([[expiryDate earlierDate:currentDate] isEqualToDate:currentDate]);
 }
 
 - (void)loadAccessToken {

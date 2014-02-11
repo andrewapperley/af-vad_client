@@ -13,6 +13,9 @@
 @property (nonatomic, strong) NSString *accessToken;
 @property (nonatomic, strong) NSString *expiryDate;
 
+#pragma mark - Expiry Date Checking
+- (BOOL)accessTokenValid;
+
 #pragma mark - Saving
 - (void)setAccessToken:(NSString *)accessToken andExpiryDate:(NSString *)expiryDate;
 

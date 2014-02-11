@@ -70,16 +70,35 @@ NSString *email = @"email@email.com";
     
     
     
+    if ([self checkForLoginInfo]) {
+        
+    } else {
+        AFVDIntialViewController* inVC = [[AFVDIntialViewController alloc] initWithBackgroundImage:[UIImage imageNamed:@"AFVDFieldBackground"]];
+        
+        [self addChildViewController:inVC];
+        [self.view addSubview:inVC.view];
+        
+        [self setAccessToken:@"thisisatoken" andExpiryDate:@"dsfds"];
+    }
     
     
-    AFVDIntialViewController* inVC = [[AFVDIntialViewController alloc] initWithBackgroundImage:[UIImage imageNamed:@"AFVDFieldBackground"]];
+}
+
+#pragma mark - Access Token Checks
+
+- (BOOL)checkForLoginInfo {
     
-    [self addChildViewController:inVC];
-    [self.view addSubview:inVC.view];
+    if ([[AFVDKeychain keychain] accessTokenValid]) {
+#warning temp VC until we have timeline merged
+        AFViewController* timelineVC = [[AFViewController alloc] init];
+        timelineVC.view.backgroundColor = [UIColor purpleColor];
+        [self addChildViewController:timelineVC];
+        [self.view addSubview:timelineVC.view];
+        [timelineVC didMoveToParentViewController:self];
+        return YES;
+    }
     
-    [self setAccessToken:@"thisisatoken" andExpiryDate:@"dsfds"];
-    
-    
+    return NO;
 }
 
 - (void)createUser {

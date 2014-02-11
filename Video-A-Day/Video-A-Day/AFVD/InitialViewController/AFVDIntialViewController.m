@@ -48,6 +48,7 @@ static CGFloat panelViewAnimationDuration = 0.6f;
 - (id)initWithBackgroundImage:(UIImage *)backgroundImage {
     self = [super init];
     if (self) {
+        
         _slidingPaneHeight = kAFVDSlidingPanelHeight;
         _backgroundImageView = [[UIImageView alloc] initWithImage:backgroundImage];
         _backgroundImageView.userInteractionEnabled = FALSE;
