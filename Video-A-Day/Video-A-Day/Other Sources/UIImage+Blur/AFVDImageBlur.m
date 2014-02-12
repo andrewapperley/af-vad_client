@@ -17,4 +17,33 @@
     return [self applyBlurWithRadius:25 tintColor:[[UIColor whiteColor] colorWithAlphaComponent:0.5] saturationDeltaFactor:0.7 maskImage:nil];
 }
 
++ (UIImage *)imageScreenshotFromView:(UIView *)view size:(CGSize)size offset:(CGSize)offset newHeight:(NSInteger)newHeight {
+    
+    UIImage* tempImage = [UIImage imageScreenshotFromView:view size:size];
+    
+    CGImageRef cgImage = tempImage.CGImage;
+    CGFloat width = CGImageGetWidth(cgImage);
+    CGFloat height = CGImageGetHeight(cgImage);
+    CGRect rect = CGRectMake(offset.width, height - offset.height, width, newHeight);
+    
+    CGImageRef cgSubImage = CGImageCreateWithImageInRect(cgImage, rect);
+    UIImage *subImage = [UIImage imageWithCGImage:cgSubImage];
+    tempImage = subImage;
+    CGImageRelease(cgSubImage);
+    
+    return tempImage;
+}
+
++ (UIImage *)imageScreenshotFromView:(UIView *)view size:(CGSize)size {
+    
+    UIGraphicsBeginImageContext(CGSizeMake(size.width, size.height));
+    
+    [view drawViewHierarchyInRect:CGRectMake(0, 0, size.width, size.height) afterScreenUpdates:NO];
+    UIImage* tempImage = UIGraphicsGetImageFromCurrentImageContext();
+
+    UIGraphicsEndImageContext();
+    
+    return tempImage;
+}
+
 @end

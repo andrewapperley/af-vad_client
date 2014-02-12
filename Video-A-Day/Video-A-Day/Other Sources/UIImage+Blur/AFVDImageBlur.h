@@ -12,5 +12,6 @@
 @interface UIImage (AFVDImageBlur)
 
 - (UIImage *)applyAFVDBlur;
-
++ (UIImage *)imageScreenshotFromView:(UIView *)view size:(CGSize)size offset:(CGSize)offset newHeight:(NSInteger)newHeight;
++ (UIImage *)imageScreenshotFromView:(UIView *)view size:(CGSize)size;
 @end

@@ -24,10 +24,10 @@
 }
 
 - (void)setupScrollView {
-    formScrollView = [[UIScrollView alloc] initWithFrame:CGRectZero];
-    formScrollView.scrollEnabled = NO;
-    formScrollView.showsHorizontalScrollIndicator = formScrollView.showsVerticalScrollIndicator = NO;
-    [self addSubview:formScrollView];
+    _formScrollView = [[UIScrollView alloc] initWithFrame:CGRectZero];
+    _formScrollView.scrollEnabled = NO;
+    _formScrollView.showsHorizontalScrollIndicator = _formScrollView.showsVerticalScrollIndicator = NO;
+    [self addSubview:_formScrollView];
 }
 
 - (void)setupCloseArrow {
@@ -61,7 +61,7 @@
     
     CGFloat formViewStartY = titleLabel.frame.size.height + titleLabel.frame.origin.y + kAFVDFormScrollViewYMargin;
     
-    formScrollView.frame = CGRectMake(0, formViewStartY, self.frame.size.width, self.frame.size.height - formViewStartY);
+    _formScrollView.frame = CGRectMake(0, formViewStartY, self.frame.size.width, self.frame.size.height - formViewStartY);
 }
 
 #pragma mark - UIPanGestureMethod
@@ -73,14 +73,14 @@
     
     if (gesture.state == UIGestureRecognizerStateBegan || gesture.state == UIGestureRecognizerStateChanged) {
         
-        [self.delegate panelViewIsDragged:translation closeView:closingView withVelocity:[gesture velocityInView:self.superview].y];
+        [self.delegate panelViewIsDragged:translation closeView:closingView withVelocity:[gesture velocityInView:self.superview].y andSender:self];
         [gesture setTranslation:CGPointZero inView:self.superview];
         
     } else if (gesture.state == UIGestureRecognizerStateEnded) {
         
         CGPoint velocity = [gesture velocityInView:self.superview];
         closingView = (velocity.y > 0.0f) ? YES : NO;
-        [self.delegate snapPanelToPositionWithVelocity:velocity.y andClosePanel:closingView];
+        [self.delegate panelViewToSnapToPositionWithVelocity:velocity.y andClosePanel:closingView andSender:self];
         
     }
 }
@@ -88,12 +88,12 @@
 #pragma mark - UITextFieldInput Delegate Methods
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
-    [formScrollView setContentOffset:CGPointMake(formScrollView.contentOffset.x, textField.frame.origin.y - textField.frame.size.height) animated:YES];
+    [_formScrollView setContentOffset:CGPointMake(_formScrollView.contentOffset.x, textField.frame.origin.y - textField.frame.size.height) animated:YES];
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-    [formScrollView setContentOffset:CGPointMake(formScrollView.contentOffset.x, 0) animated:TRUE];
+    [_formScrollView setContentOffset:CGPointMake(_formScrollView.contentOffset.x, 0) animated:TRUE];
     [textField resignFirstResponder];
     return YES;
 }

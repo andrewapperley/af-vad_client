@@ -12,12 +12,12 @@
 
 - (instancetype)initWithUsername:(NSString *)username password:(NSString *)password;
 
-- (instancetype)initWithUsername:(NSString *)username access_token:(NSString *)token;
+- (instancetype)initWithUsername:(NSString *)username accessToken:(NSString *)token;
 
 @property(nonatomic, strong, readonly)NSString* username;
 
 @property(nonatomic, strong, readonly)NSString* password;
 
-@property(nonatomic, strong, readonly)NSString* access_token;
+@property(nonatomic, strong, readonly)NSString* accessToken;
 
 @end

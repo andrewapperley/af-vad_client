@@ -7,16 +7,3 @@
 //
 
 #import "AFVDStatics.h"
-
-NSString* const kAFVDNormalFont = @"Helvetica";
-NSInteger kAFVDTitleXYBuffer            = 25;
-NSInteger kAFVDFormItemXBuffer          = 25;
-NSInteger kAFVDFormItemYBuffer          = 35;
-NSInteger kAFVDSigninFormItemYBuffer    = 30;
-NSInteger kAFVDCloseArrowYMargin        = 9;
-NSInteger kAFVDFormItemInputYBufferSize = 8;
-NSInteger kAFVDFormScrollViewYMargin    = 25;
-NSInteger kAFVDFormTextViewWidth        = 262;
-NSInteger kAFVDFormTextViewHeight       = 27;
-NSInteger kAFVDDraggingViewHeight       = 29;
-NSInteger kAFVDSubmitButtonBottomMargin = 7;

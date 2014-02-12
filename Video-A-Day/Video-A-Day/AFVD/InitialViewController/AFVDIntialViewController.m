@@ -12,34 +12,13 @@
 #import "AFVDSignupUserModel.h"
 #import "AFVDKeychain.h"
 
-/*Some of these constants might be useful to other views in the future so they could be
- extracted to another staticsFile*/
-
-static NSString* kAFVDLogoImage = @"AFVDLogo";
-static NSString* kAFVDSigninImage = @"AFVDSigninButton";
-static NSString* kAFVDSigninSelectedImage = @"signinButton_selected";
-static NSString* kAFVDSignupSelectedImage = @"signupButton_selected";
-static NSString* kAFVDSignupImage = @"AFVDSignupButton";
-static NSInteger kAFVDCatchPhraseYBuffer = 20;
-static NSInteger kAFVDLogoYBuffer = 53;
-static NSInteger kAFVDSignupAndSigninXBuffer = 55;
-static NSInteger kAFVDSignupAndSigninYBuffer = 47;
-static NSInteger kAFVDSignupAndSigninLabelYBuffer = 11;
-//static NSInteger kAFVDSlidingPanelHeight_iPhone5 = 400;
-static NSInteger kAFVDSlidingPanelHeight = 380;
-static CGFloat panelViewAnimationDuration = 0.6f;
-
 @interface AFVDIntialViewController ()
 {
     UIImageView* _backgroundImageView;
     UIView* _slidingPanel;
-    UIView* _currentPanelView;
+    AFVDInitialView* _currentPanelView;
     NSInteger _slidingPaneHeight;
     NSInteger _initialSlidingPanelY;
-    UIAttachmentBehavior* _panAttachmentBehaviour;
-    UIDynamicAnimator* _animator;
-    UIGravityBehavior* _gravityBehaviour;
-    UIPushBehavior* _pushBehavior;
 }
 @end
 
@@ -81,7 +60,7 @@ static CGFloat panelViewAnimationDuration = 0.6f;
     CGFloat labelHeight = [afvdCatchPhraseLabel.text sizeWithAttributes:@{NSFontAttributeName : afvdCatchPhraseLabel.font}].height;
     
     afvdCatchPhraseLabel.frame = CGRectMake((self.view.frame.size.width - labelWidth)/2, logoView.frame.origin.y + logoView.frame.size.height + kAFVDCatchPhraseYBuffer, labelWidth, labelHeight);
-    afvdCatchPhraseLabel.textColor = [UIColor colorWithRed:161/255.0 green:167/255.0 blue:167/255.0 alpha:1];
+    afvdCatchPhraseLabel.textColor = UIColorFromRGBA(161, 167, 167, 1);
     
     [_backgroundImageView addSubview:logoView];
     [_backgroundImageView addSubview:afvdCatchPhraseLabel];
@@ -103,7 +82,7 @@ static CGFloat panelViewAnimationDuration = 0.6f;
     
     UILabel* signupLabel = [[UILabel alloc] init];
     signupLabel.text = NSLocalizedString(@"AFVDInitialViewSignUp", nil);
-    signupLabel.font = [UIFont fontWithName:kAFVDNormalFont size:20];
+    signupLabel.font = [UIFont fontWithName:kAFVDNormalFont size:kAFVDPanelSignupLabelFontSize];
     
     CGFloat labelWidth = [signupLabel.text sizeWithAttributes:@{NSFontAttributeName : signupLabel.font}].width;
     CGFloat labelHeight = [signupLabel.text sizeWithAttributes:@{NSFontAttributeName : signupLabel.font}].height;
@@ -153,27 +132,28 @@ static CGFloat panelViewAnimationDuration = 0.6f;
     
     self.view.userInteractionEnabled = FALSE;
     _currentPanelView = nil;
+    [self setPanelHeightAndBlur:_slidingPaneHeight];
+    CGRect panelFrame = CGRectMake(0, 0, _slidingPanel.frame.size.width, _slidingPanel.frame.size.height);
     
     switch (sender.tag) {
         case AFVDInitialViewOption_Signup:
-            [self setPanelHeightAndBlur:_slidingPaneHeight];
-            _currentPanelView = [[AFVDSignupView alloc] initWithFrame:CGRectMake(0, 0, _slidingPanel.frame.size.width, _slidingPanel.frame.size.height) andDelegate:self];
+            _currentPanelView = [[AFVDSignupView alloc] initWithFrame:panelFrame andDelegate:self];
             ((AFVDSignupView *)_currentPanelView).signupDelegate = self;
         break;
         case AFVDInitialViewOption_Signin:
-            [self setPanelHeightAndBlur:_slidingPaneHeight];
-            _currentPanelView = [[AFVDSigninView alloc] initWithFrame:CGRectMake(0, 0, _slidingPanel.frame.size.width, _slidingPanel.frame.size.height) andDelegate:self];
+            _currentPanelView = [[AFVDSigninView alloc] initWithFrame:panelFrame andDelegate:self];
             ((AFVDSigninView *)_currentPanelView).signinDelegate = self;
         break;
     }
+    
 }
 
 #pragma mark - AFVDInitialViewDelegate Methods
 
-- (void)panelViewIsReady:(UIView *)panel {
+- (void)panelViewIsReady:(UIView *)panel andSender:(AFVDInitialView *__weak)sender {
     [_slidingPanel addSubview:panel];
     
-    [UIView animateWithDuration:panelViewAnimationDuration delay:0 options:UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationCurveLinear animations:^{
+    [UIView animateWithDuration:kPanelViewAnimationDuration delay:0 options:UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationCurveLinear animations:^{
         _slidingPanel.frame = CGRectMake(0, (self.view.frame.size.height - _slidingPaneHeight),  _slidingPanel.frame.size.width,  _slidingPaneHeight);
     } completion:^(BOOL finished) {
         _initialSlidingPanelY = _slidingPanel.frame.origin.y;
@@ -182,17 +162,17 @@ static CGFloat panelViewAnimationDuration = 0.6f;
     
 }
 
-- (void)panelViewIsDragged:(CGPoint)panelsPoint closeView:(BOOL)closeView withVelocity:(CGFloat)velocity {
+- (void)panelViewIsDragged:(CGPoint)panelsPoint closeView:(BOOL)closeView withVelocity:(CGFloat)velocity andSender:(AFVDInitialView *__weak)sender {
     [_slidingPanel setCenter:CGPointMake([_slidingPanel center].x, MAX(_initialSlidingPanelY, [_slidingPanel center].y + panelsPoint.y))];
 }
 
-- (void)snapPanelToPositionWithVelocity:(NSInteger)velocity andClosePanel:(BOOL)closePanel {
+- (void)panelViewToSnapToPositionWithVelocity:(NSInteger)velocity andClosePanel:(BOOL)closePanel andSender:(AFVDInitialView *__weak)sender {
     CGFloat snapPanelAnimationSpeed = 0;
     
-    if (velocity <= -50 || velocity >= 50) {
-        snapPanelAnimationSpeed = 0.3f;
-    } else if (velocity <= -10 || velocity >= 10) {
-        snapPanelAnimationSpeed = 0.4f;
+    if (velocity <= -kAFVDSnapPanelVelocityHighThreshold || velocity >= kAFVDSnapPanelVelocityHighThreshold) {
+        snapPanelAnimationSpeed = kAFVDSnapPanelAnimationSlowSpeed;
+    } else if (velocity <= -kAFVDSnapPanelVelocityLowThreshold || velocity >= kAFVDSnapPanelVelocityLowThreshold) {
+        snapPanelAnimationSpeed = kAFVDSnapPanelAnimationSpeed;
     }
     
     [UIView animateWithDuration:snapPanelAnimationSpeed delay:0 options:UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationCurveLinear animations:^{
@@ -216,11 +196,10 @@ static CGFloat panelViewAnimationDuration = 0.6f;
 - (void)signUserInWithModel:(AFVDSigninUserModel *)model {
     AFVDUserModelFactory *modelFactory = [[AFVDUserModelFactory alloc] init];
     
-    [modelFactory fetchUserModelAndAccessTokenWithUserName:model.username andPassword:model.password accessToken:model.access_token success:^(AFVDUserModel *userModel, NSString *accessToken, AFVDBaseNetworkModel *networkCallback) {
-        [[[UIAlertView alloc] initWithTitle:@"Login Success" message:[NSString stringWithFormat:@"Your Access Token is: %@",accessToken] delegate:nil cancelButtonTitle:@"Dismiss" otherButtonTitles:nil, nil] show];
-        
+    [modelFactory fetchUserModelAndAccessTokenWithUserName:model.username andPassword:model.password accessToken:model.accessToken success:^(AFVDUserModel *userModel, NSString *accessToken, AFVDBaseNetworkModel *networkCallback) {
+            /*Go to Timeline VC, do this when you integrate the Timeline*/
     } failure:^(NSError *error) {
-        [[[UIAlertView alloc] initWithTitle:@"Login Failure" message:error.localizedDescription delegate:nil cancelButtonTitle:@"Dismiss" otherButtonTitles:nil, nil] show];
+        [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"AFVDSigninForFailureTitle", nil) message:error.localizedDescription delegate:nil cancelButtonTitle:NSLocalizedString(@"AFVDSigninForFailureButtonTitle", nil) otherButtonTitles:nil, nil] show];
     }];
 }
 
@@ -259,25 +238,20 @@ static CGFloat panelViewAnimationDuration = 0.6f;
 - (void)signUserUpWithModel:(AFVDSignupUserModel *)model {
     AFVDUserModelFactory *modelFactory = [[AFVDUserModelFactory alloc] init];
     
-    NSLog(@"Start AFVDCreateUser");
-    
     NSData *profileImageData = UIImageJPEGRepresentation(model.profileImage, 1) ;
     
     [modelFactory createUserWithUsername:model.username password:model.password displayName:model.username email:model.email profileImage:profileImageData success:^(AFVDBaseNetworkModel *networkCallback) {
         
         if(networkCallback.success) {
             
-            NSLog(@"Finish AFVDCreateUser - Success %d - %@", networkCallback.responseCode, networkCallback.responseMessage);
-            NSLog(@"Proceed to user login...");
-            [self snapPanelToPositionWithVelocity:50 andClosePanel:YES];
+            [self panelViewToSnapToPositionWithVelocity:50 andClosePanel:YES andSender:_currentPanelView];
             
         } else {
-            NSLog(@"Finish AFVDCreateUser - Failure %d - %@", networkCallback.responseCode, networkCallback.responseMessage);
+
         }
         
     } failure:^(NSError *error) {
         
-        NSLog(@"Finish AFVDCreateUser - Failure %d - %@", error.code, error.localizedDescription);
     }];
 }
 
@@ -294,25 +268,8 @@ static CGFloat panelViewAnimationDuration = 0.6f;
     
     UIImageView* temp = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, _slidingPanel.frame.size.width, _slidingPanel.frame.size.height)];
     
-    UIGraphicsBeginImageContext(CGSizeMake(temp.frame.size.width, _backgroundImageView.frame.size.height));
-    
-    [_backgroundImageView drawViewHierarchyInRect:CGRectMake(0, 0, temp.frame.size.width, _backgroundImageView.frame.size.height) afterScreenUpdates:NO];
-    UIImage* tempImage = UIGraphicsGetImageFromCurrentImageContext();
-    
-    CGImageRef cgImage = tempImage.CGImage;
-    CGFloat width = CGImageGetWidth(cgImage);
-    CGFloat height = CGImageGetHeight(cgImage);
-    CGRect rect = CGRectMake(0, height - panelHeight, width, panelHeight);
-    
-    CGImageRef cgSubImage = CGImageCreateWithImageInRect(cgImage, rect);
-    UIImage *subImage = [UIImage imageWithCGImage:cgSubImage];
-    tempImage = subImage;
-    CGImageRelease(cgSubImage);
-    tempImage = [tempImage applyAFVDBlur];
-    
-    temp.image = tempImage;
-    UIGraphicsEndImageContext();
-    temp.alpha = 0.98f;
+    temp.image = [[UIImage imageScreenshotFromView:_backgroundImageView size:_slidingPanel.frame.size offset:CGSizeMake(0, panelHeight) newHeight:panelHeight] applyAFVDBlur];
+    temp.alpha = kAFVDSlidingPanelAlpha;
     
     [_slidingPanel addSubview:temp];
 }

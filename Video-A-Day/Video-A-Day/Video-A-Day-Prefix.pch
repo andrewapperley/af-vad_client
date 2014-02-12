@@ -17,5 +17,6 @@
     #import "NSDictionary+NSDictionary_NSDataConversion.h"
     #import "AFVDConstants.h"
     #import "AFVDStatics.h"
+    #import "AFVDFontStatics.h"
     #import "AFVDImageBlur.h"
 #endif

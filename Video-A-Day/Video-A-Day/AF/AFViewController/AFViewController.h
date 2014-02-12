@@ -8,10 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-/** ViewController subclass that provides orientation handling */
 
 @interface AFViewController : UIViewController
-
-@property(nonatomic, readonly)BOOL isLandscape;
 
 @end

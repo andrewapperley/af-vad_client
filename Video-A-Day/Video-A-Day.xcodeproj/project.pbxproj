@@ -58,6 +58,8 @@
 		0FB9038F1891FA2400FCD55D /* AFVDSigninUserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FB9038E1891FA2400FCD55D /* AFVDSigninUserModel.m */; };
 		0FC8907718712FE100F5E869 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FC8907518712FE100F5E869 /* AudioToolbox.framework */; };
 		0FC8907818712FE100F5E869 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FC8907618712FE100F5E869 /* CoreAudio.framework */; };
+		0FF186D418AAFC6100BE1417 /* AFVDFontStatics.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FF186D318AAFC6100BE1417 /* AFVDFontStatics.m */; };
+		0FF186D718AAFCC000BE1417 /* AFVDInitialViewStatics.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FF186D618AAFCC000BE1417 /* AFVDInitialViewStatics.m */; };
 		0FF441D418626A3200ADAD2C /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FF441D318626A3100ADAD2C /* CoreVideo.framework */; };
 		0FF441D618626A5300ADAD2C /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FF441D518626A5300ADAD2C /* OpenGLES.framework */; };
 		0FF441D818626A5D00ADAD2C /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FF441D718626A5D00ADAD2C /* QuartzCore.framework */; };
@@ -170,6 +172,10 @@
 		0FB9038E1891FA2400FCD55D /* AFVDSigninUserModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFVDSigninUserModel.m; sourceTree = "<group>"; };
 		0FC8907518712FE100F5E869 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		0FC8907618712FE100F5E869 /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
+		0FF186D218AAFC6100BE1417 /* AFVDFontStatics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFVDFontStatics.h; sourceTree = "<group>"; };
+		0FF186D318AAFC6100BE1417 /* AFVDFontStatics.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFVDFontStatics.m; sourceTree = "<group>"; };
+		0FF186D518AAFCC000BE1417 /* AFVDInitialViewStatics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFVDInitialViewStatics.h; sourceTree = "<group>"; };
+		0FF186D618AAFCC000BE1417 /* AFVDInitialViewStatics.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFVDInitialViewStatics.m; sourceTree = "<group>"; };
 		0FF441D11862637900ADAD2C /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
 		0FF441D318626A3100ADAD2C /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
 		0FF441D518626A5300ADAD2C /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -268,6 +274,8 @@
 				0F06A6EF187CF1F70021E10C /* Other Components */,
 				0F2C8A001884CF000033397C /* AFVDStatics.h */,
 				0F2C8A011884CF000033397C /* AFVDStatics.m */,
+				0FF186D218AAFC6100BE1417 /* AFVDFontStatics.h */,
+				0FF186D318AAFC6100BE1417 /* AFVDFontStatics.m */,
 			);
 			path = AFVD;
 			sourceTree = "<group>";
@@ -281,6 +289,8 @@
 				0F06A6F2187CF2080021E10C /* AFVDIntialViewController.m */,
 				0FF604761880E39B00E7DF58 /* AFVDInitialView.h */,
 				0FF604781880E4CC00E7DF58 /* AFVDInitialView.m */,
+				0FF186D518AAFCC000BE1417 /* AFVDInitialViewStatics.h */,
+				0FF186D618AAFCC000BE1417 /* AFVDInitialViewStatics.m */,
 			);
 			path = InitialViewController;
 			sourceTree = "<group>";
@@ -862,11 +872,13 @@
 				7677BA7018373A6B00F3EDC9 /* AFVDUserModel.m in Sources */,
 				7677BA6E18373A6B00F3EDC9 /* AFVDUserModelDatasource.m in Sources */,
 				0F21EFA7189D5BDC001706FD /* SSKeychain.m in Sources */,
+				0FF186D718AAFCC000BE1417 /* AFVDInitialViewStatics.m in Sources */,
 				7677BA6F18373A6B00F3EDC9 /* AFVDUserModelFactory.m in Sources */,
 				0F06A6F3187CF2080021E10C /* AFVDIntialViewController.m in Sources */,
 				0F06A6E5187CEE550021E10C /* AFViewController.m in Sources */,
 				7610BC61183B119C003CE193 /* AFVDRelationshipModel.m in Sources */,
 				0F2FC6F71837303800611873 /* main.m in Sources */,
+				0FF186D418AAFC6100BE1417 /* AFVDFontStatics.m in Sources */,
 				76C651AF18385CB1003C7F7D /* AFVDVideoRelationshipModel.m in Sources */,
 				0F79613E183EE64E00920C59 /* AFVDUrlHasher.m in Sources */,
 				7657BBF4184EE1A1004CA559 /* AFVDBaseNetworkStatics.m in Sources */,

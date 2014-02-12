@@ -10,9 +10,9 @@
 #import "AFVDSigninUserModel.h"
 
 @interface AFVDSigninView() {
-    NSString* username;
-    NSString* password;
-    UIButton* submitButton;
+    NSString* _username;
+    NSString* _password;
+    UIButton* _submitButton;
 }
 
 @end
@@ -24,7 +24,7 @@
     if (self) {
         
         [self setupUI];
-        [self.delegate panelViewIsReady:self];
+        [self.delegate panelViewIsReady:self andSender:self];
     }
     return self;
 }
@@ -42,16 +42,16 @@
     /*Create Submit Button*/
     NSInteger submitButtonHeight = 32;
     
-    submitButton = [[UIButton alloc] initWithFrame:CGRectMake(kAFVDFormItemXBuffer, formScrollView.frame.size.height - (submitButtonHeight + kAFVDFormItemXBuffer) - kAFVDSubmitButtonBottomMargin, self.frame.size.width - kAFVDFormItemXBuffer*2, submitButtonHeight)];
-    [submitButton addTarget:self action:@selector(onSubmitButton) forControlEvents:UIControlEventTouchUpInside];
-    submitButton.layer.borderWidth = 2;
-    submitButton.layer.borderColor = [UIColor colorWithRed:101/255.0f green:101/255.0f blue:90/255.0f alpha:1.0f].CGColor;
-    submitButton.layer.cornerRadius = 5;
+    _submitButton = [[UIButton alloc] initWithFrame:CGRectMake(kAFVDFormItemXBuffer, _formScrollView.frame.size.height - (submitButtonHeight + kAFVDFormItemXBuffer) - kAFVDSubmitButtonBottomMargin, self.frame.size.width - kAFVDFormItemXBuffer*2, submitButtonHeight)];
+    [_submitButton addTarget:self action:@selector(onSubmitButton) forControlEvents:UIControlEventTouchUpInside];
+    _submitButton.layer.borderWidth = 2;
+    _submitButton.layer.borderColor = UIColorFromRGBA(101, 101, 90, 1).CGColor;
+    _submitButton.layer.cornerRadius = 5;
     
-    [submitButton setTitle:NSLocalizedString(@"AFVDSignupFormSubmitButton", nil) forState:UIControlStateNormal];
+    [_submitButton setTitle:NSLocalizedString(@"AFVDSignupFormSubmitButton", nil) forState:UIControlStateNormal];
     
-    [formScrollView addSubview:submitButton];
-    submitButton.enabled = NO;
+    [_formScrollView addSubview:_submitButton];
+    _submitButton.enabled = NO;
     /*Create username/password textviews*/
     
     NSArray* formItems = @[NSLocalizedString(@"AFVDSignupFormUsername", nil), NSLocalizedString(@"AFVDSignupFormPassword", nil)];
@@ -65,7 +65,7 @@
         
         CGSize formLabelSize = [formItemLabel.text sizeWithAttributes:@{NSFontAttributeName : formItemLabel.font}];
         
-        formItemLabel.frame = CGRectMake(kAFVDFormItemXBuffer*1.25, formScrollView.frame.size.height - ((formLabelSize.height + kAFVDSigninFormItemYBuffer*2)*itemNumber + submitButton.frame.size.height + kAFVDSigninFormItemYBuffer), formLabelSize.width, formLabelSize.height);
+        formItemLabel.frame = CGRectMake(kAFVDFormItemXBuffer*1.25, _formScrollView.frame.size.height - ((formLabelSize.height + kAFVDSigninFormItemYBuffer*2)*itemNumber + _submitButton.frame.size.height + kAFVDSigninFormItemYBuffer), formLabelSize.width, formLabelSize.height);
         
         /*Create Input Boxes*/
         UITextField* textField = [[UITextField alloc] initWithFrame:CGRectMake(formItemLabel.frame.origin.x, formItemLabel.frame.origin.y + formItemLabel.frame.size.height + kAFVDFormItemInputYBufferSize, kAFVDFormTextViewWidth, kAFVDFormTextViewHeight)];
@@ -76,8 +76,8 @@
         
         textField.leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 3, textField.frame.size.height)];
         textField.leftViewMode = UITextFieldViewModeAlways;
-        textField.layer.borderWidth = 1.5;
-        textField.layer.borderColor = [UIColor colorWithRed:128/255.0 green:129/255.0 blue:123/255.0 alpha:1].CGColor;
+        textField.layer.borderWidth = kAFVDInitialViewTextFieldBorder;
+        textField.layer.borderColor = UIColorFromRGBA(128, 129, 123, 1).CGColor;
         
         textField.autocapitalizationType = UITextAutocapitalizationTypeNone;
         
@@ -87,8 +87,8 @@
             textField.secureTextEntry = TRUE;
         }
         
-        [formScrollView addSubview:formItemLabel];
-        [formScrollView addSubview:textField];
+        [_formScrollView addSubview:formItemLabel];
+        [_formScrollView addSubview:textField];
         
         itemNumber--;
         if (itemNumber == 0) {
@@ -103,21 +103,23 @@
 - (void)textFieldDidEndEditing:(UITextField *)textField {
     switch (textField.tag) {
         case AFVDSigninFormItem_Username:
-            username = textField.text;
+            _username = textField.text;
             break;
             
         case AFVDSigninFormItem_Password:
-            password = textField.text;
+            _password = textField.text;
             break;
     }
-    submitButton.enabled = (username && password);
+    _submitButton.enabled = (_username && _password);
 }
 
 #pragma mark - onSubmitButton Method
 
 - (void)onSubmitButton {
-    AFVDSigninUserModel* model = [[AFVDSigninUserModel alloc] initWithUsername:username password:password];
-    [self.signinDelegate signUserInWithModel:model];
+    AFVDSigninUserModel* model = [[AFVDSigninUserModel alloc] initWithUsername:_username password:_password];
+    if ([_signinDelegate respondsToSelector:@selector(signUserInWithModel:)]) {
+        [_signinDelegate signUserInWithModel:model];
+    }
 }
 
 #pragma mark - Cleanup

@@ -20,11 +20,11 @@
     return self;
 }
 
-- (instancetype)initWithUsername:(NSString *)username access_token:(NSString *)token {
+- (instancetype)initWithUsername:(NSString *)username accessToken:(NSString *)token {
     
     if (self = [super init]) {
         _username       = username;
-        _access_token   = token;
+        _accessToken    = token;
     }
     
     return self;
