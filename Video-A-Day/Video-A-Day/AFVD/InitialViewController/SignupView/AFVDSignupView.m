@@ -225,7 +225,7 @@
         dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
         dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
             [_formScrollView setContentOffset:CGPointMake(self.frame.size.width*(_currentFormPage-1), 0) animated:YES];
-            [UIView animateWithDuration:0.3f delay:0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
+            [UIView animateWithDuration:kAFVDSignupNextPageDuration delay:0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
                 _profileImageSelector.alpha = 0;
             } completion:^(BOOL finished) {
                 _profileImageSelector.frame = CGRectMake((self.frame.size.width*(_currentFormPage-1)) + _profileImageSelectorInitialXMargin, _profileImageSelector.frame.origin.y, _profileImageSelector.frame.size.width, _profileImageSelector.frame.size.height);
