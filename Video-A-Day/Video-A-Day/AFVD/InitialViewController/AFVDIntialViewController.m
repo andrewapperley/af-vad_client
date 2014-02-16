@@ -72,7 +72,7 @@
     /*Signup Button*/
     
     UIImage* signupButtonImage = [UIImage imageNamed:kAFVDSignupImage];
-    UIImage* signupButtonImageSelected = [UIImage imageNamed:kAFVDSignupSelectedImage];
+    UIImage* signupButtonImageSelected = nil;//[UIImage imageNamed:kAFVDSignupSelectedImage];
     
     UIButton* signupButton = [[UIButton alloc] initWithFrame:CGRectMake(kAFVDSignupAndSigninXBuffer, self.view.frame.size.height - signupButtonImage.size.height - kAFVDSignupAndSigninYBuffer, signupButtonImage.size.width, signupButtonImage.size.height)];
     [signupButton setBackgroundImage:signupButtonImage forState:UIControlStateNormal];
@@ -92,7 +92,7 @@
     
     /*Signin Button*/
     UIImage* signinButtonImage = [UIImage imageNamed:kAFVDSigninImage];
-    UIImage* signinButtonImageSelected = [UIImage imageNamed:kAFVDSigninSelectedImage];
+    UIImage* signinButtonImageSelected = nil;//[UIImage imageNamed:kAFVDSigninSelectedImage];
     
     UIButton* signinButton = [[UIButton alloc] initWithFrame:CGRectMake(self.view.frame.size.width - signinButtonImage.size.width - kAFVDSignupAndSigninXBuffer, self.view.frame.size.height - signinButtonImage.size.height - kAFVDSignupAndSigninYBuffer, signinButtonImage.size.width, signinButtonImage.size.height)];
     [signinButton setBackgroundImage:signinButtonImage forState:UIControlStateNormal];
@@ -272,6 +272,8 @@
     temp.alpha = kAFVDSlidingPanelAlpha;
     
     [_slidingPanel addSubview:temp];
+//    _slidingPanel.backgroundColor = [UIColor whiteColor];
+//    _slidingPanel.alpha = 0.9f;
 }
 
 #pragma mark - Cleanup

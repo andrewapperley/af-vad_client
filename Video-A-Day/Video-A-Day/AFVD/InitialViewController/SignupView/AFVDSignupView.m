@@ -158,19 +158,6 @@
 }
 
 - (void)createCircleProfileImage {
-    
-//    NSInteger radius = _profileImageSelector.frame.size.width;
-//    
-//    CAShapeLayer *circle = [CAShapeLayer layer];
-//    
-//    circle.path = [UIBezierPath bezierPathWithOvalInRect:CGRectMake(0, 0, radius, radius)].CGPath;
-//    circle.frame = CGRectMake(0, 0, radius, radius);
-//    
-//    // Configure the apperence of the circle
-//    circle.fillColor = [UIColor blackColor].CGColor;
-//    circle.lineWidth = 1;
-//    
-//    [_profileImageSelector.layer setMask:circle];
     _profileImageSelector.layer.cornerRadius = CGRectGetWidth(_profileImageSelector.bounds) * 0.5f;
     _profileImageSelector.clipsToBounds = YES;
 }
