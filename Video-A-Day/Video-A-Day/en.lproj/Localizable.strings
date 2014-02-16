@@ -1,0 +1,23 @@
+/* 
+  Localizable.strings
+  Video-A-Day
+
+  Created by Andrew Apperley on 1/9/2014.
+  Copyright (c) 2014 AFApps. All rights reserved.
+*/
+
+/*Initial view*/
+"AFVDInitialViewCreating"   = "creating memories, one blip at a time";
+"AFVDInitialViewSignUp"     = "Sign Up";
+"AFVDInitialViewSignIn"     = "Sign In";
+
+/*Signup Form View*/
+"AFVDSignupFormUsername"            = "Username";
+"AFVDSignupFormDisplayName"         = "Display Name";
+"AFVDSignupFormPassword"            = "Password";
+"AFVDSignupFormConfirmPassword"     = "Confirm Password";
+"AFVDSignupFormEmail"               = "Email";
+"AFVDSignupFormSubmitButton"        = "Submit";
+"AFVDSignupFormTerms"               = "By Signing Up, you agree to our Terms and Conditions";
+"AFVDSigninForFailureTitle"         = "Login Failure";
+"AFVDSigninForFailureButtonTitle"   = "Dismiss";

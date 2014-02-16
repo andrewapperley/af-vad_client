@@ -7,13 +7,18 @@
 //
 
 #import "AFVDKeychain.h"
+#import "SSKeychain.h"
+#import "SSKeychainQuery.h"
+#import "AFVDBaseNetworkStatics.h"
+#import <Security/Security.h>
 
 //Keys
 NSString *const kIdentityTokenIdentifier = @"com.apple.%@.UbiquityIdentityToken";
 NSString *const kBundleKeyName           = @"CFBundleName";
 
 //Access Token handling
-NSString *const kAFVDAccessToken            = @"userAccessToken";
+NSString *const kAFVDAccessToken                    = @"userAccessToken";
+NSString *const kAFVDAccessTokenExpiry              = @"userAccessTokenExpiry";
 
 @implementation AFVDKeychain
 
@@ -25,6 +30,7 @@ NSString *const kAFVDAccessToken            = @"userAccessToken";
         
         [self registerForNotifications];
         [self loadiCloudToken];
+        [self loadAccessToken];
     }
     return self;
 }
@@ -36,55 +42,55 @@ NSString *const kAFVDAccessToken            = @"userAccessToken";
 }
 
 #pragma mark - Access token
-- (void)setAccessToken:(NSString *)accessToken {
+- (void)setAccessToken:(NSString *)accessToken andExpiryDate:(NSString *)expiryDate {
     
-    _accessToken = accessToken;
+    _accessToken    = accessToken;
+    _expiryDate     = expiryDate;
+    [SSKeychain setPassword:accessToken forService:kAFVDAccessToken account:iCloudTokenName()];
+    [SSKeychain setPassword:expiryDate forService:kAFVDAccessTokenExpiry account:iCloudTokenName()];
+
+}
+
+- (BOOL)accessTokenValid {
+    return ((_accessToken && _expiryDate) && [self accessTokenNotExpired]);
+}
+
+- (BOOL)accessTokenNotExpired {
     
-#warning TODO : Save to user defaults and / or iCloud
+    NSDateFormatter* expiryDateFormatter    = [[NSDateFormatter alloc] init];
+    expiryDateFormatter                     = [[NSDateFormatter alloc] init];
+    [expiryDateFormatter setDateFormat:kAFVDBaseNetworkDefaultDateFormat];
+    [expiryDateFormatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US_POSIX"]];
+    NSDate* expiryDate                      = [expiryDateFormatter dateFromString:_expiryDate];
+    NSDate* currentDate                     = [expiryDateFormatter dateFromString:[expiryDateFormatter stringFromDate:[NSDate date]]];
     
-    if(_accessToken) {
-        [[NSUserDefaults standardUserDefaults] setObject:_accessToken forKey:kAFVDAccessToken];
-    } else {
-        [[NSUserDefaults standardUserDefaults] removeObjectForKey:kAFVDAccessToken];
-    }
-    [[NSUserDefaults standardUserDefaults] synchronize];
+    return ([[expiryDate earlierDate:currentDate] isEqualToDate:currentDate]);
 }
 
 - (void)loadAccessToken {
     
-#warning TODO : Handle loading access token from iCloud
-    _accessToken = [[NSUserDefaults standardUserDefaults] objectForKey:kAFVDAccessToken];
+    _accessToken    = [SSKeychain passwordForService:kAFVDAccessToken account:iCloudTokenName()];
+    _expiryDate     = [SSKeychain passwordForService:kAFVDAccessTokenExpiry account:iCloudTokenName()];
 }
 
 - (void)iCloudAccountAvailabilityChanged:(NSNotification *)notification {
+    BOOL accountStillActive = NO;
     
-#warning TODO : Handle changes
+    for (NSDictionary* account in [SSKeychain allAccounts]) {
+        if ([account[@"acct"] isEqualToString:iCloudTokenName()]) {
+            accountStillActive = YES;
+        }
+    }
+    if (!accountStillActive) {
+        _accessToken    = nil;
+        _expiryDate     = nil;
+    }
 }
 
 #pragma mark - iCloud token handling
 #pragma mark - Retrieve token 
 - (void)loadiCloudToken {
-    
-    id currentiCloudToken = [[NSFileManager defaultManager] ubiquityIdentityToken];
-    
-    NSString *tokenName = iCloudTokenName();
-    
-    if(currentiCloudToken) {
-        NSData *newTokenData = [NSKeyedArchiver archivedDataWithRootObject:currentiCloudToken];
-        [[NSUserDefaults standardUserDefaults] setObject:newTokenData forKey:tokenName];
-    } else {
-        [[NSUserDefaults standardUserDefaults] removeObjectForKey:tokenName];
-    }
-    
     [self loadAccessToken];
-}
-
-#pragma mark - Saving
-- (void)save {
-    
-    #warning TODO : Save w/ encryption
-    [[NSUserDefaults standardUserDefaults] setObject:_accessToken forKey:kAFVDAccessToken];
-    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 #pragma mark - Utility methods

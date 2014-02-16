@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <AVFoundation/AVFoundation.h>
 
-@protocol AFVideoCaptureControlsDelegate <NSObject>
+@protocol AFVDVideoCaptureControlsDelegate <NSObject>
 
 @required
 - (void)startCapturingVideo;
@@ -19,9 +19,9 @@
 
 @end
 
-@interface AFVideoCaptureControls : UIView
+@interface AFVDVideoCaptureControls : UIView
 
-@property (nonatomic, weak) id <AFVideoCaptureControlsDelegate> delegate;
+@property (nonatomic, weak) id <AFVDVideoCaptureControlsDelegate> delegate;
 
 - (void)changeRecordingButtonState:(BOOL)lrecording;
 - (void)setRecordingTime:(long long)newTime;

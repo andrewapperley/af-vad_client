@@ -15,8 +15,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "0F2FC6E61837303800611873"
-               BuildableName = "Video-A-Day.app"
-               BlueprintName = "Video-A-Day"
+               BuildableName = "Blips.app"
+               BlueprintName = "Blips"
                ReferencedContainer = "container:Video-A-Day.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -33,8 +33,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "0F2FC70A1837303900611873"
-               BuildableName = "Video-A-DayTests.xctest"
-               BlueprintName = "Video-A-DayTests"
+               BuildableName = "BlipsTests.xctest"
+               BlueprintName = "BlipsTests"
                ReferencedContainer = "container:Video-A-Day.xcodeproj">
             </BuildableReference>
          </TestableReference>
@@ -43,8 +43,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "0F2FC6E61837303800611873"
-            BuildableName = "Video-A-Day.app"
-            BlueprintName = "Video-A-Day"
+            BuildableName = "Blips.app"
+            BlueprintName = "Blips"
             ReferencedContainer = "container:Video-A-Day.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -62,8 +62,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "0F2FC6E61837303800611873"
-            BuildableName = "Video-A-Day.app"
-            BlueprintName = "Video-A-Day"
+            BuildableName = "Blips.app"
+            BlueprintName = "Blips"
             ReferencedContainer = "container:Video-A-Day.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -80,8 +80,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "0F2FC6E61837303800611873"
-            BuildableName = "Video-A-Day.app"
-            BlueprintName = "Video-A-Day"
+            BuildableName = "Blips.app"
+            BlueprintName = "Blips"
             ReferencedContainer = "container:Video-A-Day.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
