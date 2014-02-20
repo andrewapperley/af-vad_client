@@ -48,9 +48,10 @@
 		0FDC799418B44579001F9F14 /* AFRotatingMenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FDC799318B44579001F9F14 /* AFRotatingMenuItem.m */; };
 		0FDC799718B4458F001F9F14 /* AFRotatingMenuDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FDC799618B4458F001F9F14 /* AFRotatingMenuDataSource.m */; };
 		0FDC799A18B445B7001F9F14 /* AFRotatingMenuDataSourceItemFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FDC799918B445B7001F9F14 /* AFRotatingMenuDataSourceItemFactory.m */; };
-		0FDC799D18B445F8001F9F14 /* AFRotatingMenuCollectionViewLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FDC799C18B445F8001F9F14 /* AFRotatingMenuCollectionViewLayout.m */; };
 		0FDC79A018B4461B001F9F14 /* AFRotatingMenuCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FDC799F18B4461B001F9F14 /* AFRotatingMenuCollectionViewCell.m */; };
 		0FDC79A618B448F8001F9F14 /* AFRotatingMenuControllerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FDC79A518B448F8001F9F14 /* AFRotatingMenuControllerModel.m */; };
+		0FDC79A918B5C4FE001F9F14 /* AFRotatingMenuStatics.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FDC79A818B5C4FE001F9F14 /* AFRotatingMenuStatics.m */; };
+		0FDC79AC18B5CB5A001F9F14 /* AFRotatingMenuCollectionViewLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FDC79AB18B5CB5A001F9F14 /* AFRotatingMenuCollectionViewLayout.m */; };
 		0FF186D418AAFC6100BE1417 /* AFVDFontStatics.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FF186D318AAFC6100BE1417 /* AFVDFontStatics.m */; };
 		0FF186D718AAFCC000BE1417 /* AFVDInitialViewStatics.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FF186D618AAFCC000BE1417 /* AFVDInitialViewStatics.m */; };
 		0FF441D418626A3200ADAD2C /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FF441D318626A3100ADAD2C /* CoreVideo.framework */; };
@@ -159,12 +160,14 @@
 		0FDC799618B4458F001F9F14 /* AFRotatingMenuDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFRotatingMenuDataSource.m; sourceTree = "<group>"; };
 		0FDC799818B445B7001F9F14 /* AFRotatingMenuDataSourceItemFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFRotatingMenuDataSourceItemFactory.h; sourceTree = "<group>"; };
 		0FDC799918B445B7001F9F14 /* AFRotatingMenuDataSourceItemFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFRotatingMenuDataSourceItemFactory.m; sourceTree = "<group>"; };
-		0FDC799B18B445F8001F9F14 /* AFRotatingMenuCollectionViewLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFRotatingMenuCollectionViewLayout.h; sourceTree = "<group>"; };
-		0FDC799C18B445F8001F9F14 /* AFRotatingMenuCollectionViewLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFRotatingMenuCollectionViewLayout.m; sourceTree = "<group>"; };
 		0FDC799E18B4461B001F9F14 /* AFRotatingMenuCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFRotatingMenuCollectionViewCell.h; sourceTree = "<group>"; };
 		0FDC799F18B4461B001F9F14 /* AFRotatingMenuCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFRotatingMenuCollectionViewCell.m; sourceTree = "<group>"; };
 		0FDC79A418B448F8001F9F14 /* AFRotatingMenuControllerModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFRotatingMenuControllerModel.h; sourceTree = "<group>"; };
 		0FDC79A518B448F8001F9F14 /* AFRotatingMenuControllerModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFRotatingMenuControllerModel.m; sourceTree = "<group>"; };
+		0FDC79A718B5C4FE001F9F14 /* AFRotatingMenuStatics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFRotatingMenuStatics.h; sourceTree = "<group>"; };
+		0FDC79A818B5C4FE001F9F14 /* AFRotatingMenuStatics.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFRotatingMenuStatics.m; sourceTree = "<group>"; };
+		0FDC79AA18B5CB5A001F9F14 /* AFRotatingMenuCollectionViewLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFRotatingMenuCollectionViewLayout.h; sourceTree = "<group>"; };
+		0FDC79AB18B5CB5A001F9F14 /* AFRotatingMenuCollectionViewLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFRotatingMenuCollectionViewLayout.m; sourceTree = "<group>"; };
 		0FF186D218AAFC6100BE1417 /* AFVDFontStatics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFVDFontStatics.h; sourceTree = "<group>"; };
 		0FF186D318AAFC6100BE1417 /* AFVDFontStatics.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFVDFontStatics.m; sourceTree = "<group>"; };
 		0FF186D518AAFCC000BE1417 /* AFVDInitialViewStatics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFVDInitialViewStatics.h; sourceTree = "<group>"; };
@@ -504,12 +507,14 @@
 				0FDC799618B4458F001F9F14 /* AFRotatingMenuDataSource.m */,
 				0FDC799818B445B7001F9F14 /* AFRotatingMenuDataSourceItemFactory.h */,
 				0FDC799918B445B7001F9F14 /* AFRotatingMenuDataSourceItemFactory.m */,
-				0FDC799B18B445F8001F9F14 /* AFRotatingMenuCollectionViewLayout.h */,
-				0FDC799C18B445F8001F9F14 /* AFRotatingMenuCollectionViewLayout.m */,
 				0FDC799E18B4461B001F9F14 /* AFRotatingMenuCollectionViewCell.h */,
 				0FDC799F18B4461B001F9F14 /* AFRotatingMenuCollectionViewCell.m */,
 				0FDC79A418B448F8001F9F14 /* AFRotatingMenuControllerModel.h */,
 				0FDC79A518B448F8001F9F14 /* AFRotatingMenuControllerModel.m */,
+				0FDC79A718B5C4FE001F9F14 /* AFRotatingMenuStatics.h */,
+				0FDC79A818B5C4FE001F9F14 /* AFRotatingMenuStatics.m */,
+				0FDC79AA18B5CB5A001F9F14 /* AFRotatingMenuCollectionViewLayout.h */,
+				0FDC79AB18B5CB5A001F9F14 /* AFRotatingMenuCollectionViewLayout.m */,
 			);
 			name = AFRotatingMenu;
 			path = AF/AFRotatingMenu;
@@ -841,7 +846,6 @@
 				0F06A6F9187CF2340021E10C /* AFVDSignupView.m in Sources */,
 				0FF604791880E4CC00E7DF58 /* AFVDInitialView.m in Sources */,
 				7677BA7018373A6B00F3EDC9 /* AFVDUserModel.m in Sources */,
-				0FDC799D18B445F8001F9F14 /* AFRotatingMenuCollectionViewLayout.m in Sources */,
 				7677BA6E18373A6B00F3EDC9 /* AFVDUserModelDatasource.m in Sources */,
 				0F21EFA7189D5BDC001706FD /* SSKeychain.m in Sources */,
 				0FDC798918B43B30001F9F14 /* AFVDFilterTileButton.m in Sources */,
@@ -857,6 +861,7 @@
 				0F79613E183EE64E00920C59 /* AFVDUrlHasher.m in Sources */,
 				7657BBF4184EE1A1004CA559 /* AFVDBaseNetworkStatics.m in Sources */,
 				0F06A6FC187CF2460021E10C /* AFVDActivityIndicator.m in Sources */,
+				0FDC79A918B5C4FE001F9F14 /* AFRotatingMenuStatics.m in Sources */,
 				0FDC799718B4458F001F9F14 /* AFRotatingMenuDataSource.m in Sources */,
 				7696C7DF184C366000B270FC /* AFVDKeychain.m in Sources */,
 				0F2FC6FB1837303800611873 /* AFVDAppDelegate.m in Sources */,
@@ -870,6 +875,7 @@
 				0FDC799A18B445B7001F9F14 /* AFRotatingMenuDataSourceItemFactory.m in Sources */,
 				76C651A8183840E4003C7F7D /* AFVDVideoModelFactory.m in Sources */,
 				0FDC799118B4455F001F9F14 /* AFRotatingMenuViewController.m in Sources */,
+				0FDC79AC18B5CB5A001F9F14 /* AFRotatingMenuCollectionViewLayout.m in Sources */,
 				0FDC79A618B448F8001F9F14 /* AFRotatingMenuControllerModel.m in Sources */,
 				0FDC799418B44579001F9F14 /* AFRotatingMenuItem.m in Sources */,
 				7677BA6D18373A6B00F3EDC9 /* AFVDBaseNetworkDatasource.m in Sources */,

@@ -7,25 +7,35 @@
 //
 
 #import "AFRotatingMenuCollectionViewCell.h"
+#import "AFRotatingMenuStatics.h"
+
+@interface AFRotatingMenuCollectionViewCell() {
+    UIImageView* _iconView;
+}
+
+@end
 
 @implementation AFRotatingMenuCollectionViewCell
 
-- (id)initWithFrame:(CGRect)frame
-{
+- (id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        // Initialization code
+        _iconView                       = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0,kAFRotatingMenuCollectionViewCellIconSize, kAFRotatingMenuCollectionViewCellIconSize)];
+        _iconView.layer.cornerRadius    = _iconView.frame.size.width * 0.5f;
+        _iconView.contentMode           = UIViewContentModeScaleAspectFit;
+        _iconView.clipsToBounds         = YES;
+        _iconView.backgroundColor       = [UIColor whiteColor];
+        [self.contentView addSubview:_iconView];
+        _menuItemTitleLabel             = [[UILabel alloc] init];
+        _menuItemTitleLabel.alpha       = 0;
+        [self.contentView addSubview:_menuItemTitleLabel];
+        self.alpha                      = 0.8f;
     }
     return self;
 }
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
-{
-    // Drawing code
+- (void)setIcon:(UIImage *)icon {
+    _iconView.image = icon;
 }
-*/
 
 @end

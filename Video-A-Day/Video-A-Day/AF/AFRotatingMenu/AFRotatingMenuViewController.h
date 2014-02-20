@@ -8,6 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
+@class AFRotatingMenuControllerModel;
+
 @interface AFRotatingMenuViewController : UIViewController
+
+@property(nonatomic, weak)id delegate;
+
+- (instancetype)initWithModel:(AFRotatingMenuControllerModel *)model;
 
 @end

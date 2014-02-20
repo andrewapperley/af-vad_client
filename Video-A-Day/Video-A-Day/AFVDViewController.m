@@ -16,6 +16,8 @@
 #import "AFVDVideoModelFactory.h"
 #import "AFVDRelationshipModelFactory.h"
 #import "AFVDVideoCaptureController.h"
+#import "AFRotatingMenuViewController.h"
+#import "AFRotatingMenuControllerModel.h"
 
 NSString *userName = @"andrewApperley123";
 NSString *displayName = @"a_apperley";
@@ -68,20 +70,30 @@ NSString *email = @"email@email.com";
 //    [self addChildViewController:vc];
 //    [self.view addSubview:vc.view];
     
+//    if ([self checkForLoginInfo]) {
+//        
+//    } else {
+//        AFVDIntialViewController* inVC = [[AFVDIntialViewController alloc] initWithBackgroundImage:[UIImage imageNamed:@"AFVDFieldBackground"]];
+//        
+//        [self addChildViewController:inVC];
+//        [self.view addSubview:inVC.view];
+//        
+//        [self setAccessToken:@"thisisatoken" andExpiryDate:@"dsfds"];
+//    }
     
     
-    if ([self checkForLoginInfo]) {
-        
-    } else {
-        AFVDIntialViewController* inVC = [[AFVDIntialViewController alloc] initWithBackgroundImage:[UIImage imageNamed:@"AFVDFieldBackground"]];
-        
-        [self addChildViewController:inVC];
-        [self.view addSubview:inVC.view];
-        
-        [self setAccessToken:@"thisisatoken" andExpiryDate:@"dsfds"];
-    }
+    AFRotatingMenuControllerModel* menuModel = [[AFRotatingMenuControllerModel alloc] initWithIcons:@[[UIImage imageNamed:@"AFVDLogo"], [UIImage imageNamed:@"AFVDProfileImageSelector"],[UIImage imageNamed:@"AFVDLogo"], [UIImage imageNamed:@"AFVDProfileImageSelector"],[UIImage imageNamed:@"AFVDLogo"], [UIImage imageNamed:@"AFVDProfileImageSelector"],[UIImage imageNamed:@"AFVDLogo"], [UIImage imageNamed:@"AFVDProfileImageSelector"],[UIImage imageNamed:@"AFVDLogo"], [UIImage imageNamed:@"AFVDProfileImageSelector"]] titles:@[@"test"] selectors:@[@"itemSelected", @"itemSelected"]];
     
+    AFRotatingMenuViewController* menu = [[AFRotatingMenuViewController alloc] initWithModel:menuModel];
+    menu.delegate = self;
     
+    [self addChildViewController:menu];
+    [self.view addSubview:menu.view];
+    
+}
+
+- (void)itemSelected {
+    NSLog(@"CLICKED MENU ITEM");
 }
 
 #pragma mark - Access Token Checks

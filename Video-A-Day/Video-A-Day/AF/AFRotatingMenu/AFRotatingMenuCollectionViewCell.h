@@ -10,4 +10,7 @@
 
 @interface AFRotatingMenuCollectionViewCell : UICollectionViewCell
 
+@property(nonatomic, strong)UIImage* icon;
+@property(nonatomic, strong)UILabel* menuItemTitleLabel;
+
 @end

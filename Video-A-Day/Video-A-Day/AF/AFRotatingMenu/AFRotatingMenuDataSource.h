@@ -10,7 +10,7 @@
 
 @class AFRotatingMenuControllerModel;
 
-@interface AFRotatingMenuDataSource : NSObject
+@interface AFRotatingMenuDataSource : NSObject <UICollectionViewDataSource>
 
 @property(nonatomic, strong, readonly)NSArray* menuItems;
 - (void)setMenuItemsWithModel:(AFRotatingMenuControllerModel *)model;
