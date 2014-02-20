@@ -8,12 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
-@class AFRotatingMenuControllerModel, AFRotatingMenuDataSourceItemFactory;
+@class AFRotatingMenuControllerModel;
 
 @interface AFRotatingMenuDataSource : NSObject
 
-@property(nonatomic, strong)NSArray* menuItems;
-@property(nonatomic, strong)AFRotatingMenuDataSourceItemFactory* rotatingMenuDatasourceFactory;
-+ (void)setMenuItemsWithModel:(AFRotatingMenuControllerModel *)model;
+@property(nonatomic, strong, readonly)NSArray* menuItems;
+- (void)setMenuItemsWithModel:(AFRotatingMenuControllerModel *)model;
 
 @end

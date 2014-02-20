@@ -7,10 +7,20 @@
 //
 
 #import "AFRotatingMenuDataSource.h"
+#import "AFRotatingMenuDataSourceItemFactory.h"
 
 @implementation AFRotatingMenuDataSource
 
-+ (void)setMenuItemsWithModel:(AFRotatingMenuControllerModel *)model {
+- (instancetype)init {
+    if (self = [super init]) {
+        _menuItems = [[NSArray alloc] init];
+    }
+    return self;
+}
+
+- (void)setMenuItemsWithModel:(AFRotatingMenuControllerModel *)model {
+    
+    _menuItems = [AFRotatingMenuDataSourceItemFactory generateMenuItemsFromMenuModel:model];
     
 }
 

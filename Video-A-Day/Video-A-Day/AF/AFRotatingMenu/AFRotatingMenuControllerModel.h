@@ -10,4 +10,10 @@
 
 @interface AFRotatingMenuControllerModel : NSObject
 
+@property(nonatomic, strong)NSArray* icons;
+@property(nonatomic, strong)NSArray* titles;
+@property(nonatomic, strong)NSArray* selectors;
+
+- (instancetype)initWithIcons:(NSArray *)icons titles:(NSArray *)titles selectors:(NSArray *)selectors;
+
 @end

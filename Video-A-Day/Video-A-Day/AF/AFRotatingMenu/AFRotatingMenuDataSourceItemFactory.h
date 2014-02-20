@@ -7,7 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "AFRotatingMenuControllerModel.h"
 
 @interface AFRotatingMenuDataSourceItemFactory : NSObject
+
++ (NSArray *)generateMenuItemsFromMenuModel:(AFRotatingMenuControllerModel *)model;
 
 @end
