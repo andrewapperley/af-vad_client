@@ -14,6 +14,7 @@
 
 @property(nonatomic, weak)id delegate;
 
-- (instancetype)initWithModel:(AFRotatingMenuControllerModel *)model;
+- (instancetype)initWithModel:(AFRotatingMenuControllerModel *)model diameter:(CGFloat)diameter;
+- (void)refreshMenuWithModel:(AFRotatingMenuControllerModel *)model;
 
 @end

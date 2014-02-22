@@ -12,9 +12,10 @@
 #import "AFRotatingMenuCollectionViewCell.h"
 #import "AFRotatingMenuStatics.h"
 #import "AFRotatingMenuItem.h"
+#import "AFRotatingMenuCollectionView.h"
 
 @interface AFRotatingMenuViewController () <UICollectionViewDelegate> {
-    UICollectionView* _rotatingCollectionView;
+    AFRotatingMenuCollectionView* _rotatingCollectionView;
     AFRotatingMenuDataSource* _datasource;
     AFRotatingMenuControllerModel* _currentModel;
 }
@@ -23,9 +24,13 @@
 
 @implementation AFRotatingMenuViewController
 
-- (instancetype)initWithModel:(AFRotatingMenuControllerModel *)model {
+#pragma mark - Init methods
+
+- (instancetype)initWithModel:(AFRotatingMenuControllerModel *)model diameter:(CGFloat)diameter {
     if (self = [super init]) {
         _currentModel = model;
+        AFRotatingMenuCollectionViewLayout* layout = [[AFRotatingMenuCollectionViewLayout alloc] init];
+        _rotatingCollectionView = [[AFRotatingMenuCollectionView alloc] initWithFrame:CGRectMake(0, 0, diameter, diameter) collectionViewLayout:layout];
     }
     return self;
 }
@@ -35,17 +40,24 @@
     [super viewDidLoad];
     _datasource = [[AFRotatingMenuDataSource alloc] init];
     [_datasource setMenuItemsWithModel:_currentModel];
-	_rotatingCollectionView = [[UICollectionView alloc] initWithFrame:self.view.bounds collectionViewLayout:[[AFRotatingMenuCollectionViewLayout alloc] init]];
     [_rotatingCollectionView setDelegate:self];
     [_rotatingCollectionView setDataSource:_datasource];
     [_rotatingCollectionView registerClass:[AFRotatingMenuCollectionViewCell class] forCellWithReuseIdentifier:kAFRotatingMenuCollectionViewCellId];
     [self.view addSubview:_rotatingCollectionView];
 }
 
+#pragma mark - Public Menu methods
+
 - (void)refreshMenuWithModel:(AFRotatingMenuControllerModel *)model {
     [_datasource setMenuItemsWithModel:_currentModel];
+    [_rotatingCollectionView setCollectionViewLayout:[[AFRotatingMenuCollectionViewLayout alloc] init] animated:YES];
     [_rotatingCollectionView reloadData];
+    [_rotatingCollectionView performBatchUpdates:^{
+        [_rotatingCollectionView reloadSections:[NSIndexSet indexSetWithIndex:0]];
+    } completion:nil];
 }
+
+#pragma mark - UICollectionViewDelegate methods
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     if ([_delegate respondsToSelector:(SEL)((AFRotatingMenuItem *)_datasource.menuItems[indexPath.row]).menuItemSelector]) {
@@ -56,6 +68,8 @@
         func(_delegate, _selector);
     }
 }
+
+#pragma mark - Cleanup
 
 - (void)dealloc {
     _delegate                           = nil;

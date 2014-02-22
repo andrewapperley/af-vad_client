@@ -7,7 +7,36 @@
 //
 
 #import "AFRotatingMenuCollectionViewLayout.h"
+#import "AFRotatingMenuDataSource.h"
 
 @implementation AFRotatingMenuCollectionViewLayout
+
+- (NSArray *)layoutAttributesForElementsInRect:(CGRect)rect {
+    
+    NSArray* attributes = [super layoutAttributesForElementsInRect:rect];
+
+    CGRect visibleRect;
+    visibleRect.origin = self.collectionView.contentOffset;
+    visibleRect.size = self.collectionView.bounds.size;
+    
+    for (UICollectionViewLayoutAttributes* attribute in attributes) {
+        if (CGRectIntersectsRect(attribute.frame, rect)) {
+            attribute.center = CGPointMake(visibleRect.size.width/2 + self.collectionView.center.x * cosf(2 * attribute.indexPath.item * M_PI_2 / 4), visibleRect.size.width + self.collectionView.center.y * sinf(2 * attribute.indexPath.item * M_PI_2 / 4));
+        }
+    }
+    return attributes;
+}
+
+//- (CGPoint)targetContentOffsetForProposedContentOffset:(CGPoint)proposedContentOffset withScrollingVelocity:(CGPoint)velocity {
+//    
+//}
+
+//- (CGSize)collectionViewContentSize {
+//    
+//}
+
+- (BOOL)shouldInvalidateLayoutForBoundsChange:(CGRect)newBounds {
+    return YES;
+}
 
 @end

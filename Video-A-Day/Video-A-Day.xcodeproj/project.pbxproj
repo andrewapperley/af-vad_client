@@ -52,6 +52,7 @@
 		0FDC79A618B448F8001F9F14 /* AFRotatingMenuControllerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FDC79A518B448F8001F9F14 /* AFRotatingMenuControllerModel.m */; };
 		0FDC79A918B5C4FE001F9F14 /* AFRotatingMenuStatics.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FDC79A818B5C4FE001F9F14 /* AFRotatingMenuStatics.m */; };
 		0FDC79AC18B5CB5A001F9F14 /* AFRotatingMenuCollectionViewLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FDC79AB18B5CB5A001F9F14 /* AFRotatingMenuCollectionViewLayout.m */; };
+		0FDC79AF18B83DAD001F9F14 /* AFRotatingMenuCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FDC79AE18B83DAD001F9F14 /* AFRotatingMenuCollectionView.m */; };
 		0FF186D418AAFC6100BE1417 /* AFVDFontStatics.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FF186D318AAFC6100BE1417 /* AFVDFontStatics.m */; };
 		0FF186D718AAFCC000BE1417 /* AFVDInitialViewStatics.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FF186D618AAFCC000BE1417 /* AFVDInitialViewStatics.m */; };
 		0FF441D418626A3200ADAD2C /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FF441D318626A3100ADAD2C /* CoreVideo.framework */; };
@@ -168,6 +169,8 @@
 		0FDC79A818B5C4FE001F9F14 /* AFRotatingMenuStatics.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFRotatingMenuStatics.m; sourceTree = "<group>"; };
 		0FDC79AA18B5CB5A001F9F14 /* AFRotatingMenuCollectionViewLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFRotatingMenuCollectionViewLayout.h; sourceTree = "<group>"; };
 		0FDC79AB18B5CB5A001F9F14 /* AFRotatingMenuCollectionViewLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFRotatingMenuCollectionViewLayout.m; sourceTree = "<group>"; };
+		0FDC79AD18B83DAD001F9F14 /* AFRotatingMenuCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFRotatingMenuCollectionView.h; sourceTree = "<group>"; };
+		0FDC79AE18B83DAD001F9F14 /* AFRotatingMenuCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFRotatingMenuCollectionView.m; sourceTree = "<group>"; };
 		0FF186D218AAFC6100BE1417 /* AFVDFontStatics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFVDFontStatics.h; sourceTree = "<group>"; };
 		0FF186D318AAFC6100BE1417 /* AFVDFontStatics.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFVDFontStatics.m; sourceTree = "<group>"; };
 		0FF186D518AAFCC000BE1417 /* AFVDInitialViewStatics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFVDInitialViewStatics.h; sourceTree = "<group>"; };
@@ -515,6 +518,8 @@
 				0FDC79A818B5C4FE001F9F14 /* AFRotatingMenuStatics.m */,
 				0FDC79AA18B5CB5A001F9F14 /* AFRotatingMenuCollectionViewLayout.h */,
 				0FDC79AB18B5CB5A001F9F14 /* AFRotatingMenuCollectionViewLayout.m */,
+				0FDC79AD18B83DAD001F9F14 /* AFRotatingMenuCollectionView.h */,
+				0FDC79AE18B83DAD001F9F14 /* AFRotatingMenuCollectionView.m */,
 			);
 			name = AFRotatingMenu;
 			path = AF/AFRotatingMenu;
@@ -878,6 +883,7 @@
 				0FDC79AC18B5CB5A001F9F14 /* AFRotatingMenuCollectionViewLayout.m in Sources */,
 				0FDC79A618B448F8001F9F14 /* AFRotatingMenuControllerModel.m in Sources */,
 				0FDC799418B44579001F9F14 /* AFRotatingMenuItem.m in Sources */,
+				0FDC79AF18B83DAD001F9F14 /* AFRotatingMenuCollectionView.m in Sources */,
 				7677BA6D18373A6B00F3EDC9 /* AFVDBaseNetworkDatasource.m in Sources */,
 				76C651931838003D003C7F7D /* NSDictionary+NSDictionary_NSDataConversion.m in Sources */,
 				0F2C8A021884CF000033397C /* AFVDStatics.m in Sources */,

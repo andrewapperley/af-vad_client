@@ -82,9 +82,9 @@ NSString *email = @"email@email.com";
 //    }
     
     
-    AFRotatingMenuControllerModel* menuModel = [[AFRotatingMenuControllerModel alloc] initWithIcons:@[[UIImage imageNamed:@"AFVDLogo"], [UIImage imageNamed:@"AFVDProfileImageSelector"],[UIImage imageNamed:@"AFVDLogo"], [UIImage imageNamed:@"AFVDProfileImageSelector"],[UIImage imageNamed:@"AFVDLogo"], [UIImage imageNamed:@"AFVDProfileImageSelector"],[UIImage imageNamed:@"AFVDLogo"], [UIImage imageNamed:@"AFVDProfileImageSelector"],[UIImage imageNamed:@"AFVDLogo"], [UIImage imageNamed:@"AFVDProfileImageSelector"]] titles:@[@"test"] selectors:@[@"itemSelected", @"itemSelected"]];
+    AFRotatingMenuControllerModel* menuModel = [[AFRotatingMenuControllerModel alloc] initWithIcons:@[[UIImage imageNamed:@"AFVDLogo"], [UIImage imageNamed:@"AFVDProfileImageSelector"],[UIImage imageNamed:@"AFVDLogo"], [UIImage imageNamed:@"AFVDProfileImageSelector"],[UIImage imageNamed:@"AFVDProfileImageSelector"],[UIImage imageNamed:@"AFVDProfileImageSelector"],[UIImage imageNamed:@"AFVDProfileImageSelector"],[UIImage imageNamed:@"AFVDProfileImageSelector"],[UIImage imageNamed:@"AFVDProfileImageSelector"]] titles:@[@"test"] selectors:@[@"itemSelected", @"itemSelected"]];
     
-    AFRotatingMenuViewController* menu = [[AFRotatingMenuViewController alloc] initWithModel:menuModel];
+    AFRotatingMenuViewController* menu = [[AFRotatingMenuViewController alloc] initWithModel:menuModel diameter:300];
     menu.delegate = self;
     
     [self addChildViewController:menu];
