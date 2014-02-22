@@ -14,7 +14,7 @@
     
     NSAssert([self isKindOfClass:[UIImage class]], @"Image must be class type of UIImage");
     
-    return [self applyBlurWithRadius:25 tintColor:[[UIColor whiteColor] colorWithAlphaComponent:0.5] saturationDeltaFactor:0.7 maskImage:nil];
+    return [self applyBlurWithRadius:5 tintColor:[[UIColor whiteColor] colorWithAlphaComponent:0.5] saturationDeltaFactor:0.7 maskImage:nil];
 }
 
 + (UIImage *)imageScreenshotFromView:(UIView *)view size:(CGSize)size offset:(CGSize)offset newHeight:(NSInteger)newHeight {

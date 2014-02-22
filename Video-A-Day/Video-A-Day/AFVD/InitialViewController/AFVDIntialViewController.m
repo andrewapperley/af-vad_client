@@ -16,6 +16,7 @@
 {
     UIImageView* _backgroundImageView;
     UIView* _slidingPanel;
+    UIView* _blackOverlay;
     AFVDInitialView* _currentPanelView;
     NSInteger _slidingPaneHeight;
     NSInteger _initialSlidingPanelY;
@@ -122,12 +123,19 @@
     
     _slidingPanel = [[UIView alloc] init];
     _slidingPanel.layer.anchorPoint = CGPointMake((self.view.frame.size.width - _slidingPanel.frame.size.width)/2, 0);
+    _slidingPanel.clipsToBounds = YES;
     _slidingPanel.frame = CGRectMake(0, _backgroundImageView.frame.size.height, _backgroundImageView.frame.size.width, _backgroundImageView.frame.size.height);
-    
-    UIToolbar* blurView = [[UIToolbar alloc] initWithFrame:_slidingPanel.bounds];
-    blurView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
-    [_slidingPanel insertSubview:blurView atIndex:0];
-    
+    _blackOverlay = [[UIView alloc] initWithFrame:_backgroundImageView.bounds];
+    _blackOverlay.backgroundColor = [UIColor blackColor];
+    _blackOverlay.alpha = 0.0f;
+    _blackOverlay.userInteractionEnabled = NO;
+
+    /*Doesnt work anymore on ios 7.0.3+*/
+//    UIToolbar* blurView = [[UIToolbar alloc] initWithFrame:_slidingPanel.bounds];
+//    blurView.alpha = 0.94;
+//    blurView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+//    [_slidingPanel insertSubview:blurView atIndex:0];
+    [self.view addSubview:_blackOverlay];
     [self.view addSubview:_slidingPanel];
 }
 
@@ -136,6 +144,7 @@
 - (void)onSigninSignupButton:(UIControl *)sender {
     
     self.view.userInteractionEnabled = FALSE;
+    
     _currentPanelView = nil;
     [self setPanelHeightAndBlur:_slidingPaneHeight];
     CGRect panelFrame = CGRectMake(0, 0, _slidingPanel.frame.size.width, _slidingPanel.frame.size.height);
@@ -158,8 +167,12 @@
 - (void)panelViewIsReady:(UIView *)panel andSender:(AFVDInitialView *__weak)sender {
     [_slidingPanel addSubview:panel];
     
+    UIView* blurredView = (UIView *)_slidingPanel.subviews[0];
+    
     [UIView animateWithDuration:kPanelViewAnimationDuration delay:0 options:UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationCurveLinear animations:^{
         _slidingPanel.frame = CGRectMake(0, (self.view.frame.size.height - _slidingPaneHeight),  _slidingPanel.frame.size.width,  _slidingPaneHeight);
+        blurredView.frame = CGRectMake(0, -_slidingPanel.frame.origin.y, blurredView.frame.size.width, blurredView.frame.size.height);
+        _blackOverlay.alpha = 0.65f;
     } completion:^(BOOL finished) {
         _initialSlidingPanelY = _slidingPanel.frame.origin.y;
         self.view.userInteractionEnabled = TRUE;
@@ -169,6 +182,9 @@
 
 - (void)panelViewIsDragged:(CGPoint)panelsPoint closeView:(BOOL)closeView withVelocity:(CGFloat)velocity andSender:(AFVDInitialView *__weak)sender {
     [_slidingPanel setCenter:CGPointMake([_slidingPanel center].x, MAX(_initialSlidingPanelY, [_slidingPanel center].y + panelsPoint.y))];
+    UIView* blurredView = (UIView *)_slidingPanel.subviews[0];
+    blurredView.frame = CGRectMake(0, -_slidingPanel.frame.origin.y, blurredView.frame.size.width, blurredView.frame.size.height);
+    _blackOverlay.alpha = (_backgroundImageView.frame.size.height - _slidingPanel.frame.origin.y)/_backgroundImageView.frame.size.height;
 }
 
 - (void)panelViewToSnapToPositionWithVelocity:(NSInteger)velocity andClosePanel:(BOOL)closePanel andSender:(AFVDInitialView *__weak)sender {
@@ -180,8 +196,12 @@
         snapPanelAnimationSpeed = kAFVDSnapPanelAnimationSpeed;
     }
     
+    UIView* blurredView = (UIView *)_slidingPanel.subviews[0];
+    
     [UIView animateWithDuration:snapPanelAnimationSpeed delay:0 options:UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationCurveLinear animations:^{
         [_slidingPanel setCenter:CGPointMake([_slidingPanel center].x, MAX(_initialSlidingPanelY, ((closePanel) ? self.view.frame.size.height : _initialSlidingPanelY)))];
+        blurredView.frame = CGRectMake(0, -_slidingPanel.frame.origin.y, blurredView.frame.size.width, blurredView.frame.size.height);
+        _blackOverlay.alpha = (_backgroundImageView.frame.size.height - _slidingPanel.frame.origin.y)/_backgroundImageView.frame.size.height;
     } completion:^(BOOL finished) {
         if (closePanel) {
             [self closeSlidingPanel];
@@ -190,16 +210,18 @@
 }
 
 - (void)closeSlidingPanel {
-    BOOL skippedFirstView = NO;
+//    BOOL skippedFirstView = NO;
     for (UIView* v in _slidingPanel.subviews) {
-        if (!skippedFirstView) {
-            skippedFirstView = YES;
-            continue;
-        } else {
+//        if (!skippedFirstView) {
+//            skippedFirstView = YES;
+//            continue;
+//        } else {
            [v removeFromSuperview];
-        }
+//        }
     }
-    
+    [UIView animateWithDuration:kPanelViewAnimationDuration animations:^{
+        _blackOverlay.alpha = 0.0f;
+    }];
     _currentPanelView = nil;
 }
 
@@ -272,18 +294,19 @@
 /*Improve the performance here*/
 - (void)setPanelHeightAndBlur:(CGFloat)panelHeight {
     
-//    for (UIView* v in _slidingPanel.subviews) {
-//        [v removeFromSuperview];
-//    }
-//    
+    for (UIView* v in _slidingPanel.subviews) {
+        [v removeFromSuperview];
+    }
+    
     _slidingPanel.frame = CGRectMake(0, _backgroundImageView.frame.size.height, _backgroundImageView.frame.size.width, panelHeight);
     
-//    UIImageView* temp = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, _slidingPanel.frame.size.width, _slidingPanel.frame.size.height)];
-//    
-//    temp.image = [[UIImage imageScreenshotFromView:_backgroundImageView size:_slidingPanel.frame.size offset:CGSizeMake(0, panelHeight) newHeight:panelHeight] applyAFVDBlur];
-//    temp.alpha = kAFVDSlidingPanelAlpha;
+    UIImageView* temp = [[UIImageView alloc] initWithFrame:CGRectMake(0, -(_backgroundImageView.frame.size.height - panelHeight), _slidingPanel.frame.size.width, _backgroundImageView.frame.size.height)];
     
-//    [_slidingPanel addSubview:temp];
+    temp.image = [[UIImage imageScreenshotFromView:_backgroundImageView size:_slidingPanel.frame.size] applyAFVDBlur];
+    
+    temp.alpha = kAFVDSlidingPanelAlpha;
+
+    [_slidingPanel addSubview:temp];
 //    _slidingPanel.backgroundColor = [UIColor whiteColor];
 //    _slidingPanel.alpha = 0.9f;
 }
