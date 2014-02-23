@@ -132,7 +132,7 @@ static const CGFloat kPreviewViewAnimationDuration = 0.5f;
     //setup controls
     _mainControls = [[AFVDVideoCaptureControls alloc] initWithFrame:CGRectMake(_previewWindowFrame.origin.x, _previewWindowFrame.origin.y, _previewWindowFrame.size.width, _previewWindowFrame.size.height)];
     _mainControls.delegate = self;
-//    [self.view addSubview:_mainControls];
+    [self.view addSubview:_mainControls];
     [self addShareAndFilterButtons];
 }
 

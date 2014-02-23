@@ -18,6 +18,9 @@
 
 @end
 
+static NSString* kAFVDVideoCaptureMaxDuration       = @" - 00:20";
+static NSString* kAFVDVideoCaptureDefaultDuration   = @"00:00 - 00:20";
+
 @implementation AFVDVideoCaptureControls
 
 - (id)initWithFrame:(CGRect)frame {
@@ -62,16 +65,16 @@
     recordButton.backgroundColor = [UIColor blueColor];
     [recordButton addTarget:self action:@selector(recordButtonPressed) forControlEvents:UIControlEventTouchUpInside];
     
-    CGSize labelSize = [@"20s" sizeWithAttributes: [NSDictionary dictionaryWithObject: [UIFont systemFontOfSize:15] forKey: NSFontAttributeName]];
+    CGSize labelSize = [kAFVDVideoCaptureDefaultDuration sizeWithAttributes: [NSDictionary dictionaryWithObject: [UIFont systemFontOfSize:15] forKey: NSFontAttributeName]];
     
-    recordingTime = [[UILabel alloc] initWithFrame:CGRectMake(width - labelSize.width - 5, height - labelSize.height - 5, labelSize.width, labelSize.height)];
+    recordingTime = [[UILabel alloc] initWithFrame:CGRectMake(width - labelSize.width - 5, 0, labelSize.width, labelSize.height)];
     recordingTime.textAlignment = NSTextAlignmentCenter;
     recordingTime.textColor = [UIColor whiteColor];
-    recordingTime.backgroundColor = [UIColor colorWithWhite:0 alpha:0.7f];
+    recordingTime.backgroundColor = [UIColor clearColor];//[UIColor colorWithWhite:0 alpha:0.7f];
     recordingTime.font = [UIFont systemFontOfSize:15];
-    recordingTime.text = @"0s";
+    recordingTime.text = kAFVDVideoCaptureDefaultDuration;
     
-    [self addSubview:changeCameraButton];
+//    [self addSubview:changeCameraButton];
     [self addSubview:closeButton];
     [self addSubview:resetButton];
     [self addSubview:recordButton];
@@ -116,7 +119,14 @@
 }
 
 - (void)setRecordingTime:(long long)newTime {
-    [recordingTime setText:[NSString stringWithFormat:@"%llds",newTime]];
+    
+    NSString* newTimeString = @"";
+    if (newTime < 10) {
+        newTimeString = [NSString stringWithFormat:@"0%lld", newTime];
+    } else {
+        newTimeString = [NSString stringWithFormat:@"%lld", newTime];
+    }
+    [recordingTime setText:[NSString stringWithFormat:@"00:%@%@", newTimeString,kAFVDVideoCaptureMaxDuration]];
 }
 
 @end
