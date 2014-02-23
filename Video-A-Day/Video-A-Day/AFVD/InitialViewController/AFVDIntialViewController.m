@@ -304,8 +304,8 @@
     
     temp.image = [[UIImage imageScreenshotFromView:_backgroundImageView size:_slidingPanel.frame.size] applyAFVDBlur];
     
-    temp.alpha = kAFVDSlidingPanelAlpha;
-
+//    temp.alpha = kAFVDSlidingPanelAlpha;
+    
     [_slidingPanel addSubview:temp];
 //    _slidingPanel.backgroundColor = [UIColor whiteColor];
 //    _slidingPanel.alpha = 0.9f;
