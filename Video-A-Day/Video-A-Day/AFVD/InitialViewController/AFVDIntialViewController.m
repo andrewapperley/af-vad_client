@@ -268,7 +268,7 @@
     
     UIImageView* temp = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, _slidingPanel.frame.size.width, _slidingPanel.frame.size.height)];
     
-    temp.image = [[UIImage imageScreenshotFromView:_backgroundImageView size:_slidingPanel.frame.size offset:CGSizeMake(0, panelHeight) newHeight:panelHeight] applyAFVDBlur];
+    temp.image = [[UIImage imageScreenshotFromView:_backgroundImageView size:_slidingPanel.frame.size offset:CGSizeMake(0, panelHeight) newHeight:panelHeight] applyAFVDPanelBlur];
     temp.alpha = kAFVDSlidingPanelAlpha;
     
     [_slidingPanel addSubview:temp];

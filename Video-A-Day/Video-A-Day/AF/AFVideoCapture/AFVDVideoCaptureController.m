@@ -12,25 +12,25 @@
 static const CGFloat kDurationBroadcastFrequency = 0.5f;
 static const CGFloat kPreviewViewAnimationDuration = 0.5f;
 
-@interface AFVDVideoCaptureController ()
-{
-    AVCaptureSession *captureSession;
-    AVCaptureDeviceInput *cameraInputDevice;
-    AVCaptureMovieFileOutput *cameraOutput;
-    AVCaptureVideoPreviewLayer *previewWindow;
-    AFVDVideoCaptureControls *mainControls;
-    NSString *tempOutputPath;
-    CMTime maxDurationTime;
-    CGRect previewWindowFrame;
-    AFVideoCapturePreset preset;
-    NSTimer *recordedDurationTimer;
-    UIButton *shareButton;
-    UIButton *addFilterButton;
+@interface AFVDVideoCaptureController () {
+    AVCaptureSession* _captureSession;
+    AVCaptureDeviceInput* _cameraInputDevice;
+    AVCaptureMovieFileOutput* _cameraOutput;
+    AVCaptureVideoPreviewLayer* _previewWindow;
+    UIImageView* _backgroundLayer;
+    AFVDVideoCaptureControls* _mainControls;
+    NSString* _tempOutputPath;
+    CMTime _maxDurationTime;
+    CGRect _previewWindowFrame;
+    AFVideoCapturePreset _preset;
+    NSTimer* _recordedDurationTimer;
+    UIButton* _shareButton;
+    UIButton* _addFilterButton;
     CGSize _videoDimensions;
     
     /*Preview controller that plays the file which was just recorded - This is so they have a preview with audio*/
-    AVPlayer *previewPlayer;
-    AVPlayerLayer *previewPlayerLayer;
+    AVPlayer* _previewPlayer;
+    AVPlayerLayer* _previewPlayerLayer;
 }
 
 @end
@@ -40,36 +40,35 @@ static const CGFloat kPreviewViewAnimationDuration = 0.5f;
 - (instancetype) initWithMaxDuration:(CMTime)duration andWindowSize:(CGRect)rect andPreset:(AFVideoCapturePreset)lpreset{
     self = [super init];
     if (self) {
-        maxDurationTime = duration;
-        previewWindowFrame = rect;
-        preset = lpreset;
+        _maxDurationTime = duration;
+        _previewWindowFrame = rect;
+        _preset = lpreset;
     }
     return self;
 }
 
 + (instancetype)captureControllerWithDefaults {
-    return [[AFVDVideoCaptureController alloc] initWithMaxDuration:CMTimeMake(600, 30) andWindowSize:CGRectMake(10, 30, 300, 300) andPreset:AFVideoCapturePreset_Medium];
+    return [[AFVDVideoCaptureController alloc] initWithMaxDuration:CMTimeMake(600, 30) andWindowSize:CGRectMake(10, 30, 300, 300) andPreset:AFVideoCapturePreset_High];
 }
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
     
     [self setOutputURL];
     
-    captureSession = [[AVCaptureSession alloc] init];
+    _captureSession = [[AVCaptureSession alloc] init];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(grabVideoDimensions:) name:AVCaptureInputPortFormatDescriptionDidChangeNotification object:nil];
-    [captureSession beginConfiguration];
+    [_captureSession beginConfiguration];
     //create video input
     
     AVCaptureDevice *videoDevice = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
     
     if (videoDevice) {
         NSError *error;
-        cameraInputDevice = [AVCaptureDeviceInput deviceInputWithDevice:videoDevice error:&error];
-        if (cameraInputDevice) {
-            if ([captureSession canAddInput:cameraInputDevice]) {
-                [captureSession addInput:cameraInputDevice];
+        _cameraInputDevice = [AVCaptureDeviceInput deviceInputWithDevice:videoDevice error:&error];
+        if (_cameraInputDevice) {
+            if ([_captureSession canAddInput:_cameraInputDevice]) {
+                [_captureSession addInput:_cameraInputDevice];
             }
         }
     }
@@ -81,57 +80,116 @@ static const CGFloat kPreviewViewAnimationDuration = 0.5f;
         NSError *error;
         AVCaptureDeviceInput *audioInput = [AVCaptureDeviceInput deviceInputWithDevice:audioDevice error:&error];
         if (audioInput && !error) {
-            if([captureSession canAddInput:audioInput]) {
-                [captureSession addInput:audioInput];
+            if([_captureSession canAddInput:audioInput]) {
+                [_captureSession addInput:audioInput];
             }
         }
     }
     
     // setup output properties
     //setup a video output
-    if(!cameraOutput) {
-        cameraOutput = [[AVCaptureMovieFileOutput alloc] init];
+    if(!_cameraOutput) {
+        _cameraOutput = [[AVCaptureMovieFileOutput alloc] init];
     }
 
     //setup preview layer
-    previewWindow = [[AVCaptureVideoPreviewLayer alloc] initWithSession:captureSession];
+    _previewWindow              = [[AVCaptureVideoPreviewLayer alloc] initWithSession:_captureSession];
+    _previewWindow.borderColor  = UIColorFromRGBA(100, 100, 100, 1).CGColor;
+    _previewWindow.borderWidth  = 1;
     
+    //background preview layer
+    _backgroundLayer = [[UIImageView alloc] initWithImage:[[UIImage imageNamed:@"AFVDFieldBackground"] applyAFVDBackgroundBlur]];
+    [self.view addSubview:_backgroundLayer];
+
     //setup the final preview for the recorded video file
-    previewPlayer = [[AVPlayer alloc] initWithURL:nil];
+    _previewPlayer = [[AVPlayer alloc] initWithURL:nil];
     
-    previewPlayer.actionAtItemEnd = AVPlayerActionAtItemEndNone;
+    _previewPlayer.actionAtItemEnd = AVPlayerActionAtItemEndNone;
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(previewDidReachEnd:)
                                                  name:AVPlayerItemDidPlayToEndTimeNotification
                                                object:nil];
     
-    previewPlayerLayer = [AVPlayerLayer playerLayerWithPlayer:previewPlayer];
-    previewPlayerLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
-    previewPlayerLayer.frame = previewWindowFrame;
+    _previewPlayerLayer = [AVPlayerLayer playerLayerWithPlayer:_previewPlayer];
+    _previewPlayerLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
+    _previewPlayerLayer.frame = _previewWindowFrame;
     
-    [self.view.layer addSublayer:previewPlayerLayer];
+    [self.view.layer addSublayer:_previewPlayerLayer];
     
     [self setupVideoOutputProperties];
 
-    if ( [captureSession canAddOutput:cameraOutput] ) {
-        [captureSession addOutput:cameraOutput];
+    if ( [_captureSession canAddOutput:_cameraOutput] ) {
+        [_captureSession addOutput:_cameraOutput];
     }
     
-    [self.view.layer addSublayer:previewWindow];
+    [self.view.layer addSublayer:_previewWindow];
+    [self applyCornersToPreview];
     
-    [captureSession commitConfiguration];
-    [captureSession startRunning];
+    [_captureSession commitConfiguration];
+    [_captureSession startRunning];
 
     //setup controls
-    mainControls = [[AFVDVideoCaptureControls alloc] initWithFrame:CGRectMake(previewWindowFrame.origin.x, previewWindowFrame.origin.y, previewWindowFrame.size.width, previewWindowFrame.size.height)];
-    mainControls.delegate = self;
-    [self.view addSubview:mainControls];
+    _mainControls = [[AFVDVideoCaptureControls alloc] initWithFrame:CGRectMake(_previewWindowFrame.origin.x, _previewWindowFrame.origin.y, _previewWindowFrame.size.width, _previewWindowFrame.size.height)];
+    _mainControls.delegate = self;
+//    [self.view addSubview:_mainControls];
     [self addShareAndFilterButtons];
 }
 
-- (void)didReceiveMemoryWarning
-{
+- (void)applyCornersToPreview {
+    NSInteger borderWidth   = 3;
+    NSInteger borderHeight  = 27;
+    
+    CAShapeLayer* cornerShapes  = [[CAShapeLayer alloc] init];
+    cornerShapes.frame          = CGRectMake(_previewWindowFrame.origin.x - borderWidth/2, _previewWindowFrame.origin.y - borderWidth/2, _previewWindowFrame.size.width + borderWidth, _previewWindowFrame.size.height + borderWidth);
+//    cornerShapes.opacity        = 0.8f;
+    cornerShapes.strokeColor    = [UIColor clearColor].CGColor;
+    cornerShapes.fillColor      = UIColorFromRGBA(200, 200, 200, 1.0f).CGColor;
+    
+    UIBezierPath* path = [[UIBezierPath alloc] init];
+    
+    
+    
+    [path moveToPoint:CGPointMake(0, borderHeight)];
+    [path addLineToPoint:CGPointMake(borderWidth, borderHeight)];
+    [path addLineToPoint:CGPointMake(borderWidth, borderWidth)];
+    [path addLineToPoint:CGPointMake(borderHeight, borderWidth)];
+    [path addLineToPoint:CGPointMake(borderHeight, 0)];
+    [path addLineToPoint:CGPointMake(0, 0)];
+    [path addLineToPoint:CGPointMake(0, borderHeight)];
+    
+    [path moveToPoint:CGPointMake(cornerShapes.frame.size.width, borderHeight)];
+    [path addLineToPoint:CGPointMake(cornerShapes.frame.size.width - borderWidth, borderHeight)];
+    [path addLineToPoint:CGPointMake(cornerShapes.frame.size.width - borderWidth, borderWidth)];
+    [path addLineToPoint:CGPointMake(cornerShapes.frame.size.width - borderHeight, borderWidth)];
+    [path addLineToPoint:CGPointMake(cornerShapes.frame.size.width - borderHeight, 0)];
+    [path addLineToPoint:CGPointMake(cornerShapes.frame.size.width, 0)];
+    [path addLineToPoint:CGPointMake(cornerShapes.frame.size.width, borderHeight)];
+    
+    [path moveToPoint:CGPointMake(cornerShapes.frame.size.width, cornerShapes.frame.size.height - borderHeight)];
+    [path addLineToPoint:CGPointMake(cornerShapes.frame.size.width - borderWidth, cornerShapes.frame.size.height - borderHeight)];
+    [path addLineToPoint:CGPointMake(cornerShapes.frame.size.width - borderWidth, cornerShapes.frame.size.height - borderWidth)];
+    [path addLineToPoint:CGPointMake(cornerShapes.frame.size.width - borderHeight, cornerShapes.frame.size.height - borderWidth)];
+    [path addLineToPoint:CGPointMake(cornerShapes.frame.size.width - borderHeight, cornerShapes.frame.size.height)];
+    [path addLineToPoint:CGPointMake(cornerShapes.frame.size.width, cornerShapes.frame.size.height)];
+    [path addLineToPoint:CGPointMake(cornerShapes.frame.size.height, cornerShapes.frame.size.height - borderHeight)];
+
+    [path moveToPoint:CGPointMake(0, cornerShapes.frame.size.height - borderHeight)];
+    [path addLineToPoint:CGPointMake(borderWidth, cornerShapes.frame.size.height - borderHeight)];
+    [path addLineToPoint:CGPointMake(borderWidth, cornerShapes.frame.size.height - borderWidth)];
+    [path addLineToPoint:CGPointMake(borderHeight, cornerShapes.frame.size.height - borderWidth)];
+    [path addLineToPoint:CGPointMake(borderHeight, cornerShapes.frame.size.height)];
+    [path addLineToPoint:CGPointMake(0, cornerShapes.frame.size.height)];
+    [path addLineToPoint:CGPointMake(0, cornerShapes.frame.size.height - borderHeight)];
+    
+    [path closePath];
+    
+    cornerShapes.path = path.CGPath;
+    
+    [self.view.layer addSublayer:cornerShapes];
+}
+
+- (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
@@ -145,18 +203,19 @@ static const CGFloat kPreviewViewAnimationDuration = 0.5f;
 }
 
 - (void)setupVideoOutputProperties {
-    previewWindow.videoGravity = AVLayerVideoGravityResizeAspectFill;
-    previewWindow.delegate = self;
-    previewWindow.frame = previewWindowFrame;
-    if ([previewWindow.connection isVideoOrientationSupported])
-    {
-        [previewWindow.connection setVideoOrientation:AVCaptureVideoOrientationPortrait];
+    _previewWindow.videoGravity = AVLayerVideoGravityResizeAspectFill;
+    _previewWindow.delegate = self;
+    _previewWindow.frame = _previewWindowFrame;
+    if ([_previewWindow.connection isVideoOrientationSupported]) {
+        [_previewWindow.connection setVideoOrientation:AVCaptureVideoOrientationPortrait];
     }
-    [previewWindow.connection setAutomaticallyAdjustsVideoMirroring:FALSE];
-    [previewWindow.connection setVideoMirrored:FALSE];
-    [captureSession setSessionPreset:[self AFVideoCapturePresetToString:preset]];
+    
+    [_previewWindow.connection setAutomaticallyAdjustsVideoMirroring:FALSE];
+    [_previewWindow.connection setVideoMirrored:FALSE];
+    
+    [_captureSession setSessionPreset:[self AFVideoCapturePresetToString:_preset]];
 
-    cameraOutput.maxRecordedDuration = maxDurationTime;
+    _cameraOutput.maxRecordedDuration = _maxDurationTime;
 }
 
 #pragma -
@@ -164,22 +223,22 @@ static const CGFloat kPreviewViewAnimationDuration = 0.5f;
 #pragma -
 
 - (void)previewWindowFrame:(CGRect)newFrame {
-    previewWindow.frame = newFrame;
+    _previewWindow.frame = newFrame;
     [self.view.layer layoutSublayers];
 }
 
 - (void)setOutputURL {
-    tempOutputPath = [[NSString alloc] initWithFormat:@"%@tempOutput.m4v", NSTemporaryDirectory()];
+    _tempOutputPath = [[NSString alloc] initWithFormat:@"%@tempOutput.m4v", NSTemporaryDirectory()];
 }
 
 - (NSURL *)outputURL {
-    return [NSURL fileURLWithPath:tempOutputPath];
+    return [NSURL fileURLWithPath:_tempOutputPath];
 }
 
 - (void)removeTempVideoOutput {
     NSFileManager *fileManager = [NSFileManager defaultManager];
-    if ([fileManager fileExistsAtPath:tempOutputPath])
-        [[NSFileManager defaultManager] removeItemAtPath:tempOutputPath error:nil];
+    if ([fileManager fileExistsAtPath:_tempOutputPath])
+        [[NSFileManager defaultManager] removeItemAtPath:_tempOutputPath error:nil];
 }
 
 #pragma -
@@ -189,15 +248,15 @@ static const CGFloat kPreviewViewAnimationDuration = 0.5f;
 - (void)startCapturingVideo {
     
     /*Stop the recording if it's in progress and show the share / add filter buttons*/
-    if(captureSession.isRunning && cameraOutput.isRecording) {
+    if(_captureSession.isRunning && _cameraOutput.isRecording) {
         [UIView animateWithDuration:kPreviewViewAnimationDuration delay:0 options:UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationCurveEaseIn animations:^{
-            previewWindow.opacity = 0;
+            _previewWindow.opacity = 0;
         } completion:^(BOOL finished) {
-            [cameraOutput stopRecording];
-            [captureSession stopRunning];
+            [_cameraOutput stopRecording];
+            [_captureSession stopRunning];
             [self showFilterShareButtons:TRUE];
-            [previewPlayer replaceCurrentItemWithPlayerItem:[AVPlayerItem playerItemWithURL:[self outputURL]]];
-            [previewPlayer play];
+            [_previewPlayer replaceCurrentItemWithPlayerItem:[AVPlayerItem playerItemWithURL:[self outputURL]]];
+            [_previewPlayer play];
             NSLog(@"Recording Stopped");
         }];
         return;
@@ -205,30 +264,30 @@ static const CGFloat kPreviewViewAnimationDuration = 0.5f;
     
     NSLog(@"recording");
     
-    if (!captureSession.isRunning) {
-        [captureSession startRunning];
+    if (!_captureSession.isRunning) {
+        [_captureSession startRunning];
     }
     
     [UIView animateWithDuration:kPreviewViewAnimationDuration delay:0 options:UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationCurveEaseIn animations:^{
-        previewWindow.opacity = 1;
+        _previewWindow.opacity = 1;
     } completion:^(BOOL finished) {
-        [previewPlayer replaceCurrentItemWithPlayerItem:[AVPlayerItem playerItemWithURL:nil]];
-        [previewPlayer pause];
+        [_previewPlayer replaceCurrentItemWithPlayerItem:[AVPlayerItem playerItemWithURL:nil]];
+        [_previewPlayer pause];
     }];
     
     [self removeTempVideoOutput];
     
-    [cameraOutput startRecordingToOutputFileURL:[self outputURL] recordingDelegate:self];
-    [recordedDurationTimer invalidate];
-    recordedDurationTimer = nil;
-    recordedDurationTimer = [NSTimer scheduledTimerWithTimeInterval:kDurationBroadcastFrequency target:self selector:@selector(broadcastRecordedDuration) userInfo:nil repeats:TRUE];
+    [_cameraOutput startRecordingToOutputFileURL:[self outputURL] recordingDelegate:self];
+    [_recordedDurationTimer invalidate];
+    _recordedDurationTimer = nil;
+    _recordedDurationTimer = [NSTimer scheduledTimerWithTimeInterval:kDurationBroadcastFrequency target:self selector:@selector(broadcastRecordedDuration) userInfo:nil repeats:TRUE];
     
     [self showFilterShareButtons:FALSE];
     
 }
 
 - (void)broadcastRecordedDuration {
-    [mainControls setRecordingTime:(cameraOutput.recordedDuration.value/cameraOutput.recordedDuration.timescale)];
+    [_mainControls setRecordingTime:(_cameraOutput.recordedDuration.value/_cameraOutput.recordedDuration.timescale)];
 }
 
 - (void)closeVideoCaptureController {
@@ -236,8 +295,8 @@ static const CGFloat kPreviewViewAnimationDuration = 0.5f;
     /*THIS DOESNT WORK BECAUSE WE NEED TO SETUP VC STUFF*/
     
     NSLog(@"closing");
-    [cameraOutput stopRecording];
-    [captureSession stopRunning];
+    [_cameraOutput stopRecording];
+    [_captureSession stopRunning];
 //    [self dismissViewControllerAnimated:TRUE completion:nil];
     
     //Temp
@@ -259,44 +318,44 @@ static const CGFloat kPreviewViewAnimationDuration = 0.5f;
 }
 
 - (void)recaptureVideo {
-    if (recordedDurationTimer.isValid) {
-        [recordedDurationTimer invalidate];
-        recordedDurationTimer = nil;
+    if (_recordedDurationTimer.isValid) {
+        [_recordedDurationTimer invalidate];
+        _recordedDurationTimer = nil;
     }
-    if (cameraOutput.isRecording) {
-         [cameraOutput stopRecording];
+    if (_cameraOutput.isRecording) {
+         [_cameraOutput stopRecording];
     }
     
-    if (previewPlayer.currentItem) {
+    if (_previewPlayer.currentItem) {
         [UIView animateWithDuration:kPreviewViewAnimationDuration delay:0 options:UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationCurveEaseIn animations:^{
-            previewWindow.opacity = 1;
+            _previewWindow.opacity = 1;
         } completion:^(BOOL finished) {
-            if (!captureSession.isRunning) {
-                [captureSession startRunning];
+            if (!_captureSession.isRunning) {
+                [_captureSession startRunning];
             }
-            [previewPlayer replaceCurrentItemWithPlayerItem:[AVPlayerItem playerItemWithURL:nil]];
-            [previewPlayer pause];
+            [_previewPlayer replaceCurrentItemWithPlayerItem:[AVPlayerItem playerItemWithURL:nil]];
+            [_previewPlayer pause];
             NSLog(@"Recording Reset");
         }];
     }
     
-    [mainControls setRecordingTime:0];
+    [_mainControls setRecordingTime:0];
     [self removeTempVideoOutput];
     [self showFilterShareButtons:FALSE];
 }
 
 - (void)videoCaptureDeviceSwitched:(AVCaptureDevicePosition)devicePosition {
     
-    if (recordedDurationTimer.isValid) {
-        [recordedDurationTimer invalidate];
-        recordedDurationTimer = nil;
+    if (_recordedDurationTimer.isValid) {
+        [_recordedDurationTimer invalidate];
+        _recordedDurationTimer = nil;
     }
     
-    if (cameraOutput.isRecording) {
-        [cameraOutput stopRecording];
+    if (_cameraOutput.isRecording) {
+        [_cameraOutput stopRecording];
     }
     
-    [mainControls setRecordingTime:0];
+    [_mainControls setRecordingTime:0];
     [self removeTempVideoOutput];
     [self showFilterShareButtons:FALSE];
     
@@ -310,31 +369,31 @@ static const CGFloat kPreviewViewAnimationDuration = 0.5f;
             break;
         }
     }
-    [captureSession stopRunning];
-    [captureSession beginConfiguration];
+    [_captureSession stopRunning];
+    [_captureSession beginConfiguration];
     
     NSError *error;
     
     if (newDevice) {
-        [captureSession removeInput:cameraInputDevice];
-        cameraInputDevice = [AVCaptureDeviceInput deviceInputWithDevice:newDevice error:&error];
+        [_captureSession removeInput:_cameraInputDevice];
+        _cameraInputDevice = [AVCaptureDeviceInput deviceInputWithDevice:newDevice error:&error];
         if (error) {
             NSAssert(!error, error.localizedDescription);
             return;
         }
     }
 
-    [captureSession addInput:cameraInputDevice];
+    [_captureSession addInput:_cameraInputDevice];
     
-    [captureSession commitConfiguration];
-    [captureSession startRunning];
+    [_captureSession commitConfiguration];
+    [_captureSession startRunning];
     
-    if (previewPlayer.currentItem) {
+    if (_previewPlayer.currentItem) {
         [UIView animateWithDuration:kPreviewViewAnimationDuration delay:0 options:UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationCurveEaseIn animations:^{
-            previewWindow.opacity = 1;
+            _previewWindow.opacity = 1;
         } completion:^(BOOL finished) {
-            [previewPlayer replaceCurrentItemWithPlayerItem:[AVPlayerItem playerItemWithURL:nil]];
-            [previewPlayer pause];
+            [_previewPlayer replaceCurrentItemWithPlayerItem:[AVPlayerItem playerItemWithURL:nil]];
+            [_previewPlayer pause];
             NSLog(@"Camera Switched");
         }];
     }
@@ -347,29 +406,29 @@ static const CGFloat kPreviewViewAnimationDuration = 0.5f;
 
 - (void)showFilterShareButtons:(BOOL)show {
     if (show) {
-        addFilterButton.enabled = shareButton.enabled = TRUE;
-        addFilterButton.alpha = shareButton.alpha = 1;
+        _addFilterButton.enabled = _shareButton.enabled = TRUE;
+        _addFilterButton.alpha = _shareButton.alpha = 1;
     } else {
-        addFilterButton.enabled = shareButton.enabled = FALSE;
-        addFilterButton.alpha = shareButton.alpha = 0.3f;
+        _addFilterButton.enabled = _shareButton.enabled = FALSE;
+        _addFilterButton.alpha = _shareButton.alpha = 0.3f;
     }
 }
 
 - (void)addShareAndFilterButtons {
-    addFilterButton = [[UIButton alloc] initWithFrame:CGRectMake(10, 370, 145, 40)];
-    addFilterButton.backgroundColor = [UIColor redColor];
-    [addFilterButton setTitle:@"Add FIlter" forState:UIControlStateNormal];
-    [addFilterButton addTarget:self action:@selector(addFilterButtonClicked) forControlEvents:UIControlEventTouchUpInside];
+    _addFilterButton = [[UIButton alloc] initWithFrame:CGRectMake(10, 370, 145, 40)];
+    _addFilterButton.backgroundColor = [UIColor redColor];
+    [_addFilterButton setTitle:@"Add FIlter" forState:UIControlStateNormal];
+    [_addFilterButton addTarget:self action:@selector(addFilterButtonClicked) forControlEvents:UIControlEventTouchUpInside];
     
-    shareButton = [[UIButton alloc] initWithFrame:CGRectMake(addFilterButton.frame.size.width + 15, 370, 145, 40)];
-    shareButton.backgroundColor = [UIColor purpleColor];
-    [shareButton setTitle:@"Share" forState:UIControlStateNormal];
-    [shareButton addTarget:self action:@selector(shareButtonClicked) forControlEvents:UIControlEventTouchUpInside];
+    _shareButton = [[UIButton alloc] initWithFrame:CGRectMake(_addFilterButton.frame.size.width + 15, 370, 145, 40)];
+    _shareButton.backgroundColor = [UIColor purpleColor];
+    [_shareButton setTitle:@"Share" forState:UIControlStateNormal];
+    [_shareButton addTarget:self action:@selector(shareButtonClicked) forControlEvents:UIControlEventTouchUpInside];
     
     [self showFilterShareButtons:FALSE];
     
-    [self.view addSubview:addFilterButton];
-    [self.view addSubview:shareButton];
+    [self.view addSubview:_addFilterButton];
+    [self.view addSubview:_shareButton];
 }
 
 #pragma -
@@ -382,10 +441,10 @@ static const CGFloat kPreviewViewAnimationDuration = 0.5f;
 
 - (void)addFilterButtonClicked {
     /*Invalidate the timer, stop the recording and session*/
-    [recordedDurationTimer invalidate];
-    recordedDurationTimer = nil;
-    [cameraOutput stopRecording];
-    [captureSession stopRunning];
+    [_recordedDurationTimer invalidate];
+    _recordedDurationTimer = nil;
+    [_cameraOutput stopRecording];
+    [_captureSession stopRunning];
     
     /*Present filter view controller and dismiss this view controller*/
     
@@ -402,9 +461,9 @@ static const CGFloat kPreviewViewAnimationDuration = 0.5f;
 - (void)captureOutput:(AVCaptureFileOutput *)captureOutput didFinishRecordingToOutputFileAtURL:(NSURL *)outputFileURL fromConnections:(NSArray *)connections error:(NSError *)error {
     
     if([error.userInfo[@"NSLocalizedFailureReason"] isEqualToString:@"The recording reached the maximum allowable length."]) {
-        [recordedDurationTimer invalidate];
-        recordedDurationTimer = nil;
-        [mainControls setRecordingTime:(maxDurationTime.value/maxDurationTime.timescale)];
+        [_recordedDurationTimer invalidate];
+        _recordedDurationTimer = nil;
+        [_mainControls setRecordingTime:(_maxDurationTime.value/_maxDurationTime.timescale)];
     }
     switch (error.code) {
         /*This code is for when switching devices while recording*/
@@ -414,7 +473,7 @@ static const CGFloat kPreviewViewAnimationDuration = 0.5f;
             
         /*This error code is for when we have completed a recording*/
         case -11810:
-            [cameraOutput stopRecording];
+            [_cameraOutput stopRecording];
             [self showFilterShareButtons:TRUE];
             NSLog(@"Recording Stopped");
             return;
@@ -433,7 +492,7 @@ static const CGFloat kPreviewViewAnimationDuration = 0.5f;
 - (void)previewDidReachEnd:(NSNotification *)event {
     AVPlayerItem *p = [event object];
     [p seekToTime:kCMTimeZero];
-    [previewPlayer play];
+    [_previewPlayer play];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -442,10 +501,10 @@ static const CGFloat kPreviewViewAnimationDuration = 0.5f;
 }
 
 - (void)dealloc {
-    mainControls.delegate = nil;
-    [recordedDurationTimer invalidate];
-    recordedDurationTimer = nil;
-    [[NSNotificationCenter defaultCenter] removeObserver:previewPlayer];
+    _mainControls.delegate = nil;
+    [_recordedDurationTimer invalidate];
+    _recordedDurationTimer = nil;
+    [[NSNotificationCenter defaultCenter] removeObserver:_previewPlayer];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 

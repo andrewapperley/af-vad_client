@@ -8,8 +8,7 @@
 
 #import "AFVDVideoCaptureControls.h"
 
-@interface AFVDVideoCaptureControls ()
-{
+@interface AFVDVideoCaptureControls () {
     UIButton *recordButton;
     UIButton *resetButton;
     UILabel *recordingTime;
@@ -21,8 +20,7 @@
 
 @implementation AFVDVideoCaptureControls
 
-- (id)initWithFrame:(CGRect)frame
-{
+- (id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
         [self setupButtons];

@@ -13,8 +13,7 @@ static const NSInteger kTileSize = 40;
 static const NSInteger kTileSpacingBuffer = 10;
 static const CGFloat kProcessingBlockerAnimationDuration = 0.5f;
 static const NSString *kOutputFilteredFileName = @"tempOutput_filtered.m4v";
-@interface AFVDVideoFilterController ()
-{
+@interface AFVDVideoFilterController () {
     GPUImageMovie *_movieFile;
     NSURL *_videoURL;
     NSString *_tempOutputPath;
