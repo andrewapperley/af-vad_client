@@ -11,6 +11,16 @@
 
 @implementation AFRotatingMenuCollectionViewLayout
 
+- (instancetype)init {
+    
+    if (self = [super init]) {
+        self.sectionInset       = UIEdgeInsetsMake(100, 0, 0, 0);
+        self.scrollDirection    = UICollectionViewScrollDirectionHorizontal;
+    }
+    
+    return self;
+}
+
 - (NSArray *)layoutAttributesForElementsInRect:(CGRect)rect {
     
     NSArray* attributes = [super layoutAttributesForElementsInRect:rect];
@@ -21,11 +31,12 @@
     
     for (UICollectionViewLayoutAttributes* attribute in attributes) {
         if (CGRectIntersectsRect(attribute.frame, rect)) {
-            attribute.center = CGPointMake(visibleRect.size.width/2 + self.collectionView.center.x * cosf(2 * attribute.indexPath.item * M_PI_2 / 4), visibleRect.size.width + self.collectionView.center.y * sinf(2 * attribute.indexPath.item * M_PI_2 / 4));
+            attribute.center = CGPointMake(visibleRect.size.width/2 + self.collectionView.center.x * cosf(2 * attribute.indexPath.item * M_PI_2 / 4), visibleRect.size.width/2 + self.collectionView.center.y * sinf(2 * attribute.indexPath.item * M_PI_2 / 4));
         }
     }
     return attributes;
 }
+
 
 //- (CGPoint)targetContentOffsetForProposedContentOffset:(CGPoint)proposedContentOffset withScrollingVelocity:(CGPoint)velocity {
 //    

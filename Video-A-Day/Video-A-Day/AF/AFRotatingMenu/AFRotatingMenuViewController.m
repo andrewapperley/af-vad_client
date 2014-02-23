@@ -30,7 +30,7 @@
     if (self = [super init]) {
         _currentModel = model;
         AFRotatingMenuCollectionViewLayout* layout = [[AFRotatingMenuCollectionViewLayout alloc] init];
-        _rotatingCollectionView = [[AFRotatingMenuCollectionView alloc] initWithFrame:CGRectMake(0, 0, diameter, diameter) collectionViewLayout:layout];
+        _rotatingCollectionView = [[AFRotatingMenuCollectionView alloc] initWithFrame:CGRectMake(0, 0, diameter, diameter/2) collectionViewLayout:layout];
     }
     return self;
 }
