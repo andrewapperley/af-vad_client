@@ -7,23 +7,31 @@
 //
 
 #import "AFVDVideoCaptureControls.h"
+#import "AFRotatingMenuItem.h"
+#import "AFRotatingMenuControllerModel.h"
+#import "AFRotatingMenuViewController.h"
 
 @interface AFVDVideoCaptureControls () {
-    UIButton *recordButton;
+    UIButton *_recordButton;
     UILabel *recordingTime;
+    CGSize _previewSize;
+    AFRotatingMenuViewController* _menu;
 }
 
 @end
 
 static NSString* kAFVDVideoCaptureMaxDuration       = @" - 00:20";
 static NSString* kAFVDVideoCaptureDefaultDuration   = @"00:00 - 00:20";
+NSInteger const kAFVDVideoCaptureButtonYMargin      = 10;
 
 @implementation AFVDVideoCaptureControls
 
-- (id)initWithFrame:(CGRect)frame {
+- (id)initWithFrame:(CGRect)frame sizeOfPreviewScreen:(CGSize)previewSize {
     self = [super initWithFrame:frame];
     if (self) {
+        _previewSize = previewSize;
         [self setupButtons];
+        [self setupMenu];
     }
     return self;
 }
@@ -34,17 +42,17 @@ static NSString* kAFVDVideoCaptureDefaultDuration   = @"00:00 - 00:20";
 //    UIImage *recordImage = [UIImage imageNamed:@""];
 //    UIImage *reRecordImage = [UIImage imageNamed:@""];
     
-    CGFloat height = self.bounds.size.height;
-    CGFloat width = self.bounds.size.width;
+//    CGFloat height      = self.bounds.size.height;
+    CGFloat width       = self.bounds.size.width;
     
     NSInteger tileSize = 30;
 
     /*The x/y numbers will change anyways because the placement isnt to any design and is probably wrong so they are magical for now*/
     
-    recordButton = [[UIButton alloc] initWithFrame:CGRectMake(80, height - tileSize, tileSize, tileSize)];
-    [recordButton setTitle:@"R" forState:UIControlStateNormal];
-    recordButton.backgroundColor = [UIColor blueColor];
-    [recordButton addTarget:self action:@selector(recordButtonPressed) forControlEvents:UIControlEventTouchUpInside];
+    _recordButton = [[UIButton alloc] initWithFrame:CGRectMake((_previewSize.width - tileSize)/2, _previewSize.height + kAFVDVideoCaptureButtonYMargin, tileSize, tileSize)];
+    [_recordButton setTitle:@"R" forState:UIControlStateNormal];
+    _recordButton.backgroundColor = [UIColor blueColor];
+    [_recordButton addTarget:self action:@selector(recordButtonPressed) forControlEvents:UIControlEventTouchUpInside];
     
     CGSize labelSize = [kAFVDVideoCaptureDefaultDuration sizeWithAttributes: [NSDictionary dictionaryWithObject: [UIFont systemFontOfSize:15] forKey: NSFontAttributeName]];
     
@@ -56,23 +64,37 @@ static NSString* kAFVDVideoCaptureDefaultDuration   = @"00:00 - 00:20";
     recordingTime.text = kAFVDVideoCaptureDefaultDuration;
     
     [self addSubview:recordingTime];
-    [self addSubview:recordButton];
+    [self addSubview:_recordButton];
+}
+
+- (void)setupMenu {
+    AFRotatingMenuControllerModel* menuModel = [[AFRotatingMenuControllerModel alloc] initWithIcons:@[[UIImage imageNamed:@"AFVDLogo"], [UIImage imageNamed:@"AFVDProfileImageSelector"],[UIImage imageNamed:@"AFVDLogo"], [UIImage imageNamed:@"AFVDProfileImageSelector"],[UIImage imageNamed:@"AFVDProfileImageSelector"],[UIImage imageNamed:@"AFVDProfileImageSelector"],[UIImage imageNamed:@"AFVDProfileImageSelector"],[UIImage imageNamed:@"AFVDProfileImageSelector"],[UIImage imageNamed:@"AFVDProfileImageSelector"]] titles:@[@"test"] selectors:@[@"itemSelected:", @"itemSelected:", @"itemSelected:", @"itemSelected:", @"itemSelected:", @"itemSelected:"] properties:@[@"GPUImageVignetteFilter", @"GPUImageVignetteFilter", @"GPUImageVignetteFilter", @"GPUImageVignetteFilter"]];
+    
+    _menu = [[AFRotatingMenuViewController alloc] initWithModel:menuModel diameter:300];
+    _menu.view.frame = CGRectMake(_menu.view.frame.origin.x, CGRectGetMaxY(_recordButton.frame) + kAFVDVideoCaptureButtonYMargin, _menu.view.frame.size.width, self.frame.size.height - CGRectGetMaxY(_recordButton.frame) + kAFVDVideoCaptureButtonYMargin);
+    _menu.delegate   = self;
+
+    [self addSubview:_menu.view];
 }
 
 #pragma -
 #pragma Button Methods
 #pragma -
 
-- (void)changeCameraButtonPressed:(UIButton *)sender {
+- (void)changeCameraButtonPressed:(AFRotatingMenuItem *)sender {
     AVCaptureDevicePosition device;
-    switch (sender.tag) {
+    NSInteger newMenuProperty;
+    
+    switch ([sender.menuItemProperty integerValue]) {
         case AVCaptureDevicePositionBack:
-            device = sender.tag = AVCaptureDevicePositionFront;
+            device = newMenuProperty = AVCaptureDevicePositionFront;
             break;
         case AVCaptureDevicePositionFront:
-            device = sender.tag = AVCaptureDevicePositionBack;
+            device = newMenuProperty = AVCaptureDevicePositionBack;
             break;
     }
+    
+    [sender setMenuItemProperty:@(newMenuProperty)];
     [_delegate videoCaptureDeviceSwitched:device];
 }
 

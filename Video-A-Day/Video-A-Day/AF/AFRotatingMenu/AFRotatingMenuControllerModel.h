@@ -13,7 +13,8 @@
 @property(nonatomic, strong)NSArray* icons;
 @property(nonatomic, strong)NSArray* titles;
 @property(nonatomic, strong)NSArray* selectors;
+@property(nonatomic, strong)NSArray* properties;
 
-- (instancetype)initWithIcons:(NSArray *)icons titles:(NSArray *)titles selectors:(NSArray *)selectors;
+- (instancetype)initWithIcons:(NSArray *)icons titles:(NSArray *)titles selectors:(NSArray *)selectors properties:(NSArray *)properties;
 
 @end

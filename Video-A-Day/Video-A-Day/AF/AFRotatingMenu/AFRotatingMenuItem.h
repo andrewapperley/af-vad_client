@@ -10,10 +10,11 @@
 
 @interface AFRotatingMenuItem : NSObject
 
-@property(nonatomic, strong, readonly)NSString* menuItemTitle;
-@property(nonatomic, strong, readonly)UIImage* menuItemIcon;
-@property(nonatomic, readonly)SEL menuItemSelector;
+@property(nonatomic, strong)NSString* menuItemTitle;
+@property(nonatomic, strong)UIImage* menuItemIcon;
+@property(nonatomic)SEL menuItemSelector;
+@property(nonatomic, strong)id menuItemProperty;
 
-- (instancetype)initMenuItemWithTitle:(NSString *)title icon:(UIImage *)icon selector:(SEL)selector;
+- (instancetype)initMenuItemWithTitle:(NSString *)title icon:(UIImage *)icon selector:(SEL)selector property:(id)property;
 
 @end

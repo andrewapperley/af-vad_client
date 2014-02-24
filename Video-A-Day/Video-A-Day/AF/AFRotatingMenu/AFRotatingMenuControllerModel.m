@@ -10,11 +10,12 @@
 
 @implementation AFRotatingMenuControllerModel
 
-- (instancetype)initWithIcons:(NSArray *)icons titles:(NSArray *)titles selectors:(NSArray *)selectors {
+- (instancetype)initWithIcons:(NSArray *)icons titles:(NSArray *)titles selectors:(NSArray *)selectors properties:(NSArray *)properties {
     if (self = [super init]) {
         _icons      = icons;
         _titles     = titles;
         _selectors  = selectors;
+        _properties = properties;
     }
     return self;
 }

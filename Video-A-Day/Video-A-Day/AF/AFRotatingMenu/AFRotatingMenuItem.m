@@ -10,11 +10,12 @@
 
 @implementation AFRotatingMenuItem
 
-- (instancetype)initMenuItemWithTitle:(NSString *)title icon:(UIImage *)icon selector:(SEL)selector {
+- (instancetype)initMenuItemWithTitle:(NSString *)title icon:(UIImage *)icon selector:(SEL)selector property:(id)property {
     if (self = [super init]) {
         _menuItemTitle      = title;
         _menuItemIcon       = icon;
         _menuItemSelector   = selector;
+        _menuItemProperty   = property;
     }
     return self;
 }

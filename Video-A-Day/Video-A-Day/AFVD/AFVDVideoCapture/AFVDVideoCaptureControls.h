@@ -23,6 +23,8 @@
 
 @property (nonatomic, weak) id <AFVDVideoCaptureControlsDelegate> delegate;
 
+- (id)initWithFrame:(CGRect)frame sizeOfPreviewScreen:(CGSize)previewSize;
+
 - (void)changeRecordingButtonState:(BOOL)lrecording;
 - (void)setRecordingTime:(long long)newTime;
 

@@ -30,7 +30,6 @@ NSString *email = @"email@email.com";
 
 #import "AFVD/InitialViewController/AFVDIntialViewController.h"
 
-
 @interface AFVDViewController ()
 {
     AFVDVideoCaptureController *vc;
@@ -82,21 +81,7 @@ NSString *email = @"email@email.com";
 //        
 //        [self setAccessToken:@"thisisatoken" andExpiryDate:@"dsfds"];
 //    }
-
     
-    
-//    AFRotatingMenuControllerModel* menuModel = [[AFRotatingMenuControllerModel alloc] initWithIcons:@[[UIImage imageNamed:@"AFVDLogo"], [UIImage imageNamed:@"AFVDProfileImageSelector"],[UIImage imageNamed:@"AFVDLogo"], [UIImage imageNamed:@"AFVDProfileImageSelector"],[UIImage imageNamed:@"AFVDProfileImageSelector"],[UIImage imageNamed:@"AFVDProfileImageSelector"],[UIImage imageNamed:@"AFVDProfileImageSelector"],[UIImage imageNamed:@"AFVDProfileImageSelector"],[UIImage imageNamed:@"AFVDProfileImageSelector"]] titles:@[@"test"] selectors:@[@"itemSelected", @"itemSelected"]];
-//    
-//    AFRotatingMenuViewController* menu = [[AFRotatingMenuViewController alloc] initWithModel:menuModel diameter:300];
-//    menu.delegate = self;
-//    
-//    [self addChildViewController:menu];
-//    [self.view addSubview:menu.view];
-    
-}
-
-- (void)itemSelected {
-    NSLog(@"CLICKED MENU ITEM");
 }
 
 #pragma mark - Access Token Checks

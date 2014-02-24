@@ -33,9 +33,11 @@
     
     AFRotatingMenuCollectionViewCell* cell = [collectionView dequeueReusableCellWithReuseIdentifier:kAFRotatingMenuCollectionViewCellId forIndexPath:indexPath];
     
+    AFRotatingMenuItem* menuItem = (AFRotatingMenuItem *)_menuItems[indexPath.row];
+    
     /*This could be put into the cell but is fine here for now*/
-    cell.icon = ((AFRotatingMenuItem *)_menuItems[indexPath.row]).menuItemIcon;
-    cell.menuItemTitleLabel.text = ((AFRotatingMenuItem *)_menuItems[indexPath.row]).menuItemTitle;
+    cell.icon = menuItem.menuItemIcon;
+    cell.menuItemTitleLabel.text = menuItem.menuItemTitle;
     
     return cell;
 }

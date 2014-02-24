@@ -62,10 +62,11 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     if ([_delegate respondsToSelector:(SEL)((AFRotatingMenuItem *)_datasource.menuItems[indexPath.row]).menuItemSelector]) {
         /** ARC requires enough info about the method so it can enforce proper MM rules. */
-        SEL _selector           = (SEL)((AFRotatingMenuItem *)_datasource.menuItems[indexPath.row]).menuItemSelector;
-        IMP imp                 = [_delegate methodForSelector:_selector];
-        void (*func)(id, SEL)   = (void *)imp;
-        func(_delegate, _selector);
+        AFRotatingMenuItem* item    = (AFRotatingMenuItem *)_datasource.menuItems[indexPath.row];
+        SEL _selector               = (SEL)item.menuItemSelector;
+        IMP imp                     = [_delegate methodForSelector:_selector];
+        void (*func)(id, SEL, id)   = (void *)imp;
+        func(_delegate, _selector, item);
     }
 }
 
