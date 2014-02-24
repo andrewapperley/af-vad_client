@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0F06A6DE18788C4D0021E10C /* AFVDVideoFilterDefaultList.json in Resources */ = {isa = PBXBuildFile; fileRef = 0F06A6DD18788C4D0021E10C /* AFVDVideoFilterDefaultList.json */; };
-		0F06A6E1187922570021E10C /* AFVDFilterTileButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F06A6E0187922570021E10C /* AFVDFilterTileButton.m */; };
 		0F06A6E5187CEE550021E10C /* AFViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F06A6E4187CEE550021E10C /* AFViewController.m */; };
 		0F06A6F3187CF2080021E10C /* AFVDIntialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F06A6F2187CF2080021E10C /* AFVDIntialViewController.m */; };
 		0F06A6F6187CF2250021E10C /* AFVDSigninView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F06A6F5187CF2250021E10C /* AFVDSigninView.m */; };
@@ -19,8 +17,6 @@
 		0F10E3CB18593B8B00FC1433 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F10E3CA18593B8B00FC1433 /* CoreMedia.framework */; };
 		0F10E3CD18593B9A00FC1433 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F10E3CC18593B9A00FC1433 /* MediaPlayer.framework */; };
 		0F10E3CF18593BAE00FC1433 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F10E3CE18593BAE00FC1433 /* MobileCoreServices.framework */; };
-		0F10E3DA18594B9600FC1433 /* AFVDVideoCaptureController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F10E3D918594B9600FC1433 /* AFVDVideoCaptureController.m */; };
-		0F10E3DD18594FA800FC1433 /* AFVDVideoCaptureControls.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F10E3DC18594FA800FC1433 /* AFVDVideoCaptureControls.m */; };
 		0F2141CB1876509500E8BFD5 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F2141CA1876509500E8BFD5 /* MessageUI.framework */; };
 		0F21EFA6189D5BDC001706FD /* SSKeychain.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0F21EFA0189D5BDC001706FD /* SSKeychain.strings */; };
 		0F21EFA7189D5BDC001706FD /* SSKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F21EFA3189D5BDC001706FD /* SSKeychain.m */; };
@@ -40,10 +36,23 @@
 		0F2FC7171837303900611873 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0F2FC7151837303900611873 /* InfoPlist.strings */; };
 		0F2FC7191837303900611873 /* Video_A_DayTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F2FC7181837303900611873 /* Video_A_DayTests.m */; };
 		0F79613E183EE64E00920C59 /* AFVDUrlHasher.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F79613D183EE64E00920C59 /* AFVDUrlHasher.m */; };
-		0FB5E9871862763600EE0B0D /* AFVDVideoFilterController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FB5E9861862763600EE0B0D /* AFVDVideoFilterController.m */; };
 		0FB9038F1891FA2400FCD55D /* AFVDSigninUserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FB9038E1891FA2400FCD55D /* AFVDSigninUserModel.m */; };
 		0FC8907718712FE100F5E869 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FC8907518712FE100F5E869 /* AudioToolbox.framework */; };
 		0FC8907818712FE100F5E869 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FC8907618712FE100F5E869 /* CoreAudio.framework */; };
+		0FDC798918B43B30001F9F14 /* AFVDFilterTileButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FDC798118B43B30001F9F14 /* AFVDFilterTileButton.m */; };
+		0FDC798A18B43B30001F9F14 /* AFVDVideoCaptureController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FDC798318B43B30001F9F14 /* AFVDVideoCaptureController.m */; };
+		0FDC798B18B43B30001F9F14 /* AFVDVideoCaptureControls.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FDC798518B43B30001F9F14 /* AFVDVideoCaptureControls.m */; };
+		0FDC798C18B43B30001F9F14 /* AFVDVideoFilterController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FDC798718B43B30001F9F14 /* AFVDVideoFilterController.m */; };
+		0FDC798D18B43B30001F9F14 /* AFVDVideoFilterDefaultList.json in Resources */ = {isa = PBXBuildFile; fileRef = 0FDC798818B43B30001F9F14 /* AFVDVideoFilterDefaultList.json */; };
+		0FDC799118B4455F001F9F14 /* AFRotatingMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FDC799018B4455F001F9F14 /* AFRotatingMenuViewController.m */; };
+		0FDC799418B44579001F9F14 /* AFRotatingMenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FDC799318B44579001F9F14 /* AFRotatingMenuItem.m */; };
+		0FDC799718B4458F001F9F14 /* AFRotatingMenuDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FDC799618B4458F001F9F14 /* AFRotatingMenuDataSource.m */; };
+		0FDC799A18B445B7001F9F14 /* AFRotatingMenuDataSourceItemFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FDC799918B445B7001F9F14 /* AFRotatingMenuDataSourceItemFactory.m */; };
+		0FDC79A018B4461B001F9F14 /* AFRotatingMenuCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FDC799F18B4461B001F9F14 /* AFRotatingMenuCollectionViewCell.m */; };
+		0FDC79A618B448F8001F9F14 /* AFRotatingMenuControllerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FDC79A518B448F8001F9F14 /* AFRotatingMenuControllerModel.m */; };
+		0FDC79A918B5C4FE001F9F14 /* AFRotatingMenuStatics.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FDC79A818B5C4FE001F9F14 /* AFRotatingMenuStatics.m */; };
+		0FDC79AC18B5CB5A001F9F14 /* AFRotatingMenuCollectionViewLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FDC79AB18B5CB5A001F9F14 /* AFRotatingMenuCollectionViewLayout.m */; };
+		0FDC79AF18B83DAD001F9F14 /* AFRotatingMenuCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FDC79AE18B83DAD001F9F14 /* AFRotatingMenuCollectionView.m */; };
 		0FF186D418AAFC6100BE1417 /* AFVDFontStatics.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FF186D318AAFC6100BE1417 /* AFVDFontStatics.m */; };
 		0FF186D718AAFCC000BE1417 /* AFVDInitialViewStatics.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FF186D618AAFCC000BE1417 /* AFVDInitialViewStatics.m */; };
 		0FF441D418626A3200ADAD2C /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FF441D318626A3100ADAD2C /* CoreVideo.framework */; };
@@ -83,9 +92,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0F06A6DD18788C4D0021E10C /* AFVDVideoFilterDefaultList.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = AFVDVideoFilterDefaultList.json; sourceTree = "<group>"; };
-		0F06A6DF187922570021E10C /* AFVDFilterTileButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFVDFilterTileButton.h; sourceTree = "<group>"; };
-		0F06A6E0187922570021E10C /* AFVDFilterTileButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFVDFilterTileButton.m; sourceTree = "<group>"; };
 		0F06A6E3187CEE550021E10C /* AFViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFViewController.h; sourceTree = "<group>"; };
 		0F06A6E4187CEE550021E10C /* AFViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFViewController.m; sourceTree = "<group>"; };
 		0F06A6F1187CF2080021E10C /* AFVDIntialViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFVDIntialViewController.h; sourceTree = "<group>"; };
@@ -103,10 +109,6 @@
 		0F10E3CA18593B8B00FC1433 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		0F10E3CC18593B9A00FC1433 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		0F10E3CE18593BAE00FC1433 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
-		0F10E3D818594B9600FC1433 /* AFVDVideoCaptureController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFVDVideoCaptureController.h; sourceTree = "<group>"; };
-		0F10E3D918594B9600FC1433 /* AFVDVideoCaptureController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFVDVideoCaptureController.m; sourceTree = "<group>"; };
-		0F10E3DB18594FA700FC1433 /* AFVDVideoCaptureControls.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFVDVideoCaptureControls.h; sourceTree = "<group>"; };
-		0F10E3DC18594FA800FC1433 /* AFVDVideoCaptureControls.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFVDVideoCaptureControls.m; sourceTree = "<group>"; };
 		0F2141CA1876509500E8BFD5 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		0F21EFA1189D5BDC001706FD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = SSKeychain.strings; sourceTree = "<group>"; };
 		0F21EFA2189D5BDC001706FD /* SSKeychain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SSKeychain.h; path = Keychain/SSKeychain.h; sourceTree = "<group>"; };
@@ -138,12 +140,37 @@
 		0F79613718394FF100920C59 /* AFVDConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFVDConstants.h; sourceTree = "<group>"; };
 		0F79613C183EE64E00920C59 /* AFVDUrlHasher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFVDUrlHasher.h; sourceTree = "<group>"; };
 		0F79613D183EE64E00920C59 /* AFVDUrlHasher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFVDUrlHasher.m; sourceTree = "<group>"; };
-		0FB5E9851862763600EE0B0D /* AFVDVideoFilterController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFVDVideoFilterController.h; sourceTree = "<group>"; };
-		0FB5E9861862763600EE0B0D /* AFVDVideoFilterController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFVDVideoFilterController.m; sourceTree = "<group>"; };
 		0FB9038D1891FA2400FCD55D /* AFVDSigninUserModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFVDSigninUserModel.h; sourceTree = "<group>"; };
 		0FB9038E1891FA2400FCD55D /* AFVDSigninUserModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFVDSigninUserModel.m; sourceTree = "<group>"; };
 		0FC8907518712FE100F5E869 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		0FC8907618712FE100F5E869 /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
+		0FDC798018B43B30001F9F14 /* AFVDFilterTileButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFVDFilterTileButton.h; sourceTree = "<group>"; };
+		0FDC798118B43B30001F9F14 /* AFVDFilterTileButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFVDFilterTileButton.m; sourceTree = "<group>"; };
+		0FDC798218B43B30001F9F14 /* AFVDVideoCaptureController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFVDVideoCaptureController.h; sourceTree = "<group>"; };
+		0FDC798318B43B30001F9F14 /* AFVDVideoCaptureController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFVDVideoCaptureController.m; sourceTree = "<group>"; };
+		0FDC798418B43B30001F9F14 /* AFVDVideoCaptureControls.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFVDVideoCaptureControls.h; sourceTree = "<group>"; };
+		0FDC798518B43B30001F9F14 /* AFVDVideoCaptureControls.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFVDVideoCaptureControls.m; sourceTree = "<group>"; };
+		0FDC798618B43B30001F9F14 /* AFVDVideoFilterController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFVDVideoFilterController.h; sourceTree = "<group>"; };
+		0FDC798718B43B30001F9F14 /* AFVDVideoFilterController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFVDVideoFilterController.m; sourceTree = "<group>"; };
+		0FDC798818B43B30001F9F14 /* AFVDVideoFilterDefaultList.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = AFVDVideoFilterDefaultList.json; sourceTree = "<group>"; };
+		0FDC798F18B4455F001F9F14 /* AFRotatingMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFRotatingMenuViewController.h; sourceTree = "<group>"; };
+		0FDC799018B4455F001F9F14 /* AFRotatingMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFRotatingMenuViewController.m; sourceTree = "<group>"; };
+		0FDC799218B44579001F9F14 /* AFRotatingMenuItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFRotatingMenuItem.h; sourceTree = "<group>"; };
+		0FDC799318B44579001F9F14 /* AFRotatingMenuItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFRotatingMenuItem.m; sourceTree = "<group>"; };
+		0FDC799518B4458F001F9F14 /* AFRotatingMenuDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFRotatingMenuDataSource.h; sourceTree = "<group>"; };
+		0FDC799618B4458F001F9F14 /* AFRotatingMenuDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFRotatingMenuDataSource.m; sourceTree = "<group>"; };
+		0FDC799818B445B7001F9F14 /* AFRotatingMenuDataSourceItemFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFRotatingMenuDataSourceItemFactory.h; sourceTree = "<group>"; };
+		0FDC799918B445B7001F9F14 /* AFRotatingMenuDataSourceItemFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFRotatingMenuDataSourceItemFactory.m; sourceTree = "<group>"; };
+		0FDC799E18B4461B001F9F14 /* AFRotatingMenuCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFRotatingMenuCollectionViewCell.h; sourceTree = "<group>"; };
+		0FDC799F18B4461B001F9F14 /* AFRotatingMenuCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFRotatingMenuCollectionViewCell.m; sourceTree = "<group>"; };
+		0FDC79A418B448F8001F9F14 /* AFRotatingMenuControllerModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFRotatingMenuControllerModel.h; sourceTree = "<group>"; };
+		0FDC79A518B448F8001F9F14 /* AFRotatingMenuControllerModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFRotatingMenuControllerModel.m; sourceTree = "<group>"; };
+		0FDC79A718B5C4FE001F9F14 /* AFRotatingMenuStatics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFRotatingMenuStatics.h; sourceTree = "<group>"; };
+		0FDC79A818B5C4FE001F9F14 /* AFRotatingMenuStatics.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFRotatingMenuStatics.m; sourceTree = "<group>"; };
+		0FDC79AA18B5CB5A001F9F14 /* AFRotatingMenuCollectionViewLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFRotatingMenuCollectionViewLayout.h; sourceTree = "<group>"; };
+		0FDC79AB18B5CB5A001F9F14 /* AFRotatingMenuCollectionViewLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFRotatingMenuCollectionViewLayout.m; sourceTree = "<group>"; };
+		0FDC79AD18B83DAD001F9F14 /* AFRotatingMenuCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFRotatingMenuCollectionView.h; sourceTree = "<group>"; };
+		0FDC79AE18B83DAD001F9F14 /* AFRotatingMenuCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFRotatingMenuCollectionView.m; sourceTree = "<group>"; };
 		0FF186D218AAFC6100BE1417 /* AFVDFontStatics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFVDFontStatics.h; sourceTree = "<group>"; };
 		0FF186D318AAFC6100BE1417 /* AFVDFontStatics.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFVDFontStatics.m; sourceTree = "<group>"; };
 		0FF186D518AAFCC000BE1417 /* AFVDInitialViewStatics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFVDInitialViewStatics.h; sourceTree = "<group>"; };
@@ -241,7 +268,7 @@
 		0F06A6EB187CF1F70021E10C /* AFVD */ = {
 			isa = PBXGroup;
 			children = (
-				0F10E3D718594B8200FC1433 /* AFVDVideoCapture */,
+				0FDC797F18B43B30001F9F14 /* AFVDVideoCapture */,
 				0F06A6EC187CF1F70021E10C /* InitialViewController */,
 				0F06A6EF187CF1F70021E10C /* Other Components */,
 				0F2C8A001884CF000033397C /* AFVDStatics.h */,
@@ -323,23 +350,6 @@
 				0FF604741880D75200E7DF58 /* AFVDImageBlur.m */,
 			);
 			path = "UIImage+Blur";
-			sourceTree = "<group>";
-		};
-		0F10E3D718594B8200FC1433 /* AFVDVideoCapture */ = {
-			isa = PBXGroup;
-			children = (
-				0FB5E9851862763600EE0B0D /* AFVDVideoFilterController.h */,
-				0FB5E9861862763600EE0B0D /* AFVDVideoFilterController.m */,
-				0F10E3D818594B9600FC1433 /* AFVDVideoCaptureController.h */,
-				0F10E3D918594B9600FC1433 /* AFVDVideoCaptureController.m */,
-				0F10E3DB18594FA700FC1433 /* AFVDVideoCaptureControls.h */,
-				0F10E3DC18594FA800FC1433 /* AFVDVideoCaptureControls.m */,
-				0F06A6DD18788C4D0021E10C /* AFVDVideoFilterDefaultList.json */,
-				0F06A6DF187922570021E10C /* AFVDFilterTileButton.h */,
-				0F06A6E0187922570021E10C /* AFVDFilterTileButton.m */,
-			);
-			name = AFVDVideoCapture;
-			path = ../AF/AFVideoCapture;
 			sourceTree = "<group>";
 		};
 		0F21EF9E189D5BCB001706FD /* SSKeychain */ = {
@@ -473,6 +483,48 @@
 			path = UrlHashing;
 			sourceTree = "<group>";
 		};
+		0FDC797F18B43B30001F9F14 /* AFVDVideoCapture */ = {
+			isa = PBXGroup;
+			children = (
+				0FDC798018B43B30001F9F14 /* AFVDFilterTileButton.h */,
+				0FDC798118B43B30001F9F14 /* AFVDFilterTileButton.m */,
+				0FDC798218B43B30001F9F14 /* AFVDVideoCaptureController.h */,
+				0FDC798318B43B30001F9F14 /* AFVDVideoCaptureController.m */,
+				0FDC798418B43B30001F9F14 /* AFVDVideoCaptureControls.h */,
+				0FDC798518B43B30001F9F14 /* AFVDVideoCaptureControls.m */,
+				0FDC798618B43B30001F9F14 /* AFVDVideoFilterController.h */,
+				0FDC798718B43B30001F9F14 /* AFVDVideoFilterController.m */,
+				0FDC798818B43B30001F9F14 /* AFVDVideoFilterDefaultList.json */,
+			);
+			path = AFVDVideoCapture;
+			sourceTree = "<group>";
+		};
+		0FDC798E18B43B5A001F9F14 /* AFRotatingMenu */ = {
+			isa = PBXGroup;
+			children = (
+				0FDC798F18B4455F001F9F14 /* AFRotatingMenuViewController.h */,
+				0FDC799018B4455F001F9F14 /* AFRotatingMenuViewController.m */,
+				0FDC799218B44579001F9F14 /* AFRotatingMenuItem.h */,
+				0FDC799318B44579001F9F14 /* AFRotatingMenuItem.m */,
+				0FDC799518B4458F001F9F14 /* AFRotatingMenuDataSource.h */,
+				0FDC799618B4458F001F9F14 /* AFRotatingMenuDataSource.m */,
+				0FDC799818B445B7001F9F14 /* AFRotatingMenuDataSourceItemFactory.h */,
+				0FDC799918B445B7001F9F14 /* AFRotatingMenuDataSourceItemFactory.m */,
+				0FDC799E18B4461B001F9F14 /* AFRotatingMenuCollectionViewCell.h */,
+				0FDC799F18B4461B001F9F14 /* AFRotatingMenuCollectionViewCell.m */,
+				0FDC79A418B448F8001F9F14 /* AFRotatingMenuControllerModel.h */,
+				0FDC79A518B448F8001F9F14 /* AFRotatingMenuControllerModel.m */,
+				0FDC79A718B5C4FE001F9F14 /* AFRotatingMenuStatics.h */,
+				0FDC79A818B5C4FE001F9F14 /* AFRotatingMenuStatics.m */,
+				0FDC79AA18B5CB5A001F9F14 /* AFRotatingMenuCollectionViewLayout.h */,
+				0FDC79AB18B5CB5A001F9F14 /* AFRotatingMenuCollectionViewLayout.m */,
+				0FDC79AD18B83DAD001F9F14 /* AFRotatingMenuCollectionView.h */,
+				0FDC79AE18B83DAD001F9F14 /* AFRotatingMenuCollectionView.m */,
+			);
+			name = AFRotatingMenu;
+			path = AF/AFRotatingMenu;
+			sourceTree = "<group>";
+		};
 		7610BC55183B107B003CE193 /* RelationshipModel */ = {
 			isa = PBXGroup;
 			children = (
@@ -586,6 +638,7 @@
 		76C6518E1837FFCD003C7F7D /* AF */ = {
 			isa = PBXGroup;
 			children = (
+				0FDC798E18B43B5A001F9F14 /* AFRotatingMenu */,
 				0F06A6E2187CEE290021E10C /* AFViewController */,
 				76C6518F1837FFFD003C7F7D /* AFCategory */,
 			);
@@ -740,7 +793,7 @@
 			files = (
 				0F21EFA6189D5BDC001706FD /* SSKeychain.strings in Resources */,
 				0F2FC7061837303900611873 /* Images.xcassets in Resources */,
-				0F06A6DE18788C4D0021E10C /* AFVDVideoFilterDefaultList.json in Resources */,
+				0FDC798D18B43B30001F9F14 /* AFVDVideoFilterDefaultList.json in Resources */,
 				0FF60470187E6F7E00E7DF58 /* Localizable.strings in Resources */,
 				0F2FC6F51837303800611873 /* InfoPlist.strings in Resources */,
 			);
@@ -800,10 +853,12 @@
 				7677BA7018373A6B00F3EDC9 /* AFVDUserModel.m in Sources */,
 				7677BA6E18373A6B00F3EDC9 /* AFVDUserModelDatasource.m in Sources */,
 				0F21EFA7189D5BDC001706FD /* SSKeychain.m in Sources */,
+				0FDC798918B43B30001F9F14 /* AFVDFilterTileButton.m in Sources */,
 				0FF186D718AAFCC000BE1417 /* AFVDInitialViewStatics.m in Sources */,
 				7677BA6F18373A6B00F3EDC9 /* AFVDUserModelFactory.m in Sources */,
 				0F06A6F3187CF2080021E10C /* AFVDIntialViewController.m in Sources */,
 				0F06A6E5187CEE550021E10C /* AFViewController.m in Sources */,
+				0FDC79A018B4461B001F9F14 /* AFRotatingMenuCollectionViewCell.m in Sources */,
 				7610BC61183B119C003CE193 /* AFVDRelationshipModel.m in Sources */,
 				0F2FC6F71837303800611873 /* main.m in Sources */,
 				0FF186D418AAFC6100BE1417 /* AFVDFontStatics.m in Sources */,
@@ -811,27 +866,34 @@
 				0F79613E183EE64E00920C59 /* AFVDUrlHasher.m in Sources */,
 				7657BBF4184EE1A1004CA559 /* AFVDBaseNetworkStatics.m in Sources */,
 				0F06A6FC187CF2460021E10C /* AFVDActivityIndicator.m in Sources */,
+				0FDC79A918B5C4FE001F9F14 /* AFRotatingMenuStatics.m in Sources */,
+				0FDC799718B4458F001F9F14 /* AFRotatingMenuDataSource.m in Sources */,
 				7696C7DF184C366000B270FC /* AFVDKeychain.m in Sources */,
 				0F2FC6FB1837303800611873 /* AFVDAppDelegate.m in Sources */,
 				0F06A6F6187CF2250021E10C /* AFVDSigninView.m in Sources */,
+				0FDC798A18B43B30001F9F14 /* AFVDVideoCaptureController.m in Sources */,
 				0FB9038F1891FA2400FCD55D /* AFVDSigninUserModel.m in Sources */,
 				76C6519818380A14003C7F7D /* AFVDBaseNetworkModel.m in Sources */,
 				76C651A7183840E4003C7F7D /* AFVDVideoModelDatasource.m in Sources */,
 				0F2C8A0C188B408D0033397C /* AFVDSignupUserModel.m in Sources */,
-				0F10E3DD18594FA800FC1433 /* AFVDVideoCaptureControls.m in Sources */,
-				0FB5E9871862763600EE0B0D /* AFVDVideoFilterController.m in Sources */,
 				0F21EFA8189D5BDC001706FD /* SSKeychainQuery.m in Sources */,
+				0FDC799A18B445B7001F9F14 /* AFRotatingMenuDataSourceItemFactory.m in Sources */,
 				76C651A8183840E4003C7F7D /* AFVDVideoModelFactory.m in Sources */,
+				0FDC799118B4455F001F9F14 /* AFRotatingMenuViewController.m in Sources */,
+				0FDC79AC18B5CB5A001F9F14 /* AFRotatingMenuCollectionViewLayout.m in Sources */,
+				0FDC79A618B448F8001F9F14 /* AFRotatingMenuControllerModel.m in Sources */,
+				0FDC799418B44579001F9F14 /* AFRotatingMenuItem.m in Sources */,
+				0FDC79AF18B83DAD001F9F14 /* AFRotatingMenuCollectionView.m in Sources */,
 				7677BA6D18373A6B00F3EDC9 /* AFVDBaseNetworkDatasource.m in Sources */,
 				76C651931838003D003C7F7D /* NSDictionary+NSDictionary_NSDataConversion.m in Sources */,
 				0F2C8A021884CF000033397C /* AFVDStatics.m in Sources */,
-				0F06A6E1187922570021E10C /* AFVDFilterTileButton.m in Sources */,
 				7610BC5B183B1108003CE193 /* AFVDRelationshipModelDatasource.m in Sources */,
 				76C651AC18384647003C7F7D /* AFVDVideoPlaylistModel.m in Sources */,
+				0FDC798B18B43B30001F9F14 /* AFVDVideoCaptureControls.m in Sources */,
 				0F06A71F187E3EC00021E10C /* UIImage+ImageEffects.m in Sources */,
 				0FF604751880D75200E7DF58 /* AFVDImageBlur.m in Sources */,
-				0F10E3DA18594B9600FC1433 /* AFVDVideoCaptureController.m in Sources */,
 				76C651A9183840E4003C7F7D /* AFVDVideoModel.m in Sources */,
+				0FDC798C18B43B30001F9F14 /* AFVDVideoFilterController.m in Sources */,
 				7610BC5E183B1137003CE193 /* AFVDRelationshipModelFactory.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
