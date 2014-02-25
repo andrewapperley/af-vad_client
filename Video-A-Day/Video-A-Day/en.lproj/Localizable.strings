@@ -21,3 +21,6 @@
 "AFVDSignupFormTerms"               = "By Signing Up, you agree to our Terms and Conditions";
 "AFVDSigninForFailureTitle"         = "Login Failure";
 "AFVDSigninForFailureButtonTitle"   = "Dismiss";
+
+/*Popout Menu*/
+"kAFVDPopoutMenuCloseMenuItemTitle"   = "Close Menu";

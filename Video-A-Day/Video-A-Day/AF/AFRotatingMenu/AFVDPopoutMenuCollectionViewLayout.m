@@ -14,7 +14,6 @@
 - (instancetype)init {
     
     if (self = [super init]) {
-        self.sectionInset       = UIEdgeInsetsMake(0, 0, 0, 0);
         self.scrollDirection    = UICollectionViewScrollDirectionHorizontal;
     }
     

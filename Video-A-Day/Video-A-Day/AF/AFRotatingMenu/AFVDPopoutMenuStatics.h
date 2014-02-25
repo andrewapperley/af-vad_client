@@ -8,3 +8,5 @@
 
 extern NSString* const kAFVDPopoutMenuCollectionViewCellId;
 extern NSInteger const kAFVDPopoutMenuCollectionViewCellIconSize;
+extern NSString* const kAFVDPopoutMenuCloseMenuItemIconImage;
+extern SEL popoutMenuCloseButtonPressed;

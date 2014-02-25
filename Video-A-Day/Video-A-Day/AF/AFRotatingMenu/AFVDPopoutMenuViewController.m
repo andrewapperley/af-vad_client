@@ -18,6 +18,7 @@
     AFVDPopoutMenuCollectionView* _rotatingCollectionView;
     AFVDPopoutMenuDataSource* _datasource;
     AFVDPopoutMenuControllerModel* _currentModel;
+    CGRect _menuFrame;
 }
 
 @end
@@ -26,17 +27,19 @@
 
 #pragma mark - Init methods
 
-- (instancetype)initWithModel:(AFVDPopoutMenuControllerModel *)model {
+- (instancetype)initWithModel:(AFVDPopoutMenuControllerModel *)model frame:(CGRect)frame {
     if (self = [super init]) {
         _currentModel = model;
+        _menuFrame = frame;
     }
     return self;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.view.frame = _menuFrame;
     AFVDPopoutMenuCollectionViewLayout* layout = [[AFVDPopoutMenuCollectionViewLayout alloc] init];
-    _rotatingCollectionView = [[AFVDPopoutMenuCollectionView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, kAFVDPopoutMenuCollectionViewCellIconSize) collectionViewLayout:layout];
+    _rotatingCollectionView = [[AFVDPopoutMenuCollectionView alloc] initWithFrame:CGRectMake(0, 0, _menuFrame.size.width, _menuFrame.size.height) collectionViewLayout:layout];
     _datasource = [[AFVDPopoutMenuDataSource alloc] init];
     [_datasource setMenuItemsWithModel:_currentModel];
     [_rotatingCollectionView setDelegate:self];
@@ -54,6 +57,10 @@
     [_rotatingCollectionView performBatchUpdates:^{
         [_rotatingCollectionView reloadSections:[NSIndexSet indexSetWithIndex:0]];
     } completion:nil];
+}
+
+- (void)closeMenu {
+    
 }
 
 #pragma mark - UICollectionViewDelegate methods

@@ -24,7 +24,7 @@
         _iconView.layer.cornerRadius    = _iconView.frame.size.width * 0.5f;
         _iconView.contentMode           = UIViewContentModeScaleAspectFit;
         _iconView.clipsToBounds         = YES;
-        _iconView.backgroundColor       = [UIColor whiteColor];
+        _iconView.backgroundColor       = [UIColor clearColor];
         [self.contentView addSubview:_iconView];
         _menuItemTitleLabel             = [[UILabel alloc] init];
         _menuItemTitleLabel.alpha       = 0;

@@ -8,6 +8,7 @@
 
 #import "AFVDVideoCaptureControls.h"
 #import "AFVDPopoutMenuMenuItem.h"
+#import "AFVDPopoutMenuStatics.h"
 #import "AFVDPopoutMenuControllerModel.h"
 #import "AFVDPopoutMenuViewController.h"
 
@@ -38,17 +39,16 @@ NSInteger const kAFVDVideoCaptureButtonYMargin      = 10;
 - (void)setupButtons {
     
 //    UIImage *closeImage = [UIImage imageNamed:@""];
-//    UIImage *recordImage = [UIImage imageNamed:@""];
+    UIImage *recordImage = [UIImage imageNamed:@"AFVDVideoCaptureRecordButton"];
 //    UIImage *reRecordImage = [UIImage imageNamed:@""];
     
 //    CGFloat height      = self.bounds.size.height;
     CGFloat width       = self.bounds.size.width;
     
-    NSInteger tileSize = 30;
+//    NSInteger tileSize = 30;
     
-    _recordButton = [[UIButton alloc] initWithFrame:CGRectMake((_previewSize.width - tileSize)/2, _previewSize.height + kAFVDVideoCaptureButtonYMargin, tileSize, tileSize)];
-    [_recordButton setTitle:@"R" forState:UIControlStateNormal];
-    _recordButton.backgroundColor = [UIColor blueColor];
+    _recordButton = [[UIButton alloc] initWithFrame:CGRectMake((_previewSize.width - recordImage.size.width)/2, _previewSize.height + kAFVDVideoCaptureButtonYMargin, recordImage.size.width, recordImage.size.height)];
+    [_recordButton setImage:recordImage forState:UIControlStateNormal];
     [_recordButton addTarget:self action:@selector(recordButtonPressed) forControlEvents:UIControlEventTouchUpInside];
     
     CGSize labelSize = [kAFVDVideoCaptureDefaultDuration sizeWithAttributes: [NSDictionary dictionaryWithObject: [UIFont systemFontOfSize:15] forKey: NSFontAttributeName]];
@@ -65,10 +65,12 @@ NSInteger const kAFVDVideoCaptureButtonYMargin      = 10;
 }
 
 - (void)setupMenu {
-    AFVDPopoutMenuControllerModel* menuModel = [[AFVDPopoutMenuControllerModel alloc] initWithIcons:@[[UIImage imageNamed:@"AFVDLogo"], [UIImage imageNamed:@"AFVDProfileImageSelector"],[UIImage imageNamed:@"AFVDLogo"], [UIImage imageNamed:@"AFVDProfileImageSelector"],[UIImage imageNamed:@"AFVDProfileImageSelector"],[UIImage imageNamed:@"AFVDProfileImageSelector"],[UIImage imageNamed:@"AFVDProfileImageSelector"],[UIImage imageNamed:@"AFVDProfileImageSelector"],[UIImage imageNamed:@"AFVDProfileImageSelector"]] titles:@[@"test"] selectors:@[@"itemSelected:", @"itemSelected:", @"itemSelected:", @"itemSelected:", @"itemSelected:", @"itemSelected:"] properties:@[@"GPUImageVignetteFilter", @"GPUImageVignetteFilter", @"GPUImageVignetteFilter", @"GPUImageVignetteFilter"]];
     
-    _menu = [[AFVDPopoutMenuViewController alloc] initWithModel:menuModel];
-    _menu.view.frame = CGRectMake(_menu.view.frame.origin.x, CGRectGetMaxY(_recordButton.frame) + kAFVDVideoCaptureButtonYMargin, _menu.view.frame.size.width, self.frame.size.height - CGRectGetMaxY(_recordButton.frame) + kAFVDVideoCaptureButtonYMargin);
+    /*Make close button external and do animation for close/open internal*/
+    
+    AFVDPopoutMenuControllerModel* menuModel = [[AFVDPopoutMenuControllerModel alloc] initWithIcons:@[[UIImage imageNamed:@"AFVDProfileImageSelector"], [UIImage imageNamed:@"AFVDProfileImageSelector"],[UIImage imageNamed:@"AFVDProfileImageSelector"], [UIImage imageNamed:@"AFVDProfileImageSelector"],[UIImage imageNamed:@"AFVDProfileImageSelector"],[UIImage imageNamed:@"AFVDProfileImageSelector"],[UIImage imageNamed:@"AFVDProfileImageSelector"],[UIImage imageNamed:@"AFVDProfileImageSelector"],[UIImage imageNamed:@"AFVDProfileImageSelector"]] titles:@[@"test"] selectors:@[@"itemSelected:", @"itemSelected:", @"itemSelected:", @"itemSelected:", @"itemSelected:", @"itemSelected:"] properties:@[@"GPUImageVignetteFilter", @"GPUImageVignetteFilter", @"GPUImageVignetteFilter", @"GPUImageVignetteFilter"]];
+    
+    _menu = [[AFVDPopoutMenuViewController alloc] initWithModel:menuModel frame:CGRectMake(_menu.view.frame.origin.x, self.frame.size.height - kAFVDPopoutMenuCollectionViewCellIconSize - kAFVDVideoCaptureButtonYMargin, self.frame.size.width, kAFVDPopoutMenuCollectionViewCellIconSize)];
     _menu.delegate   = self;
 
     [self addSubview:_menu.view];
@@ -77,6 +79,10 @@ NSInteger const kAFVDVideoCaptureButtonYMargin      = 10;
 #pragma -
 #pragma Button Methods
 #pragma -
+
+- (void)popoutMenuCloseButtonPressed {
+    [_menu closeMenu];
+}
 
 - (void)changeCameraButtonPressed:(AFVDPopoutMenuMenuItem *)sender {
     AVCaptureDevicePosition device;

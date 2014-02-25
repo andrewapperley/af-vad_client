@@ -8,6 +8,7 @@
 
 #import "AFVDPopoutMenuDataSourceItemFactory.h"
 #import "AFVDPopoutMenuMenuItem.h"
+#import "AFVDPopoutMenuStatics.h"
 
 @implementation AFVDPopoutMenuDataSourceItemFactory
 
@@ -17,6 +18,8 @@
     
     largestArrayCount = (model.titles.count >= model.icons.count) ? model.titles.count : (model.icons.count >= model.properties.count) ? model.icons.count : (model.properties.count >= model.selectors.count) ? model.properties.count : model.selectors.count;
     NSMutableArray* returnArray = [[NSMutableArray alloc] initWithCapacity:largestArrayCount];
+    
+    [returnArray addObject:[AFVDPopoutMenuDataSourceItemFactory addCloseButtonMenuItem]];
     
     for (NSInteger i = 0; i < largestArrayCount; i++) {
         
@@ -31,6 +34,15 @@
     }
     
     return (NSArray *)returnArray;
+}
+
+/*This is called to ensure that the first item is always the close button for the menu*/
+
++ (AFVDPopoutMenuMenuItem *)addCloseButtonMenuItem {
+    
+    AFVDPopoutMenuMenuItem* closeMenuItem = [[AFVDPopoutMenuMenuItem alloc] initMenuItemWithTitle:NSLocalizedString(@"kAFVDPopoutMenuCloseMenuItemTitle", nil) icon:[UIImage imageNamed:kAFVDPopoutMenuCloseMenuItemIconImage] selector:popoutMenuCloseButtonPressed property:nil];
+    
+    return closeMenuItem;
 }
 
 @end

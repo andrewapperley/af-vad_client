@@ -14,7 +14,8 @@
 
 @property(nonatomic, weak)id delegate;
 
-- (instancetype)initWithModel:(AFVDPopoutMenuControllerModel *)model;
+- (instancetype)initWithModel:(AFVDPopoutMenuControllerModel *)model frame:(CGRect)frame;
 - (void)refreshMenuWithModel:(AFVDPopoutMenuControllerModel *)model;
+- (void)closeMenu;
 
 @end

@@ -10,3 +10,6 @@
 
 NSString* const kAFVDPopoutMenuCollectionViewCellId         = @"kAFVDPopoutMenuCollectionViewCellId";
 NSInteger const kAFVDPopoutMenuCollectionViewCellIconSize   = 50;
+
+NSString* const kAFVDPopoutMenuCloseMenuItemIconImage       = @"AFVDPopoutMenuCloseMenuItemIconImage";
+SEL popoutMenuCloseButtonPressed;
