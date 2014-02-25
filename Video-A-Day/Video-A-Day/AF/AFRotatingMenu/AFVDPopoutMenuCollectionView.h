@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AFRotatingMenuCollectionView : UICollectionView
+@interface AFVDPopoutMenuCollectionView : UICollectionView
 
 @end

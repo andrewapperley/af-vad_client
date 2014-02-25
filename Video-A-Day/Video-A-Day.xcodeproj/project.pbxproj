@@ -44,15 +44,15 @@
 		0FDC798B18B43B30001F9F14 /* AFVDVideoCaptureControls.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FDC798518B43B30001F9F14 /* AFVDVideoCaptureControls.m */; };
 		0FDC798C18B43B30001F9F14 /* AFVDVideoFilterController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FDC798718B43B30001F9F14 /* AFVDVideoFilterController.m */; };
 		0FDC798D18B43B30001F9F14 /* AFVDVideoFilterDefaultList.json in Resources */ = {isa = PBXBuildFile; fileRef = 0FDC798818B43B30001F9F14 /* AFVDVideoFilterDefaultList.json */; };
-		0FDC799118B4455F001F9F14 /* AFRotatingMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FDC799018B4455F001F9F14 /* AFRotatingMenuViewController.m */; };
-		0FDC799418B44579001F9F14 /* AFRotatingMenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FDC799318B44579001F9F14 /* AFRotatingMenuItem.m */; };
-		0FDC799718B4458F001F9F14 /* AFRotatingMenuDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FDC799618B4458F001F9F14 /* AFRotatingMenuDataSource.m */; };
-		0FDC799A18B445B7001F9F14 /* AFRotatingMenuDataSourceItemFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FDC799918B445B7001F9F14 /* AFRotatingMenuDataSourceItemFactory.m */; };
-		0FDC79A018B4461B001F9F14 /* AFRotatingMenuCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FDC799F18B4461B001F9F14 /* AFRotatingMenuCollectionViewCell.m */; };
-		0FDC79A618B448F8001F9F14 /* AFRotatingMenuControllerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FDC79A518B448F8001F9F14 /* AFRotatingMenuControllerModel.m */; };
-		0FDC79A918B5C4FE001F9F14 /* AFRotatingMenuStatics.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FDC79A818B5C4FE001F9F14 /* AFRotatingMenuStatics.m */; };
-		0FDC79AC18B5CB5A001F9F14 /* AFRotatingMenuCollectionViewLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FDC79AB18B5CB5A001F9F14 /* AFRotatingMenuCollectionViewLayout.m */; };
-		0FDC79AF18B83DAD001F9F14 /* AFRotatingMenuCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FDC79AE18B83DAD001F9F14 /* AFRotatingMenuCollectionView.m */; };
+		0FDC799118B4455F001F9F14 /* AFVDPopoutMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FDC799018B4455F001F9F14 /* AFVDPopoutMenuViewController.m */; };
+		0FDC799418B44579001F9F14 /* AFVDPopoutMenuMenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FDC799318B44579001F9F14 /* AFVDPopoutMenuMenuItem.m */; };
+		0FDC799718B4458F001F9F14 /* AFVDPopoutMenuDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FDC799618B4458F001F9F14 /* AFVDPopoutMenuDataSource.m */; };
+		0FDC799A18B445B7001F9F14 /* AFVDPopoutMenuDataSourceItemFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FDC799918B445B7001F9F14 /* AFVDPopoutMenuDataSourceItemFactory.m */; };
+		0FDC79A018B4461B001F9F14 /* AFVDPopoutMenuCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FDC799F18B4461B001F9F14 /* AFVDPopoutMenuCollectionViewCell.m */; };
+		0FDC79A618B448F8001F9F14 /* AFVDPopoutMenuControllerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FDC79A518B448F8001F9F14 /* AFVDPopoutMenuControllerModel.m */; };
+		0FDC79A918B5C4FE001F9F14 /* AFVDPopoutMenuStatics.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FDC79A818B5C4FE001F9F14 /* AFVDPopoutMenuStatics.m */; };
+		0FDC79AC18B5CB5A001F9F14 /* AFVDPopoutMenuCollectionViewLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FDC79AB18B5CB5A001F9F14 /* AFVDPopoutMenuCollectionViewLayout.m */; };
+		0FDC79AF18B83DAD001F9F14 /* AFVDPopoutMenuCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FDC79AE18B83DAD001F9F14 /* AFVDPopoutMenuCollectionView.m */; };
 		0FF186D418AAFC6100BE1417 /* AFVDFontStatics.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FF186D318AAFC6100BE1417 /* AFVDFontStatics.m */; };
 		0FF186D718AAFCC000BE1417 /* AFVDInitialViewStatics.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FF186D618AAFCC000BE1417 /* AFVDInitialViewStatics.m */; };
 		0FF441D418626A3200ADAD2C /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FF441D318626A3100ADAD2C /* CoreVideo.framework */; };
@@ -153,24 +153,24 @@
 		0FDC798618B43B30001F9F14 /* AFVDVideoFilterController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFVDVideoFilterController.h; sourceTree = "<group>"; };
 		0FDC798718B43B30001F9F14 /* AFVDVideoFilterController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFVDVideoFilterController.m; sourceTree = "<group>"; };
 		0FDC798818B43B30001F9F14 /* AFVDVideoFilterDefaultList.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = AFVDVideoFilterDefaultList.json; sourceTree = "<group>"; };
-		0FDC798F18B4455F001F9F14 /* AFRotatingMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFRotatingMenuViewController.h; sourceTree = "<group>"; };
-		0FDC799018B4455F001F9F14 /* AFRotatingMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFRotatingMenuViewController.m; sourceTree = "<group>"; };
-		0FDC799218B44579001F9F14 /* AFRotatingMenuItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFRotatingMenuItem.h; sourceTree = "<group>"; };
-		0FDC799318B44579001F9F14 /* AFRotatingMenuItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFRotatingMenuItem.m; sourceTree = "<group>"; };
-		0FDC799518B4458F001F9F14 /* AFRotatingMenuDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFRotatingMenuDataSource.h; sourceTree = "<group>"; };
-		0FDC799618B4458F001F9F14 /* AFRotatingMenuDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFRotatingMenuDataSource.m; sourceTree = "<group>"; };
-		0FDC799818B445B7001F9F14 /* AFRotatingMenuDataSourceItemFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFRotatingMenuDataSourceItemFactory.h; sourceTree = "<group>"; };
-		0FDC799918B445B7001F9F14 /* AFRotatingMenuDataSourceItemFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFRotatingMenuDataSourceItemFactory.m; sourceTree = "<group>"; };
-		0FDC799E18B4461B001F9F14 /* AFRotatingMenuCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFRotatingMenuCollectionViewCell.h; sourceTree = "<group>"; };
-		0FDC799F18B4461B001F9F14 /* AFRotatingMenuCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFRotatingMenuCollectionViewCell.m; sourceTree = "<group>"; };
-		0FDC79A418B448F8001F9F14 /* AFRotatingMenuControllerModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFRotatingMenuControllerModel.h; sourceTree = "<group>"; };
-		0FDC79A518B448F8001F9F14 /* AFRotatingMenuControllerModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFRotatingMenuControllerModel.m; sourceTree = "<group>"; };
-		0FDC79A718B5C4FE001F9F14 /* AFRotatingMenuStatics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFRotatingMenuStatics.h; sourceTree = "<group>"; };
-		0FDC79A818B5C4FE001F9F14 /* AFRotatingMenuStatics.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFRotatingMenuStatics.m; sourceTree = "<group>"; };
-		0FDC79AA18B5CB5A001F9F14 /* AFRotatingMenuCollectionViewLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFRotatingMenuCollectionViewLayout.h; sourceTree = "<group>"; };
-		0FDC79AB18B5CB5A001F9F14 /* AFRotatingMenuCollectionViewLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFRotatingMenuCollectionViewLayout.m; sourceTree = "<group>"; };
-		0FDC79AD18B83DAD001F9F14 /* AFRotatingMenuCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFRotatingMenuCollectionView.h; sourceTree = "<group>"; };
-		0FDC79AE18B83DAD001F9F14 /* AFRotatingMenuCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFRotatingMenuCollectionView.m; sourceTree = "<group>"; };
+		0FDC798F18B4455F001F9F14 /* AFVDPopoutMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFVDPopoutMenuViewController.h; sourceTree = "<group>"; };
+		0FDC799018B4455F001F9F14 /* AFVDPopoutMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFVDPopoutMenuViewController.m; sourceTree = "<group>"; };
+		0FDC799218B44579001F9F14 /* AFVDPopoutMenuMenuItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFVDPopoutMenuMenuItem.h; sourceTree = "<group>"; };
+		0FDC799318B44579001F9F14 /* AFVDPopoutMenuMenuItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFVDPopoutMenuMenuItem.m; sourceTree = "<group>"; };
+		0FDC799518B4458F001F9F14 /* AFVDPopoutMenuDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFVDPopoutMenuDataSource.h; sourceTree = "<group>"; };
+		0FDC799618B4458F001F9F14 /* AFVDPopoutMenuDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFVDPopoutMenuDataSource.m; sourceTree = "<group>"; };
+		0FDC799818B445B7001F9F14 /* AFVDPopoutMenuDataSourceItemFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFVDPopoutMenuDataSourceItemFactory.h; sourceTree = "<group>"; };
+		0FDC799918B445B7001F9F14 /* AFVDPopoutMenuDataSourceItemFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFVDPopoutMenuDataSourceItemFactory.m; sourceTree = "<group>"; };
+		0FDC799E18B4461B001F9F14 /* AFVDPopoutMenuCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFVDPopoutMenuCollectionViewCell.h; sourceTree = "<group>"; };
+		0FDC799F18B4461B001F9F14 /* AFVDPopoutMenuCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFVDPopoutMenuCollectionViewCell.m; sourceTree = "<group>"; };
+		0FDC79A418B448F8001F9F14 /* AFVDPopoutMenuControllerModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFVDPopoutMenuControllerModel.h; sourceTree = "<group>"; };
+		0FDC79A518B448F8001F9F14 /* AFVDPopoutMenuControllerModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFVDPopoutMenuControllerModel.m; sourceTree = "<group>"; };
+		0FDC79A718B5C4FE001F9F14 /* AFVDPopoutMenuStatics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFVDPopoutMenuStatics.h; sourceTree = "<group>"; };
+		0FDC79A818B5C4FE001F9F14 /* AFVDPopoutMenuStatics.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFVDPopoutMenuStatics.m; sourceTree = "<group>"; };
+		0FDC79AA18B5CB5A001F9F14 /* AFVDPopoutMenuCollectionViewLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFVDPopoutMenuCollectionViewLayout.h; sourceTree = "<group>"; };
+		0FDC79AB18B5CB5A001F9F14 /* AFVDPopoutMenuCollectionViewLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFVDPopoutMenuCollectionViewLayout.m; sourceTree = "<group>"; };
+		0FDC79AD18B83DAD001F9F14 /* AFVDPopoutMenuCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFVDPopoutMenuCollectionView.h; sourceTree = "<group>"; };
+		0FDC79AE18B83DAD001F9F14 /* AFVDPopoutMenuCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFVDPopoutMenuCollectionView.m; sourceTree = "<group>"; };
 		0FF186D218AAFC6100BE1417 /* AFVDFontStatics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFVDFontStatics.h; sourceTree = "<group>"; };
 		0FF186D318AAFC6100BE1417 /* AFVDFontStatics.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFVDFontStatics.m; sourceTree = "<group>"; };
 		0FF186D518AAFCC000BE1417 /* AFVDInitialViewStatics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFVDInitialViewStatics.h; sourceTree = "<group>"; };
@@ -268,6 +268,7 @@
 		0F06A6EB187CF1F70021E10C /* AFVD */ = {
 			isa = PBXGroup;
 			children = (
+				0FDC798E18B43B5A001F9F14 /* AFVDPopoutMenu */,
 				0FDC797F18B43B30001F9F14 /* AFVDVideoCapture */,
 				0F06A6EC187CF1F70021E10C /* InitialViewController */,
 				0F06A6EF187CF1F70021E10C /* Other Components */,
@@ -499,30 +500,30 @@
 			path = AFVDVideoCapture;
 			sourceTree = "<group>";
 		};
-		0FDC798E18B43B5A001F9F14 /* AFRotatingMenu */ = {
+		0FDC798E18B43B5A001F9F14 /* AFVDPopoutMenu */ = {
 			isa = PBXGroup;
 			children = (
-				0FDC798F18B4455F001F9F14 /* AFRotatingMenuViewController.h */,
-				0FDC799018B4455F001F9F14 /* AFRotatingMenuViewController.m */,
-				0FDC799218B44579001F9F14 /* AFRotatingMenuItem.h */,
-				0FDC799318B44579001F9F14 /* AFRotatingMenuItem.m */,
-				0FDC799518B4458F001F9F14 /* AFRotatingMenuDataSource.h */,
-				0FDC799618B4458F001F9F14 /* AFRotatingMenuDataSource.m */,
-				0FDC799818B445B7001F9F14 /* AFRotatingMenuDataSourceItemFactory.h */,
-				0FDC799918B445B7001F9F14 /* AFRotatingMenuDataSourceItemFactory.m */,
-				0FDC799E18B4461B001F9F14 /* AFRotatingMenuCollectionViewCell.h */,
-				0FDC799F18B4461B001F9F14 /* AFRotatingMenuCollectionViewCell.m */,
-				0FDC79A418B448F8001F9F14 /* AFRotatingMenuControllerModel.h */,
-				0FDC79A518B448F8001F9F14 /* AFRotatingMenuControllerModel.m */,
-				0FDC79A718B5C4FE001F9F14 /* AFRotatingMenuStatics.h */,
-				0FDC79A818B5C4FE001F9F14 /* AFRotatingMenuStatics.m */,
-				0FDC79AA18B5CB5A001F9F14 /* AFRotatingMenuCollectionViewLayout.h */,
-				0FDC79AB18B5CB5A001F9F14 /* AFRotatingMenuCollectionViewLayout.m */,
-				0FDC79AD18B83DAD001F9F14 /* AFRotatingMenuCollectionView.h */,
-				0FDC79AE18B83DAD001F9F14 /* AFRotatingMenuCollectionView.m */,
+				0FDC798F18B4455F001F9F14 /* AFVDPopoutMenuViewController.h */,
+				0FDC799018B4455F001F9F14 /* AFVDPopoutMenuViewController.m */,
+				0FDC799218B44579001F9F14 /* AFVDPopoutMenuMenuItem.h */,
+				0FDC799318B44579001F9F14 /* AFVDPopoutMenuMenuItem.m */,
+				0FDC799518B4458F001F9F14 /* AFVDPopoutMenuDataSource.h */,
+				0FDC799618B4458F001F9F14 /* AFVDPopoutMenuDataSource.m */,
+				0FDC799818B445B7001F9F14 /* AFVDPopoutMenuDataSourceItemFactory.h */,
+				0FDC799918B445B7001F9F14 /* AFVDPopoutMenuDataSourceItemFactory.m */,
+				0FDC799E18B4461B001F9F14 /* AFVDPopoutMenuCollectionViewCell.h */,
+				0FDC799F18B4461B001F9F14 /* AFVDPopoutMenuCollectionViewCell.m */,
+				0FDC79A418B448F8001F9F14 /* AFVDPopoutMenuControllerModel.h */,
+				0FDC79A518B448F8001F9F14 /* AFVDPopoutMenuControllerModel.m */,
+				0FDC79A718B5C4FE001F9F14 /* AFVDPopoutMenuStatics.h */,
+				0FDC79A818B5C4FE001F9F14 /* AFVDPopoutMenuStatics.m */,
+				0FDC79AA18B5CB5A001F9F14 /* AFVDPopoutMenuCollectionViewLayout.h */,
+				0FDC79AB18B5CB5A001F9F14 /* AFVDPopoutMenuCollectionViewLayout.m */,
+				0FDC79AD18B83DAD001F9F14 /* AFVDPopoutMenuCollectionView.h */,
+				0FDC79AE18B83DAD001F9F14 /* AFVDPopoutMenuCollectionView.m */,
 			);
-			name = AFRotatingMenu;
-			path = AF/AFRotatingMenu;
+			name = AFVDPopoutMenu;
+			path = ../AF/AFRotatingMenu;
 			sourceTree = "<group>";
 		};
 		7610BC55183B107B003CE193 /* RelationshipModel */ = {
@@ -638,7 +639,6 @@
 		76C6518E1837FFCD003C7F7D /* AF */ = {
 			isa = PBXGroup;
 			children = (
-				0FDC798E18B43B5A001F9F14 /* AFRotatingMenu */,
 				0F06A6E2187CEE290021E10C /* AFViewController */,
 				76C6518F1837FFFD003C7F7D /* AFCategory */,
 			);
@@ -858,7 +858,7 @@
 				7677BA6F18373A6B00F3EDC9 /* AFVDUserModelFactory.m in Sources */,
 				0F06A6F3187CF2080021E10C /* AFVDIntialViewController.m in Sources */,
 				0F06A6E5187CEE550021E10C /* AFViewController.m in Sources */,
-				0FDC79A018B4461B001F9F14 /* AFRotatingMenuCollectionViewCell.m in Sources */,
+				0FDC79A018B4461B001F9F14 /* AFVDPopoutMenuCollectionViewCell.m in Sources */,
 				7610BC61183B119C003CE193 /* AFVDRelationshipModel.m in Sources */,
 				0F2FC6F71837303800611873 /* main.m in Sources */,
 				0FF186D418AAFC6100BE1417 /* AFVDFontStatics.m in Sources */,
@@ -866,8 +866,8 @@
 				0F79613E183EE64E00920C59 /* AFVDUrlHasher.m in Sources */,
 				7657BBF4184EE1A1004CA559 /* AFVDBaseNetworkStatics.m in Sources */,
 				0F06A6FC187CF2460021E10C /* AFVDActivityIndicator.m in Sources */,
-				0FDC79A918B5C4FE001F9F14 /* AFRotatingMenuStatics.m in Sources */,
-				0FDC799718B4458F001F9F14 /* AFRotatingMenuDataSource.m in Sources */,
+				0FDC79A918B5C4FE001F9F14 /* AFVDPopoutMenuStatics.m in Sources */,
+				0FDC799718B4458F001F9F14 /* AFVDPopoutMenuDataSource.m in Sources */,
 				7696C7DF184C366000B270FC /* AFVDKeychain.m in Sources */,
 				0F2FC6FB1837303800611873 /* AFVDAppDelegate.m in Sources */,
 				0F06A6F6187CF2250021E10C /* AFVDSigninView.m in Sources */,
@@ -877,13 +877,13 @@
 				76C651A7183840E4003C7F7D /* AFVDVideoModelDatasource.m in Sources */,
 				0F2C8A0C188B408D0033397C /* AFVDSignupUserModel.m in Sources */,
 				0F21EFA8189D5BDC001706FD /* SSKeychainQuery.m in Sources */,
-				0FDC799A18B445B7001F9F14 /* AFRotatingMenuDataSourceItemFactory.m in Sources */,
+				0FDC799A18B445B7001F9F14 /* AFVDPopoutMenuDataSourceItemFactory.m in Sources */,
 				76C651A8183840E4003C7F7D /* AFVDVideoModelFactory.m in Sources */,
-				0FDC799118B4455F001F9F14 /* AFRotatingMenuViewController.m in Sources */,
-				0FDC79AC18B5CB5A001F9F14 /* AFRotatingMenuCollectionViewLayout.m in Sources */,
-				0FDC79A618B448F8001F9F14 /* AFRotatingMenuControllerModel.m in Sources */,
-				0FDC799418B44579001F9F14 /* AFRotatingMenuItem.m in Sources */,
-				0FDC79AF18B83DAD001F9F14 /* AFRotatingMenuCollectionView.m in Sources */,
+				0FDC799118B4455F001F9F14 /* AFVDPopoutMenuViewController.m in Sources */,
+				0FDC79AC18B5CB5A001F9F14 /* AFVDPopoutMenuCollectionViewLayout.m in Sources */,
+				0FDC79A618B448F8001F9F14 /* AFVDPopoutMenuControllerModel.m in Sources */,
+				0FDC799418B44579001F9F14 /* AFVDPopoutMenuMenuItem.m in Sources */,
+				0FDC79AF18B83DAD001F9F14 /* AFVDPopoutMenuCollectionView.m in Sources */,
 				7677BA6D18373A6B00F3EDC9 /* AFVDBaseNetworkDatasource.m in Sources */,
 				76C651931838003D003C7F7D /* NSDictionary+NSDictionary_NSDataConversion.m in Sources */,
 				0F2C8A021884CF000033397C /* AFVDStatics.m in Sources */,

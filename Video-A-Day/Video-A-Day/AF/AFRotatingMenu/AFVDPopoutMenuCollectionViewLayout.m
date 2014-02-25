@@ -6,10 +6,10 @@
 //  Copyright (c) 2014 AFApps. All rights reserved.
 //
 
-#import "AFRotatingMenuCollectionViewLayout.h"
-#import "AFRotatingMenuDataSource.h"
+#import "AFVDPopoutMenuCollectionViewLayout.h"
+#import "AFVDPopoutMenuDataSource.h"
 
-@implementation AFRotatingMenuCollectionViewLayout
+@implementation AFVDPopoutMenuCollectionViewLayout
 
 - (instancetype)init {
     
@@ -31,7 +31,7 @@
     
     for (UICollectionViewLayoutAttributes* attribute in attributes) {
         if (CGRectIntersectsRect(attribute.frame, rect)) {
-            attribute.center = CGPointMake(visibleRect.size.width/2 + self.collectionView.center.x * cosf(2 * attribute.indexPath.item * M_PI_2 / 4), (visibleRect.size.width / 4) * sinf(2 * attribute.indexPath.item * M_PI_2 / 4));
+            
         }
     }
     return attributes;

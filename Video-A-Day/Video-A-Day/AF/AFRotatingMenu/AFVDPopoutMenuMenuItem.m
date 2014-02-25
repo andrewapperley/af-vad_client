@@ -6,9 +6,9 @@
 //  Copyright (c) 2014 AFApps. All rights reserved.
 //
 
-#import "AFRotatingMenuItem.h"
+#import "AFVDPopoutMenuMenuItem.h"
 
-@implementation AFRotatingMenuItem
+@implementation AFVDPopoutMenuMenuItem
 
 - (instancetype)initMenuItemWithTitle:(NSString *)title icon:(UIImage *)icon selector:(SEL)selector property:(id)property {
     if (self = [super init]) {

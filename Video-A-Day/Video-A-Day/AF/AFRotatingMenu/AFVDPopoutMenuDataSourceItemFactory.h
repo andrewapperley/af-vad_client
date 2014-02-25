@@ -7,10 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "AFRotatingMenuControllerModel.h"
+#import "AFVDPopoutMenuControllerModel.h"
 
-@interface AFRotatingMenuDataSourceItemFactory : NSObject
+@interface AFVDPopoutMenuDataSourceItemFactory : NSObject
 
-+ (NSArray *)generateMenuItemsFromMenuModel:(AFRotatingMenuControllerModel *)model;
++ (NSArray *)generateMenuItemsFromMenuModel:(AFVDPopoutMenuControllerModel *)model;
 
 @end

@@ -6,21 +6,21 @@
 //  Copyright (c) 2014 AFApps. All rights reserved.
 //
 
-#import "AFRotatingMenuCollectionViewCell.h"
-#import "AFRotatingMenuStatics.h"
+#import "AFVDPopoutMenuCollectionViewCell.h"
+#import "AFVDPopoutMenuStatics.h"
 
-@interface AFRotatingMenuCollectionViewCell() {
+@interface AFVDPopoutMenuCollectionViewCell() {
     UIImageView* _iconView;
 }
 
 @end
 
-@implementation AFRotatingMenuCollectionViewCell
+@implementation AFVDPopoutMenuCollectionViewCell
 
 - (id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        _iconView                       = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0,kAFRotatingMenuCollectionViewCellIconSize, kAFRotatingMenuCollectionViewCellIconSize)];
+        _iconView                       = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0,kAFVDPopoutMenuCollectionViewCellIconSize, kAFVDPopoutMenuCollectionViewCellIconSize)];
         _iconView.layer.cornerRadius    = _iconView.frame.size.width * 0.5f;
         _iconView.contentMode           = UIViewContentModeScaleAspectFit;
         _iconView.clipsToBounds         = YES;

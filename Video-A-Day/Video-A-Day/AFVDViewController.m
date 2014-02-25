@@ -16,8 +16,8 @@
 #import "AFVDVideoModelFactory.h"
 #import "AFVDRelationshipModelFactory.h"
 #import "AFVDVideoCaptureController.h"
-#import "AFRotatingMenuViewController.h"
-#import "AFRotatingMenuControllerModel.h"
+#import "AFVDPopoutMenuViewController.h"
+#import "AFVDPopoutMenuControllerModel.h"
 
 NSString *userName = @"andrewApperley123";
 NSString *displayName = @"a_apperley";

@@ -6,9 +6,9 @@
 //  Copyright (c) 2014 AFApps. All rights reserved.
 //
 
-#import "AFRotatingMenuCollectionView.h"
+#import "AFVDPopoutMenuCollectionView.h"
 
-@implementation AFRotatingMenuCollectionView
+@implementation AFVDPopoutMenuCollectionView
 
 - (id)initWithFrame:(CGRect)frame collectionViewLayout:(UICollectionViewLayout *)layout{
     self = [super initWithFrame:frame collectionViewLayout:layout];

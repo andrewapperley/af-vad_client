@@ -7,15 +7,14 @@
 //
 
 #import "AFVDVideoCaptureControls.h"
-#import "AFRotatingMenuItem.h"
-#import "AFRotatingMenuControllerModel.h"
-#import "AFRotatingMenuViewController.h"
+#import "AFVDPopoutMenuMenuItem.h"
+#import "AFVDPopoutMenuControllerModel.h"
+#import "AFVDPopoutMenuViewController.h"
 
 @interface AFVDVideoCaptureControls () {
     UIButton *_recordButton;
     UILabel *recordingTime;
     CGSize _previewSize;
-    AFRotatingMenuViewController* _menu;
 }
 
 @end
@@ -46,8 +45,6 @@ NSInteger const kAFVDVideoCaptureButtonYMargin      = 10;
     CGFloat width       = self.bounds.size.width;
     
     NSInteger tileSize = 30;
-
-    /*The x/y numbers will change anyways because the placement isnt to any design and is probably wrong so they are magical for now*/
     
     _recordButton = [[UIButton alloc] initWithFrame:CGRectMake((_previewSize.width - tileSize)/2, _previewSize.height + kAFVDVideoCaptureButtonYMargin, tileSize, tileSize)];
     [_recordButton setTitle:@"R" forState:UIControlStateNormal];
@@ -68,9 +65,9 @@ NSInteger const kAFVDVideoCaptureButtonYMargin      = 10;
 }
 
 - (void)setupMenu {
-    AFRotatingMenuControllerModel* menuModel = [[AFRotatingMenuControllerModel alloc] initWithIcons:@[[UIImage imageNamed:@"AFVDLogo"], [UIImage imageNamed:@"AFVDProfileImageSelector"],[UIImage imageNamed:@"AFVDLogo"], [UIImage imageNamed:@"AFVDProfileImageSelector"],[UIImage imageNamed:@"AFVDProfileImageSelector"],[UIImage imageNamed:@"AFVDProfileImageSelector"],[UIImage imageNamed:@"AFVDProfileImageSelector"],[UIImage imageNamed:@"AFVDProfileImageSelector"],[UIImage imageNamed:@"AFVDProfileImageSelector"]] titles:@[@"test"] selectors:@[@"itemSelected:", @"itemSelected:", @"itemSelected:", @"itemSelected:", @"itemSelected:", @"itemSelected:"] properties:@[@"GPUImageVignetteFilter", @"GPUImageVignetteFilter", @"GPUImageVignetteFilter", @"GPUImageVignetteFilter"]];
+    AFVDPopoutMenuControllerModel* menuModel = [[AFVDPopoutMenuControllerModel alloc] initWithIcons:@[[UIImage imageNamed:@"AFVDLogo"], [UIImage imageNamed:@"AFVDProfileImageSelector"],[UIImage imageNamed:@"AFVDLogo"], [UIImage imageNamed:@"AFVDProfileImageSelector"],[UIImage imageNamed:@"AFVDProfileImageSelector"],[UIImage imageNamed:@"AFVDProfileImageSelector"],[UIImage imageNamed:@"AFVDProfileImageSelector"],[UIImage imageNamed:@"AFVDProfileImageSelector"],[UIImage imageNamed:@"AFVDProfileImageSelector"]] titles:@[@"test"] selectors:@[@"itemSelected:", @"itemSelected:", @"itemSelected:", @"itemSelected:", @"itemSelected:", @"itemSelected:"] properties:@[@"GPUImageVignetteFilter", @"GPUImageVignetteFilter", @"GPUImageVignetteFilter", @"GPUImageVignetteFilter"]];
     
-    _menu = [[AFRotatingMenuViewController alloc] initWithModel:menuModel diameter:300];
+    _menu = [[AFVDPopoutMenuViewController alloc] initWithModel:menuModel];
     _menu.view.frame = CGRectMake(_menu.view.frame.origin.x, CGRectGetMaxY(_recordButton.frame) + kAFVDVideoCaptureButtonYMargin, _menu.view.frame.size.width, self.frame.size.height - CGRectGetMaxY(_recordButton.frame) + kAFVDVideoCaptureButtonYMargin);
     _menu.delegate   = self;
 
@@ -81,7 +78,7 @@ NSInteger const kAFVDVideoCaptureButtonYMargin      = 10;
 #pragma Button Methods
 #pragma -
 
-- (void)changeCameraButtonPressed:(AFRotatingMenuItem *)sender {
+- (void)changeCameraButtonPressed:(AFVDPopoutMenuMenuItem *)sender {
     AVCaptureDevicePosition device;
     NSInteger newMenuProperty;
     

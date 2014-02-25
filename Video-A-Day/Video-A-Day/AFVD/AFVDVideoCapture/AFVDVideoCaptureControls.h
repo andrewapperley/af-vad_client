@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import <AVFoundation/AVFoundation.h>
 
+@class AFVDPopoutMenuViewController;
+
 @protocol AFVDVideoCaptureControlsDelegate <NSObject>
 
 @required
@@ -21,7 +23,8 @@
 
 @interface AFVDVideoCaptureControls : UIView
 
-@property (nonatomic, weak) id <AFVDVideoCaptureControlsDelegate> delegate;
+@property(nonatomic, weak) id <AFVDVideoCaptureControlsDelegate> delegate;
+@property(nonatomic, strong) AFVDPopoutMenuViewController* menu;
 
 - (id)initWithFrame:(CGRect)frame sizeOfPreviewScreen:(CGSize)previewSize;
 

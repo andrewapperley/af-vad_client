@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AFRotatingMenuCollectionViewCell : UICollectionViewCell
+@interface AFVDPopoutMenuCollectionViewCell : UICollectionViewCell
 
 @property(nonatomic, strong)UIImage* icon;
 @property(nonatomic, strong)UILabel* menuItemTitleLabel;

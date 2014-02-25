@@ -8,11 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
-@class AFRotatingMenuControllerModel;
+@class AFVDPopoutMenuControllerModel;
 
-@interface AFRotatingMenuDataSource : NSObject <UICollectionViewDataSource>
+@interface AFVDPopoutMenuDataSource : NSObject <UICollectionViewDataSource>
 
 @property(nonatomic, strong, readonly)NSArray* menuItems;
-- (void)setMenuItemsWithModel:(AFRotatingMenuControllerModel *)model;
+- (void)setMenuItemsWithModel:(AFVDPopoutMenuControllerModel *)model;
 
 @end

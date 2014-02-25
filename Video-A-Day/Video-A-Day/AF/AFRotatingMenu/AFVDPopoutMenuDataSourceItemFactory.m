@@ -6,12 +6,12 @@
 //  Copyright (c) 2014 AFApps. All rights reserved.
 //
 
-#import "AFRotatingMenuDataSourceItemFactory.h"
-#import "AFRotatingMenuItem.h"
+#import "AFVDPopoutMenuDataSourceItemFactory.h"
+#import "AFVDPopoutMenuMenuItem.h"
 
-@implementation AFRotatingMenuDataSourceItemFactory
+@implementation AFVDPopoutMenuDataSourceItemFactory
 
-+ (NSArray *)generateMenuItemsFromMenuModel:(AFRotatingMenuControllerModel *)model {
++ (NSArray *)generateMenuItemsFromMenuModel:(AFVDPopoutMenuControllerModel *)model {
     
     NSUInteger largestArrayCount = 0;
     
@@ -25,7 +25,7 @@
         SEL _selector       = (i < model.selectors.count) ? NSSelectorFromString(model.selectors[i]) : nil;
         id _property        = (i < model.properties.count) ? model.properties[i] : nil;
         
-        AFRotatingMenuItem* menuItem = [[AFRotatingMenuItem alloc] initMenuItemWithTitle:_title icon:_icon selector:_selector property:_property];
+        AFVDPopoutMenuMenuItem* menuItem = [[AFVDPopoutMenuMenuItem alloc] initMenuItemWithTitle:_title icon:_icon selector:_selector property:_property];
         
         [returnArray addObject:menuItem];
     }

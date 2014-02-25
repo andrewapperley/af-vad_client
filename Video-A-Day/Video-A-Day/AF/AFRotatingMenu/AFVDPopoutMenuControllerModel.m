@@ -6,9 +6,9 @@
 //  Copyright (c) 2014 AFApps. All rights reserved.
 //
 
-#import "AFRotatingMenuControllerModel.h"
+#import "AFVDPopoutMenuControllerModel.h"
 
-@implementation AFRotatingMenuControllerModel
+@implementation AFVDPopoutMenuControllerModel
 
 - (instancetype)initWithIcons:(NSArray *)icons titles:(NSArray *)titles selectors:(NSArray *)selectors properties:(NSArray *)properties {
     if (self = [super init]) {

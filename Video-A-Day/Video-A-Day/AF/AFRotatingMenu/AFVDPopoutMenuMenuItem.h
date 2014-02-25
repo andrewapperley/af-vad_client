@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface AFRotatingMenuItem : NSObject
+@interface AFVDPopoutMenuMenuItem : NSObject
 
 @property(nonatomic, strong)NSString* menuItemTitle;
 @property(nonatomic, strong)UIImage* menuItemIcon;
