@@ -8,8 +8,9 @@
 
 #import "AFVDPopoutMenuStatics.h"
 
-NSString* const kAFVDPopoutMenuCollectionViewCellId         = @"kAFVDPopoutMenuCollectionViewCellId";
-NSInteger const kAFVDPopoutMenuCollectionViewCellIconSize   = 50;
+NSString* const kAFVDPopoutMenuCollectionViewCellId                 = @"kAFVDPopoutMenuCollectionViewCellId";
+NSInteger const kAFVDPopoutMenuCollectionViewCellIconSize           = 50;
 
-NSString* const kAFVDPopoutMenuCloseMenuItemIconImage       = @"AFVDPopoutMenuCloseMenuItemIconImage";
-SEL popoutMenuCloseButtonPressed;
+NSString* const kAFVDPopoutMenuCloseMenuItemIconImage               = @"AFVDPopoutMenuCloseMenuItemIconImage";
+NSString* const kAFVDPopoutMenuCloseSelector                        = @"closeButtonPressed";
+NSInteger const kAFVDPopoutMenuCloseDuration                        = 0.6f;

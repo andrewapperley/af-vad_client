@@ -20,21 +20,21 @@
     return self;
 }
 
-- (NSArray *)layoutAttributesForElementsInRect:(CGRect)rect {
-    
-    NSArray* attributes = [super layoutAttributesForElementsInRect:rect];
-
-    CGRect visibleRect;
-    visibleRect.origin = self.collectionView.contentOffset;
-    visibleRect.size = self.collectionView.bounds.size;
-    
-    for (UICollectionViewLayoutAttributes* attribute in attributes) {
-        if (CGRectIntersectsRect(attribute.frame, rect)) {
-            
-        }
-    }
-    return attributes;
-}
+//- (NSArray *)layoutAttributesForElementsInRect:(CGRect)rect {
+//    
+//    NSArray* attributes = [super layoutAttributesForElementsInRect:rect];
+//
+//    CGRect visibleRect;
+//    visibleRect.origin = self.collectionView.contentOffset;
+//    visibleRect.size = self.collectionView.bounds.size;
+//    
+//    for (UICollectionViewLayoutAttributes* attribute in attributes) {
+//        if (CGRectIntersectsRect(attribute.frame, rect)) {
+//            
+//        }
+//    }
+//    return attributes;
+//}
 
 
 //- (CGPoint)targetContentOffsetForProposedContentOffset:(CGPoint)proposedContentOffset withScrollingVelocity:(CGPoint)velocity {
@@ -45,8 +45,8 @@
 //    
 //}
 
-- (BOOL)shouldInvalidateLayoutForBoundsChange:(CGRect)newBounds {
-    return YES;
-}
+//- (BOOL)shouldInvalidateLayoutForBoundsChange:(CGRect)newBounds {
+//    return YES;
+//}
 
 @end

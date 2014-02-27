@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <AVFoundation/AVFoundation.h>
 
-@class AFVDPopoutMenuViewController;
+@class AFVDPopoutMenuViewController, AFVDPopoutMenuMenuItem;
 
 @protocol AFVDVideoCaptureControlsDelegate <NSObject>
 
@@ -17,7 +17,10 @@
 - (void)startCapturingVideo;
 - (void)closeVideoCaptureController;
 - (void)recaptureVideo;
+- (void)shareVideo;
+- (void)showFilters;
 - (void)videoCaptureDeviceSwitched:(AVCaptureDevicePosition)device;
+- (void)changeVideoFilterForItem:(AFVDPopoutMenuMenuItem *)menuItem;
 
 @end
 
@@ -30,5 +33,6 @@
 
 - (void)changeRecordingButtonState:(BOOL)lrecording;
 - (void)setRecordingTime:(long long)newTime;
+- (void)showFilterShareButtons;
 
 @end

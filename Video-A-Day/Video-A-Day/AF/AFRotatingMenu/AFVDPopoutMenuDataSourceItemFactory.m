@@ -36,11 +36,11 @@
     return (NSArray *)returnArray;
 }
 
-/*This is called to ensure that the first item is always the close button for the menu*/
+/*This is called to ensure that the first item is always the close button for the video player*/
 
 + (AFVDPopoutMenuMenuItem *)addCloseButtonMenuItem {
     
-    AFVDPopoutMenuMenuItem* closeMenuItem = [[AFVDPopoutMenuMenuItem alloc] initMenuItemWithTitle:NSLocalizedString(@"kAFVDPopoutMenuCloseMenuItemTitle", nil) icon:[UIImage imageNamed:kAFVDPopoutMenuCloseMenuItemIconImage] selector:popoutMenuCloseButtonPressed property:nil];
+    AFVDPopoutMenuMenuItem* closeMenuItem = [[AFVDPopoutMenuMenuItem alloc] initMenuItemWithTitle:NSLocalizedString(@"kAFVDPopoutMenuCloseMenuItemTitle", nil) icon:[UIImage imageNamed:kAFVDPopoutMenuCloseMenuItemIconImage] selector:NSSelectorFromString(kAFVDPopoutMenuCloseSelector) property:nil];
     
     return closeMenuItem;
 }

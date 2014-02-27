@@ -29,8 +29,10 @@
 
 - (instancetype)initWithModel:(AFVDPopoutMenuControllerModel *)model frame:(CGRect)frame {
     if (self = [super init]) {
-        _currentModel = model;
-        _menuFrame = frame;
+        _currentModel           = model;
+        _menuFrame              = frame;
+        _isOpen                 = YES;
+        self.view.clipsToBounds = YES;
     }
     return self;
 }
@@ -39,7 +41,7 @@
     [super viewDidLoad];
     self.view.frame = _menuFrame;
     AFVDPopoutMenuCollectionViewLayout* layout = [[AFVDPopoutMenuCollectionViewLayout alloc] init];
-    _rotatingCollectionView = [[AFVDPopoutMenuCollectionView alloc] initWithFrame:CGRectMake(0, 0, _menuFrame.size.width, _menuFrame.size.height) collectionViewLayout:layout];
+    _rotatingCollectionView = [[AFVDPopoutMenuCollectionView alloc] initWithFrame:CGRectMake(-_menuFrame.size.width, 0, _menuFrame.size.width, _menuFrame.size.height) collectionViewLayout:layout];
     _datasource = [[AFVDPopoutMenuDataSource alloc] init];
     [_datasource setMenuItemsWithModel:_currentModel];
     [_rotatingCollectionView setDelegate:self];
@@ -48,19 +50,32 @@
     [self.view addSubview:_rotatingCollectionView];
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [self closeMenu:NO];
+}
+
 #pragma mark - Public Menu methods
 
 - (void)refreshMenuWithModel:(AFVDPopoutMenuControllerModel *)model {
+    if (_currentModel) {
+        _currentModel = model;
+    }
     [_datasource setMenuItemsWithModel:_currentModel];
-    [_rotatingCollectionView setCollectionViewLayout:[[AFVDPopoutMenuCollectionViewLayout alloc] init] animated:YES];
-    [_rotatingCollectionView reloadData];
-    [_rotatingCollectionView performBatchUpdates:^{
-        [_rotatingCollectionView reloadSections:[NSIndexSet indexSetWithIndex:0]];
-    } completion:nil];
+    [self closeMenu:YES];
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(kAFVDPopoutMenuCloseDuration * NSEC_PER_SEC));
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        [_rotatingCollectionView reloadData];
+        [self closeMenu:NO];
+    });
 }
 
-- (void)closeMenu {
-    
+- (void)closeMenu:(BOOL)close {
+    [UIView animateWithDuration:kAFVDPopoutMenuCloseDuration animations:^{
+        _rotatingCollectionView.frame = CGRectMake((close) ? -_rotatingCollectionView.frame.size.width : 0, _rotatingCollectionView.frame.origin.y, _rotatingCollectionView.frame.size.width, _rotatingCollectionView.frame.size.height);
+    } completion:^(BOOL finished) {
+        _isOpen = !_isOpen;
+    }];
 }
 
 #pragma mark - UICollectionViewDelegate methods

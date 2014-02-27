@@ -9,4 +9,5 @@
 extern NSString* const kAFVDPopoutMenuCollectionViewCellId;
 extern NSInteger const kAFVDPopoutMenuCollectionViewCellIconSize;
 extern NSString* const kAFVDPopoutMenuCloseMenuItemIconImage;
-extern SEL popoutMenuCloseButtonPressed;
+extern NSString* const kAFVDPopoutMenuCloseSelector;
+extern NSInteger const kAFVDPopoutMenuCloseDuration;

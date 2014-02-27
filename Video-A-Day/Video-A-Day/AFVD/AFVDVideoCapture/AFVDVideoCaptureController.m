@@ -249,16 +249,7 @@ static const CGFloat kPreviewViewAnimationDuration = 0.5f;
     
     /*Stop the recording if it's in progress and show the share / add filter buttons*/
     if(_captureSession.isRunning && _cameraOutput.isRecording) {
-        [UIView animateWithDuration:kPreviewViewAnimationDuration delay:0 options:UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationCurveEaseIn animations:^{
-            _previewWindow.opacity = 0;
-        } completion:^(BOOL finished) {
-            [_cameraOutput stopRecording];
-            [_captureSession stopRunning];
-            [self showFilterShareButtons:TRUE];
-            [_previewPlayer replaceCurrentItemWithPlayerItem:[AVPlayerItem playerItemWithURL:[self outputURL]]];
-            [_previewPlayer play];
-            NSLog(@"Recording Stopped");
-        }];
+        [self showPreview];
         return;
     }
     
@@ -281,9 +272,6 @@ static const CGFloat kPreviewViewAnimationDuration = 0.5f;
     [_recordedDurationTimer invalidate];
     _recordedDurationTimer = nil;
     _recordedDurationTimer = [NSTimer scheduledTimerWithTimeInterval:kDurationBroadcastFrequency target:self selector:@selector(broadcastRecordedDuration) userInfo:nil repeats:TRUE];
-    
-    [self showFilterShareButtons:FALSE];
-    
 }
 
 - (void)broadcastRecordedDuration {
@@ -341,7 +329,6 @@ static const CGFloat kPreviewViewAnimationDuration = 0.5f;
     
     [_mainControls setRecordingTime:0];
     [self removeTempVideoOutput];
-    [self showFilterShareButtons:FALSE];
 }
 
 - (void)videoCaptureDeviceSwitched:(AVCaptureDevicePosition)devicePosition {
@@ -357,7 +344,6 @@ static const CGFloat kPreviewViewAnimationDuration = 0.5f;
     
     [_mainControls setRecordingTime:0];
     [self removeTempVideoOutput];
-    [self showFilterShareButtons:FALSE];
     
     NSArray *devicesAvailable = [AVCaptureDevice devicesWithMediaType:AVMediaTypeVideo];
     
@@ -389,7 +375,7 @@ static const CGFloat kPreviewViewAnimationDuration = 0.5f;
     [_captureSession startRunning];
     
     if (_previewPlayer.currentItem) {
-        [UIView animateWithDuration:kPreviewViewAnimationDuration delay:0 options:UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationCurveEaseIn animations:^{
+        [UIView animateWithDuration:kPreviewViewAnimationDuration delay:0 options:UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationOptionTransitionCrossDissolve animations:^{
             _previewWindow.opacity = 1;
         } completion:^(BOOL finished) {
             [_previewPlayer replaceCurrentItemWithPlayerItem:[AVPlayerItem playerItemWithURL:nil]];
@@ -404,42 +390,36 @@ static const CGFloat kPreviewViewAnimationDuration = 0.5f;
 #pragma mark - UI Update Methods
 #pragma -
 
-- (void)showFilterShareButtons:(BOOL)show {
-    if (show) {
-        _addFilterButton.enabled = _shareButton.enabled = TRUE;
-        _addFilterButton.alpha = _shareButton.alpha = 1;
-    } else {
-        _addFilterButton.enabled = _shareButton.enabled = FALSE;
-        _addFilterButton.alpha = _shareButton.alpha = 0.3f;
-    }
+- (void)showFilterShareButtons {
+    [_mainControls showFilterShareButtons];
 }
 
-- (void)addShareAndFilterButtons {
-    _addFilterButton = [[UIButton alloc] initWithFrame:CGRectMake(10, 370, 145, 40)];
-    _addFilterButton.backgroundColor = [UIColor redColor];
-    [_addFilterButton setTitle:@"Add FIlter" forState:UIControlStateNormal];
-    [_addFilterButton addTarget:self action:@selector(addFilterButtonClicked) forControlEvents:UIControlEventTouchUpInside];
-    
-    _shareButton = [[UIButton alloc] initWithFrame:CGRectMake(_addFilterButton.frame.size.width + 15, 370, 145, 40)];
-    _shareButton.backgroundColor = [UIColor purpleColor];
-    [_shareButton setTitle:@"Share" forState:UIControlStateNormal];
-    [_shareButton addTarget:self action:@selector(shareButtonClicked) forControlEvents:UIControlEventTouchUpInside];
-    
-    [self showFilterShareButtons:FALSE];
-    
-    [self.view addSubview:_addFilterButton];
-    [self.view addSubview:_shareButton];
+- (void)showPreview {
+    [UIView animateWithDuration:kPreviewViewAnimationDuration delay:0 options:UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationOptionTransitionCrossDissolve animations:^{
+        _previewWindow.opacity = 0;
+    } completion:^(BOOL finished) {
+        [_cameraOutput stopRecording];
+        [_captureSession stopRunning];
+        [self showFilterShareButtons];
+        [_previewPlayer replaceCurrentItemWithPlayerItem:[AVPlayerItem playerItemWithURL:[self outputURL]]];
+        [_previewPlayer play];
+        NSLog(@"Recording Stopped");
+    }];
 }
 
 #pragma -
 #pragma mark - Share / Add Filter Button Methods
 #pragma -
 
-- (void)shareButtonClicked {
-    NSLog(@"Share");
+- (void)changeVideoFilterForItem:(AFVDPopoutMenuMenuItem *)menuItem {
+    
 }
 
-- (void)addFilterButtonClicked {
+- (void)shareVideo {
+    
+}
+
+- (void)showFilters {
     /*Invalidate the timer, stop the recording and session*/
     [_recordedDurationTimer invalidate];
     _recordedDurationTimer = nil;
@@ -474,7 +454,8 @@ static const CGFloat kPreviewViewAnimationDuration = 0.5f;
         /*This error code is for when we have completed a recording*/
         case -11810:
             [_cameraOutput stopRecording];
-            [self showFilterShareButtons:TRUE];
+            [self showFilterShareButtons];
+            [self showPreview];
             NSLog(@"Recording Stopped");
             return;
             break;

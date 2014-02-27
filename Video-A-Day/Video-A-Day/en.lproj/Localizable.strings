@@ -23,4 +23,10 @@
 "AFVDSigninForFailureButtonTitle"   = "Dismiss";
 
 /*Popout Menu*/
-"kAFVDPopoutMenuCloseMenuItemTitle"   = "Close Menu";
+"kAFVDPopoutMenuCloseMenuItemTitle"             = "Close Menu";
+"kAFVDPopoutMenuChangeCameraMenuItemTitle"      = "Change Camera";
+"kAFVDPopoutMenuRestartMenuItemTitle"           = "Restart Capturing";
+"kAFVDPopoutMenuYesMenuItemTitle"               = "Yes";
+"kAFVDPopoutMenuNoMenuItemTitle"                = "No";
+"kAFVDPopoutMenuShareMenuItemTitle"             = "Share Video";
+"kAFVDPopoutMenuAddFilterMenuItemTitle"         = "Add Filter";

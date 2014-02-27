@@ -20,9 +20,10 @@
 
 @end
 
-static NSString* kAFVDVideoCaptureMaxDuration       = @" - 00:20";
-static NSString* kAFVDVideoCaptureDefaultDuration   = @"00:00 - 00:20";
-NSInteger const kAFVDVideoCaptureButtonYMargin      = 10;
+static NSString* kAFVDVideoCaptureMaxDuration                       = @" - 00:20";
+static NSString* kAFVDVideoCaptureDefaultDuration                   = @"00:00 - 00:20";
+NSInteger const kAFVDVideoCaptureButtonYMargin                      = 10;
+NSInteger const kAFVDPopoutMenuCollectionViewCloseButtonXMargin     = 10;
 
 @implementation AFVDVideoCaptureControls
 
@@ -38,14 +39,9 @@ NSInteger const kAFVDVideoCaptureButtonYMargin      = 10;
 
 - (void)setupButtons {
     
-//    UIImage *closeImage = [UIImage imageNamed:@""];
     UIImage *recordImage = [UIImage imageNamed:@"AFVDVideoCaptureRecordButton"];
-//    UIImage *reRecordImage = [UIImage imageNamed:@""];
     
-//    CGFloat height      = self.bounds.size.height;
     CGFloat width       = self.bounds.size.width;
-    
-//    NSInteger tileSize = 30;
     
     _recordButton = [[UIButton alloc] initWithFrame:CGRectMake((_previewSize.width - recordImage.size.width)/2, _previewSize.height + kAFVDVideoCaptureButtonYMargin, recordImage.size.width, recordImage.size.height)];
     [_recordButton setImage:recordImage forState:UIControlStateNormal];
@@ -66,22 +62,47 @@ NSInteger const kAFVDVideoCaptureButtonYMargin      = 10;
 
 - (void)setupMenu {
     
-    /*Make close button external and do animation for close/open internal*/
+    UIButton* closeButton = [[UIButton alloc] init];
+    [closeButton setImage:[UIImage imageNamed:@"AFVDPopoutMenuMenuItemIconImage"] forState:UIControlStateNormal];
+    closeButton.frame = CGRectMake(0, self.frame.size.height - kAFVDPopoutMenuCollectionViewCellIconSize - kAFVDVideoCaptureButtonYMargin, kAFVDPopoutMenuCollectionViewCellIconSize, kAFVDPopoutMenuCollectionViewCellIconSize);
+    [closeButton addTarget:self action:@selector(popoutMenuCloseButtonPressed) forControlEvents:UIControlEventTouchUpInside];
+        
+    AFVDPopoutMenuControllerModel* menuModel = [[AFVDPopoutMenuControllerModel alloc] initWithIcons:@[[UIImage imageNamed:@"AFVDPopoutMenuChangeCameraMenuItemIconImage"], [UIImage imageNamed:@"AFVDPopoutMenuRestartMenuItemIconImage"]]
+                                                                                             titles:@[NSLocalizedString(@"kAFVDPopoutMenuChangeCameraMenuItemTitle", nil), NSLocalizedString(@"kAFVDPopoutMenuRestartMenuItemTitle", nil)]
+                                                                                          selectors:@[@"changeCameraButtonPressed:", @"resetButtonPressed"]
+                                                                                         properties:@[@(AVCaptureDevicePositionBack)]];
     
-    AFVDPopoutMenuControllerModel* menuModel = [[AFVDPopoutMenuControllerModel alloc] initWithIcons:@[[UIImage imageNamed:@"AFVDProfileImageSelector"], [UIImage imageNamed:@"AFVDProfileImageSelector"],[UIImage imageNamed:@"AFVDProfileImageSelector"], [UIImage imageNamed:@"AFVDProfileImageSelector"],[UIImage imageNamed:@"AFVDProfileImageSelector"],[UIImage imageNamed:@"AFVDProfileImageSelector"],[UIImage imageNamed:@"AFVDProfileImageSelector"],[UIImage imageNamed:@"AFVDProfileImageSelector"],[UIImage imageNamed:@"AFVDProfileImageSelector"]] titles:@[@"test"] selectors:@[@"itemSelected:", @"itemSelected:", @"itemSelected:", @"itemSelected:", @"itemSelected:", @"itemSelected:"] properties:@[@"GPUImageVignetteFilter", @"GPUImageVignetteFilter", @"GPUImageVignetteFilter", @"GPUImageVignetteFilter"]];
-    
-    _menu = [[AFVDPopoutMenuViewController alloc] initWithModel:menuModel frame:CGRectMake(_menu.view.frame.origin.x, self.frame.size.height - kAFVDPopoutMenuCollectionViewCellIconSize - kAFVDVideoCaptureButtonYMargin, self.frame.size.width, kAFVDPopoutMenuCollectionViewCellIconSize)];
+    _menu = [[AFVDPopoutMenuViewController alloc] initWithModel:menuModel frame:CGRectMake(closeButton.frame.size.width + closeButton.frame.origin.x + kAFVDPopoutMenuCollectionViewCloseButtonXMargin, closeButton.frame.origin.y, self.frame.size.width - (closeButton.frame.size.width + closeButton.frame.origin.x + kAFVDPopoutMenuCollectionViewCloseButtonXMargin), kAFVDPopoutMenuCollectionViewCellIconSize)];
     _menu.delegate   = self;
 
     [self addSubview:_menu.view];
+    [self addSubview:closeButton];
 }
 
 #pragma -
 #pragma Button Methods
 #pragma -
 
+- (void)addFilterButtonClicked {
+    if ([_delegate respondsToSelector:@selector(showFilters)]) {
+        [_delegate showFilters];
+    }
+}
+
+- (void)filterButtonClicked:(AFVDPopoutMenuMenuItem *)menuItem {
+    if ([_delegate respondsToSelector:@selector(changeVideoFilterForItem:)]) {
+        [_delegate changeVideoFilterForItem:menuItem];
+    }
+}
+
+- (void)shareButtonClicked {
+    if ([_delegate respondsToSelector:@selector(shareVideo)]) {
+        [_delegate shareVideo];
+    }
+}
+
 - (void)popoutMenuCloseButtonPressed {
-    [_menu closeMenu];
+    [_menu closeMenu:!_menu.isOpen];
 }
 
 - (void)changeCameraButtonPressed:(AFVDPopoutMenuMenuItem *)sender {
@@ -98,24 +119,40 @@ NSInteger const kAFVDVideoCaptureButtonYMargin      = 10;
     }
     
     [sender setMenuItemProperty:@(newMenuProperty)];
-    [_delegate videoCaptureDeviceSwitched:device];
+    if ([_delegate respondsToSelector:@selector(videoCaptureDeviceSwitched:)]) {
+        [_delegate videoCaptureDeviceSwitched:device];
+    }
 }
 
 - (void)closeButtonPressed {
-    [_delegate closeVideoCaptureController];
+    if ([_delegate respondsToSelector:@selector(closeVideoCaptureController)]) {
+        [_delegate closeVideoCaptureController];
+    }
 }
 
 - (void)recordButtonPressed {
-    [_delegate startCapturingVideo];
+    if ([_delegate respondsToSelector:@selector(startCapturingVideo)]) {
+        [_delegate startCapturingVideo];
+    }
 }
 
 - (void)resetButtonPressed {
-    [_delegate recaptureVideo];
+    if ([_delegate respondsToSelector:@selector(recaptureVideo)]) {
+        [_delegate recaptureVideo];
+    }
 }
 
 #pragma -
 #pragma Public Methods
 #pragma -
+
+- (void)showFilterShareButtons {
+    AFVDPopoutMenuControllerModel* menuModel = [[AFVDPopoutMenuControllerModel alloc] initWithIcons:@[[UIImage imageNamed:@"AFVDPopoutMenuShareMenuItemIconImage"], [UIImage imageNamed:@"AFVDPopoutMenuAddFilterMenuItemIconImage"]]
+                                                                                             titles:@[NSLocalizedString(@"kAFVDPopoutMenuAddFilterMenuItemTitle", nil), NSLocalizedString(@"kAFVDPopoutMenuShareMenuItemTitle", nil)]
+                                                                                          selectors:@[@"shareButtonClicked", @"addFilterButtonClicked"]
+                                                                                         properties:nil];
+    [_menu refreshMenuWithModel:menuModel];
+}
 
 - (void)changeRecordingButtonState:(BOOL)lrecording {
     

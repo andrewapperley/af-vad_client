@@ -13,9 +13,10 @@
 @interface AFVDPopoutMenuViewController : UIViewController
 
 @property(nonatomic, weak)id delegate;
+@property(nonatomic)BOOL isOpen;
 
 - (instancetype)initWithModel:(AFVDPopoutMenuControllerModel *)model frame:(CGRect)frame;
 - (void)refreshMenuWithModel:(AFVDPopoutMenuControllerModel *)model;
-- (void)closeMenu;
+- (void)closeMenu:(BOOL)close;
 
 @end
