@@ -49,7 +49,7 @@ static const CGFloat kPreviewViewAnimationDuration = 0.5f;
 }
 
 + (instancetype)captureControllerWithDefaults {
-    return [[AFVDVideoCaptureController alloc] initWithMaxDuration:CMTimeMake(600, 30) andWindowSize:CGRectMake(10, 30, 300, 300) andPreset:AFVideoCapturePreset_High];
+    return [[AFVDVideoCaptureController alloc] initWithMaxDuration:CMTimeMake(600, 30) andWindowSize:CGRectMake(10, 30, 300, 300) andPreset:AFVideoCapturePreset_Medium];
 }
 
 - (void)viewDidLoad {
@@ -437,6 +437,9 @@ static const CGFloat kPreviewViewAnimationDuration = 0.5f;
     
     _videoFilterView.view.alpha = 0;
     [self.view addSubview:_videoFilterView.view];
+    
+    [self addChildViewController:_videoFilterView];
+    [_videoFilterView didMoveToParentViewController:self];
     
     [_previewPlayer replaceCurrentItemWithPlayerItem:[AVPlayerItem playerItemWithURL:nil]];
     [_previewPlayer pause];
