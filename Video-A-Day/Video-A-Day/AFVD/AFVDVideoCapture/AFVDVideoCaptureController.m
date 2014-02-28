@@ -27,6 +27,7 @@ static const CGFloat kPreviewViewAnimationDuration = 0.5f;
     UIButton* _shareButton;
     UIButton* _addFilterButton;
     CGSize _videoDimensions;
+    AFVDVideoFilterController *_videoFilterView;
     
     /*Preview controller that plays the file which was just recorded - This is so they have a preview with audio*/
     AVPlayer* _previewPlayer;
@@ -298,11 +299,15 @@ static const CGFloat kPreviewViewAnimationDuration = 0.5f;
 }
 
 - (void)grabVideoDimensions:(NSNotification *)event {
+    
     AVCaptureInputPort *port = event.object;
     CMFormatDescriptionRef formatDescription = port.formatDescription;
-    CMVideoDimensions dimensions = CMVideoFormatDescriptionGetDimensions(formatDescription);
-    _videoDimensions = CGSizeMake(dimensions.height, dimensions.width);
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:AVCaptureInputPortFormatDescriptionDidChangeNotification object:nil];
+    
+    if (CMFormatDescriptionGetMediaType(formatDescription) == kCMMediaType_Video) {
+        CMVideoDimensions dimensions = CMVideoFormatDescriptionGetDimensions(formatDescription);
+        _videoDimensions = CGSizeMake(dimensions.height, dimensions.width);
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:AVCaptureInputPortFormatDescriptionDidChangeNotification object:nil];
+    }
 }
 
 - (void)recaptureVideo {
@@ -428,10 +433,18 @@ static const CGFloat kPreviewViewAnimationDuration = 0.5f;
     
     /*Present filter view controller and dismiss this view controller*/
     
-    AFVDVideoFilterController *videoFilterView = [[AFVDVideoFilterController alloc] initWithVideoURL:[self outputURL] andMovieSize:_videoDimensions];
-    [self.navigationController presentViewController:videoFilterView animated:TRUE completion:nil];
+    _videoFilterView = [[AFVDVideoFilterController alloc] initWithVideoURL:[self outputURL] andMovieSize:_videoDimensions andFrame:_previewPlayerLayer.frame];
     
-    [self removeFromParentViewController];
+    _videoFilterView.view.alpha = 0;
+    [self.view addSubview:_videoFilterView.view];
+    
+    [_previewPlayer replaceCurrentItemWithPlayerItem:[AVPlayerItem playerItemWithURL:nil]];
+    [_previewPlayer pause];
+    
+    [UIView animateWithDuration:kPreviewViewAnimationDuration delay:0 options:UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationCurveEaseIn animations:^{
+        _videoFilterView.view.alpha = 1;
+    } completion:nil];
+
 }
 
 #pragma -

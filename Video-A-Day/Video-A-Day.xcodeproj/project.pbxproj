@@ -39,7 +39,6 @@
 		0FB9038F1891FA2400FCD55D /* AFVDSigninUserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FB9038E1891FA2400FCD55D /* AFVDSigninUserModel.m */; };
 		0FC8907718712FE100F5E869 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FC8907518712FE100F5E869 /* AudioToolbox.framework */; };
 		0FC8907818712FE100F5E869 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FC8907618712FE100F5E869 /* CoreAudio.framework */; };
-		0FDC798918B43B30001F9F14 /* AFVDFilterTileButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FDC798118B43B30001F9F14 /* AFVDFilterTileButton.m */; };
 		0FDC798A18B43B30001F9F14 /* AFVDVideoCaptureController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FDC798318B43B30001F9F14 /* AFVDVideoCaptureController.m */; };
 		0FDC798B18B43B30001F9F14 /* AFVDVideoCaptureControls.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FDC798518B43B30001F9F14 /* AFVDVideoCaptureControls.m */; };
 		0FDC798C18B43B30001F9F14 /* AFVDVideoFilterController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FDC798718B43B30001F9F14 /* AFVDVideoFilterController.m */; };
@@ -144,8 +143,6 @@
 		0FB9038E1891FA2400FCD55D /* AFVDSigninUserModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFVDSigninUserModel.m; sourceTree = "<group>"; };
 		0FC8907518712FE100F5E869 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		0FC8907618712FE100F5E869 /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
-		0FDC798018B43B30001F9F14 /* AFVDFilterTileButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFVDFilterTileButton.h; sourceTree = "<group>"; };
-		0FDC798118B43B30001F9F14 /* AFVDFilterTileButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFVDFilterTileButton.m; sourceTree = "<group>"; };
 		0FDC798218B43B30001F9F14 /* AFVDVideoCaptureController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFVDVideoCaptureController.h; sourceTree = "<group>"; };
 		0FDC798318B43B30001F9F14 /* AFVDVideoCaptureController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFVDVideoCaptureController.m; sourceTree = "<group>"; };
 		0FDC798418B43B30001F9F14 /* AFVDVideoCaptureControls.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFVDVideoCaptureControls.h; sourceTree = "<group>"; };
@@ -487,8 +484,6 @@
 		0FDC797F18B43B30001F9F14 /* AFVDVideoCapture */ = {
 			isa = PBXGroup;
 			children = (
-				0FDC798018B43B30001F9F14 /* AFVDFilterTileButton.h */,
-				0FDC798118B43B30001F9F14 /* AFVDFilterTileButton.m */,
 				0FDC798218B43B30001F9F14 /* AFVDVideoCaptureController.h */,
 				0FDC798318B43B30001F9F14 /* AFVDVideoCaptureController.m */,
 				0FDC798418B43B30001F9F14 /* AFVDVideoCaptureControls.h */,
@@ -853,7 +848,6 @@
 				7677BA7018373A6B00F3EDC9 /* AFVDUserModel.m in Sources */,
 				7677BA6E18373A6B00F3EDC9 /* AFVDUserModelDatasource.m in Sources */,
 				0F21EFA7189D5BDC001706FD /* SSKeychain.m in Sources */,
-				0FDC798918B43B30001F9F14 /* AFVDFilterTileButton.m in Sources */,
 				0FF186D718AAFCC000BE1417 /* AFVDInitialViewStatics.m in Sources */,
 				7677BA6F18373A6B00F3EDC9 /* AFVDUserModelFactory.m in Sources */,
 				0F06A6F3187CF2080021E10C /* AFVDIntialViewController.m in Sources */,

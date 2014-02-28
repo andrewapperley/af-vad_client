@@ -11,6 +11,10 @@
 
 @interface AFVDVideoFilterController : UIViewController<GPUImageMovieWriterDelegate>
 
-- (instancetype)initWithVideoURL:(NSURL *)lvideoURL andMovieSize:(CGSize)movieWriterSize;
+@property(nonatomic, strong)GPUImageView *previewView;
+
+- (instancetype)initWithVideoURL:(NSURL *)lvideoURL andMovieSize:(CGSize)movieWriterSize andFrame:(CGRect)frame;
+
+NSArray* filterList (void);
 
 @end

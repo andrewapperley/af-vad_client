@@ -13,4 +13,4 @@ NSInteger const kAFVDPopoutMenuCollectionViewCellIconSize           = 50;
 
 NSString* const kAFVDPopoutMenuCloseMenuItemIconImage               = @"AFVDPopoutMenuCloseMenuItemIconImage";
 NSString* const kAFVDPopoutMenuCloseSelector                        = @"closeButtonPressed";
-NSInteger const kAFVDPopoutMenuCloseDuration                        = 0.6f;
+CGFloat const kAFVDPopoutMenuCloseDuration                          = 0.6f;
