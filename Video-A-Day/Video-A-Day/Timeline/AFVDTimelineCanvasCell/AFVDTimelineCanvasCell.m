@@ -83,6 +83,7 @@ CGFloat const kAFVDTimelineCanvasCell_MinDateLabelAlpha         = 0.4f;
     
     //Portrait image
     _portraitImageView = [[UIImageView alloc] initWithFrame:CGRectMake(ceil((self.bounds.size.width - kAFVDTimelineCanvasCell_PortraitMinWidthHeight) * 0.5f), ceil((self.bounds.size.height - kAFVDTimelineCanvasCell_PortraitMinWidthHeight) * 0.5f), kAFVDTimelineCanvasCell_PortraitMinWidthHeight, kAFVDTimelineCanvasCell_PortraitMinWidthHeight)];
+    _portraitImageView.contentMode = UIViewContentModeCenter;
     
     //Border and corner radius
     _portraitImageView.layer.borderWidth = kAFVDTimelineCanvasCell_PortraitBorderWidth;
