@@ -162,7 +162,7 @@ CGFloat const kAFVDTimelineCanvas_CellMarkerAnimateOutDuration  = 0.15f;
     
     cellIndex = MIN(cellIndex, _data.count - 1);
     
-    [_collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:cellIndex inSection:0] atScrollPosition:UICollectionViewScrollPosit0 animated:TRUE];
+    [_collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:cellIndex inSection:0] atScrollPosition:UICollectionViewScrollPositionCenteredVertically animated:TRUE];
 }
 
 #pragma mark - Data handling
