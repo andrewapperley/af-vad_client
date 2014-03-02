@@ -7,15 +7,26 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0F06A6DE18788C4D0021E10C /* AFVideoFilterDefaultList.json in Resources */ = {isa = PBXBuildFile; fileRef = 0F06A6DD18788C4D0021E10C /* AFVideoFilterDefaultList.json */; };
+		0F06A6DE18788C4D0021E10C /* AFVDVideoFilterDefaultList.json in Resources */ = {isa = PBXBuildFile; fileRef = 0F06A6DD18788C4D0021E10C /* AFVDVideoFilterDefaultList.json */; };
 		0F06A6E1187922570021E10C /* AFVDFilterTileButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F06A6E0187922570021E10C /* AFVDFilterTileButton.m */; };
+		0F06A6E5187CEE550021E10C /* AFViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F06A6E4187CEE550021E10C /* AFViewController.m */; };
+		0F06A6F3187CF2080021E10C /* AFVDIntialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F06A6F2187CF2080021E10C /* AFVDIntialViewController.m */; };
+		0F06A6F6187CF2250021E10C /* AFVDSigninView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F06A6F5187CF2250021E10C /* AFVDSigninView.m */; };
+		0F06A6F9187CF2340021E10C /* AFVDSignupView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F06A6F8187CF2340021E10C /* AFVDSignupView.m */; };
+		0F06A6FC187CF2460021E10C /* AFVDActivityIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F06A6FB187CF2460021E10C /* AFVDActivityIndicator.m */; };
+		0F06A71F187E3EC00021E10C /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F06A71E187E3EC00021E10C /* UIImage+ImageEffects.m */; };
 		0F10E3C51859375200FC1433 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F10E3C41859375200FC1433 /* AVFoundation.framework */; };
 		0F10E3CB18593B8B00FC1433 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F10E3CA18593B8B00FC1433 /* CoreMedia.framework */; };
 		0F10E3CD18593B9A00FC1433 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F10E3CC18593B9A00FC1433 /* MediaPlayer.framework */; };
 		0F10E3CF18593BAE00FC1433 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F10E3CE18593BAE00FC1433 /* MobileCoreServices.framework */; };
-		0F10E3DA18594B9600FC1433 /* AFVideoCaptureController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F10E3D918594B9600FC1433 /* AFVideoCaptureController.m */; };
-		0F10E3DD18594FA800FC1433 /* AFVideoCaptureControls.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F10E3DC18594FA800FC1433 /* AFVideoCaptureControls.m */; };
+		0F10E3DA18594B9600FC1433 /* AFVDVideoCaptureController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F10E3D918594B9600FC1433 /* AFVDVideoCaptureController.m */; };
+		0F10E3DD18594FA800FC1433 /* AFVDVideoCaptureControls.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F10E3DC18594FA800FC1433 /* AFVDVideoCaptureControls.m */; };
 		0F2141CB1876509500E8BFD5 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F2141CA1876509500E8BFD5 /* MessageUI.framework */; };
+		0F21EFA6189D5BDC001706FD /* SSKeychain.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0F21EFA0189D5BDC001706FD /* SSKeychain.strings */; };
+		0F21EFA7189D5BDC001706FD /* SSKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F21EFA3189D5BDC001706FD /* SSKeychain.m */; };
+		0F21EFA8189D5BDC001706FD /* SSKeychainQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F21EFA5189D5BDC001706FD /* SSKeychainQuery.m */; };
+		0F2C8A021884CF000033397C /* AFVDStatics.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F2C8A011884CF000033397C /* AFVDStatics.m */; };
+		0F2C8A0C188B408D0033397C /* AFVDSignupUserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F2C8A0B188B408D0033397C /* AFVDSignupUserModel.m */; };
 		0F2FC6EB1837303800611873 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F2FC6EA1837303800611873 /* Foundation.framework */; };
 		0F2FC6EF1837303800611873 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F2FC6EE1837303800611873 /* UIKit.framework */; };
 		0F2FC6F51837303800611873 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0F2FC6F31837303800611873 /* InfoPlist.strings */; };
@@ -28,15 +39,19 @@
 		0F2FC70F1837303900611873 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F2FC6EE1837303800611873 /* UIKit.framework */; };
 		0F2FC7171837303900611873 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0F2FC7151837303900611873 /* InfoPlist.strings */; };
 		0F2FC7191837303900611873 /* Video_A_DayTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F2FC7181837303900611873 /* Video_A_DayTests.m */; };
-		0F553BB3184D97E200941506 /* baileys_5sec.mov in Resources */ = {isa = PBXBuildFile; fileRef = 0F553BB2184D97E200941506 /* baileys_5sec.mov */; };
-		0F79613A183DC81900920C59 /* face.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0F796139183DC81900920C59 /* face.jpg */; };
 		0F79613E183EE64E00920C59 /* AFVDUrlHasher.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F79613D183EE64E00920C59 /* AFVDUrlHasher.m */; };
 		0FB5E9871862763600EE0B0D /* AFVDVideoFilterController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FB5E9861862763600EE0B0D /* AFVDVideoFilterController.m */; };
+		0FB9038F1891FA2400FCD55D /* AFVDSigninUserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FB9038E1891FA2400FCD55D /* AFVDSigninUserModel.m */; };
 		0FC8907718712FE100F5E869 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FC8907518712FE100F5E869 /* AudioToolbox.framework */; };
 		0FC8907818712FE100F5E869 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FC8907618712FE100F5E869 /* CoreAudio.framework */; };
+		0FF186D418AAFC6100BE1417 /* AFVDFontStatics.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FF186D318AAFC6100BE1417 /* AFVDFontStatics.m */; };
+		0FF186D718AAFCC000BE1417 /* AFVDInitialViewStatics.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FF186D618AAFCC000BE1417 /* AFVDInitialViewStatics.m */; };
 		0FF441D418626A3200ADAD2C /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FF441D318626A3100ADAD2C /* CoreVideo.framework */; };
 		0FF441D618626A5300ADAD2C /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FF441D518626A5300ADAD2C /* OpenGLES.framework */; };
 		0FF441D818626A5D00ADAD2C /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FF441D718626A5D00ADAD2C /* QuartzCore.framework */; };
+		0FF60470187E6F7E00E7DF58 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0FF60472187E6F7E00E7DF58 /* Localizable.strings */; };
+		0FF604751880D75200E7DF58 /* AFVDImageBlur.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FF604741880D75200E7DF58 /* AFVDImageBlur.m */; };
+		0FF604791880E4CC00E7DF58 /* AFVDInitialView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FF604781880E4CC00E7DF58 /* AFVDInitialView.m */; };
 		7610BC5B183B1108003CE193 /* AFVDRelationshipModelDatasource.m in Sources */ = {isa = PBXBuildFile; fileRef = 7610BC5A183B1108003CE193 /* AFVDRelationshipModelDatasource.m */; };
 		7610BC5E183B1137003CE193 /* AFVDRelationshipModelFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 7610BC5D183B1137003CE193 /* AFVDRelationshipModelFactory.m */; };
 		7610BC61183B119C003CE193 /* AFVDRelationshipModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7610BC60183B119C003CE193 /* AFVDRelationshipModel.m */; };
@@ -72,20 +87,41 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0F06A6DD18788C4D0021E10C /* AFVideoFilterDefaultList.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = AFVideoFilterDefaultList.json; sourceTree = "<group>"; };
+		0F06A6DD18788C4D0021E10C /* AFVDVideoFilterDefaultList.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = AFVDVideoFilterDefaultList.json; sourceTree = "<group>"; };
 		0F06A6DF187922570021E10C /* AFVDFilterTileButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFVDFilterTileButton.h; sourceTree = "<group>"; };
 		0F06A6E0187922570021E10C /* AFVDFilterTileButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFVDFilterTileButton.m; sourceTree = "<group>"; };
+		0F06A6E3187CEE550021E10C /* AFViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFViewController.h; sourceTree = "<group>"; };
+		0F06A6E4187CEE550021E10C /* AFViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFViewController.m; sourceTree = "<group>"; };
+		0F06A6F1187CF2080021E10C /* AFVDIntialViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFVDIntialViewController.h; sourceTree = "<group>"; };
+		0F06A6F2187CF2080021E10C /* AFVDIntialViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFVDIntialViewController.m; sourceTree = "<group>"; };
+		0F06A6F4187CF2250021E10C /* AFVDSigninView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFVDSigninView.h; sourceTree = "<group>"; };
+		0F06A6F5187CF2250021E10C /* AFVDSigninView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFVDSigninView.m; sourceTree = "<group>"; };
+		0F06A6F7187CF2340021E10C /* AFVDSignupView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFVDSignupView.h; sourceTree = "<group>"; };
+		0F06A6F8187CF2340021E10C /* AFVDSignupView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFVDSignupView.m; sourceTree = "<group>"; };
+		0F06A6FA187CF2460021E10C /* AFVDActivityIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFVDActivityIndicator.h; sourceTree = "<group>"; };
+		0F06A6FB187CF2460021E10C /* AFVDActivityIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFVDActivityIndicator.m; sourceTree = "<group>"; };
+		0F06A71D187E3EC00021E10C /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageEffects.h"; sourceTree = "<group>"; };
+		0F06A71E187E3EC00021E10C /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageEffects.m"; sourceTree = "<group>"; };
 		0F10E3C41859375200FC1433 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		0F10E3C818593B8200FC1433 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		0F10E3CA18593B8B00FC1433 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		0F10E3CC18593B9A00FC1433 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		0F10E3CE18593BAE00FC1433 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
-		0F10E3D818594B9600FC1433 /* AFVideoCaptureController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFVideoCaptureController.h; sourceTree = "<group>"; };
-		0F10E3D918594B9600FC1433 /* AFVideoCaptureController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFVideoCaptureController.m; sourceTree = "<group>"; };
-		0F10E3DB18594FA700FC1433 /* AFVideoCaptureControls.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFVideoCaptureControls.h; sourceTree = "<group>"; };
-		0F10E3DC18594FA800FC1433 /* AFVideoCaptureControls.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFVideoCaptureControls.m; sourceTree = "<group>"; };
+		0F10E3D818594B9600FC1433 /* AFVDVideoCaptureController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFVDVideoCaptureController.h; sourceTree = "<group>"; };
+		0F10E3D918594B9600FC1433 /* AFVDVideoCaptureController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFVDVideoCaptureController.m; sourceTree = "<group>"; };
+		0F10E3DB18594FA700FC1433 /* AFVDVideoCaptureControls.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFVDVideoCaptureControls.h; sourceTree = "<group>"; };
+		0F10E3DC18594FA800FC1433 /* AFVDVideoCaptureControls.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFVDVideoCaptureControls.m; sourceTree = "<group>"; };
 		0F2141CA1876509500E8BFD5 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
-		0F2FC6E71837303800611873 /* Video-A-Day.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Video-A-Day.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		0F21EFA1189D5BDC001706FD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = SSKeychain.strings; sourceTree = "<group>"; };
+		0F21EFA2189D5BDC001706FD /* SSKeychain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SSKeychain.h; path = Keychain/SSKeychain.h; sourceTree = "<group>"; };
+		0F21EFA3189D5BDC001706FD /* SSKeychain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SSKeychain.m; path = Keychain/SSKeychain.m; sourceTree = "<group>"; };
+		0F21EFA4189D5BDC001706FD /* SSKeychainQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SSKeychainQuery.h; path = Keychain/SSKeychainQuery.h; sourceTree = "<group>"; };
+		0F21EFA5189D5BDC001706FD /* SSKeychainQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SSKeychainQuery.m; path = Keychain/SSKeychainQuery.m; sourceTree = "<group>"; };
+		0F2C8A001884CF000033397C /* AFVDStatics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFVDStatics.h; sourceTree = "<group>"; };
+		0F2C8A011884CF000033397C /* AFVDStatics.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFVDStatics.m; sourceTree = "<group>"; };
+		0F2C8A0A188B408D0033397C /* AFVDSignupUserModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFVDSignupUserModel.h; sourceTree = "<group>"; };
+		0F2C8A0B188B408D0033397C /* AFVDSignupUserModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFVDSignupUserModel.m; sourceTree = "<group>"; };
+		0F2FC6E71837303800611873 /* Blips.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Blips.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0F2FC6EA1837303800611873 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		0F2FC6EC1837303800611873 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		0F2FC6EE1837303800611873 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -98,24 +134,34 @@
 		0F2FC7021837303900611873 /* AFVDViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AFVDViewController.h; sourceTree = "<group>"; };
 		0F2FC7031837303900611873 /* AFVDViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AFVDViewController.m; sourceTree = "<group>"; };
 		0F2FC7051837303900611873 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		0F2FC70B1837303900611873 /* Video-A-DayTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Video-A-DayTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		0F2FC70B1837303900611873 /* BlipsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BlipsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0F2FC70C1837303900611873 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		0F2FC7141837303900611873 /* Video-A-DayTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Video-A-DayTests-Info.plist"; sourceTree = "<group>"; };
 		0F2FC7161837303900611873 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		0F2FC7181837303900611873 /* Video_A_DayTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Video_A_DayTests.m; sourceTree = "<group>"; };
-		0F553BB2184D97E200941506 /* baileys_5sec.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = baileys_5sec.mov; sourceTree = "<group>"; };
 		0F79613718394FF100920C59 /* AFVDConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFVDConstants.h; sourceTree = "<group>"; };
-		0F796139183DC81900920C59 /* face.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = face.jpg; sourceTree = "<group>"; };
 		0F79613C183EE64E00920C59 /* AFVDUrlHasher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFVDUrlHasher.h; sourceTree = "<group>"; };
 		0F79613D183EE64E00920C59 /* AFVDUrlHasher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFVDUrlHasher.m; sourceTree = "<group>"; };
 		0FB5E9851862763600EE0B0D /* AFVDVideoFilterController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFVDVideoFilterController.h; sourceTree = "<group>"; };
 		0FB5E9861862763600EE0B0D /* AFVDVideoFilterController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFVDVideoFilterController.m; sourceTree = "<group>"; };
+		0FB9038D1891FA2400FCD55D /* AFVDSigninUserModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFVDSigninUserModel.h; sourceTree = "<group>"; };
+		0FB9038E1891FA2400FCD55D /* AFVDSigninUserModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFVDSigninUserModel.m; sourceTree = "<group>"; };
 		0FC8907518712FE100F5E869 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		0FC8907618712FE100F5E869 /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
+		0FF186D218AAFC6100BE1417 /* AFVDFontStatics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFVDFontStatics.h; sourceTree = "<group>"; };
+		0FF186D318AAFC6100BE1417 /* AFVDFontStatics.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFVDFontStatics.m; sourceTree = "<group>"; };
+		0FF186D518AAFCC000BE1417 /* AFVDInitialViewStatics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFVDInitialViewStatics.h; sourceTree = "<group>"; };
+		0FF186D618AAFCC000BE1417 /* AFVDInitialViewStatics.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFVDInitialViewStatics.m; sourceTree = "<group>"; };
 		0FF441D11862637900ADAD2C /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
 		0FF441D318626A3100ADAD2C /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
 		0FF441D518626A5300ADAD2C /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		0FF441D718626A5D00ADAD2C /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		0FF60471187E6F7E00E7DF58 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		0FF604731880D75100E7DF58 /* AFVDImageBlur.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFVDImageBlur.h; sourceTree = "<group>"; };
+		0FF604741880D75200E7DF58 /* AFVDImageBlur.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFVDImageBlur.m; sourceTree = "<group>"; };
+		0FF604761880E39B00E7DF58 /* AFVDInitialView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFVDInitialView.h; sourceTree = "<group>"; };
+		0FF604781880E4CC00E7DF58 /* AFVDInitialView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFVDInitialView.m; sourceTree = "<group>"; };
+		0FF9E6B818A48352004624EE /* liblibGyro.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = liblibGyro.a; path = "../../../ES/LibGyro/libGyro/qtcreator/build-libGyro-iphonesimulator_clang_Qt_5_2_1_for_iOS-Debug/liblibGyro.a"; sourceTree = "<group>"; };
 		68F6FAF547E94320A258E720 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		7610BC59183B1108003CE193 /* AFVDRelationshipModelDatasource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFVDRelationshipModelDatasource.h; path = RelationshipModel/Datasource/AFVDRelationshipModelDatasource.h; sourceTree = "<group>"; };
 		7610BC5A183B1108003CE193 /* AFVDRelationshipModelDatasource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AFVDRelationshipModelDatasource.m; path = RelationshipModel/Datasource/AFVDRelationshipModelDatasource.m; sourceTree = "<group>"; };
@@ -194,21 +240,139 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0F10E3D718594B8200FC1433 /* AFVideoCapture */ = {
+		0F06A6E2187CEE290021E10C /* AFViewController */ = {
+			isa = PBXGroup;
+			children = (
+				0F06A6E3187CEE550021E10C /* AFViewController.h */,
+				0F06A6E4187CEE550021E10C /* AFViewController.m */,
+			);
+			name = AFViewController;
+			path = AF/AFViewController;
+			sourceTree = "<group>";
+		};
+		0F06A6EB187CF1F70021E10C /* AFVD */ = {
+			isa = PBXGroup;
+			children = (
+				0F10E3D718594B8200FC1433 /* AFVDVideoCapture */,
+				0F06A6EC187CF1F70021E10C /* InitialViewController */,
+				0F06A6EF187CF1F70021E10C /* Other Components */,
+				0F2C8A001884CF000033397C /* AFVDStatics.h */,
+				0F2C8A011884CF000033397C /* AFVDStatics.m */,
+				0FF186D218AAFC6100BE1417 /* AFVDFontStatics.h */,
+				0FF186D318AAFC6100BE1417 /* AFVDFontStatics.m */,
+			);
+			path = AFVD;
+			sourceTree = "<group>";
+		};
+		0F06A6EC187CF1F70021E10C /* InitialViewController */ = {
+			isa = PBXGroup;
+			children = (
+				0F06A6ED187CF1F70021E10C /* SigninView */,
+				0F06A6EE187CF1F70021E10C /* SignupView */,
+				0F06A6F1187CF2080021E10C /* AFVDIntialViewController.h */,
+				0F06A6F2187CF2080021E10C /* AFVDIntialViewController.m */,
+				0FF604761880E39B00E7DF58 /* AFVDInitialView.h */,
+				0FF604781880E4CC00E7DF58 /* AFVDInitialView.m */,
+				0FF186D518AAFCC000BE1417 /* AFVDInitialViewStatics.h */,
+				0FF186D618AAFCC000BE1417 /* AFVDInitialViewStatics.m */,
+			);
+			path = InitialViewController;
+			sourceTree = "<group>";
+		};
+		0F06A6ED187CF1F70021E10C /* SigninView */ = {
+			isa = PBXGroup;
+			children = (
+				0F06A6F4187CF2250021E10C /* AFVDSigninView.h */,
+				0F06A6F5187CF2250021E10C /* AFVDSigninView.m */,
+				0FB9038D1891FA2400FCD55D /* AFVDSigninUserModel.h */,
+				0FB9038E1891FA2400FCD55D /* AFVDSigninUserModel.m */,
+			);
+			path = SigninView;
+			sourceTree = "<group>";
+		};
+		0F06A6EE187CF1F70021E10C /* SignupView */ = {
+			isa = PBXGroup;
+			children = (
+				0F06A6F7187CF2340021E10C /* AFVDSignupView.h */,
+				0F06A6F8187CF2340021E10C /* AFVDSignupView.m */,
+				0F2C8A0A188B408D0033397C /* AFVDSignupUserModel.h */,
+				0F2C8A0B188B408D0033397C /* AFVDSignupUserModel.m */,
+			);
+			path = SignupView;
+			sourceTree = "<group>";
+		};
+		0F06A6EF187CF1F70021E10C /* Other Components */ = {
+			isa = PBXGroup;
+			children = (
+				0F06A6F0187CF1F70021E10C /* AFVDActivityInticator */,
+			);
+			path = "Other Components";
+			sourceTree = "<group>";
+		};
+		0F06A6F0187CF1F70021E10C /* AFVDActivityInticator */ = {
+			isa = PBXGroup;
+			children = (
+				0F06A6FA187CF2460021E10C /* AFVDActivityIndicator.h */,
+				0F06A6FB187CF2460021E10C /* AFVDActivityIndicator.m */,
+			);
+			path = AFVDActivityInticator;
+			sourceTree = "<group>";
+		};
+		0F06A71B187E3EC00021E10C /* Other Sources */ = {
+			isa = PBXGroup;
+			children = (
+				0F06A71C187E3EC00021E10C /* UIImage+Blur */,
+			);
+			path = "Other Sources";
+			sourceTree = "<group>";
+		};
+		0F06A71C187E3EC00021E10C /* UIImage+Blur */ = {
+			isa = PBXGroup;
+			children = (
+				0F06A71D187E3EC00021E10C /* UIImage+ImageEffects.h */,
+				0F06A71E187E3EC00021E10C /* UIImage+ImageEffects.m */,
+				0FF604731880D75100E7DF58 /* AFVDImageBlur.h */,
+				0FF604741880D75200E7DF58 /* AFVDImageBlur.m */,
+			);
+			path = "UIImage+Blur";
+			sourceTree = "<group>";
+		};
+		0F10E3D718594B8200FC1433 /* AFVDVideoCapture */ = {
 			isa = PBXGroup;
 			children = (
 				0FB5E9851862763600EE0B0D /* AFVDVideoFilterController.h */,
 				0FB5E9861862763600EE0B0D /* AFVDVideoFilterController.m */,
-				0F10E3D818594B9600FC1433 /* AFVideoCaptureController.h */,
-				0F10E3D918594B9600FC1433 /* AFVideoCaptureController.m */,
-				0F10E3DB18594FA700FC1433 /* AFVideoCaptureControls.h */,
-				0F10E3DC18594FA800FC1433 /* AFVideoCaptureControls.m */,
-				0F06A6DD18788C4D0021E10C /* AFVideoFilterDefaultList.json */,
+				0F10E3D818594B9600FC1433 /* AFVDVideoCaptureController.h */,
+				0F10E3D918594B9600FC1433 /* AFVDVideoCaptureController.m */,
+				0F10E3DB18594FA700FC1433 /* AFVDVideoCaptureControls.h */,
+				0F10E3DC18594FA800FC1433 /* AFVDVideoCaptureControls.m */,
+				0F06A6DD18788C4D0021E10C /* AFVDVideoFilterDefaultList.json */,
 				0F06A6DF187922570021E10C /* AFVDFilterTileButton.h */,
 				0F06A6E0187922570021E10C /* AFVDFilterTileButton.m */,
 			);
-			name = AFVideoCapture;
-			path = AF/AFVideoCapture;
+			name = AFVDVideoCapture;
+			path = ../AF/AFVideoCapture;
+			sourceTree = "<group>";
+		};
+		0F21EF9E189D5BCB001706FD /* SSKeychain */ = {
+			isa = PBXGroup;
+			children = (
+				0F21EF9F189D5BDC001706FD /* en.lproj */,
+				0F21EFA2189D5BDC001706FD /* SSKeychain.h */,
+				0F21EFA3189D5BDC001706FD /* SSKeychain.m */,
+				0F21EFA4189D5BDC001706FD /* SSKeychainQuery.h */,
+				0F21EFA5189D5BDC001706FD /* SSKeychainQuery.m */,
+			);
+			name = SSKeychain;
+			sourceTree = "<group>";
+		};
+		0F21EF9F189D5BDC001706FD /* en.lproj */ = {
+			isa = PBXGroup;
+			children = (
+				0F21EFA0189D5BDC001706FD /* SSKeychain.strings */,
+			);
+			name = en.lproj;
+			path = Keychain/en.lproj;
 			sourceTree = "<group>";
 		};
 		0F2FC6DE1837303800611873 = {
@@ -225,8 +389,8 @@
 		0F2FC6E81837303800611873 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				0F2FC6E71837303800611873 /* Video-A-Day.app */,
-				0F2FC70B1837303900611873 /* Video-A-DayTests.xctest */,
+				0F2FC6E71837303800611873 /* Blips.app */,
+				0F2FC70B1837303900611873 /* BlipsTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -234,6 +398,7 @@
 		0F2FC6E91837303800611873 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0FF9E6B818A48352004624EE /* liblibGyro.a */,
 				0F2141CA1876509500E8BFD5 /* MessageUI.framework */,
 				0FC8907518712FE100F5E869 /* AudioToolbox.framework */,
 				0FC8907618712FE100F5E869 /* CoreAudio.framework */,
@@ -259,6 +424,7 @@
 			isa = PBXGroup;
 			children = (
 				76C6518E1837FFCD003C7F7D /* AF */,
+				0F06A6EB187CF1F70021E10C /* AFVD */,
 				0F2FC6F91837303800611873 /* AFVDAppDelegate.h */,
 				0F2FC6FA1837303800611873 /* AFVDAppDelegate.m */,
 				0F2FC7021837303900611873 /* AFVDViewController.h */,
@@ -266,7 +432,9 @@
 				0F796138183DC81900920C59 /* Assets-TEMP */,
 				0F79613518394DBE00920C59 /* Constants */,
 				0F2FC7051837303900611873 /* Images.xcassets */,
+				0FF60472187E6F7E00E7DF58 /* Localizable.strings */,
 				7677BA5F18373A6B00F3EDC9 /* Networking API */,
+				0F06A71B187E3EC00021E10C /* Other Sources */,
 				0F2FC6F11837303800611873 /* Supporting Files */,
 				76BD303E18581CA90009E418 /* Timeline */,
 			);
@@ -308,15 +476,6 @@
 				0F79613718394FF100920C59 /* AFVDConstants.h */,
 			);
 			path = Constants;
-			sourceTree = "<group>";
-		};
-		0F796138183DC81900920C59 /* Assets-TEMP */ = {
-			isa = PBXGroup;
-			children = (
-				0F553BB2184D97E200941506 /* baileys_5sec.mov */,
-				0F796139183DC81900920C59 /* face.jpg */,
-			);
-			path = "Assets-TEMP";
 			sourceTree = "<group>";
 		};
 		0F79613B183EE62000920C59 /* UrlHashing */ = {
@@ -431,6 +590,7 @@
 		7696C7DC184C363500B270FC /* Keychain */ = {
 			isa = PBXGroup;
 			children = (
+				0F21EF9E189D5BCB001706FD /* SSKeychain */,
 				7696C7DD184C366000B270FC /* AFVDKeychain.h */,
 				7696C7DE184C366000B270FC /* AFVDKeychain.m */,
 			);
@@ -480,7 +640,7 @@
 		76C6518E1837FFCD003C7F7D /* AF */ = {
 			isa = PBXGroup;
 			children = (
-				0F10E3D718594B8200FC1433 /* AFVideoCapture */,
+				0F06A6E2187CEE290021E10C /* AFViewController */,
 				76C6518F1837FFFD003C7F7D /* AFCategory */,
 			);
 			name = AF;
@@ -556,9 +716,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		0F2FC6E61837303800611873 /* Video-A-Day */ = {
+		0F2FC6E61837303800611873 /* Blips */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 0F2FC71C1837303900611873 /* Build configuration list for PBXNativeTarget "Video-A-Day" */;
+			buildConfigurationList = 0F2FC71C1837303900611873 /* Build configuration list for PBXNativeTarget "Blips" */;
 			buildPhases = (
 				96CB87726F714CB8BCD2C282 /* Check Pods Manifest.lock */,
 				0F2FC6E31837303800611873 /* Sources */,
@@ -570,14 +730,14 @@
 			);
 			dependencies = (
 			);
-			name = "Video-A-Day";
+			name = Blips;
 			productName = "Video-A-Day";
-			productReference = 0F2FC6E71837303800611873 /* Video-A-Day.app */;
+			productReference = 0F2FC6E71837303800611873 /* Blips.app */;
 			productType = "com.apple.product-type.application";
 		};
-		0F2FC70A1837303900611873 /* Video-A-DayTests */ = {
+		0F2FC70A1837303900611873 /* BlipsTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 0F2FC71F1837303900611873 /* Build configuration list for PBXNativeTarget "Video-A-DayTests" */;
+			buildConfigurationList = 0F2FC71F1837303900611873 /* Build configuration list for PBXNativeTarget "BlipsTests" */;
 			buildPhases = (
 				0F2FC7071837303900611873 /* Sources */,
 				0F2FC7081837303900611873 /* Frameworks */,
@@ -588,9 +748,9 @@
 			dependencies = (
 				0F2FC7111837303900611873 /* PBXTargetDependency */,
 			);
-			name = "Video-A-DayTests";
+			name = BlipsTests;
 			productName = "Video-A-DayTests";
-			productReference = 0F2FC70B1837303900611873 /* Video-A-DayTests.xctest */;
+			productReference = 0F2FC70B1837303900611873 /* BlipsTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -621,8 +781,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				0F2FC6E61837303800611873 /* Video-A-Day */,
-				0F2FC70A1837303900611873 /* Video-A-DayTests */,
+				0F2FC6E61837303800611873 /* Blips */,
+				0F2FC70A1837303900611873 /* BlipsTests */,
 			);
 		};
 /* End PBXProject section */
@@ -632,10 +792,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0F553BB3184D97E200941506 /* baileys_5sec.mov in Resources */,
+				0F21EFA6189D5BDC001706FD /* SSKeychain.strings in Resources */,
 				0F2FC7061837303900611873 /* Images.xcassets in Resources */,
-				0F06A6DE18788C4D0021E10C /* AFVideoFilterDefaultList.json in Resources */,
-				0F79613A183DC81900920C59 /* face.jpg in Resources */,
+				0F06A6DE18788C4D0021E10C /* AFVDVideoFilterDefaultList.json in Resources */,
+				0FF60470187E6F7E00E7DF58 /* Localizable.strings in Resources */,
 				0F2FC6F51837303800611873 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -690,29 +850,44 @@
 			files = (
 				0F2FC7041837303900611873 /* AFVDViewController.m in Sources */,
 				76BD304118581CC00009E418 /* AFVDTimeline.m in Sources */,
+				0F06A6F9187CF2340021E10C /* AFVDSignupView.m in Sources */,
+				0FF604791880E4CC00E7DF58 /* AFVDInitialView.m in Sources */,
 				7677BA7018373A6B00F3EDC9 /* AFVDUserModel.m in Sources */,
 				7677BA6E18373A6B00F3EDC9 /* AFVDUserModelDatasource.m in Sources */,
+				0F21EFA7189D5BDC001706FD /* SSKeychain.m in Sources */,
+				0FF186D718AAFCC000BE1417 /* AFVDInitialViewStatics.m in Sources */,
 				7677BA6F18373A6B00F3EDC9 /* AFVDUserModelFactory.m in Sources */,
 				76AD7E6018596FCC006EBA8B /* AFVDTimelineCanvasLayout.m in Sources */,
+				0F06A6F3187CF2080021E10C /* AFVDIntialViewController.m in Sources */,
+				0F06A6E5187CEE550021E10C /* AFViewController.m in Sources */,
 				7610BC61183B119C003CE193 /* AFVDRelationshipModel.m in Sources */,
 				0F2FC6F71837303800611873 /* main.m in Sources */,
+				0FF186D418AAFC6100BE1417 /* AFVDFontStatics.m in Sources */,
 				76C651AF18385CB1003C7F7D /* AFVDVideoRelationshipModel.m in Sources */,
 				0F79613E183EE64E00920C59 /* AFVDUrlHasher.m in Sources */,
 				76AD7E5B18596F0E006EBA8B /* AFVDTimelineCanvas.m in Sources */,
 				7657BBF4184EE1A1004CA559 /* AFVDBaseNetworkStatics.m in Sources */,
+				0F06A6FC187CF2460021E10C /* AFVDActivityIndicator.m in Sources */,
 				7696C7DF184C366000B270FC /* AFVDKeychain.m in Sources */,
 				0F2FC6FB1837303800611873 /* AFVDAppDelegate.m in Sources */,
+				0F06A6F6187CF2250021E10C /* AFVDSigninView.m in Sources */,
+				0FB9038F1891FA2400FCD55D /* AFVDSigninUserModel.m in Sources */,
 				76C6519818380A14003C7F7D /* AFVDBaseNetworkModel.m in Sources */,
 				76C651A7183840E4003C7F7D /* AFVDVideoModelDatasource.m in Sources */,
-				0F10E3DD18594FA800FC1433 /* AFVideoCaptureControls.m in Sources */,
+				0F2C8A0C188B408D0033397C /* AFVDSignupUserModel.m in Sources */,
+				0F10E3DD18594FA800FC1433 /* AFVDVideoCaptureControls.m in Sources */,
 				0FB5E9871862763600EE0B0D /* AFVDVideoFilterController.m in Sources */,
+				0F21EFA8189D5BDC001706FD /* SSKeychainQuery.m in Sources */,
 				76C651A8183840E4003C7F7D /* AFVDVideoModelFactory.m in Sources */,
 				7677BA6D18373A6B00F3EDC9 /* AFVDBaseNetworkDatasource.m in Sources */,
 				76C651931838003D003C7F7D /* NSDictionary+NSDictionary_NSDataConversion.m in Sources */,
+				0F2C8A021884CF000033397C /* AFVDStatics.m in Sources */,
 				0F06A6E1187922570021E10C /* AFVDFilterTileButton.m in Sources */,
 				7610BC5B183B1108003CE193 /* AFVDRelationshipModelDatasource.m in Sources */,
 				76C651AC18384647003C7F7D /* AFVDVideoPlaylistModel.m in Sources */,
-				0F10E3DA18594B9600FC1433 /* AFVideoCaptureController.m in Sources */,
+				0F06A71F187E3EC00021E10C /* UIImage+ImageEffects.m in Sources */,
+				0FF604751880D75200E7DF58 /* AFVDImageBlur.m in Sources */,
+				0F10E3DA18594B9600FC1433 /* AFVDVideoCaptureController.m in Sources */,
 				76C651A9183840E4003C7F7D /* AFVDVideoModel.m in Sources */,
 				7610BC5E183B1137003CE193 /* AFVDRelationshipModelFactory.m in Sources */,
 				76AFA111185D73AD0015B402 /* AFVDTimelineCanvasCell.m in Sources */,
@@ -733,12 +908,20 @@
 /* Begin PBXTargetDependency section */
 		0F2FC7111837303900611873 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 0F2FC6E61837303800611873 /* Video-A-Day */;
+			target = 0F2FC6E61837303800611873 /* Blips */;
 			targetProxy = 0F2FC7101837303900611873 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		0F21EFA0189D5BDC001706FD /* SSKeychain.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0F21EFA1189D5BDC001706FD /* en */,
+			);
+			name = SSKeychain.strings;
+			sourceTree = "<group>";
+		};
 		0F2FC6F31837303800611873 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -753,6 +936,14 @@
 				0F2FC7161837303900611873 /* en */,
 			);
 			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		0FF60472187E6F7E00E7DF58 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0FF60471187E6F7E00E7DF58 /* en */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -783,7 +974,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
-					"IS_LOCAL_MACHINE=1",
+					"IS_LOCAL_MACHINE=0",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -843,6 +1034,10 @@
 				GCC_PREFIX_HEADER = "Video-A-Day/Video-A-Day-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = "";
 				INFOPLIST_FILE = "Video-A-Day/Video-A-Day-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Users/andrewapperley/PersonalProjects/ES/LibGyro/libGyro/qtcreator/build-libGyro-iphonesimulator_clang_Qt_5_2_1_for_iOS-Debug",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WARNING_CFLAGS = "";
 				WRAPPER_EXTENSION = app;
@@ -859,6 +1054,10 @@
 				GCC_PREFIX_HEADER = "Video-A-Day/Video-A-Day-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = "";
 				INFOPLIST_FILE = "Video-A-Day/Video-A-Day-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Users/andrewapperley/PersonalProjects/ES/LibGyro/libGyro/qtcreator/build-libGyro-iphonesimulator_clang_Qt_5_2_1_for_iOS-Debug",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -918,7 +1117,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		0F2FC71C1837303900611873 /* Build configuration list for PBXNativeTarget "Video-A-Day" */ = {
+		0F2FC71C1837303900611873 /* Build configuration list for PBXNativeTarget "Blips" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				0F2FC71D1837303900611873 /* Debug */,
@@ -927,7 +1126,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		0F2FC71F1837303900611873 /* Build configuration list for PBXNativeTarget "Video-A-DayTests" */ = {
+		0F2FC71F1837303900611873 /* Build configuration list for PBXNativeTarget "BlipsTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				0F2FC7201837303900611873 /* Debug */,

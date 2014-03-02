@@ -74,7 +74,7 @@ static const NSString *kOutputFilteredFileName = @"tempOutput_filtered.m4v";
     NSDictionary *filterListJSON;
     
     /*Home Directory filter list, this is a copy of the downloaded version after the user purchases an add-on pack*/
-    NSString *downloadedJSONList = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0] stringByAppendingString:@"/AFVideoFilterList.json"];
+    NSString *downloadedJSONList = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0] stringByAppendingString:@"/AFVDVideoFilterList.json"];
     
     /*Check if they downloaded the file*/
     if (![fileManager fileExistsAtPath:downloadedJSONList]) {

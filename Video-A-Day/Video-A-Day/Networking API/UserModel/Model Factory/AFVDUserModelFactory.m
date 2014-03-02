@@ -38,11 +38,13 @@
         AFVDUserModel *model = nil;
         
         NSString *accessToken;
+        NSString* expiryDate;
         
         if(networkCallback.success) {
             model = [self userModelForData:networkCallback.responseData];
             accessToken = networkCallback.responseData[@"access_token"];
-            [AFVDKeychain keychain].accessToken = accessToken;
+            expiryDate = networkCallback.responseData[@"expiry_date"];
+            [[AFVDKeychain keychain] setAccessToken:accessToken andExpiryDate:expiryDate];
         }
         
         success(model, accessToken, networkCallback);

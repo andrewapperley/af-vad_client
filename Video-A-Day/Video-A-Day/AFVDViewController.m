@@ -15,8 +15,9 @@
 #import "AFVDUserModelFactory.h"
 #import "AFVDVideoModelFactory.h"
 #import "AFVDRelationshipModelFactory.h"
-#import "AFVideoCaptureController.h"
 #import "AFVDTimeline.h"
+#import "AFVDVideoCaptureController.h"
+#import "AFVD/InitialViewController/AFVDIntialViewController.h"
 
 NSString *userName = @"andrewApperley123";
 NSString *displayName = @"a_apperley";
@@ -26,9 +27,9 @@ NSString *password = @"Abcde321";
 NSString *relationshipId = @"97fb98a484426f662c389bc9f686a1ee";
 NSString *email = @"email@email.com";
 
-@interface AFVDViewController () <AFVDTimelineDelegate, AFVDTimelineDataSource>
-{
-    AFVideoCaptureController *vc;
+@interface AFVDViewController () <AFVDTimelineDelegate, AFVDTimelineDataSource> {
+    
+    AFVDVideoCaptureController *vc;
 }
 @end
 
@@ -41,31 +42,31 @@ NSString *email = @"email@email.com";
     //User
     //    [self createUser];
     //    [self fetchUserModel];
-#warning TEST     [self deactivateUser];
-    //    [self updateUser];
-    //    [self checkIfUsernameIsAvailable];
-    //    [self loginUser];
-    //    [self logoutUser];
-#warning TEST    [self updateToken];
-    //
-    //    //Relationship
-    //    [self createRelationship];
-    //    [self fetchRelationshipModels];
-    //    [self fetchRelationshipModelFromId];
-    //
-    //    //Videos
-    //    [self createVideo];
-#warning TEST    [self fetchVideoModelsAtPageIndex];
-#warning TEST    [self fetchFavouriteVideoModelsAtPageIndex];
-#warning TEST    [self setUserFavouritedVideo];
-#warning TEST    [self unsetUserFavouritedVideo];
+//#warning TEST     [self deactivateUser];
+//    //    [self updateUser];
+//    //    [self checkIfUsernameIsAvailable];
+//    //    [self loginUser];
+//    //    [self logoutUser];
+//#warning TEST    [self updateToken];
+//    //
+//    //    //Relationship
+//    //    [self createRelationship];
+//    //    [self fetchRelationshipModels];
+//    //    [self fetchRelationshipModelFromId];
+//    //
+//    //    //Videos
+//    //    [self createVideo];
+//#warning TEST    [self fetchVideoModelsAtPageIndex];
+//#warning TEST    [self fetchFavouriteVideoModelsAtPageIndex];
+//#warning TEST    [self setUserFavouritedVideo];
+//#warning TEST    [self unsetUserFavouritedVideo];
 //    [self fetchVideoModel];
     //    [self fetchVideoModel];
 //    vc = [AFVideoCaptureController captureControllerWithDefaults];
 //    [self addChildViewController:vc];
 //    [self.view addSubview:vc.view];
-    
-    [self createTimeline];
+//    
+//    [self createTimeline];
 }
 
 - (void)createTimeline {
@@ -109,6 +110,37 @@ NSString *email = @"email@email.com";
     } failure:^(NSError *error) {
         appendedData(nil);
     }];
+    
+    
+    if ([self checkForLoginInfo]) {
+        
+    } else {
+        AFVDIntialViewController* inVC = [[AFVDIntialViewController alloc] initWithBackgroundImage:[UIImage imageNamed:@"AFVDFieldBackground"]];
+        
+        [self addChildViewController:inVC];
+        [self.view addSubview:inVC.view];
+        
+        [self setAccessToken:@"thisisatoken" andExpiryDate:@"dsfds"];
+    }
+    
+    
+}
+
+#pragma mark - Access Token Checks
+
+- (BOOL)checkForLoginInfo {
+    
+    if ([[AFVDKeychain keychain] accessTokenValid]) {
+#warning temp VC until we have timeline merged
+        AFViewController* timelineVC = [[AFViewController alloc] init];
+        timelineVC.view.backgroundColor = [UIColor purpleColor];
+        [self addChildViewController:timelineVC];
+        [self.view addSubview:timelineVC.view];
+        [timelineVC didMoveToParentViewController:self];
+        return YES;
+    }
+    
+    return NO;
 }
 
 - (void)createUser {
@@ -370,7 +402,7 @@ NSString *email = @"email@email.com";
         if(networkCallback.success) {
             
             NSLog(@"Finish Logout user - Success");
-            [self setAccessToken:nil];
+            [self setAccessToken:nil andExpiryDate:nil];
         } else {
             NSLog(@"Finish Logout user - Failure %d - %@", networkCallback.responseCode, networkCallback.responseMessage);
         }
@@ -532,9 +564,9 @@ NSString *email = @"email@email.com";
 }
 
 #pragma mark - Token handling
-- (void)setAccessToken:(NSString *)accessToken {
+- (void)setAccessToken:(NSString *)accessToken andExpiryDate:(NSString *)expiryDate {
     
-    [[AFVDKeychain keychain] setAccessToken:accessToken];
+    [[AFVDKeychain keychain] setAccessToken:accessToken andExpiryDate:expiryDate];
 }
 
 - (NSString *)accessToken {

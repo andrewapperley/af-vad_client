@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AFVDViewController : UINavigationController
+@interface AFVDViewController : UIViewController
 
 
 

@@ -6,19 +6,19 @@
 //  Copyright (c) 2013 AFApps. All rights reserved.
 //
 
-#import "AFVideoCaptureController.h"
+#import "AFVDVideoCaptureController.h"
 #import "AFVDVideoFilterController.h"
 
 static const CGFloat kDurationBroadcastFrequency = 0.5f;
 static const CGFloat kPreviewViewAnimationDuration = 0.5f;
 
-@interface AFVideoCaptureController ()
+@interface AFVDVideoCaptureController ()
 {
     AVCaptureSession *captureSession;
     AVCaptureDeviceInput *cameraInputDevice;
     AVCaptureMovieFileOutput *cameraOutput;
     AVCaptureVideoPreviewLayer *previewWindow;
-    AFVideoCaptureControls *mainControls;
+    AFVDVideoCaptureControls *mainControls;
     NSString *tempOutputPath;
     CMTime maxDurationTime;
     CGRect previewWindowFrame;
@@ -35,7 +35,7 @@ static const CGFloat kPreviewViewAnimationDuration = 0.5f;
 
 @end
 
-@implementation AFVideoCaptureController
+@implementation AFVDVideoCaptureController
 
 - (instancetype) initWithMaxDuration:(CMTime)duration andWindowSize:(CGRect)rect andPreset:(AFVideoCapturePreset)lpreset{
     self = [super init];
@@ -48,7 +48,7 @@ static const CGFloat kPreviewViewAnimationDuration = 0.5f;
 }
 
 + (instancetype)captureControllerWithDefaults {
-    return [[AFVideoCaptureController alloc] initWithMaxDuration:CMTimeMake(600, 30) andWindowSize:CGRectMake(10, 30, 300, 300) andPreset:AFVideoCapturePreset_Medium];
+    return [[AFVDVideoCaptureController alloc] initWithMaxDuration:CMTimeMake(600, 30) andWindowSize:CGRectMake(10, 30, 300, 300) andPreset:AFVideoCapturePreset_Medium];
 }
 
 - (void)viewDidLoad
@@ -124,7 +124,7 @@ static const CGFloat kPreviewViewAnimationDuration = 0.5f;
     [captureSession startRunning];
 
     //setup controls
-    mainControls = [[AFVideoCaptureControls alloc] initWithFrame:CGRectMake(previewWindowFrame.origin.x, previewWindowFrame.origin.y, previewWindowFrame.size.width, previewWindowFrame.size.height)];
+    mainControls = [[AFVDVideoCaptureControls alloc] initWithFrame:CGRectMake(previewWindowFrame.origin.x, previewWindowFrame.origin.y, previewWindowFrame.size.width, previewWindowFrame.size.height)];
     mainControls.delegate = self;
     [self.view addSubview:mainControls];
     [self addShareAndFilterButtons];

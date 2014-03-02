@@ -6,9 +6,9 @@
 //  Copyright (c) 2013 AFApps. All rights reserved.
 //
 
-#import "AFVideoCaptureControls.h"
+#import "AFVDVideoCaptureControls.h"
 
-@interface AFVideoCaptureControls ()
+@interface AFVDVideoCaptureControls ()
 {
     UIButton *recordButton;
     UIButton *resetButton;
@@ -19,7 +19,7 @@
 
 @end
 
-@implementation AFVideoCaptureControls
+@implementation AFVDVideoCaptureControls
 
 - (id)initWithFrame:(CGRect)frame
 {
