@@ -1,0 +1,59 @@
+{
+    "filter_list" : [
+                     {
+                     "filter_class" : "GPUImageVignetteFilter",
+                     "filter_image" : "GPUImageVignetteFilter",
+                     "filter_title" : "Vignette"
+                     },
+                     {
+                     "filter_class" : "GPUImageToonFilter",
+                     "filter_image" : "GPUImageToonFilter",
+                     "filter_title" : "Toon"
+                     },
+                     {
+                     "filter_class" : "GPUImagePixellateFilter",
+                     "filter_image" : "GPUImagePixellateFilter",
+                     "filter_title" : "Pixellate"
+                     },
+                     {
+                     "filter_class" : "GPUImageColorInvertFilter",
+                     "filter_image" : "GPUImageColorInvertFilter",
+                     "filter_title" : "Color Invert"
+                     },
+                     {
+                     "filter_class" : "GPUImageSepiaFilter",
+                     "filter_image" : "GPUImageSepiaFilter",
+                     "filter_title" : "Sepia"
+                     },
+                     {
+                     "filter_class" : "GPUImageGaussianBlurFilter",
+                     "filter_image" : "GPUImageGaussianBlurFilter",
+                     "filter_title" : "Gaussian Blur"
+                     },
+                     {
+                     "filter_class" : "GPUImageSwirlFilter",
+                     "filter_image" : "GPUImageSwirlFilter",
+                     "filter_title" : "Swirl"
+                     },
+                     {
+                     "filter_class" : "GPUImageGrayscaleFilter",
+                     "filter_image" : "GPUImageGrayscaleFilter",
+                     "filter_title" : "Grayscale"
+                     },
+                     {
+                     "filter_class" : "GPUImageBoxBlurFilter",
+                     "filter_image" : "GPUImageBoxBlurFilter",
+                     "filter_title" : "Box Blur"
+                     },
+                     {
+                     "filter_class" : "GPUImageTiltShiftFilter",
+                     "filter_image" : "GPUImageTiltShiftFilter",
+                     "filter_title" : "Tilt Shift"
+                     },
+                     {
+                     "filter_class" : "GPUImagePolkaDotFilter",
+                     "filter_image" : "GPUImagePolkaDotFilter",
+                     "filter_title" : "PolkaDot"
+                     }
+    ]
+}

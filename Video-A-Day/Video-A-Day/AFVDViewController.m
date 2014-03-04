@@ -16,6 +16,8 @@
 #import "AFVDVideoModelFactory.h"
 #import "AFVDRelationshipModelFactory.h"
 #import "AFVDVideoCaptureController.h"
+#import "AFVDPopoutMenuViewController.h"
+#import "AFVDPopoutMenuControllerModel.h"
 
 NSString *userName = @"andrewApperley123";
 NSString *displayName = @"a_apperley";
@@ -27,7 +29,6 @@ NSString *email = @"email@email.com";
 
 
 #import "AFVD/InitialViewController/AFVDIntialViewController.h"
-
 
 @interface AFVDViewController ()
 {
@@ -64,23 +65,22 @@ NSString *email = @"email@email.com";
 //#warning TEST    [self unsetUserFavouritedVideo];
 //    [self fetchVideoModel];
     //    [self fetchVideoModel];
-//    vc = [AFVideoCaptureController captureControllerWithDefaults];
-//    [self addChildViewController:vc];
-//    [self.view addSubview:vc.view];
+
+    vc = [AFVDVideoCaptureController captureControllerWithDefaults];
+    [self addChildViewController:vc];
+    [self.view addSubview:vc.view];
+
     
-    
-    
-    if ([self checkForLoginInfo]) {
-        
-    } else {
-        AFVDIntialViewController* inVC = [[AFVDIntialViewController alloc] initWithBackgroundImage:[UIImage imageNamed:@"AFVDFieldBackground"]];
-        
-        [self addChildViewController:inVC];
-        [self.view addSubview:inVC.view];
-        
-        [self setAccessToken:@"thisisatoken" andExpiryDate:@"dsfds"];
-    }
-    
+//    if ([self checkForLoginInfo]) {
+//        
+//    } else {
+//        AFVDIntialViewController* inVC = [[AFVDIntialViewController alloc] initWithBackgroundImage:[UIImage imageNamed:@"AFVDFieldBackground"]];
+//        
+//        [self addChildViewController:inVC];
+//        [self.view addSubview:inVC.view];
+//        
+//        [self setAccessToken:@"thisisatoken" andExpiryDate:@"dsfds"];
+//    }
     
 }
 
