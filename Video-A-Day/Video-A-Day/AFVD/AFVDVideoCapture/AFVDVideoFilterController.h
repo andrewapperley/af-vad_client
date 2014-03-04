@@ -12,9 +12,10 @@
 @interface AFVDVideoFilterController : UIViewController<GPUImageMovieWriterDelegate>
 
 @property(nonatomic, strong)GPUImageView *previewView;
+@property(nonatomic, strong, getter = filterList)NSArray* filterList;
 
 - (instancetype)initWithVideoURL:(NSURL *)lvideoURL andMovieSize:(CGSize)movieWriterSize andFrame:(CGRect)frame;
 
-NSArray* filterList (void);
+- (void)filterFromButtonPress:(NSString *)filterName;
 
 @end

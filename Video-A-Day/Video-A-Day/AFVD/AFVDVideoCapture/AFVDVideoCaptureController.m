@@ -8,6 +8,7 @@
 
 #import "AFVDVideoCaptureController.h"
 #import "AFVDVideoFilterController.h"
+#import "AFVDPopoutMenuMenuItem.h"
 
 static const CGFloat kDurationBroadcastFrequency = 0.5f;
 static const CGFloat kPreviewViewAnimationDuration = 0.5f;
@@ -134,7 +135,7 @@ static const CGFloat kPreviewViewAnimationDuration = 0.5f;
     _mainControls = [[AFVDVideoCaptureControls alloc] initWithFrame:CGRectMake(_previewWindowFrame.origin.x, _previewWindowFrame.origin.y, _previewWindowFrame.size.width, self.view.frame.size.height - _previewWindowFrame.origin.y) sizeOfPreviewScreen:_previewWindowFrame.size];
     _mainControls.delegate = self;
     [self.view addSubview:_mainControls];
-//    [self addShareAndFilterButtons];
+    [self showFilters];
 }
 
 - (void)applyCornersToPreview {
@@ -417,7 +418,7 @@ static const CGFloat kPreviewViewAnimationDuration = 0.5f;
 #pragma -
 
 - (void)changeVideoFilterForItem:(AFVDPopoutMenuMenuItem *)menuItem {
-    
+    [_videoFilterView filterFromButtonPress:menuItem.menuItemProperty];
 }
 
 - (void)shareVideo {
@@ -425,11 +426,11 @@ static const CGFloat kPreviewViewAnimationDuration = 0.5f;
 }
 
 - (void)showFilters {
-    /*Invalidate the timer, stop the recording and session*/
-    [_recordedDurationTimer invalidate];
-    _recordedDurationTimer = nil;
-    [_cameraOutput stopRecording];
-    [_captureSession stopRunning];
+//    /*Invalidate the timer, stop the recording and session*/
+//    [_recordedDurationTimer invalidate];
+//    _recordedDurationTimer = nil;
+//    [_cameraOutput stopRecording];
+//    [_captureSession stopRunning];
     
     /*Present filter view controller and dismiss this view controller*/
     
@@ -443,6 +444,8 @@ static const CGFloat kPreviewViewAnimationDuration = 0.5f;
     
     [_previewPlayer replaceCurrentItemWithPlayerItem:[AVPlayerItem playerItemWithURL:nil]];
     [_previewPlayer pause];
+    
+    [_mainControls showFilterMenuForFilters:_videoFilterView.filterList];
     
     [UIView animateWithDuration:kPreviewViewAnimationDuration delay:0 options:UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationCurveEaseIn animations:^{
         _videoFilterView.view.alpha = 1;

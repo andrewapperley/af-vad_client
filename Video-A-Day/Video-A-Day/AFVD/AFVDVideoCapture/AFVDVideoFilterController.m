@@ -7,6 +7,7 @@
 //
 
 #import "AFVDVideoFilterController.h"
+#import "AFVDVideoFilterModel.h"
 
 static const NSInteger kTileSize = 40;
 static const NSInteger kTileSpacingBuffer = 10;
@@ -55,17 +56,25 @@ static const NSString *kOutputFilteredFileName = @"tempOutput_filtered.m4v";
     self.view.frame = _videoPreviewFrame;
     [self setOutputURL];
     [self setupUI];
-    [self setupMovieFile];
-    NSArray* list = filterList();
-    [self applyFilter:list[0]];
+//    [self setupMovieFile];
+//    [self applyFilter:_filterList[0]];
 }
 
 #pragma mark - Set the filter list array
 
-NSArray* filterList (void) {
+- (NSArray *)filterList {
+    if (_filterList) {
+        return _filterList;
+    } else {
+        return [self generateFilterList];
+    }
+}
+
+- (NSArray *)generateFilterList {
     
     NSFileManager *fileManager = [NSFileManager defaultManager];
     NSDictionary *filterListJSON;
+    NSMutableArray* filterList = [[NSMutableArray alloc] init];
     
     /*Home Directory filter list, this is a copy of the downloaded version after the user purchases an add-on pack*/
     NSString *downloadedJSONList = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0] stringByAppendingString:@"/AFVDVideoFilterList.json"];
@@ -77,25 +86,12 @@ NSArray* filterList (void) {
          filterListJSON = [NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfFile:downloadedJSONList] options:NSJSONReadingMutableContainers error:nil];
     }
     
-    /*If the default one or the downloaded one fail to load we load an inline version of the default list*/
-    if (!filterListJSON) {
-        return [[NSArray alloc] initWithObjects:
-                      @"GPUImageVignetteFilter",
-                      @"GPUImageToonFilter",
-                      @"GPUImagePixellateFilter",
-                      @"GPUImageColorInvertFilter",
-                      @"GPUImageSepiaFilter",
-                      @"GPUImageGaussianBlurFilter",
-                      @"GPUImageSwirlFilter",
-                      @"GPUImageGrayscaleFilter",
-                      @"GPUImageBoxBlurFilter",
-                      @"GPUImageTiltShiftFilter",
-                      @"GPUImagePolkaDotFilter",
-                      @"GPUImageMotionBlurFilter", nil];
+    for (NSDictionary* filter in filterListJSON[@"filter_list"]) {
+        [filterList addObject:[AFVDVideoFilterModel filterModelWithClassName:filter[@"filter_class"] title:filter[@"filter_title"] image:filter[@"filter_image"]]];
     }
     
     /*Grab the array of filters from the dictionary and assign them to the filter list var*/
-    return [[NSArray alloc] initWithArray:filterListJSON[@"filter_list"]];
+    return (NSArray *)filterList;
 }
 
 #pragma mark - Setup UI (Preview screen and filter grid)
@@ -150,7 +146,7 @@ NSArray* filterList (void) {
 
 }
 
-#pragma mark - FIlter
+#pragma mark - Filter
 
 - (void)filterFromButtonPress:(NSString *)filterName {
     [self applyFilter:filterName];

@@ -11,6 +11,7 @@
 #import "AFVDPopoutMenuStatics.h"
 #import "AFVDPopoutMenuControllerModel.h"
 #import "AFVDPopoutMenuViewController.h"
+#import "AFVDVideoFilterModel.h"
 
 @interface AFVDVideoCaptureControls () {
     UIButton *_recordButton;
@@ -145,6 +146,27 @@ NSInteger const kAFVDPopoutMenuCollectionViewCloseButtonXMargin     = 10;
 #pragma -
 #pragma Public Methods
 #pragma -
+
+- (void)showFilterMenuForFilters:(NSArray *)filters {
+    
+    NSMutableArray* icons       = [[NSMutableArray alloc] initWithCapacity:filters.count];
+    NSMutableArray* titles      = [[NSMutableArray alloc] initWithCapacity:filters.count];
+    NSMutableArray* selectors   = [[NSMutableArray alloc] initWithCapacity:filters.count];
+    NSMutableArray* properties  = [[NSMutableArray alloc] initWithCapacity:filters.count];
+    
+    for (AFVDVideoFilterModel *filter in filters) {
+        [icons addObject:/*filter.filterImage*/[UIImage imageNamed:@"AFVDPopoutMenuShareMenuItemIconImage"]];
+        [titles addObject:filter.filterTitle];
+        [selectors addObject:@"filterButtonClicked:"];
+        [properties addObject:filter.filterClassName];
+    }
+    
+    AFVDPopoutMenuControllerModel* menuModel = [[AFVDPopoutMenuControllerModel alloc] initWithIcons:icons
+                                                                                             titles:titles
+                                                                                          selectors:selectors
+                                                                                         properties:properties];
+    [_menu refreshMenuWithModel:menuModel];
+}
 
 - (void)showFilterShareButtons {
     AFVDPopoutMenuControllerModel* menuModel = [[AFVDPopoutMenuControllerModel alloc] initWithIcons:@[[UIImage imageNamed:@"AFVDPopoutMenuShareMenuItemIconImage"], [UIImage imageNamed:@"AFVDPopoutMenuAddFilterMenuItemIconImage"]]

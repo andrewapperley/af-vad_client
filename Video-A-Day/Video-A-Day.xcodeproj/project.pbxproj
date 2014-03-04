@@ -52,6 +52,7 @@
 		0FDC79A918B5C4FE001F9F14 /* AFVDPopoutMenuStatics.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FDC79A818B5C4FE001F9F14 /* AFVDPopoutMenuStatics.m */; };
 		0FDC79AC18B5CB5A001F9F14 /* AFVDPopoutMenuCollectionViewLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FDC79AB18B5CB5A001F9F14 /* AFVDPopoutMenuCollectionViewLayout.m */; };
 		0FDC79AF18B83DAD001F9F14 /* AFVDPopoutMenuCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FDC79AE18B83DAD001F9F14 /* AFVDPopoutMenuCollectionView.m */; };
+		0FDDDF2118C570F0007FC69D /* AFVDVideoFilterModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FDDDF2018C570F0007FC69D /* AFVDVideoFilterModel.m */; };
 		0FF186D418AAFC6100BE1417 /* AFVDFontStatics.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FF186D318AAFC6100BE1417 /* AFVDFontStatics.m */; };
 		0FF186D718AAFCC000BE1417 /* AFVDInitialViewStatics.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FF186D618AAFCC000BE1417 /* AFVDInitialViewStatics.m */; };
 		0FF441D418626A3200ADAD2C /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FF441D318626A3100ADAD2C /* CoreVideo.framework */; };
@@ -168,6 +169,8 @@
 		0FDC79AB18B5CB5A001F9F14 /* AFVDPopoutMenuCollectionViewLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFVDPopoutMenuCollectionViewLayout.m; sourceTree = "<group>"; };
 		0FDC79AD18B83DAD001F9F14 /* AFVDPopoutMenuCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFVDPopoutMenuCollectionView.h; sourceTree = "<group>"; };
 		0FDC79AE18B83DAD001F9F14 /* AFVDPopoutMenuCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFVDPopoutMenuCollectionView.m; sourceTree = "<group>"; };
+		0FDDDF1F18C570F0007FC69D /* AFVDVideoFilterModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFVDVideoFilterModel.h; sourceTree = "<group>"; };
+		0FDDDF2018C570F0007FC69D /* AFVDVideoFilterModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFVDVideoFilterModel.m; sourceTree = "<group>"; };
 		0FF186D218AAFC6100BE1417 /* AFVDFontStatics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFVDFontStatics.h; sourceTree = "<group>"; };
 		0FF186D318AAFC6100BE1417 /* AFVDFontStatics.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFVDFontStatics.m; sourceTree = "<group>"; };
 		0FF186D518AAFCC000BE1417 /* AFVDInitialViewStatics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFVDInitialViewStatics.h; sourceTree = "<group>"; };
@@ -491,6 +494,8 @@
 				0FDC798618B43B30001F9F14 /* AFVDVideoFilterController.h */,
 				0FDC798718B43B30001F9F14 /* AFVDVideoFilterController.m */,
 				0FDC798818B43B30001F9F14 /* AFVDVideoFilterDefaultList.json */,
+				0FDDDF1F18C570F0007FC69D /* AFVDVideoFilterModel.h */,
+				0FDDDF2018C570F0007FC69D /* AFVDVideoFilterModel.m */,
 			);
 			path = AFVDVideoCapture;
 			sourceTree = "<group>";
@@ -757,6 +762,9 @@
 				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = AFApps;
 				TargetAttributes = {
+					0F2FC6E61837303800611873 = {
+						DevelopmentTeam = 7HWF5HF937;
+					};
 					0F2FC70A1837303900611873 = {
 						TestTargetID = 0F2FC6E61837303800611873;
 					};
@@ -858,6 +866,7 @@
 				0FF186D418AAFC6100BE1417 /* AFVDFontStatics.m in Sources */,
 				76C651AF18385CB1003C7F7D /* AFVDVideoRelationshipModel.m in Sources */,
 				0F79613E183EE64E00920C59 /* AFVDUrlHasher.m in Sources */,
+				0FDDDF2118C570F0007FC69D /* AFVDVideoFilterModel.m in Sources */,
 				7657BBF4184EE1A1004CA559 /* AFVDBaseNetworkStatics.m in Sources */,
 				0F06A6FC187CF2460021E10C /* AFVDActivityIndicator.m in Sources */,
 				0FDC79A918B5C4FE001F9F14 /* AFVDPopoutMenuStatics.m in Sources */,
@@ -1028,6 +1037,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Video-A-Day/Video-A-Day-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = "";
@@ -1037,6 +1048,7 @@
 					"/Users/andrewapperley/PersonalProjects/ES/LibGyro/libGyro/qtcreator/build-libGyro-iphonesimulator_clang_Qt_5_2_1_for_iOS-Debug",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WARNING_CFLAGS = "";
 				WRAPPER_EXTENSION = app;
 			};
@@ -1048,6 +1060,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Video-A-Day/Video-A-Day-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = "";
@@ -1057,6 +1071,7 @@
 					"/Users/andrewapperley/PersonalProjects/ES/LibGyro/libGyro/qtcreator/build-libGyro-iphonesimulator_clang_Qt_5_2_1_for_iOS-Debug",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

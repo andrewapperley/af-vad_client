@@ -34,5 +34,6 @@
 - (void)changeRecordingButtonState:(BOOL)lrecording;
 - (void)setRecordingTime:(long long)newTime;
 - (void)showFilterShareButtons;
+- (void)showFilterMenuForFilters:(NSArray *)filters;
 
 @end
