@@ -18,6 +18,8 @@
 #import "AFVDTimeline.h"
 #import "AFVDVideoCaptureController.h"
 #import "AFVD/InitialViewController/AFVDIntialViewController.h"
+#import "AFVDPopoutMenuViewController.h"
+#import "AFVDPopoutMenuControllerModel.h"
 
 NSString *userName = @"andrewApperley123";
 NSString *displayName = @"a_apperley";
@@ -28,7 +30,6 @@ NSString *relationshipId = @"97fb98a484426f662c389bc9f686a1ee";
 NSString *email = @"email@email.com";
 
 @interface AFVDViewController () <AFVDTimelineDelegate, AFVDTimelineDataSource> {
-    
     AFVDVideoCaptureController *vc;
 }
 @end
@@ -123,6 +124,21 @@ NSString *email = @"email@email.com";
         [self setAccessToken:@"thisisatoken" andExpiryDate:@"dsfds"];
     }
     
+    vc = [AFVDVideoCaptureController captureControllerWithDefaults];
+    [self addChildViewController:vc];
+    [self.view addSubview:vc.view];
+
+    
+//    if ([self checkForLoginInfo]) {
+//        
+//    } else {
+//        AFVDIntialViewController* inVC = [[AFVDIntialViewController alloc] initWithBackgroundImage:[UIImage imageNamed:@"AFVDFieldBackground"]];
+//        
+//        [self addChildViewController:inVC];
+//        [self.view addSubview:inVC.view];
+//        
+//        [self setAccessToken:@"thisisatoken" andExpiryDate:@"dsfds"];
+//    }
     
 }
 

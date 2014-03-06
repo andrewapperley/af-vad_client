@@ -21,3 +21,12 @@
 "AFVDSignupFormTerms"               = "By Signing Up, you agree to our Terms and Conditions";
 "AFVDSigninForFailureTitle"         = "Login Failure";
 "AFVDSigninForFailureButtonTitle"   = "Dismiss";
+
+/*Popout Menu*/
+"kAFVDPopoutMenuCloseMenuItemTitle"             = "Close Menu";
+"kAFVDPopoutMenuChangeCameraMenuItemTitle"      = "Change Camera";
+"kAFVDPopoutMenuRestartMenuItemTitle"           = "Restart Capturing";
+"kAFVDPopoutMenuYesMenuItemTitle"               = "Yes";
+"kAFVDPopoutMenuNoMenuItemTitle"                = "No";
+"kAFVDPopoutMenuShareMenuItemTitle"             = "Share Video";
+"kAFVDPopoutMenuAddFilterMenuItemTitle"         = "Add Filter";
