@@ -9,4 +9,6 @@
 #import "AFVDBaseNetworkStatics.h"
 
 #pragma mark - Network date formatting
-const NSString *kAFVDBaseNetworkDefaultDateFormat = @"EEE, dd MMM yyyy hh:mm:ss z";
+const NSString *kAFVDBaseNetworkDefaultDateFormat                       = @"EEE, dd MMM yyyy hh:mm:ss z";
+const NSString *kAFVDBaseNetworkDefaultDateDisplayMonthDayYearFormat    = @"MMM DD yyyy";
+const NSString *kAFVDBaseNetworkDefaultDateDisplayHourMinutesFormat     = @"hh:mm:ss z";

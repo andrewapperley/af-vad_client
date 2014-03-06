@@ -20,3 +20,5 @@ typedef void(^AFVDBaseNetworkFailure)(NSError *error);
 
 #pragma mark - Network date formatting
 extern NSString *kAFVDBaseNetworkDefaultDateFormat;
+extern NSString *kAFVDBaseNetworkDefaultDateDisplayMonthDayYearFormat;
+extern NSString *kAFVDBaseNetworkDefaultDateDisplayHourMinutesFormat;

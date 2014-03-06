@@ -15,7 +15,9 @@
 #import "AFVDUserModelFactory.h"
 #import "AFVDVideoModelFactory.h"
 #import "AFVDRelationshipModelFactory.h"
+#import "AFVDTimeline.h"
 #import "AFVDVideoCaptureController.h"
+#import "AFVD/InitialViewController/AFVDIntialViewController.h"
 #import "AFVDPopoutMenuViewController.h"
 #import "AFVDPopoutMenuControllerModel.h"
 
@@ -27,11 +29,7 @@ NSString *password = @"Abcde321";
 NSString *relationshipId = @"97fb98a484426f662c389bc9f686a1ee";
 NSString *email = @"email@email.com";
 
-
-#import "AFVD/InitialViewController/AFVDIntialViewController.h"
-
-@interface AFVDViewController ()
-{
+@interface AFVDViewController () <AFVDTimelineDelegate, AFVDTimelineDataSource> {
     AFVDVideoCaptureController *vc;
 }
 @end
@@ -65,7 +63,67 @@ NSString *email = @"email@email.com";
 //#warning TEST    [self unsetUserFavouritedVideo];
 //    [self fetchVideoModel];
     //    [self fetchVideoModel];
+//    vc = [AFVideoCaptureController captureControllerWithDefaults];
+//    [self addChildViewController:vc];
+//    [self.view addSubview:vc.view];
+//    
+//    [self createTimeline];
+}
 
+- (void)createTimeline {
+    
+    AFVDTimeline *timeline = [[AFVDTimeline alloc] init];
+    timeline.delegate = self;
+    timeline.dataSource = self;
+    [self.view addSubview:timeline.view];
+    
+    [timeline reloadData];
+    
+#warning TEMP
+    
+    UIView *uglyAssLine = [[UIView alloc] initWithFrame:CGRectMake(0, (self.view.bounds.size.height / 2) - 1, self.view.bounds.size.width, 2)];
+    uglyAssLine.backgroundColor = [UIColor redColor];
+    [self.view addSubview:uglyAssLine];
+#warning ENDTEMP
+}
+
+#pragma mark - AFVDTimelineDataSource
+- (void)timeline:(AFVDTimeline *)timeline willLoadInitialData:(AFVDTimelineInitialData)initialData {
+    
+    NSMutableArray *array = [[NSMutableArray alloc] init];
+    
+    for(NSUInteger i = 0; i < 20; i++) {
+        
+        [array addObject:@(i)];
+    }
+    
+    initialData(array);
+}
+
+- (void)timeline:(AFVDTimeline *)timeline willLoadAppendedData:(AFVDTimelineAppendedData)appendedData {
+    
+    AFVDVideoModelFactory *modelFactory = [[AFVDVideoModelFactory alloc] init];
+    
+    [modelFactory videosAtPageIndex:1 userName:@"" accessToken:@"" success:^(AFVDVideoPlaylistModel *videoPlaylistModel, AFVDBaseNetworkModel *networkCallback) {
+        
+        appendedData(videoPlaylistModel.videos);
+        
+    } failure:^(NSError *error) {
+        appendedData(nil);
+    }];
+    
+    
+    if ([self checkForLoginInfo]) {
+        
+    } else {
+        AFVDIntialViewController* inVC = [[AFVDIntialViewController alloc] initWithBackgroundImage:[UIImage imageNamed:@"AFVDFieldBackground"]];
+        
+        [self addChildViewController:inVC];
+        [self.view addSubview:inVC.view];
+        
+        [self setAccessToken:@"thisisatoken" andExpiryDate:@"dsfds"];
+    }
+    
     vc = [AFVDVideoCaptureController captureControllerWithDefaults];
     [self addChildViewController:vc];
     [self.view addSubview:vc.view];
