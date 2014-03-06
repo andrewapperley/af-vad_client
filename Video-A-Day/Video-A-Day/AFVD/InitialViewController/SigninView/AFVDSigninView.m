@@ -49,6 +49,7 @@
     _submitButton.layer.cornerRadius = 5;
     
     [_submitButton setTitle:NSLocalizedString(@"AFVDSignupFormSubmitButton", nil) forState:UIControlStateNormal];
+    [_submitButton setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
     
     [_formScrollView addSubview:_submitButton];
     _submitButton.enabled = NO;

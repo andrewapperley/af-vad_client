@@ -31,7 +31,7 @@ NSInteger const kAFVDSignupAndSigninXBuffer         = 55;
 NSInteger const kAFVDSignupAndSigninYBuffer         = 47;
 NSInteger const kAFVDSignupAndSigninLabelYBuffer    = 11;
 NSInteger const kAFVDSlidingPanelHeight             = 380;
-CGFloat const kPanelViewAnimationDuration           = 0.6f;
+CGFloat const kPanelViewAnimationDuration           = 0.4f;
 NSInteger const kAFVDPanelSignupLabelFontSize       = 20;
 
 CGFloat const kAFVDSnapPanelAnimationSpeed          = 0.4f;
